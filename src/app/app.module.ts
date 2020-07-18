@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { metaReducers, ROOT_REDUCERS } from './reducers';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,8 @@ import { metaReducers, ROOT_REDUCERS } from './reducers';
     }),
 
     EffectsModule.forRoot([]),
+
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
