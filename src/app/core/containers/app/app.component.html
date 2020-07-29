@@ -1,0 +1,33 @@
+<app-layout>
+  <app-sidenav [open]="showSidenav$ | async" (closeMenu)="closeSidenav()">
+    <app-nav-item
+      hint="Sign In into app"
+      icon="sign-in-alt"
+      *ngIf="!(loggedIn$ | async)"
+      routerLink="/login"
+      (navigate)="closeSidenav()"
+    >
+      Sign In
+    </app-nav-item>
+
+    <app-nav-item
+      icon="sign-out-alt"
+      *ngIf="loggedIn$ | async"
+      (navigate)="logout()"
+    >
+      Sign Out
+    </app-nav-item>
+  </app-sidenav>
+
+  <app-toolbar
+    [isSpinnerLoading]="isSpinnerLoading$ | async"
+    [loggedIn]="loggedIn$ | async"
+    [user]="user$ | async"
+    (logout)="logout()"
+    (openMenu)="openSidenav()"
+  >
+    <!-- <a class="title" mat-button routerLink="/"> -->
+    Controlled Health
+    <!-- </a> -->
+  </app-toolbar>
+</app-layout>

@@ -1,26 +1,22 @@
-/**
- * Every reducer module's default export is the reducer function itself. In
- * addition, each module should export a type or interface that describes
- * the state of the reducer plus any selector functions. The `* as`
- * notation packages up all of the exports into a single object.
- */
-// import * as fromLayout from '@example-app/core/reducers/layout.reducer';
 import { InjectionToken } from '@angular/core';
 import * as fromRouter from '@ngrx/router-store';
 import {
   Action,
   ActionReducer,
   ActionReducerMap,
+  createFeatureSelector,
+  createSelector,
   MetaReducer,
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
+import * as fromLayout from '../core/reducers/layout.reducers';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  // [fromLayout.layoutFeatureKey]: fromLayout.State;
+  [fromLayout.layoutFeatureKey]: fromLayout.State;
   router: fromRouter.RouterReducerState<any>;
 }
 
@@ -33,7 +29,7 @@ export const ROOT_REDUCERS = new InjectionToken<
   ActionReducerMap<State, Action>
 >('Root reducers token', {
   factory: () => ({
-    // [fromLayout.layoutFeatureKey]: fromLayout.reducer,
+    [fromLayout.layoutFeatureKey]: fromLayout.reducer,
     router: fromRouter.routerReducer,
   }),
 });
@@ -64,11 +60,11 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
 /**
  * Layout Reducers
  */
-// export const selectLayoutState = createFeatureSelector<State, fromLayout.State>(
-//   fromLayout.layoutFeatureKey
-// );
+export const selectLayoutState = createFeatureSelector<State, fromLayout.State>(
+  fromLayout.layoutFeatureKey
+);
 
-// export const selectShowSidenav = createSelector(
-//   selectLayoutState,
-//   fromLayout.selectShowSidenav
-// );
+export const selectShowSidenav = createSelector(
+  selectLayoutState,
+  fromLayout.selectShowSidenav
+);

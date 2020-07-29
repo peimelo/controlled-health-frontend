@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="openMenu.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <ng-content></ng-content>
+
+  <!-- <fa-icon
+    [icon]="['fas', 'spinner']"
+    [spin]="true"
+    *ngIf="isSpinnerLoading"
+  ></fa-icon> -->
+
+  <!-- <span fxFlex></span> -->
+
+  <span class="spacer"></span>
+
+  <a mat-button *ngIf="!loggedIn" routerLink="/login">
+    Sign In
+  </a>
+
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    matTooltip="{{ user.name }}"
+    [matTooltipPosition]="'right'"
+    *ngIf="loggedIn"
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout.emit()">
+      Sair
+    </button>
+  </mat-menu>
+</mat-toolbar>
