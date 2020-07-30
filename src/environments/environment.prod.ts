@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl: 'https://saudecontrolada-api.herokuapp.com/api',
 };
