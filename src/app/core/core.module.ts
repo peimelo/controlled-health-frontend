@@ -1,9 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { IconsModule } from '../icons.module';
-import { MaterialModule } from '../material/material.module';
 import { LayoutComponent } from './components/layout.component';
 import { NavItemComponent } from './components/nav-item.component';
 import { SidenavComponent } from './components/sidenav.component';
@@ -23,7 +29,22 @@ export const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, MaterialModule, IconsModule],
+  imports: [
+    // Angular
+    CommonModule,
+    RouterModule,
+
+    // Material
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatTooltipModule,
+
+    IconsModule,
+  ],
   declarations: [COMPONENTS],
   exports: [COMPONENTS],
   providers: [

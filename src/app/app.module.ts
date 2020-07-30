@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './core/containers/app/app.component';
 import { CoreModule } from './core/core.module';
 import { metaReducers, ROOT_REDUCERS } from './reducers';
@@ -17,6 +19,7 @@ import { metaReducers, ROOT_REDUCERS } from './reducers';
     // Angular
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
     // @ngrx
     StoreModule.forRoot(ROOT_REDUCERS, {
@@ -35,8 +38,9 @@ import { metaReducers, ROOT_REDUCERS } from './reducers';
     }),
     EffectsModule.forRoot([]),
 
-    // app
+    // App
     AppRoutingModule,
+    AuthModule,
     CoreModule,
   ],
   providers: [],
