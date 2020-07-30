@@ -27,6 +27,7 @@ export class AppComponent {
 
   logout(): void {
     this.authFacade.logout();
+    this.layoutFacade.closeSidenav();
   }
 
   openSidenav(): void {

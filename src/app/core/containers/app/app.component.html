@@ -1,13 +1,13 @@
 <app-layout>
   <app-sidenav [open]="showSidenav$ | async" (closeMenu)="closeSidenav()">
     <app-nav-item
-      hint="Sign In into app"
+      hint="Login into app"
       icon="sign-in-alt"
       *ngIf="!(loggedIn$ | async)"
       routerLink="/login"
       (navigate)="closeSidenav()"
     >
-      Sign In
+      Login
     </app-nav-item>
 
     <app-nav-item
@@ -15,7 +15,7 @@
       *ngIf="loggedIn$ | async"
       (navigate)="logout()"
     >
-      Sign Out
+      Logout
     </app-nav-item>
   </app-sidenav>
 
