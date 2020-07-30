@@ -15,20 +15,6 @@ export class AuthEffects {
     private router: Router
   ) {}
 
-  /**
-   * Here the error was not handled because it is caught in the TokenInterceptorService
-   */
-  // loadUser$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AuthActions.loadUser),
-  //     mergeMap(() =>
-  //       this.authService
-  //         .getUser()
-  //         .pipe(map((user) => AuthApiActions.loadUserSuccess({ user })))
-  //     )
-  //   )
-  // );
-
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoginPageActions.login),
@@ -54,7 +40,7 @@ export class AuthEffects {
               messages = error.error.errors;
             }
 
-            return of(AuthApiActions.loadUserFailure({ error: messages }));
+            return of(AuthApiActions.loginFailure({ error: messages }));
           })
         )
       )
@@ -93,14 +79,12 @@ export class AuthEffects {
 
             return AuthApiActions.loginRedirect();
           }),
-          catchError((error) => {
-            let messages = [error.message];
+          catchError(() => {
+            localStorage.removeItem('access-token');
+            localStorage.removeItem('client');
+            localStorage.removeItem('uid');
 
-            if (error && error.error && error.error.errors) {
-              messages = error.error.errors;
-            }
-
-            return of(AuthApiActions.loadUserFailure({ error: messages }));
+            return of(AuthApiActions.loginRedirect());
           })
         )
       )

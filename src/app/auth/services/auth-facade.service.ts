@@ -4,20 +4,22 @@ import { Observable } from 'rxjs';
 import { Credentials } from '../models';
 import { AuthActions, LoginPageActions } from '../store/actions';
 import * as fromAuth from '../store/reducers';
-import * as fromSelectors from '../store/selectors';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacadeService {
-  errorMessages$: Observable<string[]>;
+  errors$: Observable<string[]>;
   loggedIn$: Observable<boolean>;
+  pending$: Observable<boolean>;
   user$: Observable<any>;
 
   constructor(private store: Store<fromAuth.State>) {
-    this.errorMessages$ = this.store.pipe(
-      select(fromSelectors.getErrorMessages)
-    );
+    this.errors$ = this.store.pipe(select(fromAuth.selectLoginPageError));
 
-    this.loggedIn$ = this.store.pipe(select(fromSelectors.getLoggedIn));
+    this.loggedIn$ = this.store.pipe(select(fromAuth.selectLoggedIn));
+
+    this.pending$ = this.store.pipe(select(fromAuth.selectLoginPagePending));
+
+    this.user$ = this.store.pipe(select(fromAuth.selectUser));
   }
 
   login(credentials: Credentials): void {

@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 import { AuthActions } from '../store/actions';
 import * as fromAuth from '../store/reducers';
-import * as fromAuthSelectors from '../store/selectors';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -16,13 +15,13 @@ export class AuthGuard implements CanActivate {
   }
 
   isUserLoggedIn(): Observable<boolean> {
-    return this.store.select(fromAuthSelectors.getLoggedIn).pipe(
-      tap(loggedIn => {
+    return this.store.select(fromAuth.selectLoggedIn).pipe(
+      tap((loggedIn) => {
         if (!loggedIn) {
           this.store.dispatch(AuthActions.loadUser());
         }
       }),
-      filter(loggedIn => loggedIn),
+      filter((loggedIn) => loggedIn),
       take(1)
     );
   }

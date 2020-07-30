@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Credentials } from '../../models';
 import { AuthFacadeService } from '../../services/auth-facade.service';
 
@@ -9,12 +8,10 @@ import { AuthFacadeService } from '../../services/auth-facade.service';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-  errorMessages$ = this.authFacade.errorMessages$;
-  isLoading$: Observable<boolean>;
+  errors$ = this.authFacade.errors$;
+  pending$ = this.authFacade.pending$;
 
-  constructor(private authFacade: AuthFacadeService) {
-    // this.isLoading$ = this.store.pipe(select(fromAuthSelectors.getIsLoading));
-  }
+  constructor(private authFacade: AuthFacadeService) {}
 
   onSubmit(credentials: Credentials): void {
     this.authFacade.login(credentials);

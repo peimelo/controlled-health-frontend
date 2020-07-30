@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -13,7 +12,8 @@ import { LoginComponent } from './componentes/login/login.component';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
 import * as fromGuards from './guards';
 import * as fromInterceptors from './interceptors';
-import { effects, reducers } from './store';
+import { AuthEffects } from './store/effects';
+import * as fromAuth from './store/reducers';
 
 @NgModule({
   declarations: [LoginPageComponent, LoginComponent],
@@ -27,11 +27,10 @@ import { effects, reducers } from './store';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
-    MatProgressBarModule,
 
     // @ngrx
-    StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature(effects),
+    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers),
+    EffectsModule.forFeature([AuthEffects]),
 
     // App
     AuthRoutingModule,

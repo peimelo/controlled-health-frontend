@@ -7,8 +7,27 @@ import { Credentials } from '../../models';
   templateUrl: './login.component.html',
   styles: [
     `
-      .container {
-        height: 100vh;
+      :host {
+        display: flex;
+        justify-content: center;
+        margin: 72px 0;
+      }
+
+      .mat-form-field {
+        width: 100%;
+        min-width: 300px;
+      }
+
+      mat-card-title,
+      mat-card-content {
+        display: flex;
+        justify-content: center;
+      }
+
+      .loginButtons {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
       }
     `,
   ],
@@ -20,8 +39,8 @@ export class LoginComponent {
   });
   hide = true;
 
-  @Input() errorMessages: string[];
-  @Input() isLoading: boolean;
+  @Input() errors: string[];
+  @Input() pending: boolean;
 
   @Output() submitted = new EventEmitter<Credentials>();
 
