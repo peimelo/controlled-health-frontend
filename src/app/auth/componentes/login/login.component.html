@@ -1,0 +1,68 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center">
+  <div fxFlex="400px" fxFlex.xs="80%">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <br />
+      <mat-card>
+        <mat-card-title>Sign In</mat-card-title>
+
+        <mat-card-content fxLayout="column">
+          <mat-form-field>
+            <input
+              formControlName="email"
+              matInput
+              placeholder="Email"
+              required
+              type="email"
+            />
+            <mat-error
+              *ngIf="
+                !form.controls['email'].valid && form.controls['email'].touched
+              "
+            >
+              {{ getErrorEmail() }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              formControlName="password"
+              matInput
+              placeholder="Password"
+              required
+              type="password"
+            />
+            <mat-error
+              *ngIf="
+                !form.controls['password'].valid &&
+                form.controls['password'].touched
+              "
+            >
+              Field is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-error *ngFor="let error of errorMessages">
+            <p>{{ error }}</p>
+          </mat-error>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button
+            color="primary"
+            [disabled]="!form.valid || isLoading"
+            mat-raised-button
+          >
+            Send
+          </button>
+        </mat-card-actions>
+
+        <mat-card-footer>
+          <mat-progress-bar
+            mode="indeterminate"
+            *ngIf="isLoading"
+          ></mat-progress-bar>
+        </mat-card-footer>
+      </mat-card>
+    </form>
+  </div>
+</div>

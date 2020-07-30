@@ -1,0 +1,6 @@
+<app-login
+  [errorMessages]="errorMessages$ | async"
+  [isLoading]="isLoading$ | async"
+  (submitted)="onSubmit($event)"
+>
+</app-login>
