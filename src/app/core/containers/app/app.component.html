@@ -20,14 +20,14 @@
   </app-sidenav>
 
   <app-toolbar
-    [isSpinnerLoading]="isSpinnerLoading$ | async"
+    [isSpinnerLoading]="showSpinner$ | async"
     [loggedIn]="loggedIn$ | async"
     [user]="user$ | async"
     (logout)="logout()"
     (openMenu)="openSidenav()"
   >
-    <!-- <a class="title" mat-button routerLink="/"> -->
     Controlled Health
-    <!-- </a> -->
   </app-toolbar>
+
+  <router-outlet></router-outlet>
 </app-layout>

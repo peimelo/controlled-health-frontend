@@ -5,11 +5,12 @@
 
   <ng-content></ng-content>
 
-  <!-- <fa-icon
+  &nbsp;
+  <fa-icon
     [icon]="['fas', 'spinner']"
     [spin]="true"
     *ngIf="isSpinnerLoading"
-  ></fa-icon> -->
+  ></fa-icon>
 
   <!-- <span fxFlex></span> -->
 
@@ -22,7 +23,7 @@
   <button
     mat-icon-button
     [matMenuTriggerFor]="menu"
-    matTooltip="{{ user.name }}"
+    matTooltip="{{ user?.name }}"
     [matTooltipPosition]="'right'"
     *ngIf="loggedIn"
   >

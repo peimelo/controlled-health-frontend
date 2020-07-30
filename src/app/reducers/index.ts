@@ -10,6 +10,7 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import * as fromLayout from '../core/reducers/layout.reducers';
+import * as fromSpinner from '../core/reducers/spinner.reducers';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -17,6 +18,7 @@ import * as fromLayout from '../core/reducers/layout.reducers';
  */
 export interface State {
   [fromLayout.layoutFeatureKey]: fromLayout.State;
+  [fromSpinner.spinnerFeatureKey]: fromSpinner.State;
   router: fromRouter.RouterReducerState<any>;
 }
 
@@ -30,6 +32,7 @@ export const ROOT_REDUCERS = new InjectionToken<
 >('Root reducers token', {
   factory: () => ({
     [fromLayout.layoutFeatureKey]: fromLayout.reducer,
+    [fromSpinner.spinnerFeatureKey]: fromSpinner.reducer,
     router: fromRouter.routerReducer,
   }),
 });
@@ -67,4 +70,17 @@ export const selectLayoutState = createFeatureSelector<State, fromLayout.State>(
 export const selectShowSidenav = createSelector(
   selectLayoutState,
   fromLayout.selectShowSidenav
+);
+
+/**
+ * Spinner Reducers
+ */
+export const selectSpinnerState = createFeatureSelector<
+  State,
+  fromSpinner.State
+>(fromSpinner.spinnerFeatureKey);
+
+export const selectShowSpinner = createSelector(
+  selectSpinnerState,
+  fromSpinner.getShowSpinner
 );
