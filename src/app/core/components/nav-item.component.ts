@@ -12,7 +12,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a mat-list-item [routerLink]="routerLink" (click)="navigate.emit()">
-      <mat-icon mat-list-icon>{{ icon }}</mat-icon>
+      <fa-icon [icon]="['fas', icon]" mat-list-icon></fa-icon>
       <span mat-line><ng-content></ng-content></span>
       <span mat-line class="secondary">{{ hint }}</span>
     </a>
