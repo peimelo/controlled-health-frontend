@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { AuthFacadeService } from '../../../auth/services/auth-facade.service';
 import { LayoutFacadeService } from '../../services/layout-facade.service';
+import { SpinnerFacadeService } from '../../services/spinner-facade.service';
 
 @Component({
   selector: 'app-root',
@@ -9,20 +10,23 @@ import { LayoutFacadeService } from '../../services/layout-facade.service';
 })
 export class AppComponent {
   isHandset$ = this.layoutFacade.isHandset$;
+  loggedIn$ = this.authFacade.loggedIn$;
   showSidenav$ = this.layoutFacade.showSidenav$;
+  showSpinner$ = this.spinnerFacade.showSpinner$;
+  user$ = this.authFacade.user$;
 
-  isSpinnerLoading$: Observable<boolean>;
-  loggedIn$: Observable<boolean>;
-  user$: Observable<any>;
-
-  constructor(private layoutFacade: LayoutFacadeService) {}
+  constructor(
+    private authFacade: AuthFacadeService,
+    private layoutFacade: LayoutFacadeService,
+    private spinnerFacade: SpinnerFacadeService
+  ) {}
 
   closeSidenav(): void {
     this.layoutFacade.closeSidenav();
   }
 
   logout(): void {
-    // this.store.dispatch(AuthActions.logout());
+    this.authFacade.logout();
   }
 
   openSidenav(): void {
