@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './core/containers/app/app.component';
 import { CoreModule } from './core/core.module';
+import { RouterEffects, UserEffects } from './core/effects';
 import { metaReducers, ROOT_REDUCERS } from './reducers';
 
 @NgModule({
@@ -36,7 +37,7 @@ import { metaReducers, ROOT_REDUCERS } from './reducers';
       name: 'Controlled Health App',
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([RouterEffects, UserEffects]),
 
     // App
     AppRoutingModule,

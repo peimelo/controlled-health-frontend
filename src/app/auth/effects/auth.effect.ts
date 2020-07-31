@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
+import { UserActions } from '../../core/actions';
 import { AuthActions, AuthApiActions, LoginPageActions } from '../actions';
 import { Credentials } from '../models';
 import { AuthService } from '../services/auth.service';
@@ -73,16 +74,12 @@ export class AuthEffects {
       exhaustMap(() =>
         this.authService.logout().pipe(
           map(() => {
-            localStorage.removeItem('access-token');
-            localStorage.removeItem('client');
-            localStorage.removeItem('uid');
+            this.clearLocalStorage();
 
             return AuthApiActions.loginRedirect();
           }),
           catchError(() => {
-            localStorage.removeItem('access-token');
-            localStorage.removeItem('client');
-            localStorage.removeItem('uid');
+            this.clearLocalStorage();
 
             return of(AuthApiActions.loginRedirect());
           })
@@ -90,4 +87,17 @@ export class AuthEffects {
       )
     )
   );
+
+  logoutIdleUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.idleTimeout),
+      map(() => AuthActions.logout())
+    )
+  );
+
+  private clearLocalStorage() {
+    localStorage.removeItem('access-token');
+    localStorage.removeItem('client');
+    localStorage.removeItem('uid');
+  }
 }
