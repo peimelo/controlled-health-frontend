@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
-import { Credentials } from '../../models';
-import { AuthService } from '../../services/auth.service';
 import { AuthActions, AuthApiActions, LoginPageActions } from '../actions';
+import { Credentials } from '../models';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthEffects {

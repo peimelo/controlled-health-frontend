@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AuthActions, LoginPageActions } from '../actions';
 import { Credentials } from '../models';
-import { AuthActions, LoginPageActions } from '../store/actions';
-import * as fromAuth from '../store/reducers';
+import * as fromAuth from '../reducers';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacadeService {

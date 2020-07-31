@@ -3,8 +3,8 @@ import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
-import { AuthActions } from '../store/actions';
-import * as fromAuth from '../store/reducers';
+import { AuthActions } from '../actions';
+import * as fromAuth from '../reducers';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

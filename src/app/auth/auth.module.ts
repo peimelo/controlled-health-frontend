@@ -11,10 +11,10 @@ import { StoreModule } from '@ngrx/store';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './componentes/login/login.component';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
+import { AuthEffects } from './effects';
 import * as fromGuards from './guards';
 import * as fromInterceptors from './interceptors';
-import { AuthEffects } from './store/effects';
-import * as fromAuth from './store/reducers';
+import * as fromAuth from './reducers';
 
 @NgModule({
   declarations: [LoginPageComponent, LoginComponent],

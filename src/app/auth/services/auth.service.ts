@@ -23,8 +23,4 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.delete(`${this.url}/sign_out`);
   }
-
-  // getUser(): Observable<User> {
-  //   return this.http.get<User>(`${environment.baseUrl}/users/0`);
-  // }
 }
