@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -27,6 +28,7 @@ import * as fromAuth from './store/reducers';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatProgressBarModule,
 
     // @ngrx
     StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers),
