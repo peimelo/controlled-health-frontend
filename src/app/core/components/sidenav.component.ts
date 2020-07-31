@@ -15,7 +15,6 @@ import {
       [opened]="open"
       (keydown.escape)="sidenav.close()"
       (closedStart)="closeMenu.emit()"
-      disableClose
     >
       <mat-nav-list>
         <ng-content></ng-content>
