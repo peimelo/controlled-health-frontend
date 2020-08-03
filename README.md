@@ -1,27 +1,51 @@
-# ControlledHealth
+# Saúde Controlada Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
+Frontend do site Saúde Controlada construído com [Angular](https://angular.io).
 
-## Development server
+<table>
+  <tr>
+    <td>Angular</td>
+    <td>
+      10.0.4
+    </td>
+  </tr>
+  <tr>
+    <td>Material</td>
+    <td>
+      10.0.2
+    </td>
+  </tr>
+  <tr>
+    <td>NgRx</td>
+    <td>
+      9.2.0
+    </td>
+  </tr>
+</table>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+O backend desse repositório foi construído com Ruby on Rails e se chama [saudecontrolada_api](https://github.com/peimelo/saudecontrolada_api).
 
-## Code scaffolding
+## Configuração
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+git clone https://github.com/peimelo/saudecontrolada-frontend.git
+cd saudecontrolada-frontend
 
-## Build
+# instalação das dependências
+npm install
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+# rodar o projeto
+ng serve
+```
 
-## Running unit tests
+Abra o navegador no endereço `http://localhost:4200`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Testes
 
-## Running end-to-end tests
+[![CircleCI](https://circleci.com/gh/peimelo/saudecontrolada-frontend.svg?style=svg)](https://circleci.com/gh/peimelo/saudecontrolada-frontend)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Para rodar os testes:
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```bash
+npm run test
+```
