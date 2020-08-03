@@ -17,7 +17,7 @@ describe('AuthReducer', () => {
        * are used to validate against the current state
        * if the functionality of the reducer ever changes.
        */
-      expect(result).toMatchSnapshot();
+      (<any>expect(result)).toMatchSnapshot();
     });
   });
 
@@ -28,7 +28,7 @@ describe('AuthReducer', () => {
 
       const result = reducer(fromAuth.initialState, createAction);
 
-      expect(result).toMatchSnapshot();
+      (<any>expect(result)).toMatchSnapshot();
     });
   });
 
@@ -41,7 +41,7 @@ describe('AuthReducer', () => {
 
       const result = reducer(initialState, createAction);
 
-      expect(result).toMatchSnapshot();
+      (<any>expect(result)).toMatchSnapshot();
     });
   });
 });
