@@ -1,26 +1,34 @@
-import 'jest-preset-angular';
+// This file is required by karma.conf.js and loads recursively all the .spec and framework files
 
-Object.defineProperty(window, 'CSS', { value: null });
-Object.defineProperty(document, 'doctype', {
-  value: '<!DOCTYPE html>',
-});
-Object.defineProperty(window, 'getComputedStyle', {
-  value: () => {
-    return {
-      display: 'none',
-      appearance: ['-webkit-appearance'],
-    };
-  },
-});
-/**
- * ISSUE: https://github.com/angular/material2/issues/7101
- * Workaround for JSDOM missing transform property
- */
-Object.defineProperty(document.body.style, 'transform', {
-  value: () => {
-    return {
-      enumerable: true,
-      configurable: true,
-    };
-  },
-});
+import { getTestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting,
+} from '@angular/platform-browser-dynamic/testing';
+// fixes typing errors in Atom editor
+import 'jasmine';
+import 'zone.js/dist/async-test';
+import 'zone.js/dist/fake-async-test';
+import 'zone.js/dist/jasmine-patch';
+import 'zone.js/dist/long-stack-trace-zone';
+import 'zone.js/dist/proxy.js';
+import 'zone.js/dist/sync-test';
+
+// Unfortunately there's no typing for the `__karma__` variable. Just declare it as any.
+declare var __karma__: any;
+declare var require: any;
+
+// Prevent Karma from running prematurely.
+__karma__.loaded = function () {};
+
+// First, initialize the Angular testing environment.
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting()
+);
+// Then we find all the tests.
+const context = require.context('./', true, /\.spec\.ts$/);
+// And load the modules.
+context.keys().map(context);
+// Finally, start Karma to run the tests.
+__karma__.start();
