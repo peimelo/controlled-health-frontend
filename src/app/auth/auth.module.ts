@@ -12,7 +12,6 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './componentes/login/login.component';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
 import { AuthEffects } from './effects';
-import * as fromGuards from './guards';
 import * as fromInterceptors from './interceptors';
 import * as fromAuth from './reducers';
 
@@ -38,7 +37,6 @@ import * as fromAuth from './reducers';
     AuthRoutingModule,
   ],
   providers: [
-    ...fromGuards.guards,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: fromInterceptors.AuthInterceptor,
