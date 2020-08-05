@@ -2,7 +2,7 @@
 
 exports[`LoginPageReducer LOGIN should make pending to true 1`] = `
 Object {
-  "error": null,
+  "error": Array [],
   "pending": true,
 }
 `;

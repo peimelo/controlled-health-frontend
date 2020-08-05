@@ -3,41 +3,15 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Credentials } from '../../models';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styles: [
-    `
-      :host {
-        display: flex;
-        justify-content: center;
-        margin: 72px 0;
-      }
-
-      .mat-form-field {
-        width: 100%;
-        min-width: 300px;
-      }
-
-      mat-card-title,
-      mat-card-content {
-        display: flex;
-        justify-content: center;
-      }
-
-      .loginButtons {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-      }
-    `,
-  ],
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss'],
 })
-export class LoginComponent {
+export class LoginFormComponent {
   form = this.fb.group({
     email: ['', [Validators.email, Validators.required]],
     password: ['', Validators.required],
   });
-  hide = true;
 
   @Input() errors: string[];
   @Input() pending: boolean;

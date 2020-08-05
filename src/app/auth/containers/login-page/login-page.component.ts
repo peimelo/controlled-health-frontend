@@ -5,11 +5,10 @@ import { AuthFacadeService } from '../../services/auth-facade.service';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-  errors$ = this.authFacade.errors$;
-  pending$ = this.authFacade.pending$;
+  errors$ = this.authFacade.loginErrors$;
+  pending$ = this.authFacade.logingPending$;
 
   constructor(private authFacade: AuthFacadeService) {}
 
