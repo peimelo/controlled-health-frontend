@@ -23,4 +23,24 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.delete(`${this.url}/sign_out`);
   }
+
+  forgotPassword(email: string): Observable<any> {
+    const data = {
+      email,
+      redirect_url: `${this.getRootUrl()}/reset-password`,
+    };
+
+    return this.http.post<any>(`${this.url}/password`, data);
+  }
+
+  changePassword(): Observable<any> {
+    return this.http.delete(`${this.url}/password`);
+  }
+
+  private getRootUrl(): string {
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+
+    return `${protocol}//${host}`;
+  }
 }

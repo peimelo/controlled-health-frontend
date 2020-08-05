@@ -4,18 +4,17 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 import { UserActions } from '../../core/actions';
-import { AuthActions, AuthApiActions, LoginPageActions } from '../actions';
+import {
+  AuthActions,
+  AuthApiActions,
+  ForgotPasswordPageActions,
+  LoginPageActions,
+} from '../actions';
 import { Credentials } from '../models';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthEffects {
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private router: Router
-  ) {}
-
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoginPageActions.login),
@@ -94,6 +93,35 @@ export class AuthEffects {
       map(() => AuthActions.logout())
     )
   );
+
+  forgotPassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ForgotPasswordPageActions.forgotPassword),
+      map((action) => action.email),
+      exhaustMap((email) =>
+        this.authService.forgotPassword(email).pipe(
+          map(() => AuthApiActions.loginRedirect()),
+          catchError((error) => {
+            let messages = [error.message];
+
+            if (error && error.error && error.error.errors) {
+              messages = error.error.errors;
+            }
+
+            return of(
+              AuthApiActions.forgotPasswordFailure({ error: messages })
+            );
+          })
+        )
+      )
+    )
+  );
+
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   private clearLocalStorage() {
     localStorage.removeItem('access-token');

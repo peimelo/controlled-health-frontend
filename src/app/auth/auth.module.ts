@@ -9,14 +9,23 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AuthRoutingModule } from './auth-routing.module';
-import { LoginComponent } from './componentes/login/login.component';
+import { ForgotPasswordFormComponent } from './componentes/forgot-password-form/forgot-password-form.component';
+import { LoginFormComponent } from './componentes/login-form/login-form.component';
+import { ResetPasswordFormComponent } from './componentes/reset-password-form/reset-password-form.component';
+import { ForgotPasswordPageComponent } from './containers/forgot-password-page/forgot-password-page.component';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
 import { AuthEffects } from './effects';
 import * as fromInterceptors from './interceptors';
 import * as fromAuth from './reducers';
 
 @NgModule({
-  declarations: [LoginPageComponent, LoginComponent],
+  declarations: [
+    LoginPageComponent,
+    LoginFormComponent,
+    ForgotPasswordPageComponent,
+    ForgotPasswordFormComponent,
+    ResetPasswordFormComponent,
+  ],
   imports: [
     // Angular
     CommonModule,

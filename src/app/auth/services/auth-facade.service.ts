@@ -1,23 +1,42 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AuthActions, LoginPageActions } from '../actions';
+import {
+  AuthActions,
+  ForgotPasswordPageActions,
+  LoginPageActions,
+} from '../actions';
 import { Credentials } from '../models';
 import * as fromAuth from '../reducers';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacadeService {
-  errors$: Observable<string[]>;
+  forgotPasswordErrors$: Observable<string[]>;
+  forgotPasswordPending$: Observable<boolean>;
+
   loggedIn$: Observable<boolean>;
-  pending$: Observable<boolean>;
+
+  loginErrors$: Observable<string[]>;
+  logingPending$: Observable<boolean>;
+
   user$: Observable<any>;
 
   constructor(private store: Store<fromAuth.State>) {
-    this.errors$ = this.store.pipe(select(fromAuth.selectLoginPageError));
+    this.forgotPasswordErrors$ = this.store.pipe(
+      select(fromAuth.selectForgotPasswordPageError)
+    );
+
+    this.forgotPasswordPending$ = this.store.pipe(
+      select(fromAuth.selectForgotPasswordPagePending)
+    );
 
     this.loggedIn$ = this.store.pipe(select(fromAuth.selectLoggedIn));
 
-    this.pending$ = this.store.pipe(select(fromAuth.selectLoginPagePending));
+    this.loginErrors$ = this.store.pipe(select(fromAuth.selectLoginPageError));
+
+    this.logingPending$ = this.store.pipe(
+      select(fromAuth.selectLoginPagePending)
+    );
 
     this.user$ = this.store.pipe(select(fromAuth.selectUser));
   }
@@ -28,5 +47,9 @@ export class AuthFacadeService {
 
   logout(): void {
     this.store.dispatch(AuthActions.logout());
+  }
+
+  forgotPassword(email: string): void {
+    this.store.dispatch(ForgotPasswordPageActions.forgotPassword({ email }));
   }
 }
