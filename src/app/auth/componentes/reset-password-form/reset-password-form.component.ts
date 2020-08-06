@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { FormErrorService } from '../../../core/services/form-error.service';
 
 @Component({
   selector: 'app-reset-password-form',
@@ -7,26 +8,28 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./reset-password-form.component.scss'],
 })
 export class ResetPasswordFormComponent {
-  form = this.fb.group({
-    email: ['', [Validators.email, Validators.required]],
-    password: ['', Validators.required],
-    passwordConfirmation: ['', Validators.required],
-  });
+  form = this.fb.group(
+    {
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      passwordConfirmation: ['', Validators.required],
+    },
+    {
+      validators: this.formErrorService.confirmedValidator(
+        'password',
+        'passwordConfirmation'
+      ),
+    }
+  );
 
   @Input() errors: string[];
   @Input() pending: boolean;
 
   @Output() submitted = new EventEmitter<string>();
 
-  constructor(private fb: FormBuilder) {}
-
-  getErrorEmail(): string {
-    return this.form.get('email').hasError('required')
-      ? 'Field is required'
-      : this.form.get('email').hasError('email')
-      ? 'Must be a valid email address'
-      : '';
-  }
+  constructor(
+    private fb: FormBuilder,
+    public readonly formErrorService: FormErrorService
+  ) {}
 
   submit(): void {
     // if (this.form.valid) {

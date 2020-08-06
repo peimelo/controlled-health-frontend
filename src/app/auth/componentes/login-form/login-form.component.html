@@ -13,11 +13,11 @@
             type="email"
           />
           <mat-error
-            *ngIf="
-              !form.controls['email'].valid && form.controls['email'].touched
+            *ngFor="
+              let error of formErrorService.mapErrors(form.get('email').errors)
             "
           >
-            {{ getErrorEmail() }}
+            {{ error }}
           </mat-error>
         </mat-form-field>
       </p>
@@ -32,12 +32,13 @@
             type="password"
           />
           <mat-error
-            *ngIf="
-              !form.controls['password'].valid &&
-              form.controls['password'].touched
+            *ngFor="
+              let error of formErrorService.mapErrors(
+                form.get('password').errors
+              )
             "
           >
-            Field is required
+            {{ error }}
           </mat-error>
         </mat-form-field>
       </p>

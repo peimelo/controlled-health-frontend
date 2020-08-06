@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { FormErrorService } from '../../../core/services/form-error.service';
 
 @Component({
   selector: 'app-forgot-password-form',
@@ -16,15 +17,10 @@ export class ForgotPasswordFormComponent {
 
   @Output() submitted = new EventEmitter<string>();
 
-  constructor(private fb: FormBuilder) {}
-
-  getErrorEmail(): string {
-    return this.form.get('email').hasError('required')
-      ? 'Field is required'
-      : this.form.get('email').hasError('email')
-      ? 'Must be a valid email address'
-      : '';
-  }
+  constructor(
+    private fb: FormBuilder,
+    public readonly formErrorService: FormErrorService
+  ) {}
 
   submit(): void {
     if (this.form.valid) {
