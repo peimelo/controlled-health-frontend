@@ -9,6 +9,7 @@ import {
   AuthApiActions,
   ForgotPasswordPageActions,
   LoginPageActions,
+  ResetPasswordPageActions,
 } from '../actions';
 import { Credentials } from '../models';
 import { AuthService } from '../services/auth.service';
@@ -100,6 +101,29 @@ export class AuthEffects {
       map((action) => action.email),
       exhaustMap((email) =>
         this.authService.forgotPassword(email).pipe(
+          map(() => AuthApiActions.loginRedirect()),
+          catchError((error) => {
+            let messages = [error.message];
+
+            if (error && error.error && error.error.errors) {
+              messages = error.error.errors;
+            }
+
+            return of(
+              AuthApiActions.forgotPasswordFailure({ error: messages })
+            );
+          })
+        )
+      )
+    )
+  );
+
+  resetPassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ResetPasswordPageActions.resetPassword),
+      map((action) => action.passwordCombination),
+      exhaustMap((passwordCombination) =>
+        this.authService.resetPassword(passwordCombination).pipe(
           map(() => AuthApiActions.loginRedirect()),
           catchError((error) => {
             let messages = [error.message];

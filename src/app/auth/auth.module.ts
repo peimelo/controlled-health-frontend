@@ -14,6 +14,7 @@ import { LoginFormComponent } from './componentes/login-form/login-form.componen
 import { ResetPasswordFormComponent } from './componentes/reset-password-form/reset-password-form.component';
 import { ForgotPasswordPageComponent } from './containers/forgot-password-page/forgot-password-page.component';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
+import { ResetPasswordPageComponent } from './containers/reset-password-page/reset-password-page.component';
 import { AuthEffects } from './effects';
 import * as fromInterceptors from './interceptors';
 import * as fromAuth from './reducers';
@@ -24,6 +25,7 @@ import * as fromAuth from './reducers';
     LoginFormComponent,
     ForgotPasswordPageComponent,
     ForgotPasswordFormComponent,
+    ResetPasswordPageComponent,
     ResetPasswordFormComponent,
   ],
   imports: [

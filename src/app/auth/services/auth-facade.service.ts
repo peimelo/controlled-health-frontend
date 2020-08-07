@@ -5,8 +5,9 @@ import {
   AuthActions,
   ForgotPasswordPageActions,
   LoginPageActions,
+  ResetPasswordPageActions,
 } from '../actions';
-import { Credentials } from '../models';
+import { Credentials, PasswordCombination } from '../models';
 import * as fromAuth from '../reducers';
 
 @Injectable({ providedIn: 'root' })
@@ -51,5 +52,11 @@ export class AuthFacadeService {
 
   forgotPassword(email: string): void {
     this.store.dispatch(ForgotPasswordPageActions.forgotPassword({ email }));
+  }
+
+  resetPassword(passwordCombination: PasswordCombination): void {
+    this.store.dispatch(
+      ResetPasswordPageActions.resetPassword({ passwordCombination })
+    );
   }
 }

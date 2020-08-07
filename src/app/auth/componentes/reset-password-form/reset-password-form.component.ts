@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormErrorService } from '../../../core/services/form-error.service';
+import { PasswordCombination } from '../../models';
 
 @Component({
   selector: 'app-reset-password-form',
@@ -24,7 +25,7 @@ export class ResetPasswordFormComponent {
   @Input() errors: string[];
   @Input() pending: boolean;
 
-  @Output() submitted = new EventEmitter<string>();
+  @Output() submitted = new EventEmitter<PasswordCombination>();
 
   constructor(
     private fb: FormBuilder,
@@ -32,8 +33,8 @@ export class ResetPasswordFormComponent {
   ) {}
 
   submit(): void {
-    // if (this.form.valid) {
-    //   this.submitted.emit(this.form.get('email').value);
-    // }
+    if (this.form.valid) {
+      this.submitted.emit(this.form.value);
+    }
   }
 }

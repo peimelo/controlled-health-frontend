@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Credentials, User } from '../models';
+import { Credentials, PasswordCombination, User } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -10,7 +10,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getFromLocalStorage(key: string): string {
+  getKeyFromLocalStorage(key: string): string {
     return localStorage.getItem(key);
   }
 
@@ -33,8 +33,15 @@ export class AuthService {
     return this.http.post<any>(`${this.url}/password`, data);
   }
 
-  changePassword(): Observable<any> {
-    return this.http.delete(`${this.url}/password`);
+  resetPassword(passwordCombination: PasswordCombination): Observable<any> {
+    const { password, passwordConfirmation } = passwordCombination;
+
+    const data = {
+      password,
+      password_confirmation: passwordConfirmation,
+    };
+
+    return this.http.put(`${this.url}/password`, data);
   }
 
   private getRootUrl(): string {
