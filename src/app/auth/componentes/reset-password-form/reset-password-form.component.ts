@@ -22,7 +22,6 @@ export class ResetPasswordFormComponent {
     }
   );
 
-  @Input() errors: string[];
   @Input() pending: boolean;
 
   @Output() submitted = new EventEmitter<PasswordCombination>();

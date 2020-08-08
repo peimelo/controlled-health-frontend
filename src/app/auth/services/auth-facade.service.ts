@@ -12,32 +12,11 @@ import * as fromAuth from '../reducers';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacadeService {
-  forgotPasswordErrors$: Observable<string[]>;
-  forgotPasswordPending$: Observable<boolean>;
-
   loggedIn$: Observable<boolean>;
-
-  loginErrors$: Observable<string[]>;
-  logingPending$: Observable<boolean>;
-
   user$: Observable<any>;
 
   constructor(private store: Store<fromAuth.State>) {
-    this.forgotPasswordErrors$ = this.store.pipe(
-      select(fromAuth.selectForgotPasswordPageError)
-    );
-
-    this.forgotPasswordPending$ = this.store.pipe(
-      select(fromAuth.selectForgotPasswordPagePending)
-    );
-
     this.loggedIn$ = this.store.pipe(select(fromAuth.selectLoggedIn));
-
-    this.loginErrors$ = this.store.pipe(select(fromAuth.selectLoginPageError));
-
-    this.logingPending$ = this.store.pipe(
-      select(fromAuth.selectLoginPagePending)
-    );
 
     this.user$ = this.store.pipe(select(fromAuth.selectUser));
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
 import { PasswordCombination } from '../../models';
 import { AuthFacadeService } from '../../services/auth-facade.service';
 
@@ -8,11 +9,11 @@ import { AuthFacadeService } from '../../services/auth-facade.service';
   templateUrl: './reset-password-page.component.html',
 })
 export class ResetPasswordPageComponent implements OnInit {
-  errors$ = this.authFacade.forgotPasswordErrors$;
-  pending$ = this.authFacade.forgotPasswordPending$;
+  pending$ = this.layoutFacade.isSpinnerLoading$;
 
   constructor(
     private authFacade: AuthFacadeService,
+    private layoutFacade: LayoutFacadeService,
     private route: ActivatedRoute
   ) {}
 

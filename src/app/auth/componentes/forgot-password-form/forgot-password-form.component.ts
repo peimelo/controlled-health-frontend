@@ -12,7 +12,6 @@ export class ForgotPasswordFormComponent {
     email: ['', [Validators.email, Validators.required]],
   });
 
-  @Input() errors: string[];
   @Input() pending: boolean;
 
   @Output() submitted = new EventEmitter<string>();

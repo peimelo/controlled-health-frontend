@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
@@ -20,7 +21,6 @@ import { LoadingInterceptorService } from './services/loading-interceptor.servic
 
 export const COMPONENTS = [
   AppComponent,
-  // NotFoundPageComponent,
   HomeComponent,
   LayoutComponent,
   NavItemComponent,
@@ -40,6 +40,7 @@ export const COMPONENTS = [
     MatListModule,
     MatMenuModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatToolbarModule,
     MatTooltipModule,
 

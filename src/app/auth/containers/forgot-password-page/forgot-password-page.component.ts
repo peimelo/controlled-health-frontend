@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
 import { AuthFacadeService } from '../../services/auth-facade.service';
 
 @Component({
@@ -6,10 +7,12 @@ import { AuthFacadeService } from '../../services/auth-facade.service';
   templateUrl: './forgot-password-page.component.html',
 })
 export class ForgotPasswordPageComponent {
-  errors$ = this.authFacade.forgotPasswordErrors$;
-  pending$ = this.authFacade.forgotPasswordPending$;
+  pending$ = this.layoutFacade.isSpinnerLoading$;
 
-  constructor(private authFacade: AuthFacadeService) {}
+  constructor(
+    private authFacade: AuthFacadeService,
+    private layoutFacade: LayoutFacadeService
+  ) {}
 
   onSubmit(email: string): void {
     this.authFacade.forgotPassword(email);

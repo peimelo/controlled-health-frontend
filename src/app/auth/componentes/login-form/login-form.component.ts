@@ -14,7 +14,6 @@ export class LoginFormComponent {
     password: ['', Validators.required],
   });
 
-  @Input() errors: string[];
   @Input() pending: boolean;
 
   @Output() submitted = new EventEmitter<Credentials>();

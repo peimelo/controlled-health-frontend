@@ -43,10 +43,6 @@
         </mat-form-field>
       </p>
 
-      <mat-error *ngFor="let error of errors">
-        <p>{{ error }}</p>
-      </mat-error>
-
       <p class="loginButtons">
         <button
           color="primary"
@@ -59,6 +55,12 @@
 
       <p>
         <a mat-button routerLink="/forgot-password">Forgot password?</a>
+      </p>
+
+      <p>
+        <a mat-button routerLink="/forgot-password"
+          >Resend confirmation email</a
+        >
       </p>
     </form>
   </mat-card-content>

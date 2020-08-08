@@ -3,7 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { Credentials, PasswordCombination, User } from '../models';
+import {
+  Credentials,
+  PasswordCombination,
+  SuccessResponse,
+  User,
+} from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -42,16 +47,18 @@ export class AuthService {
     );
   }
 
-  forgotPassword(email: string): Observable<any> {
+  forgotPassword(email: string): Observable<SuccessResponse> {
     const data = {
       email,
       redirect_url: `${this.getRootUrl()}/reset-password`,
     };
 
-    return this.http.post<any>(`${this.url}/password`, data);
+    return this.http.post<SuccessResponse>(`${this.url}/password`, data);
   }
 
-  resetPassword(passwordCombination: PasswordCombination): Observable<any> {
+  resetPassword(
+    passwordCombination: PasswordCombination
+  ): Observable<SuccessResponse> {
     const { password, passwordConfirmation } = passwordCombination;
 
     const data = {
@@ -59,7 +66,7 @@ export class AuthService {
       password_confirmation: passwordConfirmation,
     };
 
-    return this.http.put(`${this.url}/password`, data);
+    return this.http.put<SuccessResponse>(`${this.url}/password`, data);
   }
 
   private getRootUrl(): string {
