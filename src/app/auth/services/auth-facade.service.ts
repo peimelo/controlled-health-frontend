@@ -45,4 +45,8 @@ export class AuthFacadeService {
       ResetPasswordPageActions.resetPassword({ passwordCombination })
     );
   }
+
+  showConfirmationAccountMessage(): void {
+    this.store.dispatch(LoginPageActions.showAccountConfirmationMessage());
+  }
 }

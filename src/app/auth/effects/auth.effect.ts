@@ -25,6 +25,17 @@ export class AuthEffects {
     )
   );
 
+  showAccountConfirmationMessage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LoginPageActions.showAccountConfirmationMessage),
+      map(() =>
+        MessageApiActions.successMessage({
+          message: 'Your account has been successfully confirmed.',
+        })
+      )
+    )
+  );
+
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoginPageActions.login),

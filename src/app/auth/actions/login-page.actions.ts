@@ -5,3 +5,7 @@ export const login = createAction(
   '[Login Page] Login',
   props<{ credentials: Credentials }>()
 );
+
+export const showAccountConfirmationMessage = createAction(
+  '[Login Page] Show Account Confirmation Message'
+);
