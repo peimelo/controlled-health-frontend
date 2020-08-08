@@ -23,10 +23,6 @@ export class AuthInterceptor implements HttpInterceptor {
       }),
       catchError((response) => {
         if (response.status === 401) {
-          localStorage.removeItem('access-token');
-          localStorage.removeItem('client');
-          localStorage.removeItem('uid');
-
           this.router.navigate(['login']);
         }
         return throwError(response);

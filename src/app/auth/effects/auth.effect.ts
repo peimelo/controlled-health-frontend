@@ -20,20 +20,13 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(LoginPageActions.login),
       map((action) => action.credentials),
-      exhaustMap((auth: Credentials) =>
-        this.authService.login(auth).pipe(
-          map((resp) => {
-            localStorage.setItem(
-              'access-token',
-              resp.headers.get('access-token')
-            );
-            localStorage.setItem('client', resp.headers.get('client'));
-            localStorage.setItem('uid', resp.headers.get('uid'));
-
-            return AuthApiActions.loginSuccess({
+      exhaustMap((credentials: Credentials) =>
+        this.authService.login(credentials).pipe(
+          map((resp) =>
+            AuthApiActions.loginSuccess({
               user: resp.body['data'],
-            });
-          }),
+            })
+          ),
           catchError((error) => {
             let messages = [error.message];
 
@@ -73,16 +66,8 @@ export class AuthEffects {
       ofType(AuthActions.logout),
       exhaustMap(() =>
         this.authService.logout().pipe(
-          map(() => {
-            this.clearLocalStorage();
-
-            return AuthApiActions.loginRedirect();
-          }),
-          catchError(() => {
-            this.clearLocalStorage();
-
-            return of(AuthApiActions.loginRedirect());
-          })
+          map(() => AuthApiActions.loginRedirect()),
+          catchError(() => of(AuthApiActions.loginRedirect()))
         )
       )
     )
@@ -146,10 +131,4 @@ export class AuthEffects {
     private authService: AuthService,
     private router: Router
   ) {}
-
-  private clearLocalStorage() {
-    localStorage.removeItem('access-token');
-    localStorage.removeItem('client');
-    localStorage.removeItem('uid');
-  }
 }

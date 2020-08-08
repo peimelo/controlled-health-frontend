@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Credentials, PasswordCombination, User } from '../models';
 
@@ -10,18 +11,35 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getKeyFromLocalStorage(key: string): string {
+  getValueFromLocalStorage(key: string): string {
     return localStorage.getItem(key);
   }
 
-  login(auth: Credentials): Observable<HttpResponse<User>> {
-    return this.http.post<User>(`${this.url}/sign_in`, auth, {
-      observe: 'response',
-    });
+  login(credentials: Credentials): Observable<HttpResponse<User>> {
+    return this.http
+      .post<User>(`${this.url}/sign_in`, credentials, {
+        observe: 'response',
+      })
+      .pipe(
+        tap((resp) => {
+          localStorage.setItem(
+            'access-token',
+            resp.headers.get('access-token')
+          );
+          localStorage.setItem('client', resp.headers.get('client'));
+          localStorage.setItem('uid', resp.headers.get('uid'));
+        })
+      );
   }
 
   logout(): Observable<any> {
-    return this.http.delete(`${this.url}/sign_out`);
+    return this.http.delete(`${this.url}/sign_out`).pipe(
+      tap(() => {
+        localStorage.removeItem('access-token');
+        localStorage.removeItem('client');
+        localStorage.removeItem('uid');
+      })
+    );
   }
 
   forgotPassword(email: string): Observable<any> {

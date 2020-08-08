@@ -20,9 +20,11 @@ export class TokenInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     this.authService = this.injector.get(AuthService);
 
-    const accessToken = this.authService.getKeyFromLocalStorage('access-token');
-    const client = this.authService.getKeyFromLocalStorage('client');
-    const uid = this.authService.getKeyFromLocalStorage('uid');
+    const accessToken = this.authService.getValueFromLocalStorage(
+      'access-token'
+    );
+    const client = this.authService.getValueFromLocalStorage('client');
+    const uid = this.authService.getValueFromLocalStorage('uid');
 
     if (accessToken && client && uid) {
       request = request.clone({
