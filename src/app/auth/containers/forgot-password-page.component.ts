@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
-import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
-import { AuthFacadeService } from '../../services/auth-facade.service';
+import { LayoutFacadeService } from '../../core/services/layout-facade.service';
+import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
-  selector: 'app-forgot-password-page',
-  templateUrl: './forgot-password-page.component.html',
+  template: `
+    <app-forgot-password-form
+      [pending]="pending$ | async"
+      (submitted)="onSubmit($event)"
+    >
+    </app-forgot-password-form>
+  `,
 })
 export class ForgotPasswordPageComponent {
   pending$ = this.layoutFacade.isSpinnerLoading$;

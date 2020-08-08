@@ -10,6 +10,7 @@ import {
   AuthApiActions,
   ForgotPasswordPageActions,
   LoginPageActions,
+  ResendConfirmationPageActions,
   ResetPasswordPageActions,
 } from '../actions';
 import { Credentials, SuccessResponse } from '../models';
@@ -92,6 +93,27 @@ export class AuthEffects {
       map((action) => action.passwordCombination),
       exhaustMap((passwordCombination) =>
         this.authService.resetPassword(passwordCombination).pipe(
+          switchMap((successResponse: SuccessResponse) => [
+            AuthApiActions.loginRedirect(),
+            MessageApiActions.successMessage({
+              message: successResponse.message,
+            }),
+          ]),
+          catchError((error) => {
+            const message = this.errorService.getMessage(error);
+            return of(MessageApiActions.errorMessage({ message }));
+          })
+        )
+      )
+    )
+  );
+
+  resendConfirmation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ResendConfirmationPageActions.resendConfirmation),
+      map((action) => action.email),
+      exhaustMap((email) =>
+        this.authService.resendConfirmation(email).pipe(
           switchMap((successResponse: SuccessResponse) => [
             AuthApiActions.loginRedirect(),
             MessageApiActions.successMessage({

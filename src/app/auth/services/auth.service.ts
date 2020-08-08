@@ -69,6 +69,12 @@ export class AuthService {
     return this.http.put<SuccessResponse>(`${this.url}/password`, data);
   }
 
+  resendConfirmation(email: string): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${this.url}/confirmation`, {
+      email,
+    });
+  }
+
   private getRootUrl(): string {
     const protocol = window.location.protocol;
     const host = window.location.host;

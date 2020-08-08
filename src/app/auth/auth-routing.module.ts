@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ForgotPasswordPageComponent } from './containers/forgot-password-page/forgot-password-page.component';
-import { LoginPageComponent } from './containers/login-page/login-page.component';
-import { ResetPasswordPageComponent } from './containers/reset-password-page/reset-password-page.component';
+import { ForgotPasswordPageComponent } from './containers/forgot-password-page.component';
+import { LoginPageComponent } from './containers/login-page.component';
+import { ResendConfirmationPageComponent } from './containers/resend-confirmation-page.component';
+import { ResetPasswordPageComponent } from './containers/reset-password-page.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,11 @@ const routes: Routes = [
     path: 'login',
     component: LoginPageComponent,
     data: { title: 'Login' },
+  },
+  {
+    path: 'resend-confirmation',
+    component: ResendConfirmationPageComponent,
+    data: { title: 'Resend Confirmation' },
   },
   {
     path: 'reset-password',

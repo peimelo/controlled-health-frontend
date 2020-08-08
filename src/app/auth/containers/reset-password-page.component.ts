@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
-import { PasswordCombination } from '../../models';
-import { AuthFacadeService } from '../../services/auth-facade.service';
+import { LayoutFacadeService } from '../../core/services/layout-facade.service';
+import { PasswordCombination } from '../models';
+import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
-  selector: 'app-reset-password-page',
-  templateUrl: './reset-password-page.component.html',
+  template: `
+    <app-reset-password-form
+      [pending]="pending$ | async"
+      (submitted)="onSubmit($event)"
+    >
+    </app-reset-password-form>
+  `,
 })
 export class ResetPasswordPageComponent implements OnInit {
   pending$ = this.layoutFacade.isSpinnerLoading$;

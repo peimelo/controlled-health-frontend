@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-title>Forgot Password</mat-card-title>
+  <mat-card-title>Resend Confirmation</mat-card-title>
 
   <mat-card-content>
     <form [formGroup]="form" (ngSubmit)="submit()">
@@ -28,7 +28,7 @@
           [disabled]="!form.valid || pending"
           mat-raised-button
         >
-          Send Reset Password
+          Resend Confirmation
         </button>
       </p>
     </form>

@@ -5,6 +5,7 @@ import {
   AuthActions,
   ForgotPasswordPageActions,
   LoginPageActions,
+  ResendConfirmationPageActions,
   ResetPasswordPageActions,
 } from '../actions';
 import { Credentials, PasswordCombination } from '../models';
@@ -31,6 +32,12 @@ export class AuthFacadeService {
 
   forgotPassword(email: string): void {
     this.store.dispatch(ForgotPasswordPageActions.forgotPassword({ email }));
+  }
+
+  resendConfirmation(email: string): void {
+    this.store.dispatch(
+      ResendConfirmationPageActions.resendConfirmation({ email })
+    );
   }
 
   resetPassword(passwordCombination: PasswordCombination): void {
