@@ -8,12 +8,12 @@ import { ErrorsService } from '../../core/services/errors.service';
 import {
   AuthActions,
   AuthApiActions,
+  CreateAccountPageActions,
   ForgotPasswordPageActions,
   LoginPageActions,
   ResendConfirmationPageActions,
   ResetPasswordPageActions,
 } from '../actions';
-import { Credentials, SuccessResponse } from '../models';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
@@ -22,6 +22,27 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(UserActions.idleTimeout),
       map(() => AuthActions.logout())
+    )
+  );
+
+  createAccount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CreateAccountPageActions.createAccount),
+      map((action) => action.account),
+      exhaustMap((account) =>
+        this.authService.createAccount(account).pipe(
+          switchMap(() => [
+            AuthApiActions.loginRedirect(),
+            MessageApiActions.successMessage({
+              message: 'Your account has been successfully created.',
+            }),
+          ]),
+          catchError((error) => {
+            const message = this.errorService.getMessage(error);
+            return of(MessageApiActions.errorMessage({ message }));
+          })
+        )
+      )
     )
   );
 
@@ -40,7 +61,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(LoginPageActions.login),
       map((action) => action.credentials),
-      exhaustMap((credentials: Credentials) =>
+      exhaustMap((credentials) =>
         this.authService.login(credentials).pipe(
           map((resp) =>
             AuthApiActions.loginSuccess({
@@ -83,7 +104,7 @@ export class AuthEffects {
       map((action) => action.email),
       exhaustMap((email) =>
         this.authService.forgotPassword(email).pipe(
-          switchMap((successResponse: SuccessResponse) => [
+          switchMap((successResponse) => [
             AuthApiActions.loginRedirect(),
             MessageApiActions.successMessage({
               message: successResponse.message,
@@ -104,7 +125,7 @@ export class AuthEffects {
       map((action) => action.passwordCombination),
       exhaustMap((passwordCombination) =>
         this.authService.resetPassword(passwordCombination).pipe(
-          switchMap((successResponse: SuccessResponse) => [
+          switchMap((successResponse) => [
             AuthApiActions.loginRedirect(),
             MessageApiActions.successMessage({
               message: successResponse.message,
@@ -125,7 +146,7 @@ export class AuthEffects {
       map((action) => action.email),
       exhaustMap((email) =>
         this.authService.resendConfirmation(email).pipe(
-          switchMap((successResponse: SuccessResponse) => [
+          switchMap((successResponse) => [
             AuthApiActions.loginRedirect(),
             MessageApiActions.successMessage({
               message: successResponse.message,

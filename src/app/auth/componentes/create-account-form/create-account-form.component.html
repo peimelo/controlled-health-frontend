@@ -1,0 +1,83 @@
+<mat-card>
+  <mat-card-title>Create an account</mat-card-title>
+
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <p>
+        <mat-form-field>
+          <input
+            formControlName="email"
+            matInput
+            placeholder="Email"
+            required
+            type="email"
+          />
+          <mat-error
+            *ngFor="
+              let error of formErrorService.mapErrors(form.get('email').errors)
+            "
+          >
+            {{ error }}
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input
+            formControlName="password"
+            matInput
+            placeholder="Password"
+            required
+            type="password"
+          />
+          <mat-error
+            *ngFor="
+              let error of formErrorService.mapErrors(
+                form.get('password').errors
+              )
+            "
+          >
+            {{ error }}
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input
+            formControlName="passwordConfirmation"
+            matInput
+            placeholder="Password confirmation"
+            required
+            type="password"
+          />
+          <mat-error
+            *ngFor="
+              let error of formErrorService.mapErrors(
+                form.get('passwordConfirmation').errors,
+                'Password and Password confirmation'
+              )
+            "
+          >
+            {{ error }}
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p class="submitButton">
+        <button
+          color="primary"
+          [disabled]="!form.valid || pending"
+          mat-raised-button
+        >
+          Create
+        </button>
+      </p>
+    </form>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <mat-progress-bar mode="indeterminate" *ngIf="pending"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

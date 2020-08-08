@@ -3,12 +3,17 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
   AuthActions,
+  CreateAccountPageActions,
   ForgotPasswordPageActions,
   LoginPageActions,
   ResendConfirmationPageActions,
   ResetPasswordPageActions,
 } from '../actions';
-import { Credentials, PasswordCombination } from '../models';
+import {
+  CreateAccountRequest,
+  Credentials,
+  PasswordCombination,
+} from '../models';
 import * as fromAuth from '../reducers';
 
 @Injectable({ providedIn: 'root' })
@@ -20,6 +25,10 @@ export class AuthFacadeService {
     this.loggedIn$ = this.store.pipe(select(fromAuth.selectLoggedIn));
 
     this.user$ = this.store.pipe(select(fromAuth.selectUser));
+  }
+
+  createAccount(account: CreateAccountRequest): void {
+    this.store.dispatch(CreateAccountPageActions.createAccount({ account }));
   }
 
   login(credentials: Credentials): void {

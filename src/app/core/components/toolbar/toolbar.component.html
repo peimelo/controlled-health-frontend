@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <button mat-icon-button (click)="openMenu.emit()">
-    <mat-icon>menu</mat-icon>
+    <fa-icon [icon]="['fas', 'bars']" size="lg"></fa-icon>
   </button>
 
   <ng-content></ng-content>
@@ -12,11 +12,23 @@
     *ngIf="isSpinnerLoading"
   ></fa-icon>
 
-  <!-- <span fxFlex></span> -->
-
   <span class="spacer"></span>
 
-  <a mat-button *ngIf="!loggedIn" routerLink="/login">
+  <a
+    mat-icon-button
+    matTooltip="Create an account"
+    *ngIf="!loggedIn"
+    routerLink="/create-account"
+  >
+    <fa-icon [icon]="['fas', 'user-plus']" size="lg"></fa-icon>
+  </a>
+
+  <a
+    mat-button
+    matTooltip="Login into app"
+    *ngIf="!loggedIn"
+    routerLink="/login"
+  >
     Login
   </a>
 
@@ -27,7 +39,7 @@
     [matTooltipPosition]="'right'"
     *ngIf="loggedIn"
   >
-    <mat-icon>account_circle</mat-icon>
+    <fa-icon [icon]="['fas', 'user-circle']"></fa-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="logout.emit()">

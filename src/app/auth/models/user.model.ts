@@ -12,8 +12,3 @@ export interface User {
   email: string;
   name: string;
 }
-
-export interface SuccessResponse {
-  success: boolean;
-  message: string;
-}

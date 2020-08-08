@@ -11,7 +11,11 @@ export class ErrorsService {
     let message = error.message;
 
     if (error && error.error && error.error.errors) {
-      message = error.error.errors[0];
+      if (error.error.errors.full_messages) {
+        message = error.error.errors.full_messages[0];
+      } else {
+        message = error.error.errors[0];
+      }
     }
 
     return message;

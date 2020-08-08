@@ -9,10 +9,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AuthRoutingModule } from './auth-routing.module';
+import { CreateAccountFormComponent } from './componentes/create-account-form/create-account-form.component';
 import { ForgotPasswordFormComponent } from './componentes/forgot-password-form/forgot-password-form.component';
 import { LoginFormComponent } from './componentes/login-form/login-form.component';
 import { ResendConfirmationFormComponent } from './componentes/resend-confirmation-form/resend-confirmation-form.component';
 import { ResetPasswordFormComponent } from './componentes/reset-password-form/reset-password-form.component';
+import { CreateAccountPageComponent } from './containers/create-account-page.component';
 import { ForgotPasswordPageComponent } from './containers/forgot-password-page.component';
 import { LoginPageComponent } from './containers/login-page.component';
 import { ResendConfirmationPageComponent } from './containers/resend-confirmation-page.component';
@@ -23,6 +25,8 @@ import * as fromAuth from './reducers';
 
 @NgModule({
   declarations: [
+    CreateAccountFormComponent,
+    CreateAccountPageComponent,
     ForgotPasswordFormComponent,
     ForgotPasswordPageComponent,
     LoginFormComponent,

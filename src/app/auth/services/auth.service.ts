@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import {
+  CreateAccountRequest,
   Credentials,
   PasswordCombination,
   SuccessResponse,
@@ -18,6 +19,18 @@ export class AuthService {
 
   getValueFromLocalStorage(key: string): string {
     return localStorage.getItem(key);
+  }
+
+  createAccount(account: CreateAccountRequest): Observable<SuccessResponse> {
+    const { email, password, passwordConfirmation } = account;
+
+    const data = {
+      email,
+      password,
+      password_confirmation: passwordConfirmation,
+    };
+
+    return this.http.post<SuccessResponse>(this.url, data);
   }
 
   login(credentials: Credentials): Observable<HttpResponse<User>> {

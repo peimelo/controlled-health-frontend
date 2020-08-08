@@ -6,7 +6,6 @@ import {
   Output,
 } from '@angular/core';
 
-// <mat-icon mat-list-icon>{{ icon }}</mat-icon>
 @Component({
   selector: 'app-nav-item',
   changeDetection: ChangeDetectionStrategy.OnPush,

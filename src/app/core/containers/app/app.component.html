@@ -11,6 +11,15 @@
     </app-nav-item>
 
     <app-nav-item
+      icon="user-plus"
+      *ngIf="!(loggedIn$ | async)"
+      routerLink="/create-account"
+      (navigate)="closeSidenav()"
+    >
+      Create an account
+    </app-nav-item>
+
+    <app-nav-item
       icon="sign-out-alt"
       *ngIf="loggedIn$ | async"
       (navigate)="logout()"
