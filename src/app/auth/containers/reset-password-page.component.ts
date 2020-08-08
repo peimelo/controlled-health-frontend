@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LayoutFacadeService } from '../../core/services/layout-facade.service';
+import { SpinnerFacadeService } from '../../core/services/spinner-facade.service';
 import { PasswordCombination } from '../models';
 import { AuthFacadeService } from '../services/auth-facade.service';
 
@@ -14,12 +14,12 @@ import { AuthFacadeService } from '../services/auth-facade.service';
   `,
 })
 export class ResetPasswordPageComponent implements OnInit {
-  pending$ = this.layoutFacade.isSpinnerLoading$;
+  pending$ = this.spinnerFacade.showSpinner$;
 
   constructor(
     private authFacade: AuthFacadeService,
-    private layoutFacade: LayoutFacadeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spinnerFacade: SpinnerFacadeService
   ) {}
 
   ngOnInit(): void {

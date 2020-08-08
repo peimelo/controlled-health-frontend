@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LayoutFacadeService } from '../../core/services/layout-facade.service';
+import { SpinnerFacadeService } from '../../core/services/spinner-facade.service';
 import { Credentials } from '../models';
 import { AuthFacadeService } from '../services/auth-facade.service';
 
@@ -10,11 +10,11 @@ import { AuthFacadeService } from '../services/auth-facade.service';
   `,
 })
 export class LoginPageComponent {
-  pending$ = this.layoutFacade.isSpinnerLoading$;
+  pending$ = this.spinnerFacade.showSpinner$;
 
   constructor(
     private authFacade: AuthFacadeService,
-    private layoutFacade: LayoutFacadeService
+    private spinnerFacade: SpinnerFacadeService
   ) {}
 
   onSubmit(credentials: Credentials): void {

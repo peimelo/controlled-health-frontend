@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LayoutFacadeService } from '../../core/services/layout-facade.service';
+import { SpinnerFacadeService } from '../../core/services/spinner-facade.service';
 import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
@@ -12,11 +12,11 @@ import { AuthFacadeService } from '../services/auth-facade.service';
   `,
 })
 export class ResendConfirmationPageComponent {
-  pending$ = this.layoutFacade.isSpinnerLoading$;
+  pending$ = this.spinnerFacade.showSpinner$;
 
   constructor(
     private authFacade: AuthFacadeService,
-    private layoutFacade: LayoutFacadeService
+    private spinnerFacade: SpinnerFacadeService
   ) {}
 
   onSubmit(email: string): void {

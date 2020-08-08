@@ -9,10 +9,7 @@ import { LayoutActions } from '../actions';
 @Injectable({ providedIn: 'root' })
 export class LayoutFacadeService {
   isHandset$: Observable<boolean>;
-  isSpinnerLoading$: Observable<boolean>;
-  loggedIn$: Observable<boolean>;
   showSidenav$: Observable<boolean>;
-  user$: Observable<any>;
 
   constructor(
     private store: Store<fromRoot.State>,
