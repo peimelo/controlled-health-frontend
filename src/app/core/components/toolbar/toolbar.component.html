@@ -39,7 +39,7 @@
     [matTooltipPosition]="'right'"
     *ngIf="loggedIn"
   >
-    <fa-icon [icon]="['fas', 'user-circle']"></fa-icon>
+    <fa-icon [icon]="['fas', 'user-circle']" size="lg"></fa-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="logout.emit()">
