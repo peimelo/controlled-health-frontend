@@ -4,16 +4,21 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { IconsModule } from '../icons.module';
 import { AuthRoutingModule } from './auth-routing.module';
+import { AccountFormComponent } from './componentes/account-form/account-form.component';
 import { CreateAccountFormComponent } from './componentes/create-account-form/create-account-form.component';
 import { ForgotPasswordFormComponent } from './componentes/forgot-password-form/forgot-password-form.component';
 import { LoginFormComponent } from './componentes/login-form/login-form.component';
 import { ResendConfirmationFormComponent } from './componentes/resend-confirmation-form/resend-confirmation-form.component';
 import { ResetPasswordFormComponent } from './componentes/reset-password-form/reset-password-form.component';
+import { AccountPageComponent } from './containers/account-page.component';
 import { CreateAccountPageComponent } from './containers/create-account-page.component';
 import { ForgotPasswordPageComponent } from './containers/forgot-password-page.component';
 import { LoginPageComponent } from './containers/login-page.component';
@@ -25,6 +30,8 @@ import * as fromAuth from './reducers';
 
 @NgModule({
   declarations: [
+    AccountFormComponent,
+    AccountPageComponent,
     CreateAccountFormComponent,
     CreateAccountPageComponent,
     ForgotPasswordFormComponent,
@@ -45,6 +52,8 @@ import * as fromAuth from './reducers';
     // Material
     MatCardModule,
     MatButtonModule,
+    MatExpansionModule,
+    MatIconModule,
     MatInputModule,
     MatProgressBarModule,
 
@@ -54,6 +63,7 @@ import * as fromAuth from './reducers';
 
     // App
     AuthRoutingModule,
+    IconsModule,
   ],
   providers: [
     {

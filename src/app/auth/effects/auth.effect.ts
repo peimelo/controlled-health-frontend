@@ -6,6 +6,7 @@ import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { MessageApiActions, UserActions } from '../../core/actions';
 import { ErrorsService } from '../../core/services/errors.service';
 import {
+  AccountPageActions,
   AuthActions,
   AuthApiActions,
   CreateAccountPageActions,
@@ -35,6 +36,26 @@ export class AuthEffects {
             AuthApiActions.loginRedirect(),
             MessageApiActions.successMessage({
               message: 'Your account has been successfully created.',
+            }),
+          ]),
+          catchError((error) => {
+            const message = this.errorService.getMessage(error);
+            return of(MessageApiActions.errorMessage({ message }));
+          })
+        )
+      )
+    )
+  );
+
+  deleteAccount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AccountPageActions.deleteAccount),
+      exhaustMap(() =>
+        this.authService.deleteAccount().pipe(
+          switchMap(() => [
+            AuthActions.logout(),
+            MessageApiActions.successMessage({
+              message: 'Your account has been successfully deleted.',
             }),
           ]),
           catchError((error) => {

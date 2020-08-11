@@ -33,6 +33,10 @@ export class AuthService {
     return this.http.post<SuccessResponse>(this.url, data);
   }
 
+  deleteAccount(): Observable<any> {
+    return this.http.delete(this.url).pipe(tap(() => this.clearLocalStorage()));
+  }
+
   login(credentials: Credentials): Observable<HttpResponse<User>> {
     return this.http
       .post<User>(`${this.url}/sign_in`, credentials, {
@@ -51,13 +55,9 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.delete(`${this.url}/sign_out`).pipe(
-      tap(() => {
-        localStorage.removeItem('access-token');
-        localStorage.removeItem('client');
-        localStorage.removeItem('uid');
-      })
-    );
+    return this.http
+      .delete(`${this.url}/sign_out`)
+      .pipe(tap(() => this.clearLocalStorage()));
   }
 
   forgotPassword(email: string): Observable<SuccessResponse> {
@@ -86,6 +86,12 @@ export class AuthService {
     return this.http.post<SuccessResponse>(`${this.url}/confirmation`, {
       email,
     });
+  }
+
+  private clearLocalStorage(): void {
+    localStorage.removeItem('access-token');
+    localStorage.removeItem('client');
+    localStorage.removeItem('uid');
   }
 
   private getRootUrl(): string {

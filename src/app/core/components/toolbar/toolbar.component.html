@@ -42,6 +42,9 @@
     <fa-icon [icon]="['fas', 'user-circle']" size="lg"></fa-icon>
   </button>
   <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/account">
+      Account settings
+    </a>
     <button mat-menu-item (click)="logout.emit()">
       Logout
     </button>

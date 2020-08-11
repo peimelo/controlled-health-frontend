@@ -1,3 +1,4 @@
+import * as AccountPageActions from './account-page.actions';
 import * as AuthApiActions from './auth-api.actions';
 import * as AuthActions from './auth.actions';
 import * as CreateAccountPageActions from './create-account-page.actions';
@@ -7,6 +8,7 @@ import * as ResendConfirmationPageActions from './resend-confirmation-page.actio
 import * as ResetPasswordPageActions from './reset-password-page.actions';
 
 export {
+  AccountPageActions,
   AuthApiActions,
   AuthActions,
   CreateAccountPageActions,

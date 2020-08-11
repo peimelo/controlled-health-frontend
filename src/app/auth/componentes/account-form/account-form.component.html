@@ -1,0 +1,45 @@
+<div>
+  <h1 class="mat-h1">Account Settings</h1>
+
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal data
+        </mat-panel-title>
+        <mat-panel-description>
+          Type your name and age
+          <!-- <fa-icon [icon]="['fas', 'user-circle']" size="lg"></fa-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+      </form>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Delete Account
+        </mat-panel-title>
+        <mat-panel-description>
+          Type your name and age
+          <!-- <fa-icon [icon]="['fas', 'user-circle']" size="lg"></fa-icon> -->
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <button mat-raised-button color="warn" (click)="delete()">
+        Delete Account
+      </button>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

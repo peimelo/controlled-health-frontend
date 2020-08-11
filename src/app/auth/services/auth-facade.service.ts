@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
+  AccountPageActions,
   AuthActions,
   CreateAccountPageActions,
   ForgotPasswordPageActions,
@@ -29,6 +30,10 @@ export class AuthFacadeService {
 
   createAccount(account: CreateAccountRequest): void {
     this.store.dispatch(CreateAccountPageActions.createAccount({ account }));
+  }
+
+  deleteAccount(): void {
+    this.store.dispatch(AccountPageActions.deleteAccount());
   }
 
   login(credentials: Credentials): void {
