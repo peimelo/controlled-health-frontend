@@ -63,4 +63,8 @@ export class AuthFacadeService {
   showConfirmationAccountMessage(): void {
     this.store.dispatch(LoginPageActions.showAccountConfirmationMessage());
   }
+
+  updateAccount(name: string): void {
+    this.store.dispatch(AccountPageActions.updateAccount({ name }));
+  }
 }

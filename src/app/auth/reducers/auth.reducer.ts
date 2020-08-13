@@ -20,7 +20,15 @@ export const reducer = createReducer(
     user,
   })),
 
-  on(AuthActions.logout, AccountPageActions.deleteAccount, () => initialState)
+  on(AuthActions.logout, AccountPageActions.deleteAccount, () => initialState),
+
+  on(AuthApiActions.updateAccountSuccess, (state, { name }) => ({
+    ...state,
+    user: {
+      ...state.user,
+      name,
+    },
+  }))
 );
 
 export const getUser = (state: State) => state.user;

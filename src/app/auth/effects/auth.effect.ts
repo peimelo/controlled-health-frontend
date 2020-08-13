@@ -47,6 +47,27 @@ export class AuthEffects {
     )
   );
 
+  updateAccount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AccountPageActions.updateAccount),
+      map((action) => action.name),
+      exhaustMap((name) =>
+        this.authService.updateAccount(name).pipe(
+          switchMap(() => [
+            AuthApiActions.updateAccountSuccess({ name }),
+            MessageApiActions.successMessage({
+              message: 'Your account has been successfully updated.',
+            }),
+          ]),
+          catchError((error) => {
+            const message = this.errorService.getMessage(error);
+            return of(MessageApiActions.errorMessage({ message }));
+          })
+        )
+      )
+    )
+  );
+
   deleteAccount$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AccountPageActions.deleteAccount),

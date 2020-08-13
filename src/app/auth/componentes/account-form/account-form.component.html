@@ -2,7 +2,7 @@
   <h1 class="mat-h1">Account Settings</h1>
 
   <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
+    <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Personal data
@@ -24,6 +24,9 @@
           <input matInput formControlName="name" />
         </mat-form-field>
       </form>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="onSave()">Save</button>
+      </mat-action-row>
     </mat-expansion-panel>
 
     <mat-expansion-panel>

@@ -7,3 +7,8 @@ export const loginSuccess = createAction(
 );
 
 export const loginRedirect = createAction('[Auth/API] Login Redirect');
+
+export const updateAccountSuccess = createAction(
+  '[Auth/API] Update Account Success',
+  props<{ name: string }>()
+);

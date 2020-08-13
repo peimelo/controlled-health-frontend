@@ -17,10 +17,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getValueFromLocalStorage(key: string): string {
-    return localStorage.getItem(key);
-  }
-
+  /**
+   * User account
+   */
   createAccount(account: CreateAccountRequest): Observable<SuccessResponse> {
     const { email, password, passwordConfirmation } = account;
 
@@ -33,10 +32,21 @@ export class AuthService {
     return this.http.post<SuccessResponse>(this.url, data);
   }
 
+  updateAccount(name: string): Observable<SuccessResponse> {
+    const data = {
+      name,
+    };
+
+    return this.http.put<SuccessResponse>(this.url, data);
+  }
+
   deleteAccount(): Observable<any> {
     return this.http.delete(this.url).pipe(tap(() => this.clearLocalStorage()));
   }
 
+  /**
+   * Session
+   */
   login(credentials: Credentials): Observable<HttpResponse<User>> {
     return this.http
       .post<User>(`${this.url}/sign_in`, credentials, {
@@ -60,6 +70,15 @@ export class AuthService {
       .pipe(tap(() => this.clearLocalStorage()));
   }
 
+  private clearLocalStorage(): void {
+    localStorage.removeItem('access-token');
+    localStorage.removeItem('client');
+    localStorage.removeItem('uid');
+  }
+
+  /**
+   * Password
+   */
   forgotPassword(email: string): Observable<SuccessResponse> {
     const data = {
       email,
@@ -67,6 +86,13 @@ export class AuthService {
     };
 
     return this.http.post<SuccessResponse>(`${this.url}/password`, data);
+  }
+
+  private getRootUrl(): string {
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+
+    return `${protocol}//${host}`;
   }
 
   resetPassword(
@@ -82,22 +108,16 @@ export class AuthService {
     return this.http.put<SuccessResponse>(`${this.url}/password`, data);
   }
 
+  /**
+   * Confirmation
+   */
   resendConfirmation(email: string): Observable<SuccessResponse> {
     return this.http.post<SuccessResponse>(`${this.url}/confirmation`, {
       email,
     });
   }
 
-  private clearLocalStorage(): void {
-    localStorage.removeItem('access-token');
-    localStorage.removeItem('client');
-    localStorage.removeItem('uid');
-  }
-
-  private getRootUrl(): string {
-    const protocol = window.location.protocol;
-    const host = window.location.host;
-
-    return `${protocol}//${host}`;
+  getValueFromLocalStorage(key: string): string {
+    return localStorage.getItem(key);
   }
 }
