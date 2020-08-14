@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthFacadeService } from '../../../auth/services/auth-facade.service';
 import { LayoutFacadeService } from '../../services/layout-facade.service';
 import { SpinnerFacadeService } from '../../services/spinner-facade.service';
 
 @Component({
   selector: 'app-root',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

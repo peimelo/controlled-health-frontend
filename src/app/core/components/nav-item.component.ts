@@ -1,14 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-nav-item',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a mat-list-item [routerLink]="routerLink" (click)="navigate.emit()">
       <fa-icon [icon]="['fas', icon]" mat-list-icon></fa-icon>

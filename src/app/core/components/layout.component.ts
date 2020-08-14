@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-layout',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <mat-sidenav-container class="sidenav-container">
       <ng-content></ng-content>

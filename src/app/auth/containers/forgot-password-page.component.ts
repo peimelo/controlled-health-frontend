@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SpinnerFacadeService } from '../../core/services/spinner-facade.service';
 import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-forgot-password-form
       [pending]="pending$ | async"

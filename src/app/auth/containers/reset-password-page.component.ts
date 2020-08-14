@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpinnerFacadeService } from '../../core/services/spinner-facade.service';
 import { PasswordCombination } from '../models';
 import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-reset-password-form
       [pending]="pending$ | async"
