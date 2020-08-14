@@ -1,43 +1,38 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AccountPageComponent } from './containers/account-page.component';
-import { CreateAccountPageComponent } from './containers/create-account-page.component';
-import { ForgotPasswordPageComponent } from './containers/forgot-password-page.component';
-import { LoginPageComponent } from './containers/login-page.component';
-import { ResendConfirmationPageComponent } from './containers/resend-confirmation-page.component';
-import { ResetPasswordPageComponent } from './containers/reset-password-page.component';
+import * as fromContainers from './containers';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'account',
-    component: AccountPageComponent,
-    data: { title: 'Account settings' },
+    component: fromContainers.AccountPageComponent,
+    data: { title: 'Account Settings' },
     canActivate: [AuthGuard],
   },
   {
     path: 'create-account',
-    component: CreateAccountPageComponent,
-    data: { title: 'Create an account' },
+    component: fromContainers.CreateAccountPageComponent,
+    data: { title: 'Create an Account' },
   },
   {
     path: 'forgot-password',
-    component: ForgotPasswordPageComponent,
+    component: fromContainers.ForgotPasswordPageComponent,
     data: { title: 'Forgot Password' },
   },
   {
     path: 'login',
-    component: LoginPageComponent,
+    component: fromContainers.LoginPageComponent,
     data: { title: 'Login' },
   },
   {
     path: 'resend-confirmation',
-    component: ResendConfirmationPageComponent,
+    component: fromContainers.ResendConfirmationPageComponent,
     data: { title: 'Resend Confirmation' },
   },
   {
     path: 'reset-password',
-    component: ResetPasswordPageComponent,
+    component: fromContainers.ResetPasswordPageComponent,
     data: { title: 'Reset Password' },
   },
 ];
