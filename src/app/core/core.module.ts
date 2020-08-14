@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -16,12 +17,14 @@ import { NavItemComponent } from './components/nav-item.component';
 import { SidenavComponent } from './components/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { AppComponent } from './containers/app/app.component';
-import { HomeComponent } from './containers/home/home.component';
+import { HomePageComponent } from './containers/home-page.component';
+import { NotFoundPageComponent } from './containers/not-found-page.component';
 import { LoadingInterceptorService } from './services/loading-interceptor.service';
 
 export const COMPONENTS = [
   AppComponent,
-  HomeComponent,
+  HomePageComponent,
+  NotFoundPageComponent,
   LayoutComponent,
   NavItemComponent,
   SidenavComponent,
@@ -36,6 +39,7 @@ export const COMPONENTS = [
 
     // Material
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
     MatListModule,
     MatMenuModule,

@@ -40,9 +40,9 @@ import { metaReducers, ROOT_REDUCERS } from './reducers';
     EffectsModule.forRoot([MessageEffects, RouterEffects, UserEffects]),
 
     // App
-    AppRoutingModule,
     AuthModule,
     CoreModule,
+    AppRoutingModule, // <== this has to be at the end
   ],
   providers: [],
   bootstrap: [AppComponent],

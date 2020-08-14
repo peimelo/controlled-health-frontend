@@ -3,6 +3,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'app-home',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './home.component.html'
+  template: ``,
 })
-export class HomeComponent {}
+export class HomePageComponent {}
