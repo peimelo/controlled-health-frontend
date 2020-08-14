@@ -1,19 +1,42 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SpinnerFacadeService } from '../../core/services/spinner-facade.service';
-import { CreateAccountRequest } from '../models';
+import { PasswordCombination } from '../models';
 import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <app-account-form
-      [pending]="pending$ | async"
-      [user]="user$ | async"
-      (deleted)="onDelete()"
-      (save)="onSave($event)"
-      (submitted)="onSubmit($event)"
-    >
-    </app-account-form>
+    <div>
+      <h1 class="mat-h1">Account Settings</h1>
+
+      <mat-accordion multi>
+        <app-personal-data
+          [pending]="pending$ | async"
+          [user]="user$ | async"
+          (update)="onUpdate($event)"
+        ></app-personal-data>
+
+        <app-change-password
+          [pending]="pending$ | async"
+          (updatePassword)="onUpdatePassword($event)"
+        ></app-change-password>
+
+        <app-delete-account
+          [pending]="pending$ | async"
+          (delete)="onDelete()"
+        ></app-delete-account>
+      </mat-accordion>
+    </div>
   `,
+  styles: [
+    `
+      :host {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+    `,
+  ],
 })
 export class AccountPageComponent {
   pending$ = this.spinnerFacade.showSpinner$;
@@ -25,14 +48,14 @@ export class AccountPageComponent {
   ) {}
 
   onDelete(): void {
-    this.authFacade.deleteAccount();
+    this.authFacade.deleteAccountConfirmation();
   }
 
-  onSave(name: string): void {
+  onUpdate(name: string): void {
     this.authFacade.updateAccount(name);
   }
 
-  onSubmit(account: CreateAccountRequest): void {
-    this.authFacade.createAccount(account);
+  onUpdatePassword(passwordCombination: PasswordCombination): void {
+    this.authFacade.updatePassword(passwordCombination);
   }
 }

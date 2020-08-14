@@ -1,14 +1,16 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import {
   CreateAccountRequest,
   Credentials,
+  MessageResponse,
   PasswordCombination,
-  SuccessResponse,
+  UpdateAccountResponse,
   User,
+  UserDataResponse,
 } from '../models';
 
 @Injectable({ providedIn: 'root' })
@@ -17,10 +19,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * User account
-   */
-  createAccount(account: CreateAccountRequest): Observable<SuccessResponse> {
+  getValueFromLocalStorage(key: string): string {
+    return localStorage.getItem(key);
+  }
+
+  // User account
+
+  createAccount(account: CreateAccountRequest): Observable<string> {
     const { email, password, passwordConfirmation } = account;
 
     const data = {
@@ -29,27 +34,34 @@ export class AuthService {
       password_confirmation: passwordConfirmation,
     };
 
-    return this.http.post<SuccessResponse>(this.url, data);
-  }
-
-  updateAccount(name: string): Observable<SuccessResponse> {
-    const data = {
-      name,
-    };
-
-    return this.http.put<SuccessResponse>(this.url, data);
-  }
-
-  deleteAccount(): Observable<any> {
-    return this.http.delete(this.url).pipe(tap(() => this.clearLocalStorage()));
-  }
-
-  /**
-   * Session
-   */
-  login(credentials: Credentials): Observable<HttpResponse<User>> {
     return this.http
-      .post<User>(`${this.url}/sign_in`, credentials, {
+      .post<any>(this.url, data)
+      .pipe(map(() => 'Your account has been successfully created.'));
+  }
+
+  updateAccount(name: string): Observable<UpdateAccountResponse> {
+    return this.http
+      .put<UserDataResponse>(this.url, { name })
+      .pipe(
+        map((resp) => ({
+          ...resp,
+          message: 'Your account has been successfully updated.',
+        }))
+      );
+  }
+
+  deleteAccount(): Observable<string> {
+    return this.http.delete(this.url).pipe(
+      tap(() => this.clearLocalStorage()),
+      map(() => 'Your account has been successfully deleted.')
+    );
+  }
+
+  // Session
+
+  login(credentials: Credentials): Observable<User> {
+    return this.http
+      .post<UserDataResponse>(`${this.url}/sign_in`, credentials, {
         observe: 'response',
       })
       .pipe(
@@ -60,7 +72,8 @@ export class AuthService {
           );
           localStorage.setItem('client', resp.headers.get('client'));
           localStorage.setItem('uid', resp.headers.get('uid'));
-        })
+        }),
+        map((resp) => ({ ...resp.body.data }))
       );
   }
 
@@ -76,16 +89,23 @@ export class AuthService {
     localStorage.removeItem('uid');
   }
 
-  /**
-   * Password
-   */
-  forgotPassword(email: string): Observable<SuccessResponse> {
+  getUser(): Observable<User> {
+    return this.http
+      .get<UserDataResponse>(`${this.url}/validate_token`)
+      .pipe(map((resp) => resp.data));
+  }
+
+  // Password
+
+  forgotPassword(email: string): Observable<string> {
     const data = {
       email,
       redirect_url: `${this.getRootUrl()}/reset-password`,
     };
 
-    return this.http.post<SuccessResponse>(`${this.url}/password`, data);
+    return this.http
+      .post<MessageResponse>(`${this.url}/password`, data)
+      .pipe(map((resp) => resp.message));
   }
 
   private getRootUrl(): string {
@@ -95,29 +115,37 @@ export class AuthService {
     return `${protocol}//${host}`;
   }
 
-  resetPassword(
-    passwordCombination: PasswordCombination
-  ): Observable<SuccessResponse> {
-    const { password, passwordConfirmation } = passwordCombination;
+  updatePassword(passwordCombination: PasswordCombination): Observable<string> {
+    const {
+      currentPassword,
+      password,
+      passwordConfirmation,
+    } = passwordCombination;
 
-    const data = {
+    let data: any = {
       password,
       password_confirmation: passwordConfirmation,
     };
 
-    return this.http.put<SuccessResponse>(`${this.url}/password`, data);
+    if (currentPassword) {
+      data = {
+        ...data,
+        current_password: currentPassword,
+      };
+    }
+
+    return this.http
+      .put<MessageResponse>(`${this.url}/password`, data)
+      .pipe(map((resp) => resp.message));
   }
 
-  /**
-   * Confirmation
-   */
-  resendConfirmation(email: string): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${this.url}/confirmation`, {
-      email,
-    });
-  }
+  // Confirmation
 
-  getValueFromLocalStorage(key: string): string {
-    return localStorage.getItem(key);
+  resendConfirmation(email: string): Observable<string> {
+    return this.http
+      .post<MessageResponse>(`${this.url}/confirmation`, {
+        email,
+      })
+      .pipe(map((resp) => resp.message));
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
@@ -15,6 +16,7 @@ import {
   ResendConfirmationPageActions,
   ResetPasswordPageActions,
 } from '../actions';
+import * as fromComponents from '../componentes';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
@@ -32,10 +34,10 @@ export class AuthEffects {
       map((action) => action.account),
       exhaustMap((account) =>
         this.authService.createAccount(account).pipe(
-          switchMap(() => [
+          switchMap((message) => [
             AuthApiActions.loginRedirect(),
             MessageApiActions.successMessage({
-              message: 'Your account has been successfully created.',
+              message,
             }),
           ]),
           catchError((error) => {
@@ -53,10 +55,10 @@ export class AuthEffects {
       map((action) => action.name),
       exhaustMap((name) =>
         this.authService.updateAccount(name).pipe(
-          switchMap(() => [
-            AuthApiActions.updateAccountSuccess({ name }),
+          switchMap((resp) => [
+            AuthApiActions.updateAccountSuccess({ user: resp.data }),
             MessageApiActions.successMessage({
-              message: 'Your account has been successfully updated.',
+              message: resp.message,
             }),
           ]),
           catchError((error) => {
@@ -68,15 +70,55 @@ export class AuthEffects {
     )
   );
 
+  updatePassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AccountPageActions.updatePassword),
+      map((action) => action.passwordCombination),
+      exhaustMap((passwordCombination) =>
+        this.authService.updatePassword(passwordCombination).pipe(
+          switchMap((message) => [
+            MessageApiActions.successMessage({
+              message,
+            }),
+          ]),
+          catchError((error) => {
+            const message = this.errorService.getMessage(error);
+            return of(MessageApiActions.errorMessage({ message }));
+          })
+        )
+      )
+    )
+  );
+
+  deleteAccountConfirmation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AccountPageActions.deleteAccountConfirmation),
+      exhaustMap(() => {
+        const dialogRef = this.dialog.open<
+          fromComponents.DeleteAccountConfirmationComponent,
+          undefined,
+          boolean
+        >(fromComponents.DeleteAccountConfirmationComponent);
+
+        return dialogRef.afterClosed();
+      }),
+      map((result) =>
+        result
+          ? AuthActions.deleteAccount()
+          : AuthActions.deleteAccountConfirmationDismiss()
+      )
+    )
+  );
+
   deleteAccount$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AccountPageActions.deleteAccount),
+      ofType(AuthActions.deleteAccount),
       exhaustMap(() =>
         this.authService.deleteAccount().pipe(
-          switchMap(() => [
+          switchMap((message) => [
             AuthActions.logout(),
             MessageApiActions.successMessage({
-              message: 'Your account has been successfully deleted.',
+              message,
             }),
           ]),
           catchError((error) => {
@@ -91,9 +133,10 @@ export class AuthEffects {
   showAccountConfirmationMessage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoginPageActions.showAccountConfirmationMessage),
-      map(() =>
+      map((action) => action.message),
+      map((message) =>
         MessageApiActions.successMessage({
-          message: 'Your account has been successfully confirmed.',
+          message,
         })
       )
     )
@@ -105,9 +148,9 @@ export class AuthEffects {
       map((action) => action.credentials),
       exhaustMap((credentials) =>
         this.authService.login(credentials).pipe(
-          map((resp) =>
+          map((user) =>
             AuthApiActions.loginSuccess({
-              user: resp.body['data'],
+              user,
             })
           ),
           catchError((error) => {
@@ -140,16 +183,35 @@ export class AuthEffects {
     )
   );
 
+  loadUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loadUser),
+      exhaustMap(() =>
+        this.authService.getUser().pipe(
+          map((user) =>
+            AuthApiActions.loadUserSuccess({
+              user,
+            })
+          ),
+          catchError((error) => {
+            const message = this.errorService.getMessage(error);
+            return of(MessageApiActions.errorMessage({ message }));
+          })
+        )
+      )
+    )
+  );
+
   forgotPassword$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ForgotPasswordPageActions.forgotPassword),
       map((action) => action.email),
       exhaustMap((email) =>
         this.authService.forgotPassword(email).pipe(
-          switchMap((successResponse) => [
+          switchMap((message) => [
             AuthApiActions.loginRedirect(),
             MessageApiActions.successMessage({
-              message: successResponse.message,
+              message,
             }),
           ]),
           catchError((error) => {
@@ -166,11 +228,11 @@ export class AuthEffects {
       ofType(ResetPasswordPageActions.resetPassword),
       map((action) => action.passwordCombination),
       exhaustMap((passwordCombination) =>
-        this.authService.resetPassword(passwordCombination).pipe(
-          switchMap((successResponse) => [
+        this.authService.updatePassword(passwordCombination).pipe(
+          switchMap((message) => [
             AuthApiActions.loginRedirect(),
             MessageApiActions.successMessage({
-              message: successResponse.message,
+              message,
             }),
           ]),
           catchError((error) => {
@@ -188,10 +250,10 @@ export class AuthEffects {
       map((action) => action.email),
       exhaustMap((email) =>
         this.authService.resendConfirmation(email).pipe(
-          switchMap((successResponse) => [
+          switchMap((message) => [
             AuthApiActions.loginRedirect(),
             MessageApiActions.successMessage({
-              message: successResponse.message,
+              message,
             }),
           ]),
           catchError((error) => {
@@ -217,6 +279,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
+    private dialog: MatDialog,
     private errorService: ErrorsService,
     private router: Router
   ) {}

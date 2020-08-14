@@ -32,8 +32,22 @@ export class AuthFacadeService {
     this.store.dispatch(CreateAccountPageActions.createAccount({ account }));
   }
 
+  updateAccount(name: string): void {
+    this.store.dispatch(AccountPageActions.updateAccount({ name }));
+  }
+
+  updatePassword(passwordCombination: PasswordCombination): void {
+    this.store.dispatch(
+      AccountPageActions.updatePassword({ passwordCombination })
+    );
+  }
+
   deleteAccount(): void {
-    this.store.dispatch(AccountPageActions.deleteAccount());
+    this.store.dispatch(AuthActions.deleteAccount());
+  }
+
+  deleteAccountConfirmation(): void {
+    this.store.dispatch(AccountPageActions.deleteAccountConfirmation());
   }
 
   login(credentials: Credentials): void {
@@ -42,6 +56,10 @@ export class AuthFacadeService {
 
   logout(): void {
     this.store.dispatch(AuthActions.logout());
+  }
+
+  loadUser(): void {
+    this.store.dispatch(AuthActions.loadUser());
   }
 
   forgotPassword(email: string): void {
@@ -60,11 +78,11 @@ export class AuthFacadeService {
     );
   }
 
-  showConfirmationAccountMessage(): void {
-    this.store.dispatch(LoginPageActions.showAccountConfirmationMessage());
-  }
-
-  updateAccount(name: string): void {
-    this.store.dispatch(AccountPageActions.updateAccount({ name }));
+  showConfirmationAccountMessage(message: string): void {
+    this.store.dispatch(
+      LoginPageActions.showAccountConfirmationMessage({
+        message,
+      })
+    );
   }
 }

@@ -4,6 +4,7 @@ export interface Credentials {
 }
 
 export interface PasswordCombination {
+  currentPassword?: string;
   password: string;
   passwordConfirmation: string;
 }

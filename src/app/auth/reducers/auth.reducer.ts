@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { AccountPageActions, AuthActions, AuthApiActions } from '../actions';
+import { AuthActions, AuthApiActions } from '../actions';
 import { User } from '../models';
 
 export const statusFeatureKey = 'status';
@@ -15,20 +15,17 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
-  on(AuthApiActions.loginSuccess, (state, { user }) => ({
-    ...state,
-    user,
-  })),
+  on(
+    AuthApiActions.loadUserSuccess,
+    AuthApiActions.loginSuccess,
+    AuthApiActions.updateAccountSuccess,
+    (state, { user }) => ({
+      ...state,
+      user,
+    })
+  ),
 
-  on(AuthActions.logout, AccountPageActions.deleteAccount, () => initialState),
-
-  on(AuthApiActions.updateAccountSuccess, (state, { name }) => ({
-    ...state,
-    user: {
-      ...state.user,
-      name,
-    },
-  }))
+  on(AuthActions.logout, AuthActions.deleteAccount, () => initialState)
 );
 
 export const getUser = (state: State) => state.user;
