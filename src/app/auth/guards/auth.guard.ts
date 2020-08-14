@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
-import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { AuthApiActions } from '../actions';
-import * as fromAuth from '../reducers';
+import { filter, take, tap } from 'rxjs/operators';
+import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private store: Store<fromAuth.State>) {}
+  constructor(private authFacade: AuthFacadeService) {}
 
   canActivate(): Observable<boolean> {
-    return this.store.pipe(
-      select(fromAuth.selectLoggedIn),
-      map((authed) => {
-        if (!authed) {
-          this.store.dispatch(AuthApiActions.loginRedirect());
-          return false;
-        }
+    return this.isUserLoggedIn();
+  }
 
-        return true;
+  isUserLoggedIn(): Observable<boolean> {
+    return this.authFacade.loggedIn$.pipe(
+      tap((loggedIn) => {
+        if (!loggedIn) {
+          this.authFacade.loadUser();
+        }
       }),
+      filter((loggedIn) => loggedIn),
       take(1)
     );
   }
