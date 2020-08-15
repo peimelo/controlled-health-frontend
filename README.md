@@ -18,7 +18,7 @@ Frontend do site Saúde Controlada construído com [Angular](https://angular.io)
   <tr>
     <td>NgRx</td>
     <td>
-      9.2.0
+      10.0.0
     </td>
   </tr>
 </table>
