@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Page should compile 1`] = `
+<app-login-form
+  fb={[Function FormBuilder]}
+  form={[Function FormGroup]}
+  formErrorService={[Function FormErrorService]}
+  submitted={[Function EventEmitter_]}
+>
+  <mat-card>
+    <mat-card-title>
+      Login
+    </mat-card-title>
+    <mat-card-content>
+      <form
+        class="ng-untouched ng-pristine ng-invalid"
+        novalidate=""
+      >
+        <p>
+          <mat-form-field>
+            <input
+              class="ng-untouched ng-pristine ng-invalid"
+              formcontrolname="email"
+              matinput=""
+              placeholder="Email"
+              required=""
+              type="email"
+            />
+            
+            <mat-error>
+               Field is required. 
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input
+              class="ng-untouched ng-pristine ng-invalid"
+              formcontrolname="password"
+              matinput=""
+              placeholder="Password"
+              required=""
+              type="password"
+            />
+            
+            <mat-error>
+               Field is required. 
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p
+          class="submitButton"
+        >
+          <button
+            color="primary"
+            mat-raised-button=""
+            type="submit"
+          >
+             Login 
+          </button>
+        </p>
+        <p>
+          <a
+            mat-button=""
+            routerlink="/forgot-password"
+          >
+            Forgot password?
+          </a>
+        </p>
+        <p>
+          <a
+            mat-button=""
+            routerlink="/resend-confirmation"
+          >
+            Resend confirmation email
+          </a>
+        </p>
+      </form>
+    </mat-card-content>
+    <mat-card-footer>
+      
+    </mat-card-footer>
+  </mat-card>
+</app-login-form>
+`;
+
+exports[`Login Page should disable the form if pending 1`] = `
+<app-login-form
+  fb={[Function FormBuilder]}
+  form={[Function FormGroup]}
+  formErrorService={[Function FormErrorService]}
+  submitted={[Function EventEmitter_]}
+>
+  <mat-card>
+    <mat-card-title>
+      Login
+    </mat-card-title>
+    <mat-card-content>
+      <form
+        class="ng-untouched ng-pristine"
+        novalidate=""
+      >
+        <p>
+          <mat-form-field>
+            <input
+              class="ng-untouched ng-pristine"
+              disabled=""
+              formcontrolname="email"
+              matinput=""
+              placeholder="Email"
+              required=""
+              type="email"
+            />
+            
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input
+              class="ng-untouched ng-pristine"
+              disabled=""
+              formcontrolname="password"
+              matinput=""
+              placeholder="Password"
+              required=""
+              type="password"
+            />
+            
+          </mat-form-field>
+        </p>
+        <p
+          class="submitButton"
+        >
+          <button
+            color="primary"
+            mat-raised-button=""
+            type="submit"
+          >
+             Login 
+          </button>
+        </p>
+        <p>
+          <a
+            mat-button=""
+            routerlink="/forgot-password"
+          >
+            Forgot password?
+          </a>
+        </p>
+        <p>
+          <a
+            mat-button=""
+            routerlink="/resend-confirmation"
+          >
+            Resend confirmation email
+          </a>
+        </p>
+      </form>
+    </mat-card-content>
+    <mat-card-footer>
+      
+    </mat-card-footer>
+  </mat-card>
+</app-login-form>
+`;

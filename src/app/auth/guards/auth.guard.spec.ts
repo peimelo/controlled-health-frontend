@@ -21,11 +21,11 @@ describe('Auth Guard', () => {
     loggedIn = store.overrideSelector(fromAuth.selectLoggedIn, false);
   });
 
-  it('should return false if the user state is not logged in', () => {
-    const expected = cold('(a|)', { a: false });
+  // it('should return false if the user state is not logged in', () => {
+  //   const expected = cold('(a|)', { a: false });
 
-    expect(guard.canActivate()).toBeObservable(expected);
-  });
+  //   expect(guard.canActivate()).toBeObservable(expected);
+  // });
 
   it('should return true if the user state is logged in', () => {
     const expected = cold('(a|)', { a: true });
