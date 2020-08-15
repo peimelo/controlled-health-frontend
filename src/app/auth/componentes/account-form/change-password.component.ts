@@ -83,7 +83,7 @@ import { PasswordCombination } from '../../models';
       <mat-action-row>
         <button
           color="primary"
-          [disabled]="!form.valid || pending"
+          [disabled]="!form.valid"
           mat-button
           (click)="onUpdatePassword()"
         >
@@ -109,7 +109,14 @@ export class ChangePasswordComponent {
     }
   );
 
-  @Input() pending: boolean;
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
 
   @Output() updatePassword = new EventEmitter<PasswordCombination>();
 

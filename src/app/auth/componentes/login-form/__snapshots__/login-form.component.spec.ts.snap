@@ -72,14 +72,11 @@ exports[`Login Page should compile 1`] = `
             mat-button=""
             routerlink="/resend-confirmation"
           >
-            Resend confirmation email
+             Resend confirmation email 
           </a>
         </p>
       </form>
     </mat-card-content>
-    <mat-card-footer>
-      
-    </mat-card-footer>
   </mat-card>
 </app-login-form>
 `;
@@ -152,14 +149,11 @@ exports[`Login Page should disable the form if pending 1`] = `
             mat-button=""
             routerlink="/resend-confirmation"
           >
-            Resend confirmation email
+             Resend confirmation email 
           </a>
         </p>
       </form>
     </mat-card-content>
-    <mat-card-footer>
-      
-    </mat-card-footer>
   </mat-card>
 </app-login-form>
 `;

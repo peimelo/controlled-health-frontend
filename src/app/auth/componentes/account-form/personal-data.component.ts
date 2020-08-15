@@ -32,12 +32,7 @@ import { User } from '../../models';
       </form>
 
       <mat-action-row>
-        <button
-          color="primary"
-          [disabled]="pending"
-          mat-button
-          (click)="onUpdate()"
-        >
+        <button color="primary" mat-button (click)="onUpdate()">
           Save
         </button>
       </mat-action-row>
@@ -54,7 +49,15 @@ export class PersonalDataComponent implements OnInit {
     name: ['', []],
   });
 
-  @Input() pending: boolean;
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
+
   @Input() user: User;
 
   @Output() update = new EventEmitter<string>();

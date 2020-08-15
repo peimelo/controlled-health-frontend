@@ -22,7 +22,14 @@ export class ResetPasswordFormComponent {
     }
   );
 
-  @Input() pending: boolean;
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
 
   @Output() submitted = new EventEmitter<PasswordCombination>();
 

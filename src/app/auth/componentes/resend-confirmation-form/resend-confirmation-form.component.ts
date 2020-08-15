@@ -12,7 +12,14 @@ export class ResendConfirmationFormComponent {
     email: ['', [Validators.email, Validators.required]],
   });
 
-  @Input() pending: boolean;
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
 
   @Output() submitted = new EventEmitter<string>();
 

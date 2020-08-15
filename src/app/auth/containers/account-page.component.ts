@@ -21,10 +21,7 @@ import { AuthFacadeService } from '../services/auth-facade.service';
           (updatePassword)="onUpdatePassword($event)"
         ></app-change-password>
 
-        <app-delete-account
-          [pending]="pending$ | async"
-          (delete)="onDelete()"
-        ></app-delete-account>
+        <app-delete-account (delete)="onDelete()"></app-delete-account>
       </mat-accordion>
     </div>
   `,

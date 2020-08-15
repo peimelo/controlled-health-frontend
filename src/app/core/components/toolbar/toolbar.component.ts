@@ -4,10 +4,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss'],
+  styles: [
+    `
+      .spacer {
+        flex: 1 1 auto;
+      }
+    `,
+  ],
 })
 export class ToolbarComponent {
-  @Input() isHandset: boolean;
   @Input() isSpinnerLoading: boolean;
   @Input() loggedIn: boolean;
   @Input() user: any;

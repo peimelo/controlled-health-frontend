@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-delete-account',
@@ -18,12 +18,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
         Once you delete your account, there is no going back. Please be certain.
       </p>
 
-      <button
-        color="warn"
-        [disabled]="pending"
-        mat-raised-button
-        (click)="onDelete()"
-      >
+      <button color="warn" mat-raised-button (click)="onDelete()">
         Delete your account
       </button>
     </mat-expansion-panel>
@@ -31,8 +26,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./account-form.component.scss'],
 })
 export class DeleteAccountComponent {
-  @Input() pending: boolean;
-
   @Output() delete = new EventEmitter();
 
   onDelete(): void {

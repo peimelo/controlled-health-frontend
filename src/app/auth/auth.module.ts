@@ -8,7 +8,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { IconsModule } from '../icons.module';
@@ -34,7 +33,6 @@ import * as fromAuth from './reducers';
     MatExpansionModule,
     MatIconModule,
     MatInputModule,
-    MatProgressBarModule,
 
     // @ngrx
     StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers),
