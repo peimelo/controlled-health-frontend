@@ -1,42 +1,55 @@
-<app-layout>
-  <app-sidenav [open]="showSidenav$ | async" (closeMenu)="closeSidenav()">
-    <app-nav-item
-      hint="Login into app"
-      icon="sign-in-alt"
-      *ngIf="!(loggedIn$ | async)"
-      routerLink="/login"
-      (navigate)="closeSidenav()"
-    >
-      Login
-    </app-nav-item>
-
-    <app-nav-item
-      icon="user-plus"
-      *ngIf="!(loggedIn$ | async)"
-      routerLink="/create-account"
-      (navigate)="closeSidenav()"
-    >
-      Create an account
-    </app-nav-item>
-
-    <app-nav-item
-      icon="sign-out-alt"
-      *ngIf="loggedIn$ | async"
-      (navigate)="logout()"
-    >
-      Logout
-    </app-nav-item>
-  </app-sidenav>
-
-  <app-toolbar
-    [isSpinnerLoading]="showSpinner$ | async"
-    [loggedIn]="loggedIn$ | async"
-    [user]="user$ | async"
-    (logout)="logout()"
-    (openMenu)="openSidenav()"
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="'over'"
+    [opened]="false"
   >
-    Controlled Health
-  </app-toolbar>
+    <mat-toolbar>Menu</mat-toolbar>
 
-  <router-outlet></router-outlet>
-</app-layout>
+    <mat-nav-list>
+      <app-nav-item
+        hint="Login into app"
+        icon="sign-in-alt"
+        *ngIf="!(loggedIn$ | async)"
+        routerLink="/login"
+        (navigate)="drawer.toggle()"
+      >
+        Login
+      </app-nav-item>
+
+      <app-nav-item
+        icon="user-plus"
+        *ngIf="!(loggedIn$ | async)"
+        routerLink="/create-account"
+        (navigate)="drawer.toggle()"
+      >
+        Create an account
+      </app-nav-item>
+
+      <app-nav-item
+        icon="sign-out-alt"
+        *ngIf="loggedIn$ | async"
+        (navigate)="drawer.toggle(); logout()"
+      >
+        Logout
+      </app-nav-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-toolbar
+      [isSpinnerLoading]="showSpinner$ | async"
+      [loggedIn]="loggedIn$ | async"
+      [user]="user$ | async"
+      (logout)="logout()"
+      (openMenu)="drawer.toggle()"
+    >
+      Controlled Health
+    </app-toolbar>
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
