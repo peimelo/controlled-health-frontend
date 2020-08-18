@@ -10,12 +10,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { IconsModule } from '../icons.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import * as fromComponents from './componentes';
 import * as fromContainers from './containers';
 import { AuthEffects } from './effects';
-import * as fromInterceptors from './interceptors';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 import * as fromAuth from './reducers';
 
 @NgModule({
@@ -40,17 +40,16 @@ import * as fromAuth from './reducers';
 
     // App
     AuthRoutingModule,
-    IconsModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: fromInterceptors.AuthInterceptor,
+      useClass: AuthInterceptor,
       multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: fromInterceptors.TokenInterceptor,
+      useClass: TokenInterceptor,
       multi: true,
     },
   ],
