@@ -21,18 +21,10 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthEffects {
-  logoutIdleUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UserActions.idleTimeout),
-      map(() => AuthActions.logout())
-    )
-  );
-
   createAccount$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CreateAccountPageActions.createAccount),
-      map((action) => action.account),
-      exhaustMap((account) =>
+      exhaustMap(({ account }) =>
         this.authService.createAccount(account).pipe(
           switchMap((message) => [
             AuthApiActions.loginRedirect(),
@@ -52,8 +44,7 @@ export class AuthEffects {
   updateAccount$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AccountPageActions.updateAccount),
-      map((action) => action.name),
-      exhaustMap((name) =>
+      exhaustMap(({ name }) =>
         this.authService.updateAccount(name).pipe(
           switchMap((resp) => [
             AuthApiActions.updateAccountSuccess({ user: resp.data }),
@@ -73,8 +64,7 @@ export class AuthEffects {
   updatePassword$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AccountPageActions.updatePassword),
-      map((action) => action.passwordCombination),
-      exhaustMap((passwordCombination) =>
+      exhaustMap(({ passwordCombination }) =>
         this.authService.updatePassword(passwordCombination).pipe(
           switchMap((message) => [
             MessageApiActions.successMessage({
@@ -133,8 +123,7 @@ export class AuthEffects {
   showAccountConfirmationMessage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoginPageActions.showAccountConfirmationMessage),
-      map((action) => action.message),
-      map((message) =>
+      map(({ message }) =>
         MessageApiActions.successMessage({
           message,
         })
@@ -145,8 +134,7 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoginPageActions.login),
-      map((action) => action.credentials),
-      exhaustMap((credentials) =>
+      exhaustMap(({ credentials }) =>
         this.authService.login(credentials).pipe(
           map((user) =>
             AuthApiActions.loginSuccess({
@@ -166,9 +154,16 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthApiActions.loginSuccess),
-        tap(() => this.router.navigate(['/']))
+        tap(() => this.router.navigate(['/weights']))
       ),
     { dispatch: false }
+  );
+
+  logoutIdleUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.idleTimeout),
+      map(() => AuthActions.logout())
+    )
   );
 
   logout$ = createEffect(() =>
@@ -205,8 +200,7 @@ export class AuthEffects {
   forgotPassword$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ForgotPasswordPageActions.forgotPassword),
-      map((action) => action.email),
-      exhaustMap((email) =>
+      exhaustMap(({ email }) =>
         this.authService.forgotPassword(email).pipe(
           switchMap((message) => [
             AuthApiActions.loginRedirect(),
@@ -226,8 +220,7 @@ export class AuthEffects {
   resetPassword$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ResetPasswordPageActions.resetPassword),
-      map((action) => action.passwordCombination),
-      exhaustMap((passwordCombination) =>
+      exhaustMap(({ passwordCombination }) =>
         this.authService.updatePassword(passwordCombination).pipe(
           switchMap((message) => [
             AuthApiActions.loginRedirect(),
@@ -247,8 +240,7 @@ export class AuthEffects {
   resendConfirmation$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ResendConfirmationPageActions.resendConfirmation),
-      map((action) => action.email),
-      exhaustMap((email) =>
+      exhaustMap(({ email }) =>
         this.authService.resendConfirmation(email).pipe(
           switchMap((message) => [
             AuthApiActions.loginRedirect(),
