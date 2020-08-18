@@ -11,23 +11,32 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-import { IconsModule } from '../icons.module';
-import { LayoutComponent } from './components/layout.component';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
+import {
+  faBars,
+  faSignInAlt,
+  faSignOutAlt,
+  faSpinner,
+  faTachometerAlt,
+  faUserCircle,
+  faUserPlus,
+  faWeight,
+} from '@fortawesome/pro-solid-svg-icons';
 import { NavItemComponent } from './components/nav-item.component';
-import { SidenavComponent } from './components/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { AppComponent } from './containers/app/app.component';
 import { HomePageComponent } from './containers/home-page.component';
 import { NotFoundPageComponent } from './containers/not-found-page.component';
-import { LoadingInterceptorService } from './services/loading-interceptor.service';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 export const COMPONENTS = [
   AppComponent,
   HomePageComponent,
   NotFoundPageComponent,
-  LayoutComponent,
   NavItemComponent,
-  SidenavComponent,
   ToolbarComponent,
 ];
 
@@ -48,16 +57,30 @@ export const COMPONENTS = [
     MatToolbarModule,
     MatTooltipModule,
 
-    IconsModule,
+    // Icons
+    FontAwesomeModule,
   ],
   declarations: [COMPONENTS],
   exports: [COMPONENTS],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptorService,
+      useClass: LoadingInterceptor,
       multi: true,
     },
   ],
 })
-export class CoreModule {}
+export class CoreModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(
+      faBars,
+      faSignInAlt,
+      faSignOutAlt,
+      faSpinner,
+      faTachometerAlt,
+      faUserCircle,
+      faUserPlus,
+      faWeight
+    );
+  }
+}
