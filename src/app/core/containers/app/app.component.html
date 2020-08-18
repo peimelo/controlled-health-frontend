@@ -36,6 +36,16 @@
       >
         Logout
       </app-nav-item>
+
+      <app-nav-item
+        hint="View your Weights"
+        icon="weight"
+        *ngIf="loggedIn$ | async"
+        routerLink="/weights"
+        (navigate)="drawer.toggle()"
+      >
+        Weights
+      </app-nav-item>
     </mat-nav-list>
   </mat-sidenav>
 

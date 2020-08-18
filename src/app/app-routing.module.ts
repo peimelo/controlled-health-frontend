@@ -10,6 +10,11 @@ const routes: Routes = [
     data: { title: 'Home' },
   },
   {
+    path: 'weights',
+    loadChildren: () =>
+      import('./weights/weights.module').then((m) => m.WeightsModule),
+  },
+  {
     path: '**',
     component: NotFoundPageComponent,
     data: { title: 'Not found' },

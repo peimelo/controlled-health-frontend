@@ -1,0 +1,9 @@
+<app-weights
+  [isHandset]="isHandset$ | async"
+  [pagination]="pagination$ | async"
+  [weights]="weights$ | async"
+  (changePage)="onChangePage($event)"
+  (delete)="onDelete($event)"
+  (edit)="onEdit($event)"
+  (weightFormDialogOpen)="onWeightFormDialogOpen()"
+></app-weights>
