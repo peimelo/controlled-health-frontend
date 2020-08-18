@@ -9,11 +9,10 @@ import {
   MetaReducer,
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import * as fromLayout from '../core/reducers/layout.reducers';
+import { AuthActions } from '../auth/actions';
 import * as fromSpinner from '../core/reducers/spinner.reducers';
 
 export interface State {
-  [fromLayout.layoutFeatureKey]: fromLayout.State;
   [fromSpinner.spinnerFeatureKey]: fromSpinner.State;
   router: fromRouter.RouterReducerState<any>;
 }
@@ -22,7 +21,6 @@ export const ROOT_REDUCERS = new InjectionToken<
   ActionReducerMap<State, Action>
 >('Root reducers token', {
   factory: () => ({
-    [fromLayout.layoutFeatureKey]: fromLayout.reducer,
     [fromSpinner.spinnerFeatureKey]: fromSpinner.reducer,
     router: fromRouter.routerReducer,
   }),
@@ -42,26 +40,22 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   };
 }
 
-/**
- * By default, @ngrx/store uses combineReducers with the reducer map to compose
- * the root meta-reducer. To add more meta-reducers, provide an array of meta-reducers
- * that will be composed to form the root meta-reducer.
- */
+// clear state in logout
+export function clearState(
+  reducer: ActionReducer<State>
+): ActionReducer<State> {
+  return function (state: State, action: any): State {
+    if (action.type === AuthActions.logout.type) {
+      state = undefined;
+    }
+
+    return reducer(state, action);
+  };
+}
+
 export const metaReducers: MetaReducer<State>[] = !environment.production
-  ? [logger]
-  : [];
-
-/**
- * Layout Reducers
- */
-export const selectLayoutState = createFeatureSelector<State, fromLayout.State>(
-  fromLayout.layoutFeatureKey
-);
-
-export const selectShowSidenav = createSelector(
-  selectLayoutState,
-  fromLayout.selectShowSidenav
-);
+  ? [clearState, logger]
+  : [clearState];
 
 /**
  * Spinner Reducers
