@@ -17,11 +17,11 @@ export class CreateAccountPageComponent {
   pending$ = this.spinnerFacade.showSpinner$;
 
   constructor(
-    private authFacade: AuthFacadeService,
+    private authFacadeService: AuthFacadeService,
     private spinnerFacade: SpinnerFacadeService
   ) {}
 
   onSubmit(account: CreateAccountRequest): void {
-    this.authFacade.createAccount(account);
+    this.authFacadeService.createAccount(account);
   }
 }

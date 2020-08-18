@@ -30,29 +30,29 @@ import { AuthFacadeService } from '../services/auth-facade.service';
       :host {
         display: flex;
         justify-content: center;
-        margin: 20px 0;
+        margin: 20px;
       }
     `,
   ],
 })
 export class AccountPageComponent {
   pending$ = this.spinnerFacade.showSpinner$;
-  user$ = this.authFacade.user$;
+  user$ = this.authFacadeService.user$;
 
   constructor(
-    private authFacade: AuthFacadeService,
+    private authFacadeService: AuthFacadeService,
     private spinnerFacade: SpinnerFacadeService
   ) {}
 
   onDelete(): void {
-    this.authFacade.deleteAccountConfirmation();
+    this.authFacadeService.deleteAccountConfirmation();
   }
 
   onUpdate(name: string): void {
-    this.authFacade.updateAccount(name);
+    this.authFacadeService.updateAccount(name);
   }
 
   onUpdatePassword(passwordCombination: PasswordCombination): void {
-    this.authFacade.updatePassword(passwordCombination);
+    this.authFacadeService.updatePassword(passwordCombination);
   }
 }

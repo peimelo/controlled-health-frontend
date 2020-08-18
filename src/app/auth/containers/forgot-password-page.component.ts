@@ -16,11 +16,11 @@ export class ForgotPasswordPageComponent {
   pending$ = this.spinnerFacade.showSpinner$;
 
   constructor(
-    private authFacade: AuthFacadeService,
+    private authFacadeService: AuthFacadeService,
     private spinnerFacade: SpinnerFacadeService
   ) {}
 
   onSubmit(email: string): void {
-    this.authFacade.forgotPassword(email);
+    this.authFacadeService.forgotPassword(email);
   }
 }

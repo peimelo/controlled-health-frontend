@@ -12,12 +12,12 @@ import { AuthFacadeService } from '../services/auth-facade.service';
   `,
 })
 export class LoginPageComponent implements OnInit {
-  pending$ = this.spinnerFacade.showSpinner$;
+  pending$ = this.spinnerFacadeService.showSpinner$;
 
   constructor(
-    private authFacade: AuthFacadeService,
+    private authFacadeService: AuthFacadeService,
     private route: ActivatedRoute,
-    private spinnerFacade: SpinnerFacadeService
+    private spinnerFacadeService: SpinnerFacadeService
   ) {}
 
   ngOnInit(): void {
@@ -26,13 +26,13 @@ export class LoginPageComponent implements OnInit {
     );
 
     if (accountConfirmationSuccess) {
-      this.authFacade.showConfirmationAccountMessage(
+      this.authFacadeService.showConfirmationAccountMessage(
         'Your account has been successfully confirmed.'
       );
     }
   }
 
   onSubmit(credentials: Credentials): void {
-    this.authFacade.login(credentials);
+    this.authFacadeService.login(credentials);
   }
 }

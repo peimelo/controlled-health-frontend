@@ -10,28 +10,18 @@ import { SpinnerFacadeService } from '../../services/spinner-facade.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  isHandset$ = this.layoutFacade.isHandset$;
-  loggedIn$ = this.authFacade.loggedIn$;
-  showSidenav$ = this.layoutFacade.showSidenav$;
-  showSpinner$ = this.spinnerFacade.showSpinner$;
-  user$ = this.authFacade.user$;
+  isHandset$ = this.layoutFacadeService.isHandset$;
+  loggedIn$ = this.authFacadeService.loggedIn$;
+  showSpinner$ = this.spinnerFacadeService.showSpinner$;
+  user$ = this.authFacadeService.user$;
 
   constructor(
-    private authFacade: AuthFacadeService,
-    private layoutFacade: LayoutFacadeService,
-    private spinnerFacade: SpinnerFacadeService
+    private authFacadeService: AuthFacadeService,
+    private layoutFacadeService: LayoutFacadeService,
+    private spinnerFacadeService: SpinnerFacadeService
   ) {}
 
-  closeSidenav(): void {
-    this.layoutFacade.closeSidenav();
-  }
-
   logout(): void {
-    this.authFacade.logout();
-    this.layoutFacade.closeSidenav();
-  }
-
-  openSidenav(): void {
-    this.layoutFacade.openSidenav();
+    this.authFacadeService.logout();
   }
 }

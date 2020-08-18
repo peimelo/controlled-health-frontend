@@ -15,12 +15,12 @@ import { AuthFacadeService } from '../services/auth-facade.service';
   `,
 })
 export class ResetPasswordPageComponent implements OnInit {
-  pending$ = this.spinnerFacade.showSpinner$;
+  pending$ = this.spinnerFacadeService.showSpinner$;
 
   constructor(
-    private authFacade: AuthFacadeService,
+    private authFacadeService: AuthFacadeService,
     private route: ActivatedRoute,
-    private spinnerFacade: SpinnerFacadeService
+    private spinnerFacadeService: SpinnerFacadeService
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +36,6 @@ export class ResetPasswordPageComponent implements OnInit {
   }
 
   onSubmit(passwordCombination: PasswordCombination): void {
-    this.authFacade.resetPassword(passwordCombination);
+    this.authFacadeService.resetPassword(passwordCombination);
   }
 }

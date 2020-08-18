@@ -13,14 +13,14 @@ import { AuthFacadeService } from '../services/auth-facade.service';
   `,
 })
 export class ResendConfirmationPageComponent {
-  pending$ = this.spinnerFacade.showSpinner$;
+  pending$ = this.spinnerFacadeService.showSpinner$;
 
   constructor(
-    private authFacade: AuthFacadeService,
-    private spinnerFacade: SpinnerFacadeService
+    private authFacadeService: AuthFacadeService,
+    private spinnerFacadeService: SpinnerFacadeService
   ) {}
 
   onSubmit(email: string): void {
-    this.authFacade.resendConfirmation(email);
+    this.authFacadeService.resendConfirmation(email);
   }
 }
