@@ -16,6 +16,8 @@ export class ErrorsService {
       } else {
         message = error.error.errors[0];
       }
+    } else if (error.status === 404) {
+      return error.statusText;
     }
 
     return message;
