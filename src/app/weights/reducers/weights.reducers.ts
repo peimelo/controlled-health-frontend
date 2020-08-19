@@ -24,6 +24,11 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
+
+  on(WeightsApiActions.deleteWeightSuccess, (state, { id }) =>
+    adapter.removeOne(id, state)
+  ),
+
   on(WeightsApiActions.loadWeightsSuccess, (state, { weightResponse }) =>
     adapter.addMany(weightResponse.weights, {
       ...state,

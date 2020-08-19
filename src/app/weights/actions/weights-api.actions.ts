@@ -1,9 +1,17 @@
 import { createAction, props } from '@ngrx/store';
 import { WeightResponse } from '../models';
 
+export const deleteWeightFailure = createAction(
+  '[Weights/API] Delete Weights Failure'
+);
+
+export const deleteWeightSuccess = createAction(
+  '[Weights/API] Delete Weights Success',
+  props<{ id: number }>()
+);
+
 export const loadWeightsFailure = createAction(
   '[Weights/API] Load Weights Failure'
-  // props<{ user: any }>()
 );
 
 export const loadWeightsSuccess = createAction(

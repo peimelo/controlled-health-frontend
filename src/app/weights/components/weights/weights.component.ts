@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-// import { Pagination } from '../../../shared/models';
-// import { ConfirmationDialogService } from '../../../shared/services';
-import { Pagination, Weight } from '../../models';
+import * as moment from 'moment';
+import { DialogConfig, Pagination, Weight } from '../../models';
+import { ConfirmationDialogService } from '../../services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-weights',
@@ -29,24 +29,26 @@ export class WeightsComponent {
   @Output() edit = new EventEmitter<Weight>();
   @Output() weightFormDialogOpen = new EventEmitter();
 
-  // constructor(private confirmationDialogService: ConfirmationDialogService) {}
+  constructor(private confirmationDialogService: ConfirmationDialogService) {}
 
-  deleteConfirmDialog(weight: Weight) {
-    //   const dialogConfig: DialogConfig = {
-    //     confirmText: 'Remove',
-    //     content: `'${moment.utc(weight.date).format('DD/MM/YYYY HH:mm')}' will be removed.`,
-    //     title: 'Remove weight',
-    //   };
-    //   this.confirmationDialogService.show(this.delete, weight.id, dialogConfig)
+  deleteConfirmDialog(weight: Weight): void {
+    const dialogConfig: DialogConfig = {
+      confirmText: 'Remove',
+      content: `'${moment
+        .utc(weight.date)
+        .format('DD/MM/YYYY HH:mm')}' will be removed.`,
+      title: 'Remove weight',
+    };
+    this.confirmationDialogService.show(this.delete, weight.id, dialogConfig);
   }
 
-  getDisplayedColumns() {
+  getDisplayedColumns(): string[] {
     return this.columnDefinitions
       .filter((item) => (this.isHandset ? item.showMobile : true))
       .map((item) => item.columnDef);
   }
 
-  onChangePage(event: PageEvent) {
+  onChangePage(event: PageEvent): void {
     this.changePage.emit(event);
   }
 
@@ -62,11 +64,11 @@ export class WeightsComponent {
     this.weightFormDialogOpen.emit();
   }
 
-  inicio(): number {
+  initialRange(): number {
     return (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
   }
 
-  maximo(): number {
+  finalRange(): number {
     const valor = this.pagination.currentPage * this.pagination.itemsPerPage;
 
     if (valor > this.pagination.totalItems) {

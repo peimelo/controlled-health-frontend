@@ -11,7 +11,7 @@
       <fa-icon [icon]="['fas', 'plus']" size="lg"></fa-icon>
     </button>
 
-    <mat-table [dataSource]="weights | slice: inicio():maximo()">
+    <mat-table [dataSource]="weights | slice: initialRange():finalRange()">
       <!-- Date Column -->
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>

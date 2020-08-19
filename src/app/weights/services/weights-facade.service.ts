@@ -29,6 +29,10 @@ export class WeightsFacadeService {
   //                );
   //              }
 
+  deleteWeight(id: number): void {
+    this.store.dispatch(WeightsPageActions.deleteWeight({ id }));
+  }
+
   loadWeights(pageIndex: number): void {
     this.store.dispatch(WeightsPageActions.loadWeights({ pageIndex }));
   }
