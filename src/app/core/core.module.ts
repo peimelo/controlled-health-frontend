@@ -24,7 +24,7 @@ import {
   faUserCircle,
   faUserPlus,
   faWeight,
-} from '@fortawesome/pro-solid-svg-icons';
+} from '@fortawesome/free-solid-svg-icons';
 import { NavItemComponent } from './components/nav-item.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { AppComponent } from './containers/app/app.component';
