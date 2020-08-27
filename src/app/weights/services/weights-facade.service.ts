@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { WeightsPageActions } from '../actions';
+import { WeightsFormDialogActions, WeightsPageActions } from '../actions';
 import { Pagination, Weight } from '../models';
 import * as fromWeights from '../reducers';
 
@@ -21,13 +21,9 @@ export class WeightsFacadeService {
     this.weights$ = this.store.pipe(select(fromWeights.selectAllWeights));
   }
 
-  // changePage() {
-  //                this.store.dispatch(
-  //                  WeightsActions.loadWeights({
-  //                    pageIndex: event.pageIndex + 1,
-  //                  })
-  //                );
-  //              }
+  createWeight(weight: Weight): void {
+    this.store.dispatch(WeightsFormDialogActions.createWeight({ weight }));
+  }
 
   deleteWeight(id: number): void {
     this.store.dispatch(WeightsPageActions.deleteWeight({ id }));
@@ -35,5 +31,9 @@ export class WeightsFacadeService {
 
   loadWeights(pageIndex: number): void {
     this.store.dispatch(WeightsPageActions.loadWeights({ pageIndex }));
+  }
+
+  weightFormDialogOpen(): void {
+    this.store.dispatch(WeightsPageActions.weightFormDialogOpen({}));
   }
 }

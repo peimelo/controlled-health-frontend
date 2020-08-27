@@ -13,8 +13,12 @@ export interface State extends EntityState<Weight> {
 
 export const adapter: EntityAdapter<Weight> = createEntityAdapter<Weight>({
   selectId: (weight: Weight) => weight.id,
-  sortComparer: false,
+  sortComparer: sortByDateDesc,
 });
+
+export function sortByDateDesc(a: Weight, b: Weight): number {
+  return b.date.localeCompare(a.date);
+}
 
 export const initialState: State = adapter.getInitialState({
   selectedWeightId: null,
@@ -25,8 +29,24 @@ export const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
 
+  on(WeightsApiActions.createWeightSuccess, (state, { weight }) =>
+    adapter.addOne(weight, {
+      ...state,
+      pagination: {
+        ...state.pagination,
+        totalItems: state.pagination.totalItems + 1,
+      },
+    })
+  ),
+
   on(WeightsApiActions.deleteWeightSuccess, (state, { id }) =>
-    adapter.removeOne(id, state)
+    adapter.removeOne(id, {
+      ...state,
+      pagination: {
+        ...state.pagination,
+        totalItems: state.pagination.totalItems - 1,
+      },
+    })
   ),
 
   on(WeightsApiActions.loadWeightsSuccess, (state, { weightResponse }) =>

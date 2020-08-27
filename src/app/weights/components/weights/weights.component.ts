@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { DialogConfig, Pagination, Weight } from '../../models';
@@ -9,11 +16,10 @@ import { ConfirmationDialogService } from '../../services/confirmation-dialog.se
   templateUrl: './weights.component.html',
   styleUrls: ['./weights.component.scss'],
 })
-export class WeightsComponent {
+export class WeightsComponent implements OnChanges {
   columnDefinitions = [
     { columnDef: 'id', showMobile: false },
     { columnDef: 'date', showMobile: true },
-    { columnDef: 'height', showMobile: false },
     { columnDef: 'value', showMobile: true },
     { columnDef: 'range', showMobile: false },
     { columnDef: 'actions', showMobile: true },
@@ -30,6 +36,10 @@ export class WeightsComponent {
   @Output() weightFormDialogOpen = new EventEmitter();
 
   constructor(private confirmationDialogService: ConfirmationDialogService) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+  }
 
   deleteConfirmDialog(weight: Weight): void {
     const dialogConfig: DialogConfig = {
@@ -49,6 +59,7 @@ export class WeightsComponent {
   }
 
   onChangePage(event: PageEvent): void {
+    console.log('event', event);
     this.changePage.emit(event);
   }
 
@@ -60,21 +71,24 @@ export class WeightsComponent {
     this.edit.emit(weight);
   }
 
-  onWeightFormDialogOpen() {
+  onWeightFormDialogOpen(): void {
     this.weightFormDialogOpen.emit();
   }
 
-  initialRange(): number {
-    return (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
+  get initialRange(): number {
+    const initialRange =
+      (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
+    return initialRange;
   }
 
-  finalRange(): number {
-    const valor = this.pagination.currentPage * this.pagination.itemsPerPage;
+  get finalRange(): number {
+    const finalRange =
+      this.pagination.currentPage * this.pagination.itemsPerPage;
 
-    if (valor > this.pagination.totalItems) {
+    if (finalRange > this.pagination.totalItems) {
       return this.pagination.totalItems;
     }
 
-    return valor;
+    return finalRange;
   }
 }

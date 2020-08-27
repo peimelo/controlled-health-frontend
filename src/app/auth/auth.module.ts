@@ -38,7 +38,7 @@ import * as fromAuth from './reducers';
     StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers),
     EffectsModule.forFeature([AuthEffects]),
 
-    // App
+    // app
     AuthRoutingModule,
   ],
   providers: [

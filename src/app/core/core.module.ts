@@ -57,7 +57,7 @@ export const COMPONENTS = [
     MatToolbarModule,
     MatTooltipModule,
 
-    // Icons
+    // third-party
     FontAwesomeModule,
   ],
   declarations: [COMPONENTS],

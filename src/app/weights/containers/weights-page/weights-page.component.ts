@@ -31,7 +31,7 @@ export class WeightsPageComponent {
     // this.store.dispatch(WeightsActions.weightFormDialogOpen({ weight }));
   }
 
-  onWeightFormDialogOpen() {
-    // this.store.dispatch(WeightsActions.weightFormDialogOpen({}));
+  onWeightFormDialogOpen(): void {
+    this.weightsFacadeService.weightFormDialogOpen();
   }
 }

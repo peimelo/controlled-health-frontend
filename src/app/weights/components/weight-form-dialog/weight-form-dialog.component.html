@@ -1,6 +1,4 @@
-<h1 mat-dialog-title>
-  {{isEditing ? 'Update' : 'Create'}} weight
-</h1>
+<h1 mat-dialog-title>{{ isEditing ? "Update" : "Create" }} weight</h1>
 
 <div mat-dialog-content>
   <form
@@ -13,58 +11,45 @@
     <mat-form-field fxFlex>
       <input
         [dropSpecialCharacters]="false"
-        [showMaskTyped] = "true"
+        [showMaskTyped]="true"
         formControlName="date"
         mask="d0/M0/0000 Hh:m0"
         matInput
-        placeholder="Date" 
+        placeholder="Date"
         required
-        type='text'>
-      <mat-error *ngIf="!form.controls['date'].valid && form.controls['date'].touched">
+        type="text"
+      />
+      <mat-error
+        *ngIf="!form.controls['date'].valid && form.controls['date'].touched"
+      >
         {{ getErrorDate() }}
       </mat-error>
       <mat-error *ngIf="form.controls['date'].errors?.serverError">
-        {{ form.controls['date'].errors?.serverError }}
+        {{ form.controls["date"].errors?.serverError }}
       </mat-error>
     </mat-form-field>
-  
+
     <mat-form-field fxFlex>
       <input
-        formControlName="height"
-        mask="dot_separator.2"
-        matInput
-        placeholder="Height (m)"
-        required>
-      <mat-error *ngIf="!form.controls['height'].valid && form.controls['height'].touched">
-        {{ getErrorHeight() }}
-      </mat-error>
-    </mat-form-field>
-    
-    <mat-form-field fxFlex>
-      <input 
-        [dropSpecialCharacters]="true"  
+        [dropSpecialCharacters]="true"
         formControlName="value"
-        mask="dot_separator.2"
-        matInput 
+        mask="separator.2"
+        thousandSeparator="."
+        matInput
         placeholder="Value (kg)"
-        required>
-      <mat-error *ngIf="!form.controls['value'].valid && form.controls['value'].touched">
+        required
+      />
+      <mat-error
+        *ngIf="!form.controls['value'].valid && form.controls['value'].touched"
+      >
         {{ getErrorValue() }}
       </mat-error>
     </mat-form-field>
   </form>
 </div>
 
-<div 
-  fxLayout
-  fxLayoutAlign="end"
-  mat-dialog-actions
->
-  <button
-    fxflex
-    mat-button
-    [mat-dialog-close]="true"
-  >
+<div fxLayout fxLayoutAlign="end" mat-dialog-actions>
+  <button fxflex mat-button [mat-dialog-close]="true">
     Cancel
   </button>
 

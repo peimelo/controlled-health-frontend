@@ -11,7 +11,7 @@
       <fa-icon [icon]="['fas', 'plus']" size="lg"></fa-icon>
     </button>
 
-    <mat-table [dataSource]="weights | slice: initialRange():finalRange()">
+    <mat-table [dataSource]="weights | slice: initialRange:finalRange">
       <!-- Date Column -->
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
@@ -25,14 +25,6 @@
         <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{ element.date | formatDatetimeUtc: "DD/MM/YYYY HH:mm" }}
-        </mat-cell>
-      </ng-container>
-
-      <!-- Height Column -->
-      <ng-container matColumnDef="height">
-        <mat-header-cell *matHeaderCellDef> Height (m) </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          {{ element.height | number: "0.2-2" }}
         </mat-cell>
       </ng-container>
 
@@ -84,7 +76,6 @@
       [pageIndex]="pagination.currentPage - 1"
       [pageSize]="pagination.itemsPerPage"
       [pageSizeOptions]="[20]"
-      showFirstLastButtons="true"
       (page)="onChangePage($event)"
     ></mat-paginator>
   </div>
