@@ -3,7 +3,7 @@
   [pagination]="pagination$ | async"
   [weights]="weights$ | async"
   (changePage)="onChangePage($event)"
+  (add)="onAdd()"
   (delete)="onDelete($event)"
   (edit)="onEdit($event)"
-  (weightFormDialogOpen)="onWeightFormDialogOpen()"
 ></app-weights>

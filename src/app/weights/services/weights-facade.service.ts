@@ -21,8 +21,16 @@ export class WeightsFacadeService {
     this.weights$ = this.store.pipe(select(fromWeights.selectAllWeights));
   }
 
+  addWeight(): void {
+    this.store.dispatch(WeightsPageActions.addWeight());
+  }
+
   createWeight(weight: Weight): void {
     this.store.dispatch(WeightsFormDialogActions.createWeight({ weight }));
+  }
+
+  editWeight(weight: Weight): void {
+    this.store.dispatch(WeightsPageActions.editWeight({ weight }));
   }
 
   deleteWeight(id: number): void {
@@ -33,7 +41,7 @@ export class WeightsFacadeService {
     this.store.dispatch(WeightsPageActions.loadWeights({ pageIndex }));
   }
 
-  weightFormDialogOpen(): void {
-    this.store.dispatch(WeightsPageActions.weightFormDialogOpen({}));
+  updateWeight(weight: Weight): void {
+    this.store.dispatch(WeightsFormDialogActions.updateWeight({ weight }));
   }
 }

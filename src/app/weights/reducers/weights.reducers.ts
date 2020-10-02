@@ -55,6 +55,12 @@ export const reducer = createReducer(
       listLoaded: true,
       pagination: weightResponse.meta,
     })
+  ),
+
+  on(WeightsApiActions.updateWeightSuccess, (state, { update }) =>
+    adapter.updateOne(update, {
+      ...state,
+    })
   )
 );
 

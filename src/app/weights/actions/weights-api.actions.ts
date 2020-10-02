@@ -1,3 +1,4 @@
+import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { Weight, WeightResponse } from '../models';
 
@@ -36,5 +37,5 @@ export const updateWeightFailure = createAction(
 
 export const updateWeightSuccess = createAction(
   '[Weights/API] Update Weight Success',
-  props<{ response: any }>()
+  props<{ update: Update<Weight> }>()
 );

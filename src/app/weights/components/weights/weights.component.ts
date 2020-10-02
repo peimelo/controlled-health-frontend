@@ -29,11 +29,10 @@ export class WeightsComponent implements OnChanges {
   @Input() pagination: Pagination;
   @Input() weights: Weight[];
 
-  @Output() changePage = new EventEmitter<PageEvent>();
-  @Output() create = new EventEmitter();
-  @Output() delete = new EventEmitter<number>();
-  @Output() edit = new EventEmitter<Weight>();
-  @Output() weightFormDialogOpen = new EventEmitter();
+  @Output() private changePage = new EventEmitter<PageEvent>();
+  @Output() private add = new EventEmitter();
+  @Output() private delete = new EventEmitter<number>();
+  @Output() private edit = new EventEmitter<Weight>();
 
   constructor(private confirmationDialogService: ConfirmationDialogService) {}
 
@@ -58,30 +57,34 @@ export class WeightsComponent implements OnChanges {
       .map((item) => item.columnDef);
   }
 
+  onAdd(): void {
+    this.add.emit();
+  }
+
   onChangePage(event: PageEvent): void {
     console.log('event', event);
     this.changePage.emit(event);
   }
 
-  onCreate() {
-    this.create.emit();
-  }
-
-  onEdit(weight: Weight) {
+  onEdit(weight: Weight): void {
     this.edit.emit(weight);
   }
 
-  onWeightFormDialogOpen(): void {
-    this.weightFormDialogOpen.emit();
-  }
-
   get initialRange(): number {
+    if (!this.pagination) {
+      return 0;
+    }
+
     const initialRange =
       (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
     return initialRange;
   }
 
   get finalRange(): number {
+    if (!this.pagination) {
+      return 0;
+    }
+
     const finalRange =
       this.pagination.currentPage * this.pagination.itemsPerPage;
 

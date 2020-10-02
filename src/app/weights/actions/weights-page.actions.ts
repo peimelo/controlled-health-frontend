@@ -1,6 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { Weight } from '../models';
 
+export const addWeight = createAction('[Weights Page] Add Weight');
+
 export const deleteWeight = createAction(
   '[Weights Page] Delete Weight',
   props<{ id: number }>()
@@ -11,7 +13,7 @@ export const loadWeights = createAction(
   props<{ pageIndex: number }>()
 );
 
-export const weightFormDialogOpen = createAction(
-  '[Weights Page] Weight Form Dialog Open',
-  props<{ weight?: Weight }>()
+export const editWeight = createAction(
+  '[Weights Page] Edit Weight',
+  props<{ weight: Weight }>()
 );

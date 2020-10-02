@@ -23,15 +23,15 @@ export class WeightsPageComponent {
     this.weightsFacadeService.loadWeights(event.pageIndex + 1);
   }
 
+  onAdd(): void {
+    this.weightsFacadeService.addWeight();
+  }
+
   onDelete(id: number): void {
     this.weightsFacadeService.deleteWeight(id);
   }
 
-  onEdit(weight: Weight) {
-    // this.store.dispatch(WeightsActions.weightFormDialogOpen({ weight }));
-  }
-
-  onWeightFormDialogOpen(): void {
-    this.weightsFacadeService.weightFormDialogOpen();
+  onEdit(weight: Weight): void {
+    this.weightsFacadeService.editWeight(weight);
   }
 }

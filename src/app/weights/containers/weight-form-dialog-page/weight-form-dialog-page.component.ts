@@ -23,14 +23,14 @@ export class WeightFormDialogPageComponent {
     // this.error$ = this.store.pipe(select(fromWeightsSelectors.getWeightsError))
     // this.isLoading$ = this.store.pipe(select(fromWeightsSelectors.getWeightsLoading))
     // this.user$ = this.store.pipe(select(fromAuthSelectors.getUser))
-    // this.weight = data.weight;
+    this.weight = this.data.weight;
   }
 
   onCreate(weight: Weight): void {
     this.weightFacadeService.createWeight(weight);
   }
 
-  onUpdate(weight: Weight) {
-    // this.store.dispatch(WeightsActions.updateWeight({ weight }));
+  onUpdate(weight: Weight): void {
+    this.weightFacadeService.updateWeight(weight);
   }
 }

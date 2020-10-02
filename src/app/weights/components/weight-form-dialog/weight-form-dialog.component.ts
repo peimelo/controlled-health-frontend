@@ -36,8 +36,8 @@ export class WeightFormDialogComponent implements OnChanges, OnInit {
   @Input() user: User;
   @Input() weight: Weight;
 
-  @Output() create = new EventEmitter<Weight>();
-  @Output() update = new EventEmitter<Weight>();
+  @Output() private create = new EventEmitter<Weight>();
+  @Output() private update = new EventEmitter<Weight>();
 
   constructor(private fb: FormBuilder) {}
 
@@ -82,13 +82,13 @@ export class WeightFormDialogComponent implements OnChanges, OnInit {
     }
   }
 
-  getErrorDate() {
+  getErrorDate(): string {
     return this.form.get('date').hasError('required')
       ? 'Field is required'
       : '';
   }
 
-  getErrorValue() {
+  getErrorValue(): string {
     return this.form.get('value').hasError('required')
       ? 'Field is required'
       : this.form.get('value').hasError('min')
@@ -112,7 +112,7 @@ export class WeightFormDialogComponent implements OnChanges, OnInit {
     }
   }
 
-  onUpdate(form: FormGroup) {
+  onUpdate(form: FormGroup): void {
     const { valid, value } = form;
 
     if (valid) {

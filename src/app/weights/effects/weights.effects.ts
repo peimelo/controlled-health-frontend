@@ -26,6 +26,19 @@ import { WeightsService } from '../services/weights.service';
 export class WeightsEffects {
   dialogRef: any;
 
+  addWeight$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(WeightsPageActions.addWeight),
+        tap(() => {
+          this.dialogRef = this.dialog.open(WeightFormDialogPageComponent, {
+            data: {},
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
   createWeight$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WeightsFormDialogActions.createWeight),
@@ -65,6 +78,19 @@ export class WeightsEffects {
     )
   );
 
+  editWeight$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(WeightsPageActions.editWeight),
+        tap(({ weight }) => {
+          this.dialogRef = this.dialog.open(WeightFormDialogPageComponent, {
+            data: { weight },
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
   loadWeights$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WeightsPageActions.loadWeights),
@@ -79,25 +105,32 @@ export class WeightsEffects {
     )
   );
 
+  updateWeight$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(WeightsFormDialogActions.updateWeight),
+      mergeMap(({ weight }) =>
+        this.weightsService.update(weight).pipe(
+          mergeMap((weightResponse) => [
+            WeightsApiActions.updateWeightSuccess({
+              update: { id: weightResponse.id, changes: weightResponse },
+            }),
+            WeightsActions.weightFormDialogDismiss(),
+          ]),
+          catchError((error) => {
+            const message = this.errorService.getMessage(error);
+            return of(MessageApiActions.errorMessage({ message }));
+          })
+        )
+      )
+    )
+  );
+
   weightFormDialogDismiss$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(WeightsActions.weightFormDialogDismiss),
         tap(() => {
           this.dialogRef.close();
-        })
-      ),
-    { dispatch: false }
-  );
-
-  weightFormDialogOpen$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(WeightsPageActions.weightFormDialogOpen),
-        tap(({ weight }) => {
-          this.dialogRef = this.dialog.open(WeightFormDialogPageComponent, {
-            data: { weight },
-          });
         })
       ),
     { dispatch: false }
