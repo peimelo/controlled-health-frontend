@@ -8,20 +8,16 @@ import { User } from '../../models';
   template: `
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Personal Data
-        </mat-panel-title>
+        <mat-panel-title> Personal Data </mat-panel-title>
 
-        <mat-panel-description>
-          Type your name
-        </mat-panel-description>
+        <mat-panel-description> Type your name </mat-panel-description>
       </mat-expansion-panel-header>
 
       <form [formGroup]="form">
         <mat-form-field>
           <mat-label>Email</mat-label>
 
-          <input matInput formControlName="email" />
+          <input matInput [value]="user.email" disabled />
         </mat-form-field>
 
         <mat-form-field>
@@ -32,9 +28,7 @@ import { User } from '../../models';
       </form>
 
       <mat-action-row>
-        <button color="primary" mat-button (click)="onUpdate()">
-          Save
-        </button>
+        <button color="primary" mat-button (click)="onUpdate()">Save</button>
       </mat-action-row>
     </mat-expansion-panel>
   `,
