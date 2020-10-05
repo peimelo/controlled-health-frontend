@@ -84,9 +84,7 @@ export class AuthService {
   }
 
   private clearLocalStorage(): void {
-    localStorage.removeItem('access-token');
-    localStorage.removeItem('client');
-    localStorage.removeItem('uid');
+    localStorage.clear();
   }
 
   getUser(): Observable<User> {
