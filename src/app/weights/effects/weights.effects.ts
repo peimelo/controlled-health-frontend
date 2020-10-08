@@ -10,7 +10,7 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { MessageApiActions } from 'src/app/core/actions';
+import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../core/services/errors.service';
 import {
   WeightsActions,

@@ -10,6 +10,11 @@ const routes: Routes = [
     data: { title: 'Home' },
   },
   {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+  },
+  {
     path: 'weights',
     loadChildren: () =>
       import('./weights/weights.module').then((m) => m.WeightsModule),

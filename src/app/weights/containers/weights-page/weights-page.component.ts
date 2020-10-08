@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { LayoutFacadeService } from 'src/app/core/services/layout-facade.service';
+import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
 import { Weight } from '../../models';
 import { WeightsFacadeService } from '../../services/weights-facade.service';
 

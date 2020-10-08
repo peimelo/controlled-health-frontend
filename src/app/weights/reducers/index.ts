@@ -51,13 +51,3 @@ export const {
   selectAll: selectAllWeights,
   selectTotal: selectTotalWeights,
 } = fromWeights.adapter.getSelectors(selectWeightsEntitiesState);
-
-// export const getWeightsError = createSelector(
-//   getWeightsState,
-//   fromWeights.getError
-// );
-
-// export const getWeightsPagination = createSelector(
-//   getWeightsState,
-//   fromWeights.getPagination
-// );

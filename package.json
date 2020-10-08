@@ -33,6 +33,7 @@
     "@ngrx/router-store": "^10.0.0",
     "@ngrx/store": "^10.0.0",
     "@ngrx/store-devtools": "^10.0.0",
+    "@swimlane/ngx-charts": "^16.0.0",
     "moment": "^2.27.0",
     "ngx-mask": "^10.0.1",
     "rxjs": "~6.5.5",

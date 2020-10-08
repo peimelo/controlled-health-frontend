@@ -38,6 +38,16 @@
       </app-nav-item>
 
       <app-nav-item
+        hint="View your Dashboard"
+        icon="tachometer-alt"
+        *ngIf="loggedIn$ | async"
+        routerLink="/dashboard"
+        (navigate)="drawer.toggle()"
+      >
+        Dashboard
+      </app-nav-item>
+
+      <app-nav-item
         hint="View your Weights"
         icon="weight"
         *ngIf="loggedIn$ | async"
