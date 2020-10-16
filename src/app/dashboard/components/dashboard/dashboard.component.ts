@@ -1,15 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import * as shape from 'd3-shape';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
   view: any[];
-  schemeType: string = 'ordinal';
-  animations: boolean = true;
+  schemeType = 'ordinal';
+  animations = true;
   showLegend = false;
   legendTitle = 'Legend';
   legendPosition = 'right';
@@ -44,13 +44,13 @@ export class DashboardComponent {
     Step: shape.curveStep,
     'Step After': shape.curveStepAfter,
     'Step Before': shape.curveStepBefore,
-    default: shape.curveLinear
+    default: shape.curveLinear,
   };
 
   // line interpolation
-  curveType: string = 'Linear';
+  curveType = 'Linear';
   curve: any = this.curves[this.curveType];
-  rangeFillOpacity: number = 0.15;
+  rangeFillOpacity = 0.15;
   roundDomains = false;
   tooltipDisabled = false;
   trimXAxisTicks = true;
@@ -65,19 +65,21 @@ export class DashboardComponent {
       return [];
     }
 
-    let series = [];
-    for (let i = this.dashboard['weights'].length - 1; i >= 0; i--) {
+    const series = [];
+    for (let i = this.dashboard.weights.length - 1; i >= 0; i--) {
       series.push({
-        value: this.dashboard['weights'][i].value,
-        name: new Date(this.dashboard['weights'][i].date),
+        value: this.dashboard.weights[i].value,
+        name: new Date(this.dashboard.weights[i].date),
         min: 59.91,
-        max: 80.97
+        max: 80.97,
       });
     }
 
-    return [{
-      name: 'Weights',
-      series: series
-    }];
+    return [
+      {
+        name: 'Weights',
+        series,
+      },
+    ];
   }
 }

@@ -15,7 +15,7 @@ export class DashboardEffects {
   @Effect()
   loadDashboard$ = this.actions$.pipe(
     ofType(DashboardPageActions.loadDashboard),
-    switchMap((_) =>
+    switchMap(() =>
       this.dashboardService.getAll().pipe(
         map((dashboard) =>
           DashboardApiActions.loadDashboardSuccess({ dashboard })

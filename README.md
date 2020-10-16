@@ -46,6 +46,8 @@ Abra o navegador no endereço `http://localhost:4200`.
 
 [![CircleCI](https://circleci.com/gh/peimelo/saudecontrolada-frontend.svg?style=svg)](https://circleci.com/gh/peimelo/saudecontrolada-frontend)
 
+[![DeepScan grade](https://deepscan.io/api/teams/11362/projects/14269/branches/261102/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11362&pid=14269&bid=261102)
+
 Para rodar os testes:
 
 ```bash
