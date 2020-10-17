@@ -40,16 +40,20 @@ ng serve
 
 Abra o navegador no endereço `http://localhost:4200`.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0758d55a-22df-40bf-ab41-3c0c3cf2397c/deploy-status)](https://app.netlify.com/sites/saudecontrolada/deploys)
-
 ## Testes
 
 [![CircleCI](https://circleci.com/gh/peimelo/saudecontrolada-frontend.svg?style=svg)](https://circleci.com/gh/peimelo/saudecontrolada-frontend)
-
-[![DeepScan grade](https://deepscan.io/api/teams/11362/projects/14269/branches/261102/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11362&pid=14269&bid=261102)
 
 Para rodar os testes:
 
 ```bash
 npm run test
 ```
+
+## Qualidade do Código
+
+[![DeepScan grade](https://deepscan.io/api/teams/11362/projects/14269/branches/261102/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11362&pid=14269&bid=261102)
+
+## Deploy
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0758d55a-22df-40bf-ab41-3c0c3cf2397c/deploy-status)](https://app.netlify.com/sites/saudecontrolada/deploys)
