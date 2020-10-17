@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Weight } from '../models';
+import { Weight } from '../../shared/models';
 
 export const createWeight = createAction(
   '[Weights Form Dialog Page] Create Weight',

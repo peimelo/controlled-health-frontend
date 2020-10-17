@@ -1,1 +1,1 @@
-export * from './club';
+export * from './dashboard';

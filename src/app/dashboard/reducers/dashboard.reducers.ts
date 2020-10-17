@@ -1,15 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
 import { DashboardApiActions } from '../actions';
-import { Club } from '../models';
+import { Dashboard } from '../models';
 
 export const statusFeatureKey = 'status';
 
 export interface State {
-  list: Club[] | null;
+  dashboard: Dashboard | null;
 }
 
 export const initialState: State = {
-  list: null,
+  dashboard: null,
 };
 
 export const reducer = createReducer(
@@ -17,8 +17,8 @@ export const reducer = createReducer(
 
   on(DashboardApiActions.loadDashboardSuccess, (state, { dashboard }) => ({
     ...state,
-    list: dashboard,
+    dashboard,
   }))
 );
 
-export const getList = (state: State) => state.list;
+export const getDashboard = (state: State) => state.dashboard;

@@ -1,6 +1,7 @@
 import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
-import { Weight, WeightResponse } from '../models';
+import { Weight } from '../../shared/models';
+import { WeightResponse } from '../models';
 
 export const createWeightFailure = createAction(
   '[Weights/API] Create Weight Failure',

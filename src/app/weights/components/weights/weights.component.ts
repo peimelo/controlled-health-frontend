@@ -8,7 +8,8 @@ import {
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import * as moment from 'moment';
-import { DialogConfig, Pagination, Weight } from '../../models';
+import { Weight } from '../../../shared/models';
+import { DialogConfig, Pagination } from '../../models';
 import { ConfirmationDialogService } from '../../services/confirmation-dialog.service';
 
 @Component({

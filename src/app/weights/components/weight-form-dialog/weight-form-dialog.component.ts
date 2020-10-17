@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/auth/models';
-import { Weight } from '../../models';
+import { Weight } from '../../../shared/models';
 
 @Component({
   selector: 'app-weight-form-dialog',

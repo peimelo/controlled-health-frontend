@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { User } from '../../../auth/models';
-import { Weight } from '../../models';
+import { Weight } from '../../../shared/models';
 import { WeightsFacadeService } from '../../services/weights-facade.service';
 
 @Component({

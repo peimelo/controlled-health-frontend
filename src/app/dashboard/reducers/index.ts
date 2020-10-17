@@ -36,7 +36,7 @@ export const selectDashboardStatusState = createSelector(
   (state) => state.status
 );
 
-export const selectList = createSelector(
+export const selectDashboard = createSelector(
   selectDashboardStatusState,
-  fromDashboard.getList
+  fromDashboard.getDashboard
 );

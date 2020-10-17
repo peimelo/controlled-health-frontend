@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import * as shape from 'd3-shape';
+import { Dashboard } from '../../models';
 
 @Component({
   selector: 'app-dashboard',
@@ -58,7 +59,7 @@ export class DashboardComponent {
   maxXAxisTickLength = 16;
   maxYAxisTickLength = 16;
 
-  @Input() dashboard: any[];
+  @Input() dashboard: Dashboard;
 
   get dateDataWithOrWithoutRange() {
     if (!this.dashboard) {

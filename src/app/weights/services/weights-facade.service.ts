@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Weight } from '../../shared/models';
 import { WeightsFormDialogActions, WeightsPageActions } from '../actions';
-import { Pagination, Weight } from '../models';
+import { Pagination } from '../models';
 import * as fromWeights from '../reducers';
 
 @Injectable()

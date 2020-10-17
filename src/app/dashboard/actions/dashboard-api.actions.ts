@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Club } from '../models';
+import { Dashboard } from '../models';
 
 export const loadDashboardFailure = createAction(
   '[Dashboard/API] Load Dashboard Failure',
@@ -8,5 +8,5 @@ export const loadDashboardFailure = createAction(
 
 export const loadDashboardSuccess = createAction(
   '[Dashboard/API] Load Dashboard Success',
-  props<{ dashboard: Club[] }>()
+  props<{ dashboard: Dashboard }>()
 );
