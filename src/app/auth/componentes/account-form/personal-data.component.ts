@@ -17,7 +17,7 @@ import { User } from '../../models';
         <mat-form-field>
           <mat-label>Email</mat-label>
 
-          <input matInput [value]="user.email" disabled />
+          <input matInput [value]="user?.email" disabled />
         </mat-form-field>
 
         <mat-form-field>
