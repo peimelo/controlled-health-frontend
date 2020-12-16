@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { Weight } from '../../../shared/models';
@@ -17,7 +10,7 @@ import { ConfirmationDialogService } from '../../services/confirmation-dialog.se
   templateUrl: './weights.component.html',
   styleUrls: ['./weights.component.scss'],
 })
-export class WeightsComponent implements OnChanges {
+export class WeightsComponent {
   columnDefinitions = [
     { columnDef: 'id', showMobile: false },
     { columnDef: 'date', showMobile: true },
@@ -36,10 +29,6 @@ export class WeightsComponent implements OnChanges {
   @Output() private edit = new EventEmitter<Weight>();
 
   constructor(private confirmationDialogService: ConfirmationDialogService) {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-  }
 
   deleteConfirmDialog(weight: Weight): void {
     const dialogConfig: DialogConfig = {
@@ -63,7 +52,6 @@ export class WeightsComponent implements OnChanges {
   }
 
   onChangePage(event: PageEvent): void {
-    console.log('event', event);
     this.changePage.emit(event);
   }
 

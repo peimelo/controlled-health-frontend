@@ -19,12 +19,12 @@ export class WeightsPageComponent {
     private weightsFacadeService: WeightsFacadeService
   ) {}
 
-  onChangePage(event: PageEvent): void {
-    this.weightsFacadeService.loadWeights(event.pageIndex + 1);
-  }
-
   onAdd(): void {
     this.weightsFacadeService.addWeight();
+  }
+
+  onChangePage(event: PageEvent): void {
+    this.weightsFacadeService.loadWeights(event.pageIndex + 1);
   }
 
   onDelete(id: number): void {

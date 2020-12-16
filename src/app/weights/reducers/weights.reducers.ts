@@ -7,13 +7,11 @@ import { Pagination } from '../models';
 export const weightsFeatureKey = 'weights';
 
 export interface State extends EntityState<Weight> {
-  selectedWeightId: string | null;
   listLoaded: boolean;
   pagination: Pagination | null;
 }
 
 export const adapter: EntityAdapter<Weight> = createEntityAdapter<Weight>({
-  selectId: (weight: Weight) => weight.id,
   sortComparer: sortByDateDesc,
 });
 
@@ -22,7 +20,6 @@ export function sortByDateDesc(a: Weight, b: Weight): number {
 }
 
 export const initialState: State = adapter.getInitialState({
-  selectedWeightId: null,
   listLoaded: false,
   pagination: null,
 });
@@ -65,6 +62,5 @@ export const reducer = createReducer(
   )
 );
 
-export const selectId = (state: State) => state.selectedWeightId;
 export const getListLoaded = (state: State) => state.listLoaded;
 export const getPagination = (state: State) => state.pagination;

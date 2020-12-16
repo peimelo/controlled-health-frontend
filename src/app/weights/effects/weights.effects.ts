@@ -108,11 +108,15 @@ export class WeightsEffects {
   updateWeight$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WeightsFormDialogActions.updateWeight),
-      mergeMap(({ weight }) =>
-        this.weightsService.update(weight).pipe(
+      withLatestFrom(this.weightsFacadeService.pagination$),
+      mergeMap(([action, pagination]) =>
+        this.weightsService.update(action.weight).pipe(
           mergeMap((weightResponse) => [
             WeightsApiActions.updateWeightSuccess({
               update: { id: weightResponse.id, changes: weightResponse },
+            }),
+            WeightsPageActions.loadWeights({
+              pageIndex: pagination.currentPage,
             }),
             WeightsActions.weightFormDialogDismiss(),
           ]),
