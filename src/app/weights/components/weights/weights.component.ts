@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import * as moment from 'moment';
-import { Weight } from '../../../shared/models';
-import { DialogConfig, Pagination } from '../../models';
+import { Pagination, Weight } from '../../../shared/models';
+import { PaginationService } from '../../../shared/services/pagination.service';
+import { DialogConfig } from '../../models';
 import { ConfirmationDialogService } from '../../services/confirmation-dialog.service';
 
 @Component({
@@ -28,7 +29,10 @@ export class WeightsComponent {
   @Output() private delete = new EventEmitter<number>();
   @Output() private edit = new EventEmitter<Weight>();
 
-  constructor(private confirmationDialogService: ConfirmationDialogService) {}
+  constructor(
+    private confirmationDialogService: ConfirmationDialogService,
+    private paginationService: PaginationService
+  ) {}
 
   deleteConfirmDialog(weight: Weight): void {
     const dialogConfig: DialogConfig = {
@@ -60,27 +64,10 @@ export class WeightsComponent {
   }
 
   get initialRange(): number {
-    if (!this.pagination) {
-      return 0;
-    }
-
-    const initialRange =
-      (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
-    return initialRange;
+    return this.paginationService.initialRange(this.pagination);
   }
 
   get finalRange(): number {
-    if (!this.pagination) {
-      return 0;
-    }
-
-    const finalRange =
-      this.pagination.currentPage * this.pagination.itemsPerPage;
-
-    if (finalRange > this.pagination.totalItems) {
-      return this.pagination.totalItems;
-    }
-
-    return finalRange;
+    return this.paginationService.finalRange(this.pagination);
   }
 }

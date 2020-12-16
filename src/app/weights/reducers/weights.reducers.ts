@@ -1,8 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { Weight } from '../../shared/models';
+import { Pagination, Weight } from '../../shared/models';
 import { WeightsApiActions } from '../actions';
-import { Pagination } from '../models';
 
 export const weightsFeatureKey = 'weights';
 
