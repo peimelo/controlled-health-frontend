@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       mat-list-item
       [routerLink]="routerLink"
       routerLinkActive="active-list-item"
+      [routerLinkActiveOptions]="{ exact: true }"
       (click)="navigate.emit()"
     >
       <fa-icon [icon]="['fas', icon]" mat-list-icon></fa-icon>

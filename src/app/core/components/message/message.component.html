@@ -1,0 +1,11 @@
+<span fxLayout fxLayoutAlign="start center" fxLayoutGap="10px">
+  <mat-icon *ngIf="data.type === 'success'">
+    <fa-icon [icon]="['fas', 'check']" size="lg"></fa-icon>
+  </mat-icon>
+
+  <mat-icon *ngIf="data.type === 'error'">
+    <fa-icon [icon]="['fas', 'times']" size="lg"></fa-icon>
+  </mat-icon>
+
+  <span>{{ data.message }}</span>
+</span>
