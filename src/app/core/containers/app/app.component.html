@@ -10,6 +10,15 @@
 
     <mat-nav-list>
       <app-nav-item
+        icon="home"
+        *ngIf="!(loggedIn$ | async)"
+        routerLink="/"
+        (navigate)="drawer.toggle()"
+      >
+        Home
+      </app-nav-item>
+
+      <app-nav-item
         hint="Login into app"
         icon="sign-in-alt"
         *ngIf="!(loggedIn$ | async)"
@@ -67,7 +76,7 @@
       (logout)="logout()"
       (openMenu)="drawer.toggle()"
     >
-      My Weights
+      Controlled Health
     </app-toolbar>
 
     <router-outlet></router-outlet>
