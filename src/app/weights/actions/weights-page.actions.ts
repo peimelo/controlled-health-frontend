@@ -8,8 +8,8 @@ export const deleteWeight = createAction(
   props<{ id: number }>()
 );
 
-export const loadWeights = createAction(
-  '[Weights Guard] Load Weights',
+export const changePageWeights = createAction(
+  '[Weights Page] Change Page Weights',
   props<{ pageIndex: number }>()
 );
 

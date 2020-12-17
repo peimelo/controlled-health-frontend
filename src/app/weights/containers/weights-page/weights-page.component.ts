@@ -24,7 +24,7 @@ export class WeightsPageComponent {
   }
 
   onChangePage(event: PageEvent): void {
-    this.weightsFacadeService.loadWeights(event.pageIndex + 1);
+    this.weightsFacadeService.changePageWeights(event.pageIndex + 1);
   }
 
   onDelete(id: number): void {

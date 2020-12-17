@@ -93,7 +93,7 @@ export class WeightsEffects {
 
   loadWeights$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(WeightsPageActions.loadWeights),
+      ofType(WeightsActions.loadWeights, WeightsPageActions.changePageWeights),
       exhaustMap(({ pageIndex }) =>
         this.weightsService.getAll(pageIndex).pipe(
           map((weightResponse) =>
