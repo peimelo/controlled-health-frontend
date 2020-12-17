@@ -52,7 +52,7 @@ npm run test
 
 ## Quality of the Code
 
-[![DeepScan grade](https://deepscan.io/api/teams/11362/projects/14269/branches/261102/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11362&pid=14269&bid=261102)
+[![DeepScan grade](https://deepscan.io/api/teams/11362/projects/15113/branches/298154/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11362&pid=15113&bid=298154)
 
 ## Deploy
 

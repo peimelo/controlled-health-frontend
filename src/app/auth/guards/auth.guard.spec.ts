@@ -3,6 +3,7 @@ import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { cold } from 'jasmine-marbles';
 import * as fromAuth from '../reducers';
+import { AuthFacadeService } from '../services/auth-facade.service';
 import { AuthGuard } from './auth.guard';
 
 describe('Auth Guard', () => {
@@ -12,7 +13,7 @@ describe('Auth Guard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthGuard, provideMockStore()],
+      providers: [AuthGuard, AuthFacadeService, provideMockStore()],
     });
 
     store = TestBed.inject(MockStore);
