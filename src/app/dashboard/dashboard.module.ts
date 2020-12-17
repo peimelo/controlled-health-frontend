@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule } from '@angular/material/card';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { SharedModule } from '../shared/shared.module';
 import * as fromComponents from './components';
 import * as fromContainers from './containers';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -18,12 +16,7 @@ import { DashboardService } from './services/dashboard.service';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    FlexLayoutModule,
     NgxChartsModule,
-
-    // Material
-    MatCardModule,
-    MatGridListModule,
 
     // @ngrx
     StoreModule.forFeature(
@@ -31,6 +24,9 @@ import { DashboardService } from './services/dashboard.service';
       fromDashboard.reducers
     ),
     EffectsModule.forFeature([DashboardEffects]),
+
+    // app
+    SharedModule,
   ],
   declarations: [...fromComponents.components, ...fromContainers.containers],
   exports: [...fromComponents.components, ...fromContainers.containers],

@@ -17,7 +17,7 @@ import {
 } from '../models';
 import * as fromAuth from '../reducers';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthFacadeService {
   loggedIn$: Observable<boolean>;
   user$: Observable<any>;

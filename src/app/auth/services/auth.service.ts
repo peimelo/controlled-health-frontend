@@ -13,7 +13,7 @@ import {
   UserDataResponse,
 } from '../models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthService {
   private url = `${environment.baseUrl}/auth`;
 

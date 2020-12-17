@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import * as fromRoot from '../../reducers';
 import { SpinnerActions } from '../actions';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SpinnerFacadeService {
   showSpinner$: Observable<boolean>;
 

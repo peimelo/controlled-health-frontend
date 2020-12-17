@@ -1,5 +1,4 @@
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,7 +8,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './core/containers/app/app.component';
@@ -24,12 +23,10 @@ const maskConfig: Partial<IConfig> = {
 };
 
 @NgModule({
-  declarations: [],
   imports: [
     // Angular
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
 
     // @ngrx
     StoreModule.forRoot(ROOT_REDUCERS, {

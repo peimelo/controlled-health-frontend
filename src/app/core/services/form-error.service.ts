@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class FormErrorService {
   errorMap: {
     [key: string]: (errors: ValidationErrors, name: string) => string;

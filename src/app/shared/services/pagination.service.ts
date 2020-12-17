@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Pagination } from '../../shared/models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class PaginationService {
   initialRange(pagination: Pagination): number {
     if (!pagination) {

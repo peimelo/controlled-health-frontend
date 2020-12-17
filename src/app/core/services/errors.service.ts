@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ErrorsService {
   getMessage(error: any): string {
     if (!environment.production) {

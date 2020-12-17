@@ -1,9 +1,5 @@
 export interface Weight {
-  id?: number;
+  id: number;
   date: string;
-  height: number;
-  imc: number;
-  maximum: number;
-  minimum: number;
   value: number;
 }
