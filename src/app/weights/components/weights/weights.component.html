@@ -3,7 +3,7 @@
 
   <div class="mat-elevation-z8">
     <button class="custom-button" color="accent" mat-fab (click)="onAdd()">
-      <fa-icon [icon]="['fas', 'plus']" size="lg"></fa-icon>
+      <mat-icon>add</mat-icon>
     </button>
 
     <mat-table
@@ -48,14 +48,14 @@
             matTooltip="Edit this item"
             (click)="onEdit(row)"
           >
-            <fa-icon [icon]="['fas', 'pencil-alt']" size="lg"></fa-icon>
+            <mat-icon>edit</mat-icon>
           </button>
           <button
             mat-icon-button
             matTooltip="Delete this item"
             (click)="deleteConfirmDialog(row)"
           >
-            <fa-icon [icon]="['fas', 'trash-alt']" size="lg"></fa-icon>
+            <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
       </ng-container>

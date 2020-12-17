@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <button mat-icon-button (click)="openMenu.emit()">
-    <fa-icon [icon]="['fas', 'bars']" size="lg"></fa-icon>
+    <mat-icon>menu</mat-icon>
   </button>
 
   <ng-content></ng-content>
@@ -20,7 +20,7 @@
     *ngIf="!loggedIn"
     routerLink="/create-account"
   >
-    <fa-icon [icon]="['fas', 'user-plus']" size="lg"></fa-icon>
+    <mat-icon>person_add</mat-icon>
   </a>
 
   <a
@@ -39,14 +39,10 @@
     [matTooltipPosition]="'right'"
     *ngIf="loggedIn"
   >
-    <fa-icon [icon]="['fas', 'user-circle']" size="lg"></fa-icon>
+    <mat-icon>account_circle</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <a mat-menu-item routerLink="/account">
-      Account settings
-    </a>
-    <button mat-menu-item (click)="logout.emit()">
-      Logout
-    </button>
+    <a mat-menu-item routerLink="/account"> Account settings </a>
+    <button mat-menu-item (click)="logout.emit()">Logout</button>
   </mat-menu>
 </mat-toolbar>

@@ -10,7 +10,7 @@
 
     <mat-nav-list>
       <app-nav-item
-        icon="home"
+        matIcon="home"
         *ngIf="!(loggedIn$ | async)"
         routerLink="/"
         (navigate)="drawer.toggle()"
@@ -20,7 +20,7 @@
 
       <app-nav-item
         hint="Login into app"
-        icon="sign-in-alt"
+        matIcon="login"
         *ngIf="!(loggedIn$ | async)"
         routerLink="/login"
         (navigate)="drawer.toggle()"
@@ -29,7 +29,7 @@
       </app-nav-item>
 
       <app-nav-item
-        icon="user-plus"
+        matIcon="person_add"
         *ngIf="!(loggedIn$ | async)"
         routerLink="/create-account"
         (navigate)="drawer.toggle()"
@@ -38,7 +38,7 @@
       </app-nav-item>
 
       <app-nav-item
-        icon="sign-out-alt"
+        fasIcon="sign-out-alt"
         *ngIf="loggedIn$ | async"
         routerLink="/login"
         (navigate)="drawer.toggle(); logout()"
@@ -48,7 +48,7 @@
 
       <app-nav-item
         hint="View your Dashboard"
-        icon="tachometer-alt"
+        matIcon="dashboard"
         *ngIf="loggedIn$ | async"
         routerLink="/dashboard"
         (navigate)="drawer.toggle()"
@@ -58,12 +58,22 @@
 
       <app-nav-item
         hint="View your Weights"
-        icon="weight"
+        fasIcon="weight"
         *ngIf="loggedIn$ | async"
         routerLink="/weights"
         (navigate)="drawer.toggle()"
       >
         Weights
+      </app-nav-item>
+
+      <app-nav-item
+        hint="View your Heights"
+        matIcon="height"
+        *ngIf="loggedIn$ | async"
+        routerLink="/heights"
+        (navigate)="drawer.toggle()"
+      >
+        Heights
       </app-nav-item>
     </mat-nav-list>
   </mat-sidenav>

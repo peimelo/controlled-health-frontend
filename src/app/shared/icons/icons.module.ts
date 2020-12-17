@@ -4,19 +4,9 @@ import {
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
 import {
-  faBars,
-  faCheck,
-  faHome,
-  faPencilAlt,
-  faPlus,
-  faSignInAlt,
   faSignOutAlt,
   faSpinner,
   faTachometerAlt,
-  faTimes,
-  faTrashAlt,
-  faUserCircle,
-  faUserPlus,
   faWeight,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -26,21 +16,6 @@ import {
 })
 export class IconsModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(
-      faBars,
-      faCheck,
-      faHome,
-      faPencilAlt,
-      faPlus,
-      faSignInAlt,
-      faSignOutAlt,
-      faSpinner,
-      faTachometerAlt,
-      faTimes,
-      faTrashAlt,
-      faUserCircle,
-      faUserPlus,
-      faWeight
-    );
+    library.addIcons(faSignOutAlt, faSpinner, faTachometerAlt, faWeight);
   }
 }

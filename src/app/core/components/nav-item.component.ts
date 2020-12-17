@@ -10,7 +10,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       [routerLinkActiveOptions]="{ exact: true }"
       (click)="navigate.emit()"
     >
-      <fa-icon [icon]="['fas', icon]" mat-list-icon></fa-icon>
+      <mat-icon mat-list-icon *ngIf="!!matIcon">{{ matIcon }}</mat-icon>
+      <fa-icon
+        [icon]="['fas', fasIcon]"
+        mat-list-icon
+        *ngIf="!!fasIcon"
+      ></fa-icon>
       <span mat-line><ng-content></ng-content></span>
       <span mat-line class="secondary">{{ hint }}</span>
     </a>
@@ -30,7 +35,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class NavItemComponent {
   @Input() hint = '';
-  @Input() icon = '';
+  @Input() fasIcon = '';
+  @Input() matIcon = '';
   @Input() routerLink: string;
   @Output() navigate = new EventEmitter();
 }
