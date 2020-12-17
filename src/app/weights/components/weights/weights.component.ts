@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
 import * as moment from 'moment';
-import { Pagination, Weight } from '../../../shared/models';
+import { DialogConfig, Pagination, Weight } from '../../../shared/models';
+import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 import { PaginationService } from '../../../shared/services/pagination.service';
-import { DialogConfig } from '../../models';
-import { ConfirmationDialogService } from '../../services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-weights',
@@ -13,12 +13,16 @@ import { ConfirmationDialogService } from '../../services/confirmation-dialog.se
 })
 export class WeightsComponent {
   columnDefinitions = [
-    { columnDef: 'id', showMobile: false },
     { columnDef: 'date', showMobile: true },
     { columnDef: 'value', showMobile: true },
     { columnDef: 'range', showMobile: false },
     { columnDef: 'actions', showMobile: true },
   ];
+
+  sort: Sort = {
+    active: 'date',
+    direction: 'desc',
+  };
 
   @Input() isHandset: boolean;
   @Input() pagination: Pagination;

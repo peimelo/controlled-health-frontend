@@ -6,18 +6,17 @@
       <fa-icon [icon]="['fas', 'plus']" size="lg"></fa-icon>
     </button>
 
-    <mat-table [dataSource]="weights | slice: initialRange:finalRange">
-      <!-- Date Column -->
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          {{ element.id }}
-        </mat-cell>
-      </ng-container>
-
+    <mat-table
+      [dataSource]="weights | slice: initialRange:finalRange"
+      matSort
+      [matSortActive]="this.sort.active"
+      [matSortDirection]="this.sort.direction"
+    >
       <!-- Date Column -->
       <ng-container matColumnDef="date">
-        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header disabled>
+          Date
+        </mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{ element.date | formatDatetimeUtc: "DD/MM/YYYY HH:mm" }}
         </mat-cell>
