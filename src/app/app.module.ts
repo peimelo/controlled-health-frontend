@@ -1,4 +1,5 @@
 import { registerLocaleData } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,6 +28,7 @@ const maskConfig: Partial<IConfig> = {
     // Angular
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
     // @ngrx
     StoreModule.forRoot(ROOT_REDUCERS, {

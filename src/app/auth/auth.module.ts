@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
@@ -19,9 +18,7 @@ import { AuthService } from './services/auth.service';
   declarations: [...fromContainers.containers, ...fromComponents.components],
   imports: [
     // Angular
-    CommonModule,
     FormsModule,
-    HttpClientModule,
     ReactiveFormsModule,
 
     // @ngrx

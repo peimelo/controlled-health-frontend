@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
@@ -20,7 +19,6 @@ import { WeightsRoutingModule } from './weights-routing.module';
 @NgModule({
   imports: [
     // Angular
-    CommonModule,
     ReactiveFormsModule,
 
     // @ngrx

@@ -11,12 +11,16 @@ import { PaginationService } from './services/pagination.service';
   declarations: [ConfirmationDialogComponent],
   imports: [CommonModule, FlexLayoutModule, IconsModule, MaterialModule],
   exports: [
-    ConfirmationDialogComponent,
+    // Angular
+    CommonModule,
 
     // third-party
     FlexLayoutModule,
     IconsModule,
     MaterialModule,
+
+    // app
+    ConfirmationDialogComponent,
   ],
   providers: [ConfirmationDialogService, PaginationService],
 })
