@@ -42,7 +42,7 @@ Open the browser at the address `http://localhost:4200`.
 
 ## Tests
 
-[![CircleCI](https://circleci.com/gh/peimelo/saudecontrolada-frontend.svg?style=svg)](https://circleci.com/gh/peimelo/saudecontrolada-frontend)
+[![CircleCI](https://circleci.com/gh/peimelo/controlled-health-frontend.svg?style=svg)](https://circleci.com/gh/peimelo/controlled-health-frontend)
 
 To run the tests:
 
@@ -56,4 +56,4 @@ npm run test
 
 ## Deploy
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0758d55a-22df-40bf-ab41-3c0c3cf2397c/deploy-status)](https://app.netlify.com/sites/saudecontrolada/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7df675ef-b29a-403a-97a3-5e90f4ad8f4e/deploy-status)](https://app.netlify.com/sites/controlled-health/deploys)
