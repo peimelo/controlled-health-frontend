@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -24,7 +23,6 @@ export const COMPONENTS = [
 @NgModule({
   imports: [
     // Angular
-    CommonModule,
     RouterModule,
 
     // app

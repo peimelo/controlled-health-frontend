@@ -47,6 +47,9 @@ export class WeightsEffects {
           mergeMap((response) => [
             WeightsApiActions.createWeightSuccess({ weight: response }),
             WeightsActions.weightFormDialogDismiss(),
+            MessageApiActions.successMessage({
+              message: 'Record successfully created.',
+            }),
           ]),
           catchError((error) => {
             const message = this.errorService.getMessage(error);
@@ -67,6 +70,9 @@ export class WeightsEffects {
             WeightsApiActions.deleteWeightSuccess({ id: action.id }),
             WeightsActions.reloadWeights({
               pageIndex: pagination.currentPage,
+            }),
+            MessageApiActions.successMessage({
+              message: 'Record successfully deleted.',
             }),
           ]),
           catchError((error) => {
@@ -123,6 +129,9 @@ export class WeightsEffects {
               pageIndex: pagination.currentPage,
             }),
             WeightsActions.weightFormDialogDismiss(),
+            MessageApiActions.successMessage({
+              message: 'Record successfully updated.',
+            }),
           ]),
           catchError((error) => {
             const message = this.errorService.getMessage(error);
