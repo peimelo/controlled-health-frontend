@@ -1,56 +1,56 @@
-# Saúde Controlada Frontend
+# Controlled Health Frontend
 
-Frontend do site Saúde Controlada construído com [Angular](https://angular.io).
+Frontend of the Controlled Health website built with [Angular](https://angular.io).
 
 <table>
   <tr>
     <td>Angular</td>
     <td>
-      10.0.4
+      10.2.3
     </td>
   </tr>
   <tr>
     <td>Material</td>
     <td>
-      10.0.2
+      10.2.7
     </td>
   </tr>
   <tr>
     <td>NgRx</td>
     <td>
-      10.0.0
+      10.1.1
     </td>
   </tr>
 </table>
 
-O backend desse repositório foi construído com Ruby on Rails e se chama [saudecontrolada_api](https://github.com/peimelo/saudecontrolada_api).
+The backend of this repository was built with Ruby on Rails and is called [controlled_health_api](https://github.com/peimelo/controlled_health_api).
 
-## Configuração
+## Configuration
 
 ```bash
-git clone https://github.com/peimelo/saudecontrolada-frontend.git
-cd saudecontrolada-frontend
+git clone https://github.com/peimelo/controlled-health-frontend.git
+cd controlled-health-frontend
 
-# instalação das dependências
+# installation of dependencies
 npm install
 
-# rodar o projeto
+# run the project
 ng serve
 ```
 
-Abra o navegador no endereço `http://localhost:4200`.
+Open the browser at the address `http://localhost:4200`.
 
-## Testes
+## Tests
 
 [![CircleCI](https://circleci.com/gh/peimelo/saudecontrolada-frontend.svg?style=svg)](https://circleci.com/gh/peimelo/saudecontrolada-frontend)
 
-Para rodar os testes:
+To run the tests:
 
 ```bash
 npm run test
 ```
 
-## Qualidade do Código
+## Quality of the Code
 
 [![DeepScan grade](https://deepscan.io/api/teams/11362/projects/14269/branches/261102/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11362&pid=14269&bid=261102)
 

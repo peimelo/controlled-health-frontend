@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "saudecontrolada-frontend": {
+    "controlled-health-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/saudecontrolada-frontend",
+            "outputPath": "dist/controlled-health-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,19 +72,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "saudecontrolada-frontend:build",
+            "browserTarget": "controlled-health-frontend:build",
             "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "saudecontrolada-frontend:build:production"
+              "browserTarget": "controlled-health-frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "saudecontrolada-frontend:build"
+            "browserTarget": "controlled-health-frontend:build"
           }
         },
         "test": {
@@ -117,16 +117,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "saudecontrolada-frontend:serve"
+            "devServerTarget": "controlled-health-frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "saudecontrolada-frontend:serve:production"
+              "devServerTarget": "controlled-health-frontend:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "saudecontrolada-frontend"
+  "defaultProject": "controlled-health-frontend"
 }
