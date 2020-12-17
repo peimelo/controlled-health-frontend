@@ -65,7 +65,7 @@ export class WeightsEffects {
         this.weightsService.delete(action.id).pipe(
           mergeMap(() => [
             WeightsApiActions.deleteWeightSuccess({ id: action.id }),
-            WeightsPageActions.loadWeights({
+            WeightsActions.reloadWeights({
               pageIndex: pagination.currentPage,
             }),
           ]),
@@ -93,7 +93,11 @@ export class WeightsEffects {
 
   loadWeights$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(WeightsActions.loadWeights, WeightsPageActions.changePageWeights),
+      ofType(
+        WeightsActions.loadWeights,
+        WeightsActions.reloadWeights,
+        WeightsPageActions.changePageWeights
+      ),
       exhaustMap(({ pageIndex }) =>
         this.weightsService.getAll(pageIndex).pipe(
           map((weightResponse) =>
@@ -115,7 +119,7 @@ export class WeightsEffects {
             WeightsApiActions.updateWeightSuccess({
               update: { id: weightResponse.id, changes: weightResponse },
             }),
-            WeightsPageActions.loadWeights({
+            WeightsActions.reloadWeights({
               pageIndex: pagination.currentPage,
             }),
             WeightsActions.weightFormDialogDismiss(),

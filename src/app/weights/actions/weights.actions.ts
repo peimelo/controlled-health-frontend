@@ -5,6 +5,11 @@ export const loadWeights = createAction(
   props<{ pageIndex: number }>()
 );
 
+export const reloadWeights = createAction(
+  '[Weights Effects] Reload Weights',
+  props<{ pageIndex: number }>()
+);
+
 export const weightFormDialogDismiss = createAction(
   '[Weights] Weight Form Dialog Dismiss'
 );
