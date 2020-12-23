@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseResourceModel } from '../models';
@@ -14,13 +14,13 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     return this.http.post<T>(this.apiPath, resource);
   }
 
-  getAll(pageIndex: number): Observable<T> {
-    const httpParams = new HttpParams().set('page', pageIndex.toString());
+  // getAll(pageIndex: number): Observable<T> {
+  //   const httpParams = new HttpParams().set('page', pageIndex.toString());
 
-    return this.http.get<T>(this.apiPath, {
-      params: httpParams,
-    });
-  }
+  //   return this.http.get<T>(this.apiPath, {
+  //     params: httpParams,
+  //   });
+  // }
 
   update(resource: T): Observable<T> {
     return this.http.put<T>(`${this.apiPath}/${resource.id}`, resource);
