@@ -1,0 +1,9 @@
+<app-heights
+  [isHandset]="isHandset$ | async"
+  [pagination]="pagination$ | async"
+  [heights]="heights$ | async"
+  (add)="onAdd()"
+  (changePage)="onChangePage($event)"
+  (delete)="onDelete($event)"
+  (edit)="onEdit($event)"
+></app-heights>

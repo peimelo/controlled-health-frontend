@@ -10,6 +10,7 @@ export interface State {
 
 export const initialState: State = {
   dashboard: {
+    heights: [],
     weights: [],
   },
 };

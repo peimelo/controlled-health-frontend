@@ -15,6 +15,11 @@ const routes: Routes = [
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
+    path: 'heights',
+    loadChildren: () =>
+      import('./heights/heights.module').then((m) => m.HeightsModule),
+  },
+  {
     path: 'weights',
     loadChildren: () =>
       import('./weights/weights.module').then((m) => m.WeightsModule),

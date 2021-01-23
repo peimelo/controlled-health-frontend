@@ -10,7 +10,6 @@ import { WeightFormDialogPageComponent } from './containers/weight-form-dialog-p
 import { WeightsPageComponent } from './containers/weights-page/weights-page.component';
 import { WeightsEffects } from './effects';
 import { WeightsGuard } from './guards/weights.guard';
-import { FormatDatetimeUtcPipe } from './pipes/format-datetime-utc.pipe';
 import * as fromWeight from './reducers';
 import { WeightsFacadeService } from './services/weights-facade.service';
 import { WeightsService } from './services/weights.service';
@@ -33,7 +32,6 @@ import { WeightsRoutingModule } from './weights-routing.module';
     SharedModule,
   ],
   declarations: [
-    FormatDatetimeUtcPipe,
     WeightsPageComponent,
     WeightsComponent,
     WeightFormDialogComponent,

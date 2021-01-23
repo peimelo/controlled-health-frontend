@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Height, Weight } from '../../../shared/models';
 import { Dashboard } from '../../models';
 
 @Component({
@@ -17,29 +18,37 @@ export class DashboardComponent {
   showXAxisLabel = true;
 
   yAxis = true;
-  yAxisLabel = 'Weight';
   showYAxisLabel = true;
 
+  @Input() title = '';
   @Input() dashboard!: Dashboard;
+  @Input() data!: Height[] | Weight[];
 
   get result() {
-    if (!this.dashboard) {
+    if (!this.data) {
       return [];
     }
 
     const series = [];
-    for (let i = this.dashboard.weights.length - 1; i >= 0; i--) {
+    for (let i = this.data.length - 1; i >= 0; i--) {
       series.push({
-        value: this.dashboard.weights[i].value,
-        name: new Date(this.dashboard.weights[i].date),
-        min: this.dashboard.weights[i].min,
-        max: this.dashboard.weights[i].max,
+        value: this.data[i].value,
+        name: new Date(this.data[i].date),
+        min: this.data[i].min ? this.data[i].min : 0,
+        max: this.data[i].max ? this.data[i].max : 0,
+      });
+    }
+
+    if (!series[0].min) {
+      series.forEach(function (v) {
+        delete v.min;
+        delete v.max;
       });
     }
 
     return [
       {
-        name: 'Weights',
+        name: this.title,
         series,
       },
     ];
