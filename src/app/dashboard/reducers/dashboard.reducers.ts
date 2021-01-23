@@ -5,11 +5,13 @@ import { Dashboard } from '../models';
 export const statusFeatureKey = 'status';
 
 export interface State {
-  dashboard: Dashboard | null;
+  dashboard: Dashboard;
 }
 
 export const initialState: State = {
-  dashboard: null,
+  dashboard: {
+    weights: [],
+  },
 };
 
 export const reducer = createReducer(

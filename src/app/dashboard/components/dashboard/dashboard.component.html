@@ -1,52 +1,21 @@
-<div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
+<mat-card class="dashboard-card">
+  <mat-card-header>
+    <mat-card-title> Weights </mat-card-title>
+  </mat-card-header>
 
-  <mat-grid-list cols="2" rowHeight="750px">
-    <mat-grid-tile [colspan]="2" [rowspan]="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Weight
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div fxLayout>
-            <!-- [yAxisLabel]="yAxisLabel" -->
-            <!-- [yAxis]="showYAxis" -->
-            <ngx-charts-line-chart
-              fxFlex
-              [view]="view"
-              class="chart-container"
-              [schemeType]="schemeType"
-              [results]="dateDataWithOrWithoutRange"
-              [animations]="animations"
-              [legend]="showLegend"
-              [legendTitle]="legendTitle"
-              [legendPosition]="legendPosition"
-              [gradient]="gradient"
-              [xAxis]="showXAxis"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-              [xAxisLabel]="xAxisLabel"
-              [autoScale]="autoScale"
-              [xScaleMin]="xScaleMin"
-              [xScaleMax]="xScaleMax"
-              [yScaleMin]="yScaleMin"
-              [yScaleMax]="yScaleMax"
-              [timeline]="timeline"
-              [showGridLines]="showGridLines"
-              [curve]="curve"
-              [rangeFillOpacity]="rangeFillOpacity"
-              [roundDomains]="roundDomains"
-              [tooltipDisabled]="tooltipDisabled"
-              [trimXAxisTicks]="trimXAxisTicks"
-              [trimYAxisTicks]="trimYAxisTicks"
-              [maxXAxisTickLength]="maxXAxisTickLength"
-              [maxYAxisTickLength]="maxYAxisTickLength">
-            </ngx-charts-line-chart>    
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
+  <mat-card-content class="dashboard-card-content">
+    <ngx-charts-line-chart
+      [autoScale]="autoScale"
+      [results]="result"
+      [scheme]="colorScheme"
+      [timeline]="timeline"
+      [xAxis]="xAxis"
+      [xAxisLabel]="xAxisLabel"
+      [showXAxisLabel]="showXAxisLabel"
+      [yAxis]="yAxis"
+      [yAxisLabel]="yAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+    >
+    </ngx-charts-line-chart>
+  </mat-card-content>
+</mat-card>
