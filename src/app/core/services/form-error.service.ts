@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { FormGroup, ValidationErrors } from '@angular/forms';
 
 @Injectable()
 export class FormErrorService {
   errorMap: {
     [key: string]: (errors: ValidationErrors, name: string) => string;
   } = {
-    confirmedValidator: (c: FormControl, name: string) =>
+    confirmedValidator: (errors: ValidationErrors, name: string) =>
       `${name} must be match.`,
-    email: (c: FormControl, name: string) => 'Must be a valid email address.',
+    email: (errors: ValidationErrors, name: string) =>
+      'Must be a valid email address.',
     minlength: (errors: ValidationErrors, name: string) =>
       `Must be at least ${errors.minlength.requiredLength} characters.`,
-    required: (c: FormControl, name: string) => 'Field is required.',
+    required: (errors: ValidationErrors, name: string) => 'Field is required.',
   };
 
-  mapErrors(errors: ValidationErrors, name?: string): string[] {
+  mapErrors(errors: ValidationErrors, name: string): string[] {
     return Object.keys(errors || {}).map((key) =>
       this.errorMap[key](errors, name)
     );
