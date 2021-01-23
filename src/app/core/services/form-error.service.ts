@@ -15,7 +15,7 @@ export class FormErrorService {
     required: (errors: ValidationErrors, name: string) => 'Field is required.',
   };
 
-  mapErrors(errors: ValidationErrors, name: string): string[] {
+  mapErrors(errors: ValidationErrors, name = ''): string[] {
     return Object.keys(errors || {}).map((key) =>
       this.errorMap[key](errors, name)
     );
