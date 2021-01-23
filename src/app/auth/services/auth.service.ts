@@ -73,7 +73,16 @@ export class AuthService {
           this.setInLocalStorage('client', resp.headers.get('client'));
           this.setInLocalStorage('uid', resp.headers.get('uid'));
         }),
-        map((resp) => ({ email: 'pualo.', name: 'palo' }))
+        map((resp) => {
+          if (resp && resp.body && resp.body.data) {
+            return { ...resp.body.data };
+          }
+
+          return {
+            email: '',
+            name: '',
+          };
+        })
       );
   }
 

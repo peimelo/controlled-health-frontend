@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-// import { User } from '../../../auth/models';
+import { User } from '../../../auth/models';
 
 @Component({
   selector: 'app-toolbar',
@@ -15,7 +15,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ToolbarComponent {
   @Input() isSpinnerLoading!: boolean;
   @Input() loggedIn!: boolean;
-  @Input() user: any;
+  @Input() user!: User;
 
   @Output() logout = new EventEmitter();
   @Output() openMenu = new EventEmitter();
