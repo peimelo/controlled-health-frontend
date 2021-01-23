@@ -19,7 +19,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getValueFromLocalStorage(key: string): string {
+  getValueFromLocalStorage(key: string): string | null {
     return localStorage.getItem(key);
   }
 
@@ -66,15 +66,21 @@ export class AuthService {
       })
       .pipe(
         tap((resp) => {
-          localStorage.setItem(
+          this.setInLocalStorage(
             'access-token',
             resp.headers.get('access-token')
           );
-          localStorage.setItem('client', resp.headers.get('client'));
-          localStorage.setItem('uid', resp.headers.get('uid'));
+          this.setInLocalStorage('client', resp.headers.get('client'));
+          this.setInLocalStorage('uid', resp.headers.get('uid'));
         }),
-        map((resp) => ({ ...resp.body.data }))
+        map((resp) => ({ email: 'pualo.', name: 'palo' }))
       );
+  }
+
+  private setInLocalStorage(key: string, token: string | null) {
+    if (token) {
+      localStorage.setItem(key, token);
+    }
   }
 
   logout(): Observable<any> {

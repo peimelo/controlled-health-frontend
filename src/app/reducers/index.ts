@@ -44,7 +44,7 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 export function clearState(
   reducer: ActionReducer<State>
 ): ActionReducer<State> {
-  return function (state: State, action: any): State {
+  return function (state: State | undefined, action: any): State {
     if (action.type === AuthActions.logout.type) {
       state = undefined;
     }

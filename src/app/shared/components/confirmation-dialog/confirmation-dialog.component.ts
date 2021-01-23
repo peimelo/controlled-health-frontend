@@ -8,8 +8,8 @@ import { DialogConfig } from '../../models';
   templateUrl: 'confirmation-dialog.component.html',
 })
 export class ConfirmationDialogComponent {
-  cancelText = '';
-  confirmText = '';
+  cancelText: string | undefined = '';
+  confirmText: string | undefined = '';
   content = '';
   title = '';
 

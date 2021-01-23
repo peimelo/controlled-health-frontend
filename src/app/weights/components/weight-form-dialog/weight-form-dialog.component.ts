@@ -29,12 +29,12 @@ export class WeightFormDialogComponent implements OnChanges, OnInit {
   });
   isNotFilledWeight = true;
   isEditing = false;
-  originalWeight: Weight;
+  originalWeight!: Weight;
 
-  @Input() error: Observable<any>;
-  @Input() isLoading: boolean;
-  @Input() user: User;
-  @Input() weight: Weight;
+  @Input() error!: Observable<any>;
+  @Input() isLoading!: boolean;
+  @Input() user!: User;
+  @Input() weight!: Weight;
 
   @Output() private create = new EventEmitter<Weight>();
   @Output() private update = new EventEmitter<Weight>();
@@ -83,17 +83,17 @@ export class WeightFormDialogComponent implements OnChanges, OnInit {
   }
 
   getErrorDate(): string {
-    return this.form.get('date').hasError('required')
+    return this.form.get('date')?.hasError('required')
       ? 'Field is required'
       : '';
   }
 
   getErrorValue(): string {
-    return this.form.get('value').hasError('required')
+    return this.form.get('value')?.hasError('required')
       ? 'Field is required'
-      : this.form.get('value').hasError('min')
+      : this.form.get('value')?.hasError('min')
       ? 'Must be >= 3,35'
-      : this.form.get('value').hasError('max')
+      : this.form.get('value')?.hasError('max')
       ? 'Must be <= 400'
       : '';
   }

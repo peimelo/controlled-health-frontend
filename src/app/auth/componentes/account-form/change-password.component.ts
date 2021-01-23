@@ -8,13 +8,9 @@ import { PasswordCombination } from '../../models';
   template: `
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Change Password
-        </mat-panel-title>
+        <mat-panel-title> Change Password </mat-panel-title>
 
-        <mat-panel-description>
-          Type your new password
-        </mat-panel-description>
+        <mat-panel-description> Type your new password </mat-panel-description>
       </mat-expansion-panel-header>
 
       <form [formGroup]="form">
@@ -30,7 +26,7 @@ import { PasswordCombination } from '../../models';
           <mat-error
             *ngFor="
               let error of formErrorService.mapErrors(
-                form.get('currentPassword').errors
+                form.get('currentPassword')?.errors
               )
             "
           >
@@ -50,7 +46,7 @@ import { PasswordCombination } from '../../models';
           <mat-error
             *ngFor="
               let error of formErrorService.mapErrors(
-                form.get('password').errors
+                form.get('password')?.errors
               )
             "
           >
@@ -70,7 +66,7 @@ import { PasswordCombination } from '../../models';
           <mat-error
             *ngFor="
               let error of formErrorService.mapErrors(
-                form.get('passwordConfirmation').errors,
+                form.get('passwordConfirmation')?.errors,
                 'Password and Password confirmation'
               )
             "

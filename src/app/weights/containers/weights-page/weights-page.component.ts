@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Observable } from 'rxjs';
 import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
 import { Weight } from '../../../shared/models';
 import { WeightsFacadeService } from '../../services/weights-facade.service';
@@ -12,12 +13,14 @@ import { WeightsFacadeService } from '../../services/weights-facade.service';
 export class WeightsPageComponent {
   isHandset$ = this.layoutFacadeService.isHandset$;
   pagination$ = this.weightsFacadeService.pagination$;
-  weights$ = this.weightsFacadeService.weights$;
+  weights$: Observable<Weight[]>;
 
   constructor(
     private layoutFacadeService: LayoutFacadeService,
     private weightsFacadeService: WeightsFacadeService
-  ) {}
+  ) {
+    this.weights$ = this.weightsFacadeService.weights$;
+  }
 
   onAdd(): void {
     this.weightsFacadeService.addWeight();

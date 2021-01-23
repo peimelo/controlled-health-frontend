@@ -24,9 +24,9 @@ export class WeightsComponent {
     direction: 'desc',
   };
 
-  @Input() isHandset: boolean;
-  @Input() pagination: Pagination;
-  @Input() weights: Weight[];
+  @Input() isHandset!: boolean;
+  @Input() pagination!: Pagination;
+  @Input() weights!: Weight[];
 
   @Output() private changePage = new EventEmitter<PageEvent>();
   @Output() private add = new EventEmitter();

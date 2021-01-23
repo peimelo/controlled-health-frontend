@@ -13,8 +13,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   ],
 })
 export class ToolbarComponent {
-  @Input() isSpinnerLoading: boolean;
-  @Input() loggedIn: boolean;
+  @Input() isSpinnerLoading!: boolean;
+  @Input() loggedIn!: boolean;
   @Input() user: any;
 
   @Output() logout = new EventEmitter();

@@ -52,7 +52,7 @@ export class PersonalDataComponent implements OnInit {
     }
   }
 
-  @Input() user: User;
+  @Input() user!: User;
 
   @Output() update = new EventEmitter<string>();
 
@@ -69,6 +69,6 @@ export class PersonalDataComponent implements OnInit {
   }
 
   onUpdate(): void {
-    this.update.emit(this.form.get('name').value);
+    this.update.emit(this.form.get('name')?.value);
   }
 }

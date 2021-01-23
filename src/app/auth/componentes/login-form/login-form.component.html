@@ -14,7 +14,7 @@
           />
           <mat-error
             *ngFor="
-              let error of formErrorService.mapErrors(form.get('email').errors)
+              let error of formErrorService.mapErrors(form.get('email')?.errors)
             "
           >
             {{ error }}
@@ -34,7 +34,7 @@
           <mat-error
             *ngFor="
               let error of formErrorService.mapErrors(
-                form.get('password').errors
+                form.get('password')?.errors
               )
             "
           >
@@ -44,9 +44,7 @@
       </p>
 
       <p class="submitButton">
-        <button color="primary" mat-raised-button type="submit">
-          Login
-        </button>
+        <button color="primary" mat-raised-button type="submit">Login</button>
       </p>
 
       <p>

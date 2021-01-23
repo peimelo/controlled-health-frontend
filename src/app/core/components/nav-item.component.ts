@@ -37,6 +37,6 @@ export class NavItemComponent {
   @Input() hint = '';
   @Input() fasIcon = '';
   @Input() matIcon = '';
-  @Input() routerLink: string;
+  @Input() routerLink!: string;
   @Output() navigate = new EventEmitter();
 }

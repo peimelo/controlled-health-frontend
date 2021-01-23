@@ -30,7 +30,7 @@ export class ResendConfirmationFormComponent {
 
   submit(): void {
     if (this.form.valid) {
-      this.submitted.emit(this.form.get('email').value);
+      this.submitted.emit(this.form.get('email')?.value);
     }
   }
 }
