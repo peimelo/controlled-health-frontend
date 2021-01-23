@@ -34,8 +34,8 @@
       <ng-container matColumnDef="range">
         <mat-header-cell *matHeaderCellDef> Range (kg)</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{ element.minimum | number: "0.2-2" }} -
-          {{ element.maximum | number: "0.2-2" }}
+          {{ element.min | number: "0.2-2" }} ~
+          {{ element.max | number: "0.2-2" }}
         </mat-cell>
       </ng-container>
 

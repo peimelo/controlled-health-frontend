@@ -33,8 +33,8 @@ export class DashboardComponent {
       series.push({
         value: this.dashboard.weights[i].value,
         name: new Date(this.dashboard.weights[i].date),
-        min: 59.91,
-        max: 80.97,
+        min: this.dashboard.weights[i].min,
+        max: this.dashboard.weights[i].max,
       });
     }
 
