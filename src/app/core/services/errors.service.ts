@@ -8,7 +8,7 @@ export class ErrorsService {
       console.log(error);
     }
 
-    let message = error.message;
+    let message = error && error.message;
 
     if (error && error.error && error.error.errors) {
       if (error.error.errors.full_messages) {
