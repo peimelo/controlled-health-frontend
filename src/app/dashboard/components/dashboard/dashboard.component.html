@@ -5,15 +5,13 @@
 
   <mat-card-content class="dashboard-card-content">
     <ngx-charts-line-chart
-      [autoScale]="autoScale"
+      autoScale="true"
       [results]="result"
       [scheme]="colorScheme"
-      [xAxis]="xAxis"
-      [xAxisLabel]="xAxisLabel"
-      [showXAxisLabel]="showXAxisLabel"
-      [yAxis]="yAxis"
-      [yAxisLabel]="title"
-      [showYAxisLabel]="showYAxisLabel"
+      xAxis="true"
+      [xAxisLabel]="'Date'"
+      showXAxisLabel="true"
+      yAxis="true"
     >
     </ngx-charts-line-chart>
   </mat-card-content>

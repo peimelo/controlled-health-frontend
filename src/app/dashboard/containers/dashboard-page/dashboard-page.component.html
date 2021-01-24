@@ -4,7 +4,6 @@
   <mat-grid-list cols="2" rowHeight="500px">
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <app-dashboard
-        [dashboard]="dashboard$ | async"
         [data]="(dashboard$ | async).weights"
         [title]="'Weights'"
       ></app-dashboard>
@@ -12,7 +11,6 @@
 
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <app-dashboard
-        [dashboard]="dashboard$ | async"
         [data]="(dashboard$ | async).heights"
         [title]="'Heights'"
       ></app-dashboard>
