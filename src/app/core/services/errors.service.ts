@@ -8,9 +8,9 @@ export class ErrorsService {
       console.log(error);
     }
 
-    let message = error && error.message;
+    let message = error.message;
 
-    if (error && error.error && error.error.errors) {
+    if (error.error && error.error.errors) {
       if (error.error.errors.full_messages) {
         message = error.error.errors.full_messages[0];
       } else {
