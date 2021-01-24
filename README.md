@@ -23,7 +23,7 @@ Frontend of the Controlled Health website built with [Angular](https://angular.i
   </tr>
 </table>
 
-The backend of this repository was built with Ruby on Rails and is called [saudecontrolada_api](https://github.com/peimelo/saudecontrolada_api).
+The backend of this repository was built with Ruby on Rails 6 and is called [controlled_health_api](https://github.com/peimelo/controlled_health_api).
 
 ## Configuration
 
