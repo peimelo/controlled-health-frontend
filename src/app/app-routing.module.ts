@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePageComponent } from './core/containers/home-page.component';
+import { HomePageComponent } from './core/containers/home/home-page.component';
 import { NotFoundPageComponent } from './core/containers/not-found-page.component';
 
 const routes: Routes = [
@@ -27,7 +27,7 @@ const routes: Routes = [
   {
     path: '**',
     component: NotFoundPageComponent,
-    data: { title: 'Not found' },
+    data: { title: 'Page Not found' },
   },
 ];
 

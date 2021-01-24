@@ -6,7 +6,7 @@ import { MessageComponent } from './components/message/message.component';
 import { NavItemComponent } from './components/nav-item.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { AppComponent } from './containers/app/app.component';
-import { HomePageComponent } from './containers/home-page.component';
+import { HomePageComponent } from './containers/home/home-page.component';
 import { NotFoundPageComponent } from './containers/not-found-page.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import * as fromServices from './services';
