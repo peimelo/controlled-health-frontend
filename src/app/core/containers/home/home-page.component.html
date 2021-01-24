@@ -86,7 +86,7 @@
 
   <h1 class="mat-h1">Functionalities</h1>
 
-  <mat-grid-list [cols]="cols === 4 ? 2 : 1" rowHeight="250px">
+  <mat-grid-list [cols]="cols === 4 ? 2 : 1" rowHeight="400px">
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-card class="dashboard-card">
         <mat-card-header>
@@ -95,6 +95,8 @@
           </div>
           <mat-card-title> Weight Control </mat-card-title>
         </mat-card-header>
+
+        <img mat-card-image src="assets/weight.png" alt="Weight" />
 
         <mat-card-content class="dashboard-card-content">
           Control the evolution of your weight.
@@ -110,6 +112,8 @@
           </div>
           <mat-card-title> Height Control </mat-card-title>
         </mat-card-header>
+
+        <img mat-card-image src="assets/height.png" alt="Height" />
 
         <mat-card-content class="dashboard-card-content">
           Control the evolution of your height.
