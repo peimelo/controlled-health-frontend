@@ -39,7 +39,7 @@ export class DashboardComponent {
       });
     }
 
-    if (!series[0].min) {
+    if (series.length && series[0].min === 0) {
       series.forEach(function (v) {
         delete v.min;
         delete v.max;

@@ -33,11 +33,11 @@
   </a>
 
   <button
+    *ngIf="loggedIn"
     mat-icon-button
     [matMenuTriggerFor]="menu"
     matTooltip="{{ !!user.name ? user.name : user.email }}"
-    [matTooltipPosition]="'right'"
-    *ngIf="loggedIn"
+    [matTooltipPosition]="'left'"
   >
     <mat-icon>account_circle</mat-icon>
   </button>
