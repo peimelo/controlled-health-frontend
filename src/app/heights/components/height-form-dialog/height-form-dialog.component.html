@@ -9,16 +9,10 @@
     novalidate
   >
     <mat-form-field fxFlex>
-      <input
-        [dropSpecialCharacters]="false"
-        [showMaskTyped]="true"
-        formControlName="date"
-        mask="d0/M0/0000"
-        matInput
-        placeholder="Date"
-        required
-        type="text"
-      />
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
       <mat-error
         *ngIf="!form.controls['date'].valid && form.controls['date'].touched"
       >

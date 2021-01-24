@@ -22,6 +22,7 @@ import { Weight } from '../../../shared/models';
 export class WeightFormDialogComponent implements OnChanges, OnInit {
   form = this.fb.group({
     date: ['', Validators.required],
+    time: ['', Validators.required],
     value: [
       '',
       [Validators.max(400), Validators.min(3.35), Validators.required],
@@ -68,13 +69,15 @@ export class WeightFormDialogComponent implements OnChanges, OnInit {
       }
 
       this.form.patchValue({
-        date: moment.utc(this.weight.date).format('DD/MM/YYYY HH:mm'),
+        date: moment.utc(this.weight.date),
+        time: moment.utc(this.weight.date).format('HH:mm'),
         value: formatNumber(this.weight.value, 'pt', '0.2-2'),
       });
     } else {
       if (this.isNotFilledWeight) {
         this.form.patchValue({
-          date: moment().format('DD/MM/YYYY HH:mm'),
+          date: moment(),
+          time: moment().format('HH:mm'),
         });
 
         this.isNotFilledWeight = false;
@@ -102,9 +105,11 @@ export class WeightFormDialogComponent implements OnChanges, OnInit {
     const { valid, value } = form;
 
     if (valid) {
+      const date = moment(value.date).format('YYYY-MM-DD');
+
       const weight = {
         ...this.weight,
-        date: value.date,
+        date: moment(`${date} ${value.time}`).format('YYYY-MM-DD HH:mm'),
         value: value.value,
       };
 
@@ -116,9 +121,11 @@ export class WeightFormDialogComponent implements OnChanges, OnInit {
     const { valid, value } = form;
 
     if (valid) {
+      const date = moment(value.date).format('YYYY-MM-DD');
+
       const weight = {
         ...this.weight,
-        date: value.date,
+        date: moment(`${date} ${value.time}`).format('YYYY-MM-DD HH:mm'),
         value: this.convertToFloat(this.originalWeight.value, value.value),
       };
 

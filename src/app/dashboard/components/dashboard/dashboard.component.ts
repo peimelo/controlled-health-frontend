@@ -17,7 +17,7 @@ export class DashboardComponent {
   };
 
   @Input() title = '';
-  @Input() data!: any;
+  @Input() data!: any[];
 
   get result() {
     if (!this.data) {

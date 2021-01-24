@@ -68,13 +68,13 @@ export class HeightFormDialogComponent implements OnChanges, OnInit {
       }
 
       this.form.patchValue({
-        date: moment.utc(this.height.date).format('DD/MM/YYYY HH:mm'),
+        date: moment.utc(this.height.date),
         value: formatNumber(this.height.value, 'pt', '0.2-2'),
       });
     } else {
       if (this.isNotFilledHeight) {
         this.form.patchValue({
-          date: moment().format('DD/MM/YYYY HH:mm'),
+          date: moment(),
         });
 
         this.isNotFilledHeight = false;
@@ -100,11 +100,12 @@ export class HeightFormDialogComponent implements OnChanges, OnInit {
 
   onCreate(form: FormGroup): void {
     const { valid, value } = form;
+    console.log(value.date);
 
     if (valid) {
       const height = {
         ...this.height,
-        date: value.date,
+        date: moment(value.date).format('YYYY-MM-DD'),
         value: value.value,
       };
 
@@ -118,7 +119,7 @@ export class HeightFormDialogComponent implements OnChanges, OnInit {
     if (valid) {
       const height = {
         ...this.height,
-        date: value.date,
+        date: moment(value.date).format('YYYY-MM-DD'),
         value: this.convertToFloat(this.originalHeight.value, value.value),
       };
 

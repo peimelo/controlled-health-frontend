@@ -5,6 +5,7 @@
 
   <mat-card-content class="dashboard-card-content">
     <ngx-charts-line-chart
+      *ngIf="data.length > 1; else noData"
       autoScale="true"
       [results]="result"
       [scheme]="colorScheme"
@@ -14,5 +15,11 @@
       yAxis="true"
     >
     </ngx-charts-line-chart>
+
+    <ng-template #noData>
+      <h2 class="mat-h2">
+        Register at least 2 records to see the graph.
+      </h2></ng-template
+    >
   </mat-card-content>
 </mat-card>
