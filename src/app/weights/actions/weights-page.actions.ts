@@ -17,3 +17,5 @@ export const editWeight = createAction(
   '[Weights Page] Edit Weight',
   props<{ weight: Weight }>()
 );
+
+export const loadWeights = createAction('[Weights Page] Load Weights');

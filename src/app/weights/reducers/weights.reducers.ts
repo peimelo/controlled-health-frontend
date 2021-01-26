@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { Pagination, Weight } from '../../shared/models';
-import { WeightsApiActions } from '../actions';
+import { WeightsApiActions, WeightsPageActions } from '../actions';
 
 export const weightsFeatureKey = 'weights';
 
@@ -21,7 +21,7 @@ export function sortByDateDesc(a: Weight, b: Weight): number {
 export const initialState: State = adapter.getInitialState({
   listLoaded: false,
   pagination: {
-    currentPage: 0,
+    currentPage: 1,
     itemsPerPage: 0,
     totalItems: 0,
   },
@@ -31,6 +31,14 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
+
+  on(WeightsPageActions.changePageWeights, (state, { pageIndex }) => ({
+    ...state,
+    pagination: {
+      ...state.pagination,
+      currentPage: pageIndex,
+    },
+  })),
 
   on(WeightsApiActions.createWeightSuccess, (state, { weight }) =>
     adapter.addOne(weight, {
@@ -53,7 +61,7 @@ export const reducer = createReducer(
   ),
 
   on(WeightsApiActions.loadWeightsSuccess, (state, { weightResponse }) =>
-    adapter.addMany(weightResponse.weights, {
+    adapter.upsertMany(weightResponse.weights, {
       ...state,
       listLoaded: true,
       pagination: weightResponse.meta,

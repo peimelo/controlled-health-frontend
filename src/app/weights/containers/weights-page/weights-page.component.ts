@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
 import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
@@ -10,7 +10,7 @@ import { WeightsFacadeService } from '../../services/weights-facade.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './weights-page.component.html',
 })
-export class WeightsPageComponent {
+export class WeightsPageComponent implements OnInit {
   isHandset$ = this.layoutFacadeService.isHandset$;
   pagination$ = this.weightsFacadeService.pagination$;
   weights$: Observable<Weight[]>;
@@ -20,6 +20,10 @@ export class WeightsPageComponent {
     private weightsFacadeService: WeightsFacadeService
   ) {
     this.weights$ = this.weightsFacadeService.weights$;
+  }
+
+  ngOnInit(): void {
+    this.weightsFacadeService.loadWeights();
   }
 
   onAdd(): void {
