@@ -63,14 +63,11 @@ export class WeightsEffects {
   deleteWeight$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WeightsPageActions.deleteWeight),
-      withLatestFrom(this.weightsFacadeService.pagination$),
-      mergeMap(([action, pagination]) =>
-        this.weightsService.delete(action.id).pipe(
+      mergeMap(({ id }) =>
+        this.weightsService.delete(id).pipe(
           mergeMap(() => [
-            WeightsApiActions.deleteWeightSuccess({ id: action.id }),
-            WeightsActions.reloadWeights({
-              pageIndex: pagination.currentPage,
-            }),
+            WeightsApiActions.deleteWeightSuccess({ id }),
+            WeightsActions.reloadWeights(),
             MessageApiActions.successMessage({
               message: 'Record successfully deleted.',
             }),
@@ -100,12 +97,13 @@ export class WeightsEffects {
   loadWeights$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        WeightsActions.loadWeights,
+        WeightsPageActions.loadWeights,
         WeightsActions.reloadWeights,
         WeightsPageActions.changePageWeights
       ),
-      exhaustMap(({ pageIndex }) =>
-        this.weightsService.getAll(pageIndex).pipe(
+      withLatestFrom(this.weightsFacadeService.pagination$),
+      exhaustMap(([action, pagination]) =>
+        this.weightsService.getAll(pagination.currentPage).pipe(
           map((weightResponse) =>
             WeightsApiActions.loadWeightsSuccess({ weightResponse })
           ),
@@ -118,16 +116,13 @@ export class WeightsEffects {
   updateWeight$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WeightsFormDialogActions.updateWeight),
-      withLatestFrom(this.weightsFacadeService.pagination$),
-      mergeMap(([action, pagination]) =>
-        this.weightsService.update(action.weight).pipe(
+      mergeMap(({ weight }) =>
+        this.weightsService.update(weight).pipe(
           mergeMap((weightResponse) => [
             WeightsApiActions.updateWeightSuccess({
               update: { id: weightResponse.id, changes: weightResponse },
             }),
-            WeightsActions.reloadWeights({
-              pageIndex: pagination.currentPage,
-            }),
+            WeightsActions.reloadWeights(),
             WeightsActions.weightFormDialogDismiss(),
             MessageApiActions.successMessage({
               message: 'Record successfully updated.',
