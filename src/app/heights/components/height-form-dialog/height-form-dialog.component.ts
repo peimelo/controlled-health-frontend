@@ -89,9 +89,9 @@ export class HeightFormDialogComponent implements OnChanges, OnInit {
     return this.form.get('value')?.hasError('required')
       ? 'Field is required.'
       : this.form.get('value')?.hasError('min')
-      ? 'Must be >= 0,20'
+      ? 'Must be >= 20'
       : this.form.get('value')?.hasError('max')
-      ? 'Must be <= 2,52'
+      ? 'Must be <= 250'
       : '';
   }
 

@@ -25,7 +25,7 @@ export class WeightFormDialogComponent implements OnChanges, OnInit {
     time: ['', Validators.required],
     value: [
       '',
-      [Validators.max(400), Validators.min(3.35), Validators.required],
+      [Validators.min(3.35), Validators.max(400), Validators.required],
     ],
   });
   isNotFilledWeight = true;
@@ -95,7 +95,7 @@ export class WeightFormDialogComponent implements OnChanges, OnInit {
     return this.form.get('value')?.hasError('required')
       ? 'Field is required.'
       : this.form.get('value')?.hasError('min')
-      ? 'Must be >= 3,35'
+      ? 'Must be >= 3'
       : this.form.get('value')?.hasError('max')
       ? 'Must be <= 400'
       : '';
