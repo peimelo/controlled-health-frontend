@@ -24,9 +24,11 @@
 
       <!-- Value Column -->
       <ng-container matColumnDef="value">
-        <mat-header-cell *matHeaderCellDef> Value (meters) </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>
+          Value (centimeters)
+        </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{ element.value | number: "0.2-2" }}
+          {{ element.value }}
         </mat-cell>
       </ng-container>
 

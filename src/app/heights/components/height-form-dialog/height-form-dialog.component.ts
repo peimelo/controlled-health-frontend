@@ -22,10 +22,7 @@ import { Height } from '../../../shared/models';
 export class HeightFormDialogComponent implements OnChanges, OnInit {
   form = this.fb.group({
     date: ['', Validators.required],
-    value: [
-      '',
-      [Validators.max(2.52), Validators.min(0.2), Validators.required],
-    ],
+    value: ['', [Validators.min(20), Validators.max(250), Validators.required]],
   });
   isNotFilledHeight = true;
   isEditing = false;
