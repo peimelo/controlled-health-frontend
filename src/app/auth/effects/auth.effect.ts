@@ -25,20 +25,28 @@ export class AuthEffects {
   createAccount$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CreateAccountPageActions.createAccount),
-      exhaustMap(({ account }) =>
-        this.authService.createAccount(account).pipe(
-          switchMap((message) => [
-            AuthApiActions.loginRedirect(),
-            MessageApiActions.successMessage({
-              message,
-            }),
-          ]),
+      exhaustMap(({ account }) => {
+        this.loadingService.add({ key: 'createAccount' });
+
+        return this.authService.createAccount(account).pipe(
+          switchMap((message) => {
+            this.loadingService.remove({ key: 'createAccount' });
+
+            return [
+              AuthApiActions.loginRedirect(),
+              MessageApiActions.successMessage({
+                message,
+              }),
+            ];
+          }),
           catchError((error) => {
+            this.loadingService.remove({ key: 'createAccount' });
+
             const message = this.errorService.getMessage(error);
             return of(MessageApiActions.errorMessage({ message }));
           })
-        )
-      )
+        );
+      })
     )
   );
 
@@ -207,20 +215,28 @@ export class AuthEffects {
   forgotPassword$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ForgotPasswordPageActions.forgotPassword),
-      exhaustMap(({ email }) =>
-        this.authService.forgotPassword(email).pipe(
-          switchMap((message) => [
-            AuthApiActions.loginRedirect(),
-            MessageApiActions.successMessage({
-              message,
-            }),
-          ]),
+      exhaustMap(({ email }) => {
+        this.loadingService.add({ key: 'forgotPassword' });
+
+        return this.authService.forgotPassword(email).pipe(
+          switchMap((message) => {
+            this.loadingService.remove({ key: 'forgotPassword' });
+
+            return [
+              AuthApiActions.loginRedirect(),
+              MessageApiActions.successMessage({
+                message,
+              }),
+            ];
+          }),
           catchError((error) => {
+            this.loadingService.remove({ key: 'forgotPassword' });
+
             const message = this.errorService.getMessage(error);
             return of(MessageApiActions.errorMessage({ message }));
           })
-        )
-      )
+        );
+      })
     )
   );
 
@@ -247,20 +263,28 @@ export class AuthEffects {
   resendConfirmation$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ResendConfirmationPageActions.resendConfirmation),
-      exhaustMap(({ email }) =>
-        this.authService.resendConfirmation(email).pipe(
-          switchMap((message) => [
-            AuthApiActions.loginRedirect(),
-            MessageApiActions.successMessage({
-              message,
-            }),
-          ]),
+      exhaustMap(({ email }) => {
+        this.loadingService.add({ key: 'resendConfirmation' });
+
+        return this.authService.resendConfirmation(email).pipe(
+          switchMap((message) => {
+            this.loadingService.remove({ key: 'resendConfirmation' });
+
+            return [
+              AuthApiActions.loginRedirect(),
+              MessageApiActions.successMessage({
+                message,
+              }),
+            ];
+          }),
           catchError((error) => {
+            this.loadingService.remove({ key: 'resendConfirmation' });
+
             const message = this.errorService.getMessage(error);
             return of(MessageApiActions.errorMessage({ message }));
           })
-        )
-      )
+        );
+      })
     )
   );
 

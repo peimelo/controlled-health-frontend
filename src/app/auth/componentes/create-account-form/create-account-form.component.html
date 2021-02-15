@@ -67,7 +67,14 @@
       </p>
 
       <p class="submitButton">
-        <button color="primary" mat-raised-button type="submit">Create</button>
+        <button color="primary" mat-raised-button type="submit">
+          <fa-icon
+            *ngIf="'createAccount' | swIsLoading | async"
+            [icon]="['fas', 'spinner']"
+            [spin]="true"
+          ></fa-icon>
+          Create
+        </button>
       </p>
     </form>
   </mat-card-content>
