@@ -67,7 +67,12 @@
       </p>
 
       <p class="submitButton">
-        <button color="primary" mat-raised-button type="submit">
+        <button
+          color="primary"
+          [disabled]="'createAccount' | swIsLoading | async"
+          mat-raised-button
+          type="submit"
+        >
           <fa-icon
             *ngIf="'createAccount' | swIsLoading | async"
             [icon]="['fas', 'spinner']"
