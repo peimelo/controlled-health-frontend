@@ -34,6 +34,7 @@
     "@ngrx/router-store": "^11.0.0",
     "@ngrx/store": "^11.0.0",
     "@ngrx/store-devtools": "^11.0.0",
+    "@service-work/is-loading": "^5.1.1",
     "@swimlane/ngx-charts": "^17.0.0",
     "moment": "^2.29.1",
     "ngx-mask": "^11.1.4",

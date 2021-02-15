@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { IsLoadingPipeModule } from '@service-work/is-loading';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { IconsModule } from './icons/icons.module';
 import { MaterialModule } from './material/material.module';
@@ -18,6 +19,7 @@ import { PaginationService } from './services/pagination.service';
     // third-party
     FlexLayoutModule,
     IconsModule,
+    IsLoadingPipeModule,
     MaterialModule,
 
     // app

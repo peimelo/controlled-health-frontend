@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { IsLoadingService } from '@service-work/is-loading';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { MessageApiActions, UserActions } from '../../core/actions';
@@ -134,19 +135,25 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoginPageActions.login),
-      exhaustMap(({ credentials }) =>
-        this.authService.login(credentials).pipe(
-          map((user) =>
-            AuthApiActions.loginSuccess({
+      exhaustMap(({ credentials }) => {
+        this.loadingService.add({ key: 'login' });
+
+        return this.authService.login(credentials).pipe(
+          map((user) => {
+            this.loadingService.remove({ key: 'login' });
+
+            return AuthApiActions.loginSuccess({
               user,
-            })
-          ),
+            });
+          }),
           catchError((error) => {
+            this.loadingService.remove({ key: 'login' });
+
             const message = this.errorService.getMessage(error);
             return of(MessageApiActions.errorMessage({ message }));
           })
-        )
-      )
+        );
+      })
     )
   );
 
@@ -273,6 +280,7 @@ export class AuthEffects {
     private authService: AuthService,
     private dialog: MatDialog,
     private errorService: ErrorsService,
+    private loadingService: IsLoadingService,
     private router: Router
   ) {}
 }
