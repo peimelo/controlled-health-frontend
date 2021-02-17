@@ -18,7 +18,7 @@ export class RouterEffects {
           return route;
         }),
         mergeMap((route) => route.data),
-        map((data) => `${data['title']} - Controlled Health`),
+        map((data) => `${data['title']} | Controlled Health`),
         tap((title) => this.titleService.setTitle(title))
       ),
     {
