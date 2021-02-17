@@ -11,7 +11,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { User } from '../../../auth/models';
-import { FormErrorService } from '../../../core/services/form-error.service';
 import { Weight } from '../../../shared/models';
 
 @Component({
@@ -37,10 +36,7 @@ export class WeightFormDialogComponent implements OnChanges {
   @Output() private create = new EventEmitter<Weight>();
   @Output() private update = new EventEmitter<Weight>();
 
-  constructor(
-    private fb: FormBuilder,
-    private formErrorService: FormErrorService
-  ) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.weight && this.weight.id) {
@@ -65,14 +61,6 @@ export class WeightFormDialogComponent implements OnChanges {
         this.isNotFilledWeight = false;
       }
     }
-  }
-
-  getErrorDate(pickerInput: string): string {
-    if (!pickerInput || pickerInput === '') {
-      return 'Please choose a date.';
-    }
-
-    return this.formErrorService.isMyDateFormat(pickerInput);
   }
 
   getErrorValue(): string {

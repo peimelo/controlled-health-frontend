@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxMaskModule } from 'ngx-mask';
@@ -16,9 +15,6 @@ import { WeightsRoutingModule } from './weights-routing.module';
 
 @NgModule({
   imports: [
-    // Angular
-    ReactiveFormsModule,
-
     // @ngrx
     StoreModule.forFeature(fromWeight.weightsFeatureKey, fromWeight.reducers),
     EffectsModule.forFeature([WeightsEffects]),

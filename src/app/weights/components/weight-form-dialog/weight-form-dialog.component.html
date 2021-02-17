@@ -8,24 +8,7 @@
     fxLayoutGap="10px"
     novalidate
   >
-    <mat-form-field fxFlex>
-      <mat-label>Date</mat-label>
-      <input
-        matInput
-        [matDatepicker]="picker"
-        formControlName="date"
-        maxlength="10"
-        #pickerInput
-        required
-      />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error
-        *ngIf="!form.controls['date'].valid && form.controls['date'].touched"
-      >
-        {{ getErrorDate(pickerInput.value) }}
-      </mat-error>
-    </mat-form-field>
+    <app-date-picker [form]="form"></app-date-picker>
 
     <mat-form-field fxFlex>
       <input

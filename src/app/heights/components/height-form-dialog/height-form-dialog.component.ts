@@ -11,7 +11,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { User } from '../../../auth/models';
-import { FormErrorService } from '../../../core/services/form-error.service';
 import { Height } from '../../../shared/models';
 
 @Component({
@@ -36,10 +35,7 @@ export class HeightFormDialogComponent implements OnChanges {
   @Output() private create = new EventEmitter<Height>();
   @Output() private update = new EventEmitter<Height>();
 
-  constructor(
-    private fb: FormBuilder,
-    private formErrorService: FormErrorService
-  ) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.height && this.height.id) {
@@ -62,14 +58,6 @@ export class HeightFormDialogComponent implements OnChanges {
         this.isNotFilledHeight = false;
       }
     }
-  }
-
-  getErrorDate(pickerInput: string): string {
-    if (!pickerInput || pickerInput === '') {
-      return 'Please choose a date.';
-    }
-
-    return this.formErrorService.isMyDateFormat(pickerInput);
   }
 
   getErrorValue(): string {

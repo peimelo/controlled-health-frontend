@@ -1,0 +1,23 @@
+<mat-form-field fxFlex [formGroup]="form">
+  <mat-label>{{ label }}</mat-label>
+  <!-- <ng-container *ngIf="required; else notRequired"> -->
+  <input
+    [formControlName]="controlName"
+    [matDatepicker]="picker"
+    matInput
+    maxlength="10"
+    #pickerInput
+    [required]="required"
+  />
+
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+
+  <mat-error
+    *ngIf="
+      !form.controls[controlName].valid && form.controls[controlName].touched
+    "
+  >
+    {{ getErrorDate(pickerInput.value) }}
+  </mat-error>
+</mat-form-field>

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { FormErrorService } from '../../../core/services/form-error.service';
 import { User } from '../../models';
 
 @Component({
@@ -36,29 +35,13 @@ import { User } from '../../models';
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>Date of birth</mat-label>
-            <input
-              matInput
-              [matDatepicker]="picker"
-              formControlName="date_of_birth"
-              maxlength="10"
-              #pickerInput
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error
-              *ngIf="
-                !form.controls['date_of_birth'].valid &&
-                form.controls['date_of_birth'].touched
-              "
-            >
-              {{ getErrorDate(pickerInput.value) }}
-            </mat-error>
-          </mat-form-field>
+          <app-date-picker
+            [controlName]="'date_of_birth'"
+            [form]="form"
+            [label]="'Date of birth'"
+            [required]="false"
+          >
+          </app-date-picker>
         </div>
       </form>
 
@@ -100,10 +83,7 @@ export class PersonalDataComponent implements OnInit {
 
   @Output() update = new EventEmitter<User>();
 
-  constructor(
-    private fb: FormBuilder,
-    public readonly formErrorService: FormErrorService
-  ) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form.patchValue({
@@ -112,14 +92,6 @@ export class PersonalDataComponent implements OnInit {
       gender: this.user.gender,
       date_of_birth: this.user.date_of_birth,
     });
-  }
-
-  getErrorDate(pickerInput: string): string {
-    if (!pickerInput || pickerInput === '') {
-      return 'Please choose a date.';
-    }
-
-    return this.formErrorService.isMyDateFormat(pickerInput);
   }
 
   onUpdate(): void {

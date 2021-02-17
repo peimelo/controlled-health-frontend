@@ -1,6 +1,5 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '../shared/shared.module';
@@ -17,10 +16,6 @@ import { AuthService } from './services/auth.service';
 @NgModule({
   declarations: [...fromContainers.containers, ...fromComponents.components],
   imports: [
-    // Angular
-    FormsModule,
-    ReactiveFormsModule,
-
     // @ngrx
     StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers),
     EffectsModule.forFeature([AuthEffects]),

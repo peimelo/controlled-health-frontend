@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxMaskModule } from 'ngx-mask';
@@ -17,9 +16,6 @@ import { HeightsService } from './services/heights.service';
 
 @NgModule({
   imports: [
-    // Angular
-    ReactiveFormsModule,
-
     // @ngrx
     StoreModule.forFeature(fromHeight.heightsFeatureKey, fromHeight.reducers),
     EffectsModule.forFeature([HeightsEffects]),
