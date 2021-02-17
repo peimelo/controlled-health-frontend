@@ -6,7 +6,6 @@
   <mat-card-content class="dashboard-card-content">
     <ngx-charts-line-chart
       *ngIf="data.length > 1; else noData"
-      autoScale="true"
       [results]="result"
       [scheme]="colorScheme"
       xAxis="true"
