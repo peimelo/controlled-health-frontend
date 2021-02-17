@@ -6,13 +6,13 @@ Frontend of the Controlled Health website built with [Angular](https://angular.i
   <tr>
     <td>Angular</td>
     <td>
-      11.1.x
+      11.2.x
     </td>
   </tr>
   <tr>
     <td>Material</td>
     <td>
-      11.1.x
+      11.2.x
     </td>
   </tr>
   <tr>
@@ -42,20 +42,6 @@ Open the browser at the address `http://localhost:4200`.
 
 The backend is expected to rise to `http://localhost:3000`. If you want another port, change the file `src/proxy.conf.json` and restart the frontend.
 
-## Tests
-
-[![CircleCI](https://circleci.com/gh/peimelo/controlled-health-frontend.svg?style=svg)](https://circleci.com/gh/peimelo/controlled-health-frontend)
-
-To run the tests:
-
-```bash
-npm run test
-```
-
 ## Quality of the Code
 
 [![DeepScan grade](https://deepscan.io/api/teams/11362/projects/15113/branches/298154/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11362&pid=15113&bid=298154)
-
-## Deploy
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/7df675ef-b29a-403a-97a3-5e90f4ad8f4e/deploy-status)](https://app.netlify.com/sites/controlledhealth/deploys)
