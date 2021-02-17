@@ -53,8 +53,8 @@ export class AuthEffects {
   updateAccount$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AccountPageActions.updateAccount),
-      exhaustMap(({ name }) =>
-        this.authService.updateAccount(name).pipe(
+      exhaustMap(({ user }) =>
+        this.authService.updateAccount(user).pipe(
           switchMap((resp) => [
             AuthApiActions.updateAccountSuccess({ user: resp.data }),
             MessageApiActions.successMessage({

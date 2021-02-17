@@ -5,6 +5,7 @@ import {
 } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -14,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
@@ -34,6 +36,7 @@ const MODULES = [
   MatMenuModule,
   MatMomentDateModule,
   MatPaginatorModule,
+  MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
   MatSortModule,
@@ -41,6 +44,18 @@ const MODULES = [
   MatToolbarModule,
   MatTooltipModule,
 ];
+
+const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   imports: [MODULES],
@@ -50,6 +65,7 @@ const MODULES = [
       provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS,
       useValue: { strict: true },
     },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
 export class MaterialModule {}

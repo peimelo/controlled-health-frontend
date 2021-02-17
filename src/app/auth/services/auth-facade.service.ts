@@ -14,6 +14,7 @@ import {
   CreateAccountRequest,
   Credentials,
   PasswordCombination,
+  User,
 } from '../models';
 import * as fromAuth from '../reducers';
 
@@ -32,8 +33,8 @@ export class AuthFacadeService {
     this.store.dispatch(CreateAccountPageActions.createAccount({ account }));
   }
 
-  updateAccount(name: string): void {
-    this.store.dispatch(AccountPageActions.updateAccount({ name }));
+  updateAccount(user: User): void {
+    this.store.dispatch(AccountPageActions.updateAccount({ user }));
   }
 
   updatePassword(passwordCombination: PasswordCombination): void {

@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { PasswordCombination } from '../models';
+import { PasswordCombination, User } from '../models';
 
 export const updateAccount = createAction(
   '[Account Page] Update Account',
-  props<{ name: string }>()
+  props<{ user: User }>()
 );
 
 export const updatePassword = createAction(

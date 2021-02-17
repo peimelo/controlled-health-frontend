@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { User } from '../../models';
 
@@ -20,15 +21,56 @@ import { User } from '../../models';
           <input matInput [value]="user?.email" disabled />
         </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Name</mat-label>
+        <div fxLayout fxLayout.xs="column" fxLayoutGap="10px">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
 
-          <input matInput formControlName="name" />
-        </mat-form-field>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option value="F">F</mat-option>
+              <mat-option value="M">M</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Date of birth</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="date_of_birth"
+              maxlength="10"
+              #pickerInput
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error
+              *ngIf="
+                !form.controls['date_of_birth'].valid &&
+                form.controls['date_of_birth'].touched
+              "
+            >
+              {{ getErrorDate(pickerInput.value) }}
+            </mat-error>
+          </mat-form-field>
+        </div>
       </form>
 
       <mat-action-row>
-        <button color="primary" mat-button (click)="onUpdate()">Save</button>
+        <button
+          color="primary"
+          [disabled]="!form.valid"
+          mat-button
+          (click)="onUpdate()"
+        >
+          Save
+        </button>
       </mat-action-row>
     </mat-expansion-panel>
   `,
@@ -41,6 +83,8 @@ export class PersonalDataComponent implements OnInit {
       [Validators.email, Validators.required],
     ],
     name: ['', []],
+    gender: ['', []],
+    date_of_birth: ['', []],
   });
 
   @Input()
@@ -54,7 +98,7 @@ export class PersonalDataComponent implements OnInit {
 
   @Input() user!: User;
 
-  @Output() update = new EventEmitter<string>();
+  @Output() update = new EventEmitter<User>();
 
   constructor(
     private fb: FormBuilder,
@@ -65,10 +109,29 @@ export class PersonalDataComponent implements OnInit {
     this.form.patchValue({
       email: this.user.email,
       name: this.user.name,
+      gender: this.user.gender,
+      date_of_birth: this.user.date_of_birth,
     });
   }
 
+  getErrorDate(pickerInput: string): string {
+    if (!pickerInput || pickerInput === '') {
+      return 'Please choose a date.';
+    }
+
+    return this.formErrorService.isMyDateFormat(pickerInput);
+  }
+
   onUpdate(): void {
-    this.update.emit(this.form.get('name')?.value);
+    const { valid, value } = this.form;
+
+    if (valid) {
+      this.update.emit({
+        ...this.user,
+        date_of_birth: moment(value.date_of_birth).format('YYYY-MM-DD'),
+        gender: value.gender,
+        name: value.name,
+      });
+    }
   }
 }

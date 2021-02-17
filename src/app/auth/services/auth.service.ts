@@ -39,9 +39,13 @@ export class AuthService {
       .pipe(map(() => 'Your account has been successfully created.'));
   }
 
-  updateAccount(name: string): Observable<UpdateAccountResponse> {
+  updateAccount(user: User): Observable<UpdateAccountResponse> {
     return this.http
-      .put<UserDataResponse>(this.url, { name })
+      .put<UserDataResponse>(this.url, {
+        date_of_birth: user.date_of_birth,
+        gender: user.gender,
+        name: user.name,
+      })
       .pipe(
         map((resp) => ({
           ...resp,
@@ -81,6 +85,8 @@ export class AuthService {
           return {
             email: '',
             name: '',
+            gender: '',
+            date_of_birth: '',
           };
         })
       );

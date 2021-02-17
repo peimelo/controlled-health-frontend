@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
+import * as moment from 'moment';
 
 @Injectable()
 export class FormErrorService {
@@ -39,5 +40,22 @@ export class FormErrorService {
         matchingControl.setErrors(null);
       }
     };
+  }
+
+  isMyDateFormat(date: string): string {
+    const da = date.split('/');
+
+    if (
+      da.length !== 3 ||
+      da[0].length !== 2 ||
+      da[1].length !== 2 ||
+      da[2].length !== 4
+    ) {
+      return 'Please input in the form of DD/MM/YYYY';
+    } else if (!moment(date).isValid()) {
+      return 'Please input a valid date.';
+    }
+
+    return 'Unknown error.';
   }
 }

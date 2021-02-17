@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SpinnerFacadeService } from '../../core/services/spinner-facade.service';
-import { PasswordCombination } from '../models';
+import { PasswordCombination, User } from '../models';
 import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
@@ -48,8 +48,8 @@ export class AccountPageComponent {
     this.authFacadeService.deleteAccountConfirmation();
   }
 
-  onUpdate(name: string): void {
-    this.authFacadeService.updateAccount(name);
+  onUpdate(user: User): void {
+    this.authFacadeService.updateAccount(user);
   }
 
   onUpdatePassword(passwordCombination: PasswordCombination): void {

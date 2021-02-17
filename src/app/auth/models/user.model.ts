@@ -12,4 +12,6 @@ export interface PasswordCombination {
 export interface User {
   email: string;
   name: string;
+  gender: string;
+  date_of_birth: string;
 }

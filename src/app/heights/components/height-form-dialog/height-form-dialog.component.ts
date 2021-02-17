@@ -4,7 +4,6 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -12,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { User } from '../../../auth/models';
+import { FormErrorService } from '../../../core/services/form-error.service';
 import { Height } from '../../../shared/models';
 
 @Component({
@@ -19,7 +19,7 @@ import { Height } from '../../../shared/models';
   // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './height-form-dialog.component.html',
 })
-export class HeightFormDialogComponent implements OnChanges, OnInit {
+export class HeightFormDialogComponent implements OnChanges {
   form = this.fb.group({
     date: ['', Validators.required],
     value: ['', [Validators.min(20), Validators.max(250), Validators.required]],
@@ -36,25 +36,10 @@ export class HeightFormDialogComponent implements OnChanges, OnInit {
   @Output() private create = new EventEmitter<Height>();
   @Output() private update = new EventEmitter<Height>();
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    // this.error.subscribe((validationErrors) => {
-    //   if (validationErrors) {
-    //     console.log(validationErrors);
-    //     Object.keys(validationErrors).forEach((prop) => {
-    //       console.log(prop);
-    //       const formControl = this.form.get(prop);
-    //       if (formControl) {
-    //         console.log(validationErrors[prop]);
-    //         formControl.setErrors({
-    //           serverError: validationErrors[prop],
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
-  }
+  constructor(
+    private fb: FormBuilder,
+    private formErrorService: FormErrorService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.height && this.height.id) {
@@ -79,10 +64,12 @@ export class HeightFormDialogComponent implements OnChanges, OnInit {
     }
   }
 
-  getErrorDate(): string {
-    return this.form.get('date')?.hasError('required')
-      ? 'Field is required'
-      : '';
+  getErrorDate(pickerInput: string): string {
+    if (!pickerInput || pickerInput === '') {
+      return 'Please choose a date.';
+    }
+
+    return this.formErrorService.isMyDateFormat(pickerInput);
   }
 
   getErrorValue(): string {
