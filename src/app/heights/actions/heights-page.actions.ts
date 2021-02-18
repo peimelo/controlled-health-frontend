@@ -1,3 +1,4 @@
+import { Sort } from '@angular/material/sort';
 import { createAction, props } from '@ngrx/store';
 import { Height } from '../../shared/models';
 
@@ -16,4 +17,11 @@ export const changePageHeights = createAction(
 export const editHeight = createAction(
   '[Heights Page] Edit Height',
   props<{ height: Height }>()
+);
+
+export const loadHeights = createAction('[Heights Page] Load Heights');
+
+export const sortHeights = createAction(
+  '[Heights Page] Sort Heights',
+  props<{ sort: Sort }>()
 );

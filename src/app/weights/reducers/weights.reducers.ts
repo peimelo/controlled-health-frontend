@@ -1,3 +1,4 @@
+import { Sort } from '@angular/material/sort';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { Pagination, Weight } from '../../shared/models';
@@ -8,25 +9,24 @@ export const weightsFeatureKey = 'weights';
 export interface State extends EntityState<Weight> {
   listLoaded: boolean;
   pagination: Pagination;
+  sort: Sort;
 }
 
-export const adapter: EntityAdapter<Weight> = createEntityAdapter<Weight>({
-  sortComparer: sortByDateDesc,
-});
-
-export function sortByDateDesc(a: Weight, b: Weight): number {
-  return b.date.localeCompare(a.date);
-}
+export const adapter: EntityAdapter<Weight> = createEntityAdapter<Weight>({});
 
 export const initialState: State = adapter.getInitialState({
+  entities: {},
+  ids: [],
   listLoaded: false,
   pagination: {
     currentPage: 1,
     itemsPerPage: 0,
     totalItems: 0,
   },
-  entities: {},
-  ids: [],
+  sort: <Sort>{
+    active: 'date',
+    direction: 'desc',
+  },
 });
 
 export const reducer = createReducer(
@@ -61,12 +61,17 @@ export const reducer = createReducer(
   ),
 
   on(WeightsApiActions.loadWeightsSuccess, (state, { weightResponse }) =>
-    adapter.upsertMany(weightResponse.weights, {
+    adapter.setAll(weightResponse.weights, {
       ...state,
       listLoaded: true,
       pagination: weightResponse.meta,
     })
   ),
+
+  on(WeightsPageActions.sortWeights, (state, { sort }) => ({
+    ...state,
+    sort: sort,
+  })),
 
   on(WeightsApiActions.updateWeightSuccess, (state, { update }) =>
     adapter.updateOne(update, {
@@ -77,3 +82,4 @@ export const reducer = createReducer(
 
 export const getListLoaded = (state: State) => state.listLoaded;
 export const getPagination = (state: State) => state.pagination;
+export const getSort = (state: State) => state.sort;

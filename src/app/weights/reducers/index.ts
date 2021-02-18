@@ -45,6 +45,11 @@ export const selectPagination = createSelector(
   fromWeights.getPagination
 );
 
+export const selectSort = createSelector(
+  selectWeightsEntitiesState,
+  fromWeights.getSort
+);
+
 export const {
   selectIds: selectWeightIds,
   selectEntities: selectWeightEntities,

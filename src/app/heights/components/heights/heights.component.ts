@@ -4,7 +4,6 @@ import { Sort } from '@angular/material/sort';
 import * as moment from 'moment';
 import { DialogConfig, Height, Pagination } from '../../../shared/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
-import { PaginationService } from '../../../shared/services/pagination.service';
 
 @Component({
   selector: 'app-heights',
@@ -18,24 +17,18 @@ export class HeightsComponent {
     { columnDef: 'actions', showMobile: true },
   ];
 
-  sort: Sort = {
-    active: 'date',
-    direction: 'desc',
-  };
-
   @Input() isHandset!: boolean;
   @Input() pagination!: Pagination;
+  @Input() sort!: Sort;
   @Input() heights!: Height[];
 
   @Output() private changePage = new EventEmitter<PageEvent>();
   @Output() private add = new EventEmitter();
   @Output() private delete = new EventEmitter<number>();
   @Output() private edit = new EventEmitter<Height>();
+  @Output() private sortEvent = new EventEmitter<Sort>();
 
-  constructor(
-    private confirmationDialogService: ConfirmationDialogService,
-    private paginationService: PaginationService
-  ) {}
+  constructor(private confirmationDialogService: ConfirmationDialogService) {}
 
   deleteConfirmDialog(height: Height): void {
     const dialogConfig: DialogConfig = {
@@ -66,11 +59,7 @@ export class HeightsComponent {
     this.edit.emit(height);
   }
 
-  get initialRange(): number {
-    return this.paginationService.initialRange(this.pagination);
-  }
-
-  get finalRange(): number {
-    return this.paginationService.finalRange(this.pagination);
+  sortData(sort: Sort) {
+    this.sortEvent.emit(sort);
   }
 }

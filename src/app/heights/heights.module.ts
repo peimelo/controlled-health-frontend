@@ -8,7 +8,6 @@ import { HeightsComponent } from './components/heights/heights.component';
 import { HeightFormDialogPageComponent } from './containers/height-form-dialog-page/height-form-dialog-page.component';
 import { HeightsPageComponent } from './containers/heights-page/heights-page.component';
 import { HeightsEffects } from './effects';
-import { HeightsGuard } from './guards/heights.guard';
 import { HeightsRoutingModule } from './heights-routing.module';
 import * as fromHeight from './reducers';
 import { HeightsFacadeService } from './services/heights-facade.service';
@@ -33,6 +32,6 @@ import { HeightsService } from './services/heights.service';
     HeightFormDialogComponent,
     HeightFormDialogPageComponent,
   ],
-  providers: [HeightsFacadeService, HeightsGuard, HeightsService],
+  providers: [HeightsFacadeService, HeightsService],
 })
 export class HeightsModule {}

@@ -7,14 +7,15 @@
     </button>
 
     <mat-table
-      [dataSource]="weights | slice: initialRange:finalRange"
+      [dataSource]="weights"
       matSort
       [matSortActive]="this.sort.active"
       [matSortDirection]="this.sort.direction"
+      (matSortChange)="sortData($event)"
     >
       <!-- Date Column -->
       <ng-container matColumnDef="date">
-        <mat-header-cell *matHeaderCellDef mat-sort-header disabled>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
           Date
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -24,7 +25,9 @@
 
       <!-- Value Column -->
       <ng-container matColumnDef="value">
-        <mat-header-cell *matHeaderCellDef> Value (kg) </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Value (kg)
+        </mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{ element.value | number: "0.2-2" }}
         </mat-cell>
@@ -66,13 +69,10 @@
       <mat-row *matRowDef="let row; columns: getDisplayedColumns()"></mat-row>
     </mat-table>
 
-    <mat-paginator
-      [length]="pagination.totalItems"
+    <app-paginator
       *ngIf="pagination"
-      [pageIndex]="pagination.currentPage - 1"
-      [pageSize]="pagination.itemsPerPage"
-      [pageSizeOptions]="[20]"
+      [pagination]="pagination"
       (page)="onChangePage($event)"
-    ></mat-paginator>
+    ></app-paginator>
   </div>
 </div>

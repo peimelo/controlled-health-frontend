@@ -100,12 +100,17 @@ export class HeightsEffects {
   loadHeights$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        HeightsActions.loadHeights,
+        HeightsPageActions.loadHeights,
         HeightsActions.reloadHeights,
-        HeightsPageActions.changePageHeights
+        HeightsPageActions.changePageHeights,
+        HeightsPageActions.sortHeights
       ),
-      exhaustMap(({ pageIndex }) =>
-        this.heightsService.getAll(pageIndex).pipe(
+      withLatestFrom(
+        this.heightsFacadeService.pagination$,
+        this.heightsFacadeService.sort$
+      ),
+      exhaustMap(([action, pagination, sort]) =>
+        this.heightsService.getAll(pagination.currentPage, sort).pipe(
           map((heightResponse) =>
             HeightsApiActions.loadHeightsSuccess({ heightResponse })
           ),

@@ -4,7 +4,6 @@ import { Sort } from '@angular/material/sort';
 import * as moment from 'moment';
 import { DialogConfig, Pagination, Weight } from '../../../shared/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
-import { PaginationService } from '../../../shared/services/pagination.service';
 
 @Component({
   selector: 'app-weights',
@@ -19,24 +18,18 @@ export class WeightsComponent {
     { columnDef: 'actions', showMobile: true },
   ];
 
-  sort: Sort = {
-    active: 'date',
-    direction: 'desc',
-  };
-
   @Input() isHandset!: boolean;
   @Input() pagination!: Pagination;
+  @Input() sort!: Sort;
   @Input() weights!: Weight[];
 
   @Output() private changePage = new EventEmitter<PageEvent>();
   @Output() private add = new EventEmitter();
   @Output() private delete = new EventEmitter<number>();
   @Output() private edit = new EventEmitter<Weight>();
+  @Output() private sortEvent = new EventEmitter<Sort>();
 
-  constructor(
-    private confirmationDialogService: ConfirmationDialogService,
-    private paginationService: PaginationService
-  ) {}
+  constructor(private confirmationDialogService: ConfirmationDialogService) {}
 
   deleteConfirmDialog(weight: Weight): void {
     const dialogConfig: DialogConfig = {
@@ -67,11 +60,7 @@ export class WeightsComponent {
     this.edit.emit(weight);
   }
 
-  get initialRange(): number {
-    return this.paginationService.initialRange(this.pagination);
-  }
-
-  get finalRange(): number {
-    return this.paginationService.finalRange(this.pagination);
+  sortData(sort: Sort) {
+    this.sortEvent.emit(sort);
   }
 }

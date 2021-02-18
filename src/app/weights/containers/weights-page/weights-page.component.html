@@ -1,9 +1,11 @@
 <app-weights
   [isHandset]="isHandset$ | async"
   [pagination]="pagination$ | async"
+  [sort]="sort$ | async"
   [weights]="weights$ | async"
   (add)="onAdd()"
   (changePage)="onChangePage($event)"
   (delete)="onDelete($event)"
   (edit)="onEdit($event)"
+  (sortEvent)="onSortEvent($event)"
 ></app-weights>

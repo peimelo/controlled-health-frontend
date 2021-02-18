@@ -40,6 +40,11 @@ export const selectListLoaded = createSelector(
   fromHeights.getListLoaded
 );
 
+export const selectSort = createSelector(
+  selectHeightsEntitiesState,
+  fromHeights.getSort
+);
+
 export const selectPagination = createSelector(
   selectHeightsEntitiesState,
   fromHeights.getPagination

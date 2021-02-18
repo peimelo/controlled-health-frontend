@@ -99,11 +99,15 @@ export class WeightsEffects {
       ofType(
         WeightsPageActions.loadWeights,
         WeightsActions.reloadWeights,
-        WeightsPageActions.changePageWeights
+        WeightsPageActions.changePageWeights,
+        WeightsPageActions.sortWeights
       ),
-      withLatestFrom(this.weightsFacadeService.pagination$),
-      exhaustMap(([action, pagination]) =>
-        this.weightsService.getAll(pagination.currentPage).pipe(
+      withLatestFrom(
+        this.weightsFacadeService.pagination$,
+        this.weightsFacadeService.sort$
+      ),
+      exhaustMap(([action, pagination, sort]) =>
+        this.weightsService.getAll(pagination.currentPage, sort).pipe(
           map((weightResponse) =>
             WeightsApiActions.loadWeightsSuccess({ weightResponse })
           ),

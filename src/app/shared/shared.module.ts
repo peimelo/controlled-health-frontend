@@ -5,42 +5,40 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IsLoadingPipeModule } from '@service-work/is-loading';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 import { IconsModule } from './icons/icons.module';
 import { MaterialModule } from './material/material.module';
 import { FormatDatetimeUtcPipe } from './pipes/format-datetime-utc.pipe';
 import { ConfirmationDialogService } from './services/confirmation-dialog.service';
-import { PaginationService } from './services/pagination.service';
+import { DateTimeService } from './services/dateTime.service';
+import { NumberService } from './services/number.service';
+
+const COMPONENTS = [
+  ConfirmationDialogComponent,
+  DatePickerComponent,
+  FormatDatetimeUtcPipe,
+  PaginatorComponent,
+];
+
+const MODULES = [
+  // Angular
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+
+  // third-party
+  FlexLayoutModule,
+  IsLoadingPipeModule,
+
+  // app
+  IconsModule,
+  MaterialModule,
+];
 
 @NgModule({
-  declarations: [
-    ConfirmationDialogComponent,
-    DatePickerComponent,
-    FormatDatetimeUtcPipe,
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    IconsModule,
-    MaterialModule,
-  ],
-  exports: [
-    // Angular
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-
-    // third-party
-    FlexLayoutModule,
-    IconsModule,
-    IsLoadingPipeModule,
-    MaterialModule,
-
-    // app
-    ConfirmationDialogComponent,
-    DatePickerComponent,
-    FormatDatetimeUtcPipe,
-  ],
-  providers: [ConfirmationDialogService, PaginationService],
+  declarations: [...COMPONENTS],
+  imports: [...MODULES],
+  exports: [...COMPONENTS, ...MODULES],
+  providers: [ConfirmationDialogService, DateTimeService, NumberService],
 })
 export class SharedModule {}

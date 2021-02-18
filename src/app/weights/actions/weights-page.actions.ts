@@ -1,3 +1,4 @@
+import { Sort } from '@angular/material/sort';
 import { createAction, props } from '@ngrx/store';
 import { Weight } from '../../shared/models';
 
@@ -19,3 +20,8 @@ export const editWeight = createAction(
 );
 
 export const loadWeights = createAction('[Weights Page] Load Weights');
+
+export const sortWeights = createAction(
+  '[Weights Page] Sort Weights',
+  props<{ sort: Sort }>()
+);
