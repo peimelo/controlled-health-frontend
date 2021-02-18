@@ -1,17 +1,24 @@
 <mat-card class="dashboard-card">
   <mat-card-header>
     <mat-card-title> {{ title }} </mat-card-title>
+    <mat-card-subtitle>
+      <strong>Minimum: </strong>{{ minimum }} ({{ minimumDate }}) |
+      <strong>Maximum: </strong> {{ maximum }} ({{ maximumDate }}) |
+      <strong>Average: </strong> {{ average }}
+    </mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content class="dashboard-card-content">
+  <mat-card-content #containerRef class="dashboard-card-content">
     <ngx-charts-line-chart
       *ngIf="data.length > 1; else noData"
+      [view]="[containerRef.offsetWidth, containerRef.offsetHeight / 1.15]"
       [results]="result"
       [scheme]="colorScheme"
       xAxis="true"
       [xAxisLabel]="'Date'"
       showXAxisLabel="true"
       yAxis="true"
+      view
     >
       <ng-template #seriesTooltipTemplate let-model="model">
         <h2>Weight</h2>

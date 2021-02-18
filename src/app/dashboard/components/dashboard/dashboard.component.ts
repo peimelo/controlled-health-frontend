@@ -17,6 +17,12 @@ export class DashboardComponent {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
   };
 
+  minimum!: number;
+  minimumDate = '';
+  maximum!: number;
+  maximumDate = '';
+  average = 0;
+
   @Input() title = '';
   @Input() data!: any[];
 
@@ -38,6 +44,22 @@ export class DashboardComponent {
         max = -1;
       }
 
+      if (this.data[i].value <= this.minimum || !this.minimum) {
+        this.minimum = this.data[i].value;
+        this.minimumDate = moment(this.data[i].date)
+          .utc()
+          .format('DD/MM/YYYY HH:mm');
+      }
+
+      if (this.data[i].value >= this.maximum || !this.maximum) {
+        this.maximum = this.data[i].value;
+        this.maximumDate = moment(this.data[i].date)
+          .utc()
+          .format('DD/MM/YYYY HH:mm');
+      }
+
+      this.average += parseFloat(this.data[i].value);
+
       series.push({
         value: this.data[i].value,
         name: new Date(this.data[i].date),
@@ -45,6 +67,8 @@ export class DashboardComponent {
         max,
       });
     }
+
+    this.average = Math.round((this.average / this.data.length) * 100) / 100;
 
     if (!!series.length && series[0].min === -1) {
       series.forEach((serie) => {
