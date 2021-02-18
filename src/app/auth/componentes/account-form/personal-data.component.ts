@@ -10,7 +10,7 @@ import { User } from '../../models';
       <mat-expansion-panel-header>
         <mat-panel-title> Personal Data </mat-panel-title>
 
-        <mat-panel-description> Type your name </mat-panel-description>
+        <mat-panel-description> Type your data </mat-panel-description>
       </mat-expansion-panel-header>
 
       <form [formGroup]="form">

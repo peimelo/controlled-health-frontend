@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import * as moment from 'moment';
 
 interface Serie {
   name: Date;
@@ -58,5 +59,19 @@ export class DashboardComponent {
         series,
       },
     ];
+  }
+
+  getDate(date: string): string {
+    return moment(date).utc().format('DD/MM/YYYY HH:mm');
+  }
+
+  getValue(model: Serie): string {
+    const { value, min, max } = model;
+
+    if (min && max) {
+      return `${value} (min: ${min} ~ max: ${max})`;
+    }
+
+    return value.toString();
   }
 }
