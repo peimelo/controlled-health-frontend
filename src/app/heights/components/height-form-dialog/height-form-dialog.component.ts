@@ -8,10 +8,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { User } from '../../../auth/models';
 import { Height } from '../../../shared/models';
+import { DateTimeService } from '../../../shared/services/dateTime.service';
+import { NumberService } from '../../../shared/services/number.service';
 
 @Component({
   selector: 'app-height-form-dialog',
@@ -35,7 +36,11 @@ export class HeightFormDialogComponent implements OnChanges {
   @Output() private create = new EventEmitter<Height>();
   @Output() private update = new EventEmitter<Height>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private dateTimeService: DateTimeService,
+    private numberService: NumberService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.height && this.height.id) {
@@ -46,13 +51,13 @@ export class HeightFormDialogComponent implements OnChanges {
       }
 
       this.form.patchValue({
-        date: moment.utc(this.height.date),
+        date: this.dateTimeService.convertDateToUtc(this.height.date),
         value: formatNumber(this.height.value, 'pt', '0.2-2'),
       });
     } else {
       if (this.isNotFilledHeight) {
         this.form.patchValue({
-          date: moment(),
+          date: this.dateTimeService.dateNow(),
         });
 
         this.isNotFilledHeight = false;
@@ -72,12 +77,11 @@ export class HeightFormDialogComponent implements OnChanges {
 
   onCreate(form: FormGroup): void {
     const { valid, value } = form;
-    console.log(value.date);
 
     if (valid) {
       const height = {
         ...this.height,
-        date: moment(value.date).format('YYYY-MM-DD'),
+        date: this.dateTimeService.convertDateToSave(value.date),
         value: value.value,
       };
 
@@ -91,18 +95,14 @@ export class HeightFormDialogComponent implements OnChanges {
     if (valid) {
       const height = {
         ...this.height,
-        date: moment(value.date).format('YYYY-MM-DD'),
-        value: this.convertToFloat(this.originalHeight.value, value.value),
+        date: this.dateTimeService.convertDateToSave(value.date),
+        value: this.numberService.convertToFloat(
+          this.originalHeight.value,
+          value.value
+        ),
       };
 
       this.update.emit(height);
     }
-  }
-
-  private convertToFloat(oldValue: any, newValue: any): number {
-    return parseFloat(oldValue) ===
-      parseFloat(newValue.replace('.', '').replace(',', '.'))
-      ? oldValue
-      : newValue;
   }
 }

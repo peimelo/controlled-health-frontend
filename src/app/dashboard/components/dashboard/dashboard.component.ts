@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import * as moment from 'moment';
+import { DateTimeService } from '../../../shared/services/dateTime.service';
 
 interface Serie {
   name: Date;
@@ -26,6 +26,8 @@ export class DashboardComponent {
   @Input() title = '';
   @Input() data!: any[];
 
+  constructor(private dateTimeService: DateTimeService) {}
+
   get result() {
     if (!this.data) {
       return [];
@@ -34,6 +36,7 @@ export class DashboardComponent {
     const series: Serie[] = [];
     let min = 0;
     let max = 0;
+    this.average = 0;
 
     for (let i = this.data.length - 1; i >= 0; i--) {
       if (this.data[i].hasOwnProperty('range')) {
@@ -46,16 +49,12 @@ export class DashboardComponent {
 
       if (this.data[i].value <= this.minimum || !this.minimum) {
         this.minimum = this.data[i].value;
-        this.minimumDate = moment(this.data[i].date)
-          .utc()
-          .format('DD/MM/YYYY HH:mm');
+        this.minimumDate = this.getDateTime(this.data[i].date);
       }
 
       if (this.data[i].value >= this.maximum || !this.maximum) {
         this.maximum = this.data[i].value;
-        this.maximumDate = moment(this.data[i].date)
-          .utc()
-          .format('DD/MM/YYYY HH:mm');
+        this.maximumDate = this.getDateTime(this.data[i].date);
       }
 
       this.average += parseFloat(this.data[i].value);
@@ -85,8 +84,8 @@ export class DashboardComponent {
     ];
   }
 
-  getDate(date: string): string {
-    return moment(date).utc().format('DD/MM/YYYY HH:mm');
+  getDateTime(date: string): string {
+    return this.dateTimeService.convertDateTimeToUtc(date);
   }
 
   getValue(model: Serie): string {

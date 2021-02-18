@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import * as moment from 'moment';
 import { DialogConfig, Pagination, Weight } from '../../../shared/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
+import { DateTimeService } from '../../../shared/services/dateTime.service';
 
 @Component({
   selector: 'app-weights',
@@ -29,14 +29,17 @@ export class WeightsComponent {
   @Output() private edit = new EventEmitter<Weight>();
   @Output() private sortEvent = new EventEmitter<Sort>();
 
-  constructor(private confirmationDialogService: ConfirmationDialogService) {}
+  constructor(
+    private confirmationDialogService: ConfirmationDialogService,
+    private dateTimeService: DateTimeService
+  ) {}
 
   deleteConfirmDialog(weight: Weight): void {
     const dialogConfig: DialogConfig = {
       confirmText: 'Remove',
-      content: `'${moment
-        .utc(weight.date)
-        .format('DD/MM/YYYY HH:mm')}' will be removed.`,
+      content: `'${this.dateTimeService.convertDateTimeToUtc(
+        weight.date
+      )}' will be removed.`,
       title: 'Remove weight',
     };
     this.confirmationDialogService.show(this.delete, weight.id, dialogConfig);

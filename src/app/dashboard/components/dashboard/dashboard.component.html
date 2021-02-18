@@ -21,7 +21,7 @@
     >
       <ng-template #seriesTooltipTemplate let-model="model">
         <h2>Weight</h2>
-        <strong>date: </strong> {{ getDate(model[0]["name"]) }}<br />
+        <strong>date: </strong> {{ getDateTime(model[0]["name"]) }}<br />
         <strong>value: </strong>{{ getValue(model[0]) }}
       </ng-template>
     </ngx-charts-line-chart>

@@ -8,10 +8,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { User } from '../../../auth/models';
 import { Weight } from '../../../shared/models';
+import { DateTimeService } from '../../../shared/services/dateTime.service';
+import { NumberService } from '../../../shared/services/number.service';
 
 @Component({
   selector: 'app-weight-form-dialog',
@@ -36,7 +37,11 @@ export class WeightFormDialogComponent implements OnChanges {
   @Output() private create = new EventEmitter<Weight>();
   @Output() private update = new EventEmitter<Weight>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private dateTimeService: DateTimeService,
+    private numberService: NumberService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.weight && this.weight.id) {
@@ -47,15 +52,15 @@ export class WeightFormDialogComponent implements OnChanges {
       }
 
       this.form.patchValue({
-        date: moment.utc(this.weight.date),
-        time: moment.utc(this.weight.date).format('HH:mm'),
+        date: this.dateTimeService.convertDateToUtc(this.weight.date),
+        time: this.dateTimeService.convertTimeToUtc(this.weight.date),
         value: formatNumber(this.weight.value, 'pt', '0.2-2'),
       });
     } else {
       if (this.isNotFilledWeight) {
         this.form.patchValue({
-          date: moment(),
-          time: moment().format('HH:mm'),
+          date: this.dateTimeService.dateNow(),
+          time: this.dateTimeService.timeNow(),
         });
 
         this.isNotFilledWeight = false;
@@ -77,11 +82,11 @@ export class WeightFormDialogComponent implements OnChanges {
     const { valid, value } = form;
 
     if (valid) {
-      const date = moment(value.date).format('YYYY-MM-DD');
+      const date = this.dateTimeService.convertDateToSave(value.date);
 
       const weight = {
         ...this.weight,
-        date: moment(`${date} ${value.time}`).format('YYYY-MM-DD HH:mm'),
+        date: this.dateTimeService.convertDateTimeToSave(date, value.time),
         value: value.value,
       };
 
@@ -93,22 +98,18 @@ export class WeightFormDialogComponent implements OnChanges {
     const { valid, value } = form;
 
     if (valid) {
-      const date = moment(value.date).format('YYYY-MM-DD');
+      const date = this.dateTimeService.convertDateToSave(value.date);
 
       const weight = {
         ...this.weight,
-        date: moment(`${date} ${value.time}`).format('YYYY-MM-DD HH:mm'),
-        value: this.convertToFloat(this.originalWeight.value, value.value),
+        date: this.dateTimeService.convertDateTimeToSave(date, value.time),
+        value: this.numberService.convertToFloat(
+          this.originalWeight.value,
+          value.value
+        ),
       };
 
       this.update.emit(weight);
     }
-  }
-
-  private convertToFloat(oldValue: any, newValue: any): number {
-    return parseFloat(oldValue) ===
-      parseFloat(newValue.replace('.', '').replace(',', '.'))
-      ? oldValue
-      : newValue;
   }
 }

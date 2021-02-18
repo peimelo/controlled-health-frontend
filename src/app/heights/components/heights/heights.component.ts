@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import * as moment from 'moment';
 import { DialogConfig, Height, Pagination } from '../../../shared/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
+import { DateTimeService } from '../../../shared/services/dateTime.service';
 
 @Component({
   selector: 'app-heights',
@@ -28,14 +28,17 @@ export class HeightsComponent {
   @Output() private edit = new EventEmitter<Height>();
   @Output() private sortEvent = new EventEmitter<Sort>();
 
-  constructor(private confirmationDialogService: ConfirmationDialogService) {}
+  constructor(
+    private confirmationDialogService: ConfirmationDialogService,
+    private dateTimeService: DateTimeService
+  ) {}
 
   deleteConfirmDialog(height: Height): void {
     const dialogConfig: DialogConfig = {
       confirmText: 'Remove',
-      content: `'${moment
-        .utc(height.date)
-        .format('DD/MM/YYYY HH:mm')}' will be removed.`,
+      content: `'${this.dateTimeService.convertDateToUtcBr(
+        height.date
+      )}' will be removed.`,
       title: 'Remove height',
     };
     this.confirmationDialogService.show(this.delete, height.id, dialogConfig);
