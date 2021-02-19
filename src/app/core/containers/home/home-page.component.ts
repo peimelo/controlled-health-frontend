@@ -11,14 +11,20 @@ export class HomePageComponent {
   cols: number = 1;
 
   constructor(private breakpointObserver: BreakpointObserver) {
-    breakpointObserver
-      .observe([Breakpoints.HandsetLandscape, Breakpoints.HandsetPortrait])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.cols = 1;
-        } else {
-          this.cols = 4;
-        }
-      });
+    breakpointObserver.observe([Breakpoints.Handset]).subscribe((result) => {
+      if (result.matches) {
+        this.cols = 1;
+      }
+    });
+    breakpointObserver.observe([Breakpoints.Tablet]).subscribe((result) => {
+      if (result.matches) {
+        this.cols = 2;
+      }
+    });
+    breakpointObserver.observe([Breakpoints.Web]).subscribe((result) => {
+      if (result.matches) {
+        this.cols = 4;
+      }
+    });
   }
 }
