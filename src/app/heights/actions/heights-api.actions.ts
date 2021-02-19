@@ -1,6 +1,4 @@
-import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
-import { Height } from '../../shared/models';
 import { HeightResponse } from '../models';
 
 export const createHeightFailure = createAction(
@@ -9,8 +7,7 @@ export const createHeightFailure = createAction(
 );
 
 export const createHeightSuccess = createAction(
-  '[Heights/API] Create Height Success',
-  props<{ height: Height }>()
+  '[Heights/API] Create Height Success'
 );
 
 export const deleteHeightFailure = createAction(
@@ -18,8 +15,7 @@ export const deleteHeightFailure = createAction(
 );
 
 export const deleteHeightSuccess = createAction(
-  '[Heights/API] Delete Heights Success',
-  props<{ id: number }>()
+  '[Heights/API] Delete Heights Success'
 );
 
 export const loadHeightsFailure = createAction(
@@ -37,6 +33,5 @@ export const updateHeightFailure = createAction(
 );
 
 export const updateHeightSuccess = createAction(
-  '[Heights/API] Update Height Success',
-  props<{ update: Update<Height> }>()
+  '[Heights/API] Update Height Success'
 );

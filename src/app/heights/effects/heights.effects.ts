@@ -45,7 +45,7 @@ export class HeightsEffects {
       mergeMap(({ height }) =>
         this.heightsService.create(height).pipe(
           mergeMap((response) => [
-            HeightsApiActions.createHeightSuccess({ height: response }),
+            HeightsApiActions.createHeightSuccess(),
             HeightsActions.heightFormDialogDismiss(),
             MessageApiActions.successMessage({
               message: 'Record successfully created.',
@@ -67,10 +67,7 @@ export class HeightsEffects {
       mergeMap(([action, pagination]) =>
         this.heightsService.delete(action.id).pipe(
           mergeMap(() => [
-            HeightsApiActions.deleteHeightSuccess({ id: action.id }),
-            HeightsActions.reloadHeights({
-              pageIndex: pagination.currentPage,
-            }),
+            HeightsApiActions.deleteHeightSuccess(),
             MessageApiActions.successMessage({
               message: 'Record successfully deleted.',
             }),
@@ -101,9 +98,11 @@ export class HeightsEffects {
     this.actions$.pipe(
       ofType(
         HeightsPageActions.loadHeights,
-        HeightsActions.reloadHeights,
         HeightsPageActions.changePageHeights,
-        HeightsPageActions.sortHeights
+        HeightsPageActions.sortHeights,
+        HeightsApiActions.createHeightSuccess,
+        HeightsApiActions.deleteHeightSuccess,
+        HeightsApiActions.updateHeightSuccess
       ),
       withLatestFrom(
         this.heightsFacadeService.pagination$,
@@ -127,12 +126,7 @@ export class HeightsEffects {
       mergeMap(([action, pagination]) =>
         this.heightsService.update(action.height).pipe(
           mergeMap((heightResponse) => [
-            HeightsApiActions.updateHeightSuccess({
-              update: { id: heightResponse.id, changes: heightResponse },
-            }),
-            HeightsActions.reloadHeights({
-              pageIndex: pagination.currentPage,
-            }),
+            HeightsApiActions.updateHeightSuccess(),
             HeightsActions.heightFormDialogDismiss(),
             MessageApiActions.successMessage({
               message: 'Record successfully updated.',

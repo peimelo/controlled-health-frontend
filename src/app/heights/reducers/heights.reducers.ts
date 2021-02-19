@@ -32,25 +32,13 @@ export const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
 
-  on(HeightsApiActions.createHeightSuccess, (state, { height }) =>
-    adapter.addOne(height, {
-      ...state,
-      pagination: {
-        ...state.pagination,
-        totalItems: state.pagination.totalItems + 1,
-      },
-    })
-  ),
-
-  on(HeightsApiActions.deleteHeightSuccess, (state, { id }) =>
-    adapter.removeOne(id, {
-      ...state,
-      pagination: {
-        ...state.pagination,
-        totalItems: state.pagination.totalItems - 1,
-      },
-    })
-  ),
+  on(HeightsPageActions.changePageHeights, (state, { pageIndex }) => ({
+    ...state,
+    pagination: {
+      ...state.pagination,
+      currentPage: pageIndex,
+    },
+  })),
 
   on(HeightsApiActions.loadHeightsSuccess, (state, { heightResponse }) =>
     adapter.setAll(heightResponse.heights, {
@@ -63,13 +51,7 @@ export const reducer = createReducer(
   on(HeightsPageActions.sortHeights, (state, { sort }) => ({
     ...state,
     sort: sort,
-  })),
-
-  on(HeightsApiActions.updateHeightSuccess, (state, { update }) =>
-    adapter.updateOne(update, {
-      ...state,
-    })
-  )
+  }))
 );
 
 export const getListLoaded = (state: State) => state.listLoaded;
