@@ -12,7 +12,11 @@
 
     <ng-container *ngIf="(dashboard$ | async).heights as heights">
       <mat-grid-tile [colspan]="2" [rowspan]="1" *ngIf="heights.length > 1">
-        <app-dashboard [data]="heights" [title]="'Heights'"></app-dashboard>
+        <app-dashboard
+          [data]="heights"
+          [showAverage]="false"
+          [title]="'Heights'"
+        ></app-dashboard>
       </mat-grid-tile>
     </ng-container>
   </mat-grid-list>

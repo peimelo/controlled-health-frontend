@@ -25,6 +25,7 @@ export class DashboardComponent {
 
   @Input() title = '';
   @Input() data!: any[];
+  @Input() showAverage = true;
   @Input() showTime = false;
 
   constructor(private dateTimeService: DateTimeService) {}
