@@ -10,13 +10,13 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { User } from '../../../auth/models';
+import { FormErrorService } from '../../../core/services/form-error.service';
 import { Weight } from '../../../shared/models';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { NumberService } from '../../../shared/services/number.service';
 
 @Component({
   selector: 'app-weight-form-dialog',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './weight-form-dialog.component.html',
 })
 export class WeightFormDialogComponent implements OnChanges {
@@ -40,7 +40,8 @@ export class WeightFormDialogComponent implements OnChanges {
   constructor(
     private dateTimeService: DateTimeService,
     private numberService: NumberService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public readonly formErrorService: FormErrorService
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
