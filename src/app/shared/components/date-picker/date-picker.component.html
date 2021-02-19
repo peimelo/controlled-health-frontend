@@ -1,6 +1,5 @@
 <mat-form-field fxFlex [formGroup]="form">
   <mat-label>{{ label }}</mat-label>
-  <!-- <ng-container *ngIf="required; else notRequired"> -->
   <input
     [formControlName]="controlName"
     [matDatepicker]="picker"
@@ -12,6 +11,8 @@
 
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
+
+  <mat-hint>Valid format: DD/MM/YYYY</mat-hint>
 
   <mat-error
     *ngIf="

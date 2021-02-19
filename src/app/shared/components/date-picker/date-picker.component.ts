@@ -29,7 +29,7 @@ export class DatePickerComponent {
       da[1].length !== 2 ||
       da[2].length !== 4
     ) {
-      return 'Please input in the form of DD/MM/YYYY';
+      return 'Please input a valid format.';
     } else if (!moment(date, 'DD/MM/YYYY').isValid()) {
       return 'Please input a valid date.';
     }

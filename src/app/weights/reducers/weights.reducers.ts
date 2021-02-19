@@ -40,26 +40,6 @@ export const reducer = createReducer(
     },
   })),
 
-  on(WeightsApiActions.createWeightSuccess, (state, { weight }) =>
-    adapter.addOne(weight, {
-      ...state,
-      pagination: {
-        ...state.pagination,
-        totalItems: state.pagination.totalItems + 1,
-      },
-    })
-  ),
-
-  on(WeightsApiActions.deleteWeightSuccess, (state, { id }) =>
-    adapter.removeOne(id, {
-      ...state,
-      pagination: {
-        ...state.pagination,
-        totalItems: state.pagination.totalItems - 1,
-      },
-    })
-  ),
-
   on(WeightsApiActions.loadWeightsSuccess, (state, { weightResponse }) =>
     adapter.setAll(weightResponse.weights, {
       ...state,
@@ -71,13 +51,7 @@ export const reducer = createReducer(
   on(WeightsPageActions.sortWeights, (state, { sort }) => ({
     ...state,
     sort: sort,
-  })),
-
-  on(WeightsApiActions.updateWeightSuccess, (state, { update }) =>
-    adapter.updateOne(update, {
-      ...state,
-    })
-  )
+  }))
 );
 
 export const getListLoaded = (state: State) => state.listLoaded;

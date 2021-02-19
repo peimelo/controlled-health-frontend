@@ -45,7 +45,7 @@ export class WeightsEffects {
       mergeMap(({ weight }) =>
         this.weightsService.create(weight).pipe(
           mergeMap((response) => [
-            WeightsApiActions.createWeightSuccess({ weight: response }),
+            WeightsApiActions.createWeightSuccess(),
             WeightsActions.weightFormDialogDismiss(),
             MessageApiActions.successMessage({
               message: 'Record successfully created.',
@@ -66,8 +66,7 @@ export class WeightsEffects {
       mergeMap(({ id }) =>
         this.weightsService.delete(id).pipe(
           mergeMap(() => [
-            WeightsApiActions.deleteWeightSuccess({ id }),
-            WeightsActions.reloadWeights(),
+            WeightsApiActions.deleteWeightSuccess(),
             MessageApiActions.successMessage({
               message: 'Record successfully deleted.',
             }),
@@ -98,9 +97,11 @@ export class WeightsEffects {
     this.actions$.pipe(
       ofType(
         WeightsPageActions.loadWeights,
-        WeightsActions.reloadWeights,
         WeightsPageActions.changePageWeights,
-        WeightsPageActions.sortWeights
+        WeightsPageActions.sortWeights,
+        WeightsApiActions.createWeightSuccess,
+        WeightsApiActions.deleteWeightSuccess,
+        WeightsApiActions.updateWeightSuccess
       ),
       withLatestFrom(
         this.weightsFacadeService.pagination$,
@@ -123,10 +124,7 @@ export class WeightsEffects {
       mergeMap(({ weight }) =>
         this.weightsService.update(weight).pipe(
           mergeMap((weightResponse) => [
-            WeightsApiActions.updateWeightSuccess({
-              update: { id: weightResponse.id, changes: weightResponse },
-            }),
-            WeightsActions.reloadWeights(),
+            WeightsApiActions.updateWeightSuccess(),
             WeightsActions.weightFormDialogDismiss(),
             MessageApiActions.successMessage({
               message: 'Record successfully updated.',

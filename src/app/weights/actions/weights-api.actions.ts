@@ -1,6 +1,4 @@
-import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
-import { Weight } from '../../shared/models';
 import { WeightResponse } from '../models';
 
 export const createWeightFailure = createAction(
@@ -9,8 +7,7 @@ export const createWeightFailure = createAction(
 );
 
 export const createWeightSuccess = createAction(
-  '[Weights/API] Create Weight Success',
-  props<{ weight: Weight }>()
+  '[Weights/API] Create Weight Success'
 );
 
 export const deleteWeightFailure = createAction(
@@ -18,8 +15,7 @@ export const deleteWeightFailure = createAction(
 );
 
 export const deleteWeightSuccess = createAction(
-  '[Weights/API] Delete Weights Success',
-  props<{ id: number }>()
+  '[Weights/API] Delete Weights Success'
 );
 
 export const loadWeightsFailure = createAction(
@@ -37,6 +33,5 @@ export const updateWeightFailure = createAction(
 );
 
 export const updateWeightSuccess = createAction(
-  '[Weights/API] Update Weight Success',
-  props<{ update: Update<Weight> }>()
+  '[Weights/API] Update Weight Success'
 );
