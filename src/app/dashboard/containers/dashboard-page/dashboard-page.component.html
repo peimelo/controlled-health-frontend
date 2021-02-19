@@ -5,6 +5,7 @@
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <app-dashboard
         [data]="(dashboard$ | async).weights"
+        [showTime]="true"
         [title]="'Weights'"
       ></app-dashboard>
     </mat-grid-tile>

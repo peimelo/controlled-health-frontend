@@ -25,6 +25,7 @@ export class DashboardComponent {
 
   @Input() title = '';
   @Input() data!: any[];
+  @Input() showTime = false;
 
   constructor(private dateTimeService: DateTimeService) {}
 
@@ -85,7 +86,11 @@ export class DashboardComponent {
   }
 
   getDateTime(date: string): string {
-    return this.dateTimeService.convertDateTimeToUtc(date);
+    if (this.showTime) {
+      return this.dateTimeService.convertDateTimeToUtc(date);
+    } else {
+      return this.dateTimeService.convertDateToUtcBr(date);
+    }
   }
 
   getValue(model: Serie): string {
