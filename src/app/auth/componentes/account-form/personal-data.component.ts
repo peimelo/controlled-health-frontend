@@ -30,6 +30,7 @@ import { User } from '../../models';
           <mat-form-field>
             <mat-label>Gender</mat-label>
             <mat-select formControlName="gender">
+              <mat-option value=""></mat-option>
               <mat-option value="F">F</mat-option>
               <mat-option value="M">M</mat-option>
             </mat-select>
