@@ -8,16 +8,11 @@ import * as fromWeights from '../reducers';
 
 @Injectable()
 export class WeightsFacadeService {
-  selectListLoaded$: Observable<boolean>;
   pagination$: Observable<Pagination>;
   sort$: Observable<Sort>;
   weights$: Observable<Weight[]>;
 
   constructor(private store: Store<fromWeights.State>) {
-    this.selectListLoaded$ = this.store.pipe(
-      select(fromWeights.selectListLoaded)
-    );
-
     this.pagination$ = this.store.pipe(select(fromWeights.selectPagination));
 
     this.sort$ = this.store.pipe(select(fromWeights.selectSort));

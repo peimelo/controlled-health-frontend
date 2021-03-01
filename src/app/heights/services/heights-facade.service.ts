@@ -8,16 +8,11 @@ import * as fromHeights from '../reducers';
 
 @Injectable()
 export class HeightsFacadeService {
-  selectListLoaded$: Observable<boolean>;
   sort$: Observable<Sort>;
   pagination$: Observable<Pagination>;
   heights$: Observable<Height[]>;
 
   constructor(private store: Store<fromHeights.State>) {
-    this.selectListLoaded$ = this.store.pipe(
-      select(fromHeights.selectListLoaded)
-    );
-
     this.pagination$ = this.store.pipe(select(fromHeights.selectPagination));
 
     this.sort$ = this.store.pipe(select(fromHeights.selectSort));

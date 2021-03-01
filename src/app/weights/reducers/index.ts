@@ -35,11 +35,6 @@ export const selectWeightsEntitiesState = createSelector(
   (state) => state.weights
 );
 
-export const selectListLoaded = createSelector(
-  selectWeightsEntitiesState,
-  fromWeights.getListLoaded
-);
-
 export const selectPagination = createSelector(
   selectWeightsEntitiesState,
   fromWeights.getPagination

@@ -35,11 +35,6 @@ export const selectHeightsEntitiesState = createSelector(
   (state) => state.heights
 );
 
-export const selectListLoaded = createSelector(
-  selectHeightsEntitiesState,
-  fromHeights.getListLoaded
-);
-
 export const selectSort = createSelector(
   selectHeightsEntitiesState,
   fromHeights.getSort
