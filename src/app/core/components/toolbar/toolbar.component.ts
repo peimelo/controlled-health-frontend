@@ -13,7 +13,6 @@ import { User } from '../../../auth/models';
   ],
 })
 export class ToolbarComponent {
-  @Input() isSpinnerLoading!: boolean;
   @Input() loggedIn!: boolean;
   @Input() user!: User;
 

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthFacadeService } from '../../../auth/services/auth-facade.service';
 import { LayoutFacadeService } from '../../services/layout-facade.service';
-import { SpinnerFacadeService } from '../../services/spinner-facade.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +11,11 @@ import { SpinnerFacadeService } from '../../services/spinner-facade.service';
 export class AppComponent {
   isHandset$ = this.layoutFacadeService.isHandset$;
   loggedIn$ = this.authFacadeService.loggedIn$;
-  showSpinner$ = this.spinnerFacadeService.showSpinner$;
   user$ = this.authFacadeService.user$;
 
   constructor(
     private authFacadeService: AuthFacadeService,
-    private layoutFacadeService: LayoutFacadeService,
-    private spinnerFacadeService: SpinnerFacadeService
+    private layoutFacadeService: LayoutFacadeService
   ) {}
 
   logout(): void {

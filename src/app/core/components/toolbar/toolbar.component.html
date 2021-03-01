@@ -7,9 +7,9 @@
 
   &nbsp;
   <fa-icon
+    *ngIf="'loading' | swIsLoading | async"
     [icon]="['fas', 'spinner']"
     [spin]="true"
-    *ngIf="isSpinnerLoading"
   ></fa-icon>
 
   <span class="spacer"></span>

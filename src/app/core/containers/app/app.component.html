@@ -80,7 +80,6 @@
 
   <mat-sidenav-content>
     <app-toolbar
-      [isSpinnerLoading]="showSpinner$ | async"
       [loggedIn]="loggedIn$ | async"
       [user]="user$ | async"
       (logout)="logout()"
