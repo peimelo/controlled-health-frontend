@@ -1,5 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -9,8 +10,12 @@ export class LayoutFacadeService {
   isHandsetLandscape$: Observable<boolean>;
   isTablet$: Observable<boolean>;
   isWeb$: Observable<boolean>;
+  mediaObserver$: Observable<MediaChange[]>;
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private mediaObserver: MediaObserver
+  ) {
     this.isHandsetPortrait$ = this.breakpointObserver
       .observe(Breakpoints.HandsetPortrait)
       .pipe(
@@ -34,5 +39,7 @@ export class LayoutFacadeService {
       map((result) => result.matches),
       shareReplay()
     );
+
+    this.mediaObserver$ = this.mediaObserver.asObservable();
   }
 }
