@@ -1,5 +1,5 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { LayoutFacadeService } from '../../services/layout-facade.service';
 
 @Component({
   selector: 'app-home',
@@ -10,19 +10,21 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class HomePageComponent {
   cols: number = 1;
 
-  constructor(private breakpointObserver: BreakpointObserver) {
-    breakpointObserver.observe([Breakpoints.Handset]).subscribe((result) => {
-      if (result.matches) {
+  constructor(private layoutFacadeService: LayoutFacadeService) {
+    this.layoutFacadeService.isHandset$.subscribe((result) => {
+      if (result) {
         this.cols = 1;
       }
     });
-    breakpointObserver.observe([Breakpoints.Tablet]).subscribe((result) => {
-      if (result.matches) {
+
+    this.layoutFacadeService.isTablet$.subscribe((result) => {
+      if (result) {
         this.cols = 2;
       }
     });
-    breakpointObserver.observe([Breakpoints.Web]).subscribe((result) => {
-      if (result.matches) {
+
+    this.layoutFacadeService.isWeb$.subscribe((result) => {
+      if (result) {
         this.cols = 4;
       }
     });
