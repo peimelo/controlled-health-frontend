@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
-import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
 import { Height } from '../../../shared/models';
 import { HeightsFacadeService } from '../../services/heights-facade.service';
 
@@ -12,15 +11,11 @@ import { HeightsFacadeService } from '../../services/heights-facade.service';
   templateUrl: './heights-page.component.html',
 })
 export class HeightsPageComponent implements OnInit {
-  isHandset$ = this.layoutFacadeService.isHandset$;
   pagination$ = this.heightsFacadeService.pagination$;
   sort$ = this.heightsFacadeService.sort$;
   heights$: Observable<Height[]>;
 
-  constructor(
-    private layoutFacadeService: LayoutFacadeService,
-    private heightsFacadeService: HeightsFacadeService
-  ) {
+  constructor(private heightsFacadeService: HeightsFacadeService) {
     this.heights$ = this.heightsFacadeService.heights$;
   }
 

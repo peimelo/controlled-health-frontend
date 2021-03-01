@@ -11,13 +11,8 @@ import { DateTimeService } from '../../../shared/services/dateTime.service';
   styleUrls: ['./heights.component.scss'],
 })
 export class HeightsComponent {
-  columnDefinitions = [
-    { columnDef: 'date', showMobile: true },
-    { columnDef: 'value', showMobile: true },
-    { columnDef: 'actions', showMobile: true },
-  ];
+  columnDefinitions = ['date', 'value', 'actions'];
 
-  @Input() isHandset!: boolean;
   @Input() pagination!: Pagination;
   @Input() sort!: Sort;
   @Input() heights!: Height[];
@@ -42,12 +37,6 @@ export class HeightsComponent {
       title: 'Remove height',
     };
     this.confirmationDialogService.show(this.delete, height.id, dialogConfig);
-  }
-
-  getDisplayedColumns(): string[] {
-    return this.columnDefinitions
-      .filter((item) => (this.isHandset ? item.showMobile : true))
-      .map((item) => item.columnDef);
   }
 
   onAdd(): void {

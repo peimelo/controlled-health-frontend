@@ -12,7 +12,7 @@ import { WeightsFacadeService } from '../../services/weights-facade.service';
   templateUrl: './weights-page.component.html',
 })
 export class WeightsPageComponent implements OnInit {
-  isHandset$ = this.layoutFacadeService.isHandset$;
+  isHandsetPortrait$ = this.layoutFacadeService.isHandsetPortrait$;
   pagination$ = this.weightsFacadeService.pagination$;
   sort$ = this.weightsFacadeService.sort$;
   weights$: Observable<Weight[]>;

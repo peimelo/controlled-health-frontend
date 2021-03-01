@@ -11,14 +11,14 @@ import { DateTimeService } from '../../../shared/services/dateTime.service';
   styleUrls: ['./weights.component.scss'],
 })
 export class WeightsComponent {
-  columnDefinitions = [
-    { columnDef: 'date', showMobile: true },
-    { columnDef: 'value', showMobile: true },
-    { columnDef: 'range', showMobile: false },
-    { columnDef: 'actions', showMobile: true },
+  private columnDefinitions = [
+    { columnDef: 'date', showPortrait: true },
+    { columnDef: 'value', showPortrait: true },
+    { columnDef: 'range', showPortrait: false },
+    { columnDef: 'actions', showPortrait: true },
   ];
 
-  @Input() isHandset!: boolean;
+  @Input() isHandsetPortrait!: boolean;
   @Input() pagination!: Pagination;
   @Input() sort!: Sort;
   @Input() weights!: Weight[];
@@ -47,7 +47,7 @@ export class WeightsComponent {
 
   getDisplayedColumns(): string[] {
     return this.columnDefinitions
-      .filter((item) => (this.isHandset ? item.showMobile : true))
+      .filter((item) => (this.isHandsetPortrait ? item.showPortrait : true))
       .map((item) => item.columnDef);
   }
 

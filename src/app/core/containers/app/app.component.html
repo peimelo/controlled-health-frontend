@@ -1,11 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="'over'"
-    [opened]="false"
-  >
+  <mat-sidenav #drawer fixedInViewport [mode]="'over'" [opened]="false">
     <mat-toolbar>Menu</mat-toolbar>
 
     <mat-nav-list>

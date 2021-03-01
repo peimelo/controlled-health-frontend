@@ -5,15 +5,25 @@ import { map, shareReplay } from 'rxjs/operators';
 
 @Injectable()
 export class LayoutFacadeService {
-  isHandset$: Observable<boolean>;
+  isHandsetPortrait$: Observable<boolean>;
+  isHandsetLandscape$: Observable<boolean>;
   isTablet$: Observable<boolean>;
   isWeb$: Observable<boolean>;
 
   constructor(private breakpointObserver: BreakpointObserver) {
-    this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+    this.isHandsetPortrait$ = this.breakpointObserver
+      .observe(Breakpoints.HandsetPortrait)
+      .pipe(
+        map((result) => result.matches),
+        shareReplay()
+      );
+
+    this.isHandsetLandscape$ = this.breakpointObserver
+      .observe(Breakpoints.HandsetLandscape)
+      .pipe(
+        map((result) => result.matches),
+        shareReplay()
+      );
 
     this.isTablet$ = this.breakpointObserver.observe(Breakpoints.Tablet).pipe(
       map((result) => result.matches),
