@@ -112,7 +112,10 @@ export class WeightsEffects {
           map((weightResponse) =>
             WeightsApiActions.loadWeightsSuccess({ weightResponse })
           ),
-          catchError(() => of(WeightsApiActions.loadWeightsFailure()))
+          catchError((error) => {
+            const message = this.errorService.getMessage(error);
+            return of(MessageApiActions.errorMessage({ message }));
+          })
         )
       )
     )

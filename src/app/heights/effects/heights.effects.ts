@@ -113,7 +113,10 @@ export class HeightsEffects {
           map((heightResponse) =>
             HeightsApiActions.loadHeightsSuccess({ heightResponse })
           ),
-          catchError(() => of(HeightsApiActions.loadHeightsFailure()))
+          catchError((error) => {
+            const message = this.errorService.getMessage(error);
+            return of(MessageApiActions.errorMessage({ message }));
+          })
         )
       )
     )
