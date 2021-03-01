@@ -37,10 +37,13 @@
       <ng-container matColumnDef="range">
         <mat-header-cell *matHeaderCellDef> Range (kg)</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <span *ngIf="!!element.range.min">
+          <span *ngIf="!!element.range.min; else noWeight">
             {{ element.range.min | number: "0.2-2" }} ~
             {{ element.range.max | number: "0.2-2" }}
           </span>
+          <ng-template #noWeight>
+            Add your height to see the range
+          </ng-template>
         </mat-cell>
       </ng-container>
 
