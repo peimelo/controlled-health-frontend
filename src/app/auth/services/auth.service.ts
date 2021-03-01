@@ -43,6 +43,7 @@ export class AuthService {
     return this.http
       .put<UserDataResponse>(this.url, {
         date_of_birth: user.date_of_birth,
+        email: user.email,
         gender: user.gender,
         name: user.name,
       })

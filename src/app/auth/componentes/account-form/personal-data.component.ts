@@ -1,6 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { FormErrorService } from '../../../core/services/form-error.service';
 import { User } from '../../models';
 
 @Component({
@@ -14,20 +22,32 @@ import { User } from '../../models';
       </mat-expansion-panel-header>
 
       <form [formGroup]="form">
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-
-          <input matInput [value]="user?.email" disabled />
-        </mat-form-field>
-
         <div fxLayout fxLayout.xs="column" fxLayoutGap="10px">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+
+            <input matInput formControlName="email" />
+
+            <mat-error
+              *ngFor="
+                let error of formErrorService.mapErrors(
+                  form.get('email')?.errors
+                )
+              "
+            >
+              {{ error }}
+            </mat-error>
+          </mat-form-field>
+
           <mat-form-field>
             <mat-label>Name</mat-label>
 
             <input matInput formControlName="name" />
           </mat-form-field>
+        </div>
 
-          <mat-form-field>
+        <div fxLayout fxLayout.xs="column" fxLayoutGap="10px">
+          <mat-form-field fxFlex="50%">
             <mat-label>Gender</mat-label>
             <mat-select formControlName="gender">
               <mat-option value=""></mat-option>
@@ -60,12 +80,9 @@ import { User } from '../../models';
   `,
   styleUrls: ['./account-form.component.scss'],
 })
-export class PersonalDataComponent implements OnInit {
+export class PersonalDataComponent implements OnChanges {
   form = this.fb.group({
-    email: [
-      { value: '', disabled: true },
-      [Validators.email, Validators.required],
-    ],
+    email: ['', [Validators.email, Validators.required]],
     name: ['', []],
     gender: ['', []],
     date_of_birth: ['', []],
@@ -84,15 +101,20 @@ export class PersonalDataComponent implements OnInit {
 
   @Output() update = new EventEmitter<User>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    public readonly formErrorService: FormErrorService
+  ) {}
 
-  ngOnInit(): void {
-    this.form.patchValue({
-      email: this.user.email,
-      name: this.user.name,
-      gender: this.user.gender,
-      date_of_birth: this.user.date_of_birth,
-    });
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.user && changes.user.currentValue) {
+      this.form.patchValue({
+        date_of_birth: this.user.date_of_birth,
+        email: this.user.email,
+        gender: this.user.gender,
+        name: this.user.name,
+      });
+    }
   }
 
   onUpdate(): void {
@@ -102,6 +124,7 @@ export class PersonalDataComponent implements OnInit {
       this.update.emit({
         ...this.user,
         date_of_birth: moment(value.date_of_birth).format('YYYY-MM-DD'),
+        email: value.email,
         gender: value.gender,
         name: value.name,
       });
