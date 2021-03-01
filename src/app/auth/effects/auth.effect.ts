@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { IsLoadingService } from '@service-work/is-loading';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { MessageApiActions, UserActions } from '../../core/actions';
@@ -25,28 +24,20 @@ export class AuthEffects {
   createAccount$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CreateAccountPageActions.createAccount),
-      exhaustMap(({ account }) => {
-        this.loadingService.add({ key: 'createAccount' });
-
-        return this.authService.createAccount(account).pipe(
-          switchMap((message) => {
-            this.loadingService.remove({ key: 'createAccount' });
-
-            return [
-              AuthApiActions.loginRedirect(),
-              MessageApiActions.successMessage({
-                message,
-              }),
-            ];
-          }),
+      exhaustMap(({ account }) =>
+        this.authService.createAccount(account).pipe(
+          switchMap((message) => [
+            AuthApiActions.loginRedirect(),
+            MessageApiActions.successMessage({
+              message,
+            }),
+          ]),
           catchError((error) => {
-            this.loadingService.remove({ key: 'createAccount' });
-
             const message = this.errorService.getMessage(error);
             return of(MessageApiActions.errorMessage({ message }));
           })
-        );
-      })
+        )
+      )
     )
   );
 
@@ -143,25 +134,19 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoginPageActions.login),
-      exhaustMap(({ credentials }) => {
-        this.loadingService.add({ key: 'login' });
-
-        return this.authService.login(credentials).pipe(
-          map((user) => {
-            this.loadingService.remove({ key: 'login' });
-
-            return AuthApiActions.loginSuccess({
+      exhaustMap(({ credentials }) =>
+        this.authService.login(credentials).pipe(
+          map((user) =>
+            AuthApiActions.loginSuccess({
               user,
-            });
-          }),
+            })
+          ),
           catchError((error) => {
-            this.loadingService.remove({ key: 'login' });
-
             const message = this.errorService.getMessage(error);
             return of(MessageApiActions.errorMessage({ message }));
           })
-        );
-      })
+        )
+      )
     )
   );
 
@@ -215,28 +200,20 @@ export class AuthEffects {
   forgotPassword$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ForgotPasswordPageActions.forgotPassword),
-      exhaustMap(({ email }) => {
-        this.loadingService.add({ key: 'forgotPassword' });
-
-        return this.authService.forgotPassword(email).pipe(
-          switchMap((message) => {
-            this.loadingService.remove({ key: 'forgotPassword' });
-
-            return [
-              AuthApiActions.loginRedirect(),
-              MessageApiActions.successMessage({
-                message,
-              }),
-            ];
-          }),
+      exhaustMap(({ email }) =>
+        this.authService.forgotPassword(email).pipe(
+          switchMap((message) => [
+            AuthApiActions.loginRedirect(),
+            MessageApiActions.successMessage({
+              message,
+            }),
+          ]),
           catchError((error) => {
-            this.loadingService.remove({ key: 'forgotPassword' });
-
             const message = this.errorService.getMessage(error);
             return of(MessageApiActions.errorMessage({ message }));
           })
-        );
-      })
+        )
+      )
     )
   );
 
@@ -263,28 +240,20 @@ export class AuthEffects {
   resendConfirmation$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ResendConfirmationPageActions.resendConfirmation),
-      exhaustMap(({ email }) => {
-        this.loadingService.add({ key: 'resendConfirmation' });
-
-        return this.authService.resendConfirmation(email).pipe(
-          switchMap((message) => {
-            this.loadingService.remove({ key: 'resendConfirmation' });
-
-            return [
-              AuthApiActions.loginRedirect(),
-              MessageApiActions.successMessage({
-                message,
-              }),
-            ];
-          }),
+      exhaustMap(({ email }) =>
+        this.authService.resendConfirmation(email).pipe(
+          switchMap((message) => [
+            AuthApiActions.loginRedirect(),
+            MessageApiActions.successMessage({
+              message,
+            }),
+          ]),
           catchError((error) => {
-            this.loadingService.remove({ key: 'resendConfirmation' });
-
             const message = this.errorService.getMessage(error);
             return of(MessageApiActions.errorMessage({ message }));
           })
-        );
-      })
+        )
+      )
     )
   );
 
@@ -304,7 +273,6 @@ export class AuthEffects {
     private authService: AuthService,
     private dialog: MatDialog,
     private errorService: ErrorsService,
-    private loadingService: IsLoadingService,
     private router: Router
   ) {}
 }

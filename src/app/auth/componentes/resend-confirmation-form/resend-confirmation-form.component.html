@@ -25,12 +25,12 @@
       <p class="submitButton">
         <button
           color="primary"
-          [disabled]="'resendConfirmation' | swIsLoading | async"
+          [disabled]="'loading' | swIsLoading | async"
           mat-raised-button
           type="submit"
         >
           <fa-icon
-            *ngIf="'resendConfirmation' | swIsLoading | async"
+            *ngIf="'loading' | swIsLoading | async"
             [icon]="['fas', 'spinner']"
             [spin]="true"
           ></fa-icon>
