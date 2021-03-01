@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { HomeComponent } from './components/home/home.component';
 import { MessageComponent } from './components/message/message.component';
 import { NavItemComponent } from './components/nav-item.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -14,6 +15,7 @@ import * as fromServices from './services';
 export const COMPONENTS = [
   AppComponent,
   HomePageComponent,
+  HomeComponent,
   MessageComponent,
   NotFoundPageComponent,
   NavItemComponent,
