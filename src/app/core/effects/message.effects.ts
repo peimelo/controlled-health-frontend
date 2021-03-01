@@ -35,7 +35,7 @@ export class MessageEffects {
         message,
         type,
       },
-      duration: 5000,
+      duration: 7000,
       horizontalPosition: 'center',
       panelClass: [`${type}-snackbar`],
       verticalPosition: 'top',
