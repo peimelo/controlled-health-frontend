@@ -106,7 +106,7 @@ export class PersonalDataComponent implements OnChanges {
     public readonly formErrorService: FormErrorService
   ) {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.user && changes.user.currentValue) {
       this.form.patchValue({
         date_of_birth: this.user.date_of_birth,

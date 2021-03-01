@@ -44,7 +44,7 @@ export class WeightFormDialogComponent implements OnChanges {
     public readonly formErrorService: FormErrorService
   ) {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.weight && this.weight.id) {
       this.isEditing = true;
 

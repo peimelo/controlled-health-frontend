@@ -42,7 +42,7 @@ export class HeightFormDialogComponent implements OnChanges {
     private fb: FormBuilder
   ) {}
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.height && this.height.id) {
       this.isEditing = true;
 
