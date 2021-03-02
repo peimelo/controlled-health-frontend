@@ -5,7 +5,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { MessageApiActions, UserActions } from '../../core/actions';
-import { ErrorsService } from '../../core/services/errors.service';
+import { ErrorsService } from '../../shared/services/errors.service';
 import {
   AccountPageActions,
   AuthActions,
@@ -32,10 +32,7 @@ export class AuthEffects {
               message,
             }),
           ]),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -52,10 +49,7 @@ export class AuthEffects {
               message: resp.message,
             }),
           ]),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -71,10 +65,7 @@ export class AuthEffects {
               message,
             }),
           ]),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -111,10 +102,7 @@ export class AuthEffects {
               message,
             }),
           ]),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -141,10 +129,7 @@ export class AuthEffects {
               user,
             })
           ),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -188,10 +173,7 @@ export class AuthEffects {
               user,
             })
           ),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -208,10 +190,7 @@ export class AuthEffects {
               message,
             }),
           ]),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -228,10 +207,7 @@ export class AuthEffects {
               message,
             }),
           ]),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -248,10 +224,7 @@ export class AuthEffects {
               message,
             }),
           ]),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )

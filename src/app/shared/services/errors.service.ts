@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { MessageApiActions } from '../../core/actions';
 
 @Injectable()
 export class ErrorsService {
-  getMessage(error: any): string {
+  private getMessage(error: any): string {
     if (!environment.production) {
       console.log(error);
     }
@@ -21,5 +23,10 @@ export class ErrorsService {
     }
 
     return message;
+  }
+
+  showError(error: any): Observable<any> {
+    const message = this.getMessage(error);
+    return of(MessageApiActions.errorMessage({ message }));
   }
 }

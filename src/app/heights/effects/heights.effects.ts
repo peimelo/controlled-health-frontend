@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
 import {
   catchError,
   exhaustMap,
@@ -11,7 +10,7 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { MessageApiActions } from '../../core/actions';
-import { ErrorsService } from '../../core/services/errors.service';
+import { ErrorsService } from '../../shared/services/errors.service';
 import {
   HeightsActions,
   HeightsApiActions,
@@ -51,10 +50,7 @@ export class HeightsEffects {
               message: 'Record successfully created.',
             }),
           ]),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -72,10 +68,7 @@ export class HeightsEffects {
               message: 'Record successfully deleted.',
             }),
           ]),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -113,10 +106,7 @@ export class HeightsEffects {
           map((heightResponse) =>
             HeightsApiActions.loadHeightsSuccess({ heightResponse })
           ),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
@@ -135,10 +125,7 @@ export class HeightsEffects {
               message: 'Record successfully updated.',
             }),
           ]),
-          catchError((error) => {
-            const message = this.errorService.getMessage(error);
-            return of(MessageApiActions.errorMessage({ message }));
-          })
+          catchError((error) => this.errorService.showError(error))
         )
       )
     )
