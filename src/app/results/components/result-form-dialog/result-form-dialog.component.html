@@ -1,0 +1,86 @@
+<h1 mat-dialog-title>{{ isEditing ? "Update" : "Create" }} result</h1>
+
+<div mat-dialog-content>
+  <form
+    [formGroup]="form"
+    fxLayout
+    fxLayout.xs="column"
+    fxLayoutGap="10px"
+    novalidate
+  >
+    <app-date-picker [form]="form"></app-date-picker>
+
+    <mat-form-field fxFlex>
+      <input
+        [dropSpecialCharacters]="false"
+        [showMaskTyped]="true"
+        formControlName="time"
+        mask="Hh:m0"
+        matInput
+        placeholder="Time"
+        required
+        type="text"
+      />
+      <mat-error
+        *ngFor="
+          let error of formErrorService.mapErrors(form.get('time')?.errors)
+        "
+      >
+        {{ error }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex>
+      <input
+        [dropSpecialCharacters]="true"
+        formControlName="value"
+        mask="separator.2"
+        thousandSeparator="."
+        matInput
+        placeholder="Value (kg)"
+        required
+      />
+      <mat-error
+        *ngIf="!form.controls['value'].valid && form.controls['value'].touched"
+      >
+        {{ getErrorValue() }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<div fxLayout fxLayoutAlign="end" mat-dialog-actions>
+  <button fxflex mat-button [mat-dialog-close]="true">Cancel</button>
+
+  <button
+    [disabled]="!form.valid || isLoading"
+    fxflex
+    mat-button
+    *ngIf="!isEditing"
+    type="button"
+    (click)="onCreate(form)"
+  >
+    <fa-icon
+      [icon]="['fas', 'spinner']"
+      [spin]="true"
+      *ngIf="isLoading"
+    ></fa-icon>
+    Create
+  </button>
+
+  <button
+    [disabled]="!form.valid || isLoading"
+    fxflex
+    mat-button
+    *ngIf="isEditing"
+    type="button"
+    (click)="onUpdate(form)"
+  >
+    <fa-icon
+      [icon]="['fas', 'spinner']"
+      [spin]="true"
+      *ngIf="isLoading"
+    ></fa-icon>
+    Update
+  </button>
+</div>

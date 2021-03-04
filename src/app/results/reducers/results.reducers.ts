@@ -1,0 +1,56 @@
+import { Sort } from '@angular/material/sort';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { createReducer, on } from '@ngrx/store';
+import { Pagination } from '../../shared/models';
+import { ResultsApiActions, ResultsPageActions } from '../actions';
+import { Result } from '../models';
+
+export const resultsFeatureKey = 'results';
+
+export interface State extends EntityState<Result> {
+  pagination: Pagination;
+  sort: Sort;
+}
+
+export const adapter: EntityAdapter<Result> = createEntityAdapter<Result>({});
+
+export const initialState: State = adapter.getInitialState({
+  entities: {},
+  ids: [],
+  pagination: {
+    currentPage: 1,
+    itemsPerPage: 0,
+    totalItems: 0,
+  },
+  sort: <Sort>{
+    active: 'date',
+    direction: 'desc',
+  },
+});
+
+export const reducer = createReducer(
+  initialState,
+
+  on(ResultsPageActions.changePageResults, (state, { pageIndex }) => ({
+    ...state,
+    pagination: {
+      ...state.pagination,
+      currentPage: pageIndex,
+    },
+  })),
+
+  on(ResultsApiActions.loadResultsSuccess, (state, { resultResponse }) =>
+    adapter.setAll(resultResponse.results, {
+      ...state,
+      pagination: resultResponse.meta,
+    })
+  ),
+
+  on(ResultsPageActions.sortResults, (state, { sort }) => ({
+    ...state,
+    sort: sort,
+  }))
+);
+
+export const getPagination = (state: State) => state.pagination;
+export const getSort = (state: State) => state.sort;

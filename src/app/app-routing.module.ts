@@ -20,6 +20,11 @@ const routes: Routes = [
       import('./heights/heights.module').then((m) => m.HeightsModule),
   },
   {
+    path: 'results',
+    loadChildren: () =>
+      import('./results/results.module').then((m) => m.ResultsModule),
+  },
+  {
     path: 'weights',
     loadChildren: () =>
       import('./weights/weights.module').then((m) => m.WeightsModule),

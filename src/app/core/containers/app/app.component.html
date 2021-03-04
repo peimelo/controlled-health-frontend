@@ -51,6 +51,16 @@
       </app-nav-item>
 
       <app-nav-item
+        hint="View your Results"
+        matIcon="rules"
+        *ngIf="loggedIn$ | async"
+        routerLink="/results"
+        (navigate)="drawer.toggle()"
+      >
+        Results
+      </app-nav-item>
+
+      <app-nav-item
         hint="View your Weights"
         fasIcon="weight"
         *ngIf="loggedIn$ | async"
