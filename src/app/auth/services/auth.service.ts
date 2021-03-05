@@ -93,9 +93,9 @@ export class AuthService {
       );
   }
 
-  private setInLocalStorage(key: string, token: string | null) {
-    if (token) {
-      localStorage.setItem(key, token);
+  setInLocalStorage(key: string, value: string | null) {
+    if (value) {
+      localStorage.setItem(key, value);
     }
   }
 

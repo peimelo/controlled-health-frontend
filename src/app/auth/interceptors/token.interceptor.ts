@@ -3,9 +3,11 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
+  HttpResponse,
 } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
@@ -37,6 +39,20 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(request);
+    return next.handle(request).pipe(
+      tap((event: any) => {
+        if (event instanceof HttpResponse) {
+          this.authService.setInLocalStorage(
+            'access-token',
+            event.headers.get('access-token')
+          );
+          this.authService.setInLocalStorage(
+            'client',
+            event.headers.get('client')
+          );
+          this.authService.setInLocalStorage('uid', event.headers.get('uid'));
+        }
+      })
+    );
   }
 }
