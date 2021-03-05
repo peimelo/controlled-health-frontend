@@ -1,13 +1,15 @@
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
+  HttpHeaders,
   HttpInterceptor,
   HttpRequest,
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
@@ -22,11 +24,9 @@ export class TokenInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     this.authService = this.injector.get(AuthService);
 
-    const accessToken = this.authService.getValueFromLocalStorage(
-      'access-token'
-    );
-    const client = this.authService.getValueFromLocalStorage('client');
-    const uid = this.authService.getValueFromLocalStorage('uid');
+    const accessToken = localStorage.getItem('access-token');
+    const client = localStorage.getItem('client');
+    const uid = localStorage.getItem('uid');
 
     if (accessToken && client && uid) {
       request = request.clone({
@@ -40,19 +40,28 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     return next.handle(request).pipe(
-      tap((event: any) => {
+      map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          this.authService.setInLocalStorage(
-            'access-token',
-            event.headers.get('access-token')
-          );
-          this.authService.setInLocalStorage(
-            'client',
-            event.headers.get('client')
-          );
-          this.authService.setInLocalStorage('uid', event.headers.get('uid'));
+          this.setHeadersInLocalStorage(event.headers);
         }
+        return event;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        this.setHeadersInLocalStorage(error.headers);
+        return throwError(error);
       })
     );
+  }
+
+  private setHeadersInLocalStorage(headers: HttpHeaders): void {
+    this.setItemInLocalStorage('access-token', headers.get('access-token'));
+    this.setItemInLocalStorage('client', headers.get('client'));
+    this.setItemInLocalStorage('uid', headers.get('uid'));
+  }
+
+  private setItemInLocalStorage(key: string, value: string | null) {
+    if (value) {
+      localStorage.setItem(key, value);
+    }
   }
 }

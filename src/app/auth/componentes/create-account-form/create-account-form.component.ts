@@ -12,7 +12,7 @@ export class CreateAccountFormComponent {
   form = this.fb.group(
     {
       email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       passwordConfirmation: ['', Validators.required],
     },
     {

@@ -19,10 +19,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getValueFromLocalStorage(key: string): string | null {
-    return localStorage.getItem(key);
-  }
-
   // User account
 
   createAccount(account: CreateAccountRequest): Observable<string> {
@@ -66,37 +62,8 @@ export class AuthService {
 
   login(credentials: Credentials): Observable<User> {
     return this.http
-      .post<UserDataResponse>(`${this.url}/sign_in`, credentials, {
-        observe: 'response',
-      })
-      .pipe(
-        tap((resp) => {
-          this.setInLocalStorage(
-            'access-token',
-            resp.headers.get('access-token')
-          );
-          this.setInLocalStorage('client', resp.headers.get('client'));
-          this.setInLocalStorage('uid', resp.headers.get('uid'));
-        }),
-        map((resp) => {
-          if (resp && resp.body && resp.body.data) {
-            return { ...resp.body.data };
-          }
-
-          return {
-            email: '',
-            name: '',
-            gender: '',
-            date_of_birth: '',
-          };
-        })
-      );
-  }
-
-  setInLocalStorage(key: string, value: string | null) {
-    if (value) {
-      localStorage.setItem(key, value);
-    }
+      .post<UserDataResponse>(`${this.url}/sign_in`, credentials)
+      .pipe(map((resp) => resp.data));
   }
 
   logout(): Observable<any> {
@@ -155,8 +122,8 @@ export class AuthService {
     }
 
     return this.http
-      .put<MessageResponse>(`${this.url}/password`, data)
-      .pipe(map((resp) => resp.message));
+      .put<MessageResponse>(this.url, data)
+      .pipe(map(() => 'Your password has been successfully updated.'));
   }
 
   // Confirmation

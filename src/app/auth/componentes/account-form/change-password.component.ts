@@ -93,8 +93,8 @@ import { PasswordCombination } from '../../models';
 export class ChangePasswordComponent {
   form = this.fb.group(
     {
-      currentPassword: ['', [Validators.required, Validators.minLength(6)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      currentPassword: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       passwordConfirmation: ['', Validators.required],
     },
     {
