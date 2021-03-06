@@ -3,8 +3,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from '../shared/shared.module';
+import { ResultDetailComponent } from './components/result-detail/result-detail.component';
 import { ResultFormDialogComponent } from './components/result-form-dialog/result-form-dialog.component';
 import { ResultsComponent } from './components/results/results.component';
+import { ResultDetailPageComponent } from './containers/result-detail-page/result-detail-page.component';
 import { ResultFormDialogPageComponent } from './containers/result-form-dialog-page/result-form-dialog-page.component';
 import { ResultsPageComponent } from './containers/results-page/results-page.component';
 import { ResultsEffects } from './effects';
@@ -29,6 +31,8 @@ import { ResultsService } from './services/results.service';
   declarations: [
     ResultsPageComponent,
     ResultsComponent,
+    ResultDetailComponent,
+    ResultDetailPageComponent,
     ResultFormDialogComponent,
     ResultFormDialogPageComponent,
   ],

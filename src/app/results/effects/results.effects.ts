@@ -12,6 +12,7 @@ import {
 import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services/errors.service';
 import {
+  ResultDetailPageActions,
   ResultsActions,
   ResultsApiActions,
   ResultsFormDialogActions,
@@ -43,7 +44,7 @@ export class ResultsEffects {
       ofType(ResultsFormDialogActions.createResult),
       mergeMap(({ result }) =>
         this.resultsService.create(result).pipe(
-          mergeMap((response) => [
+          mergeMap(() => [
             ResultsApiActions.createResultSuccess(),
             ResultsActions.resultFormDialogDismiss(),
             MessageApiActions.successMessage({
@@ -73,18 +74,18 @@ export class ResultsEffects {
     )
   );
 
-  editResult$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ResultsPageActions.editResult),
-        tap(({ result }) => {
-          this.dialogRef = this.dialog.open(ResultFormDialogPageComponent, {
-            data: { result },
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  // editResult$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(ResultsPageActions.editResult),
+  //       tap(({ result }) => {
+  //         this.dialogRef = this.dialog.open(ResultFormDialogPageComponent, {
+  //           data: { result },
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   loadResults$ = createEffect(() =>
     this.actions$.pipe(
@@ -111,12 +112,24 @@ export class ResultsEffects {
     )
   );
 
+  loadResult$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ResultDetailPageActions.loadResult),
+      exhaustMap((action) =>
+        this.resultsService.getOne(action.id).pipe(
+          map((result) => ResultsApiActions.loadResultSuccess({ result })),
+          catchError((error) => this.errorService.showError(error))
+        )
+      )
+    )
+  );
+
   updateResult$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ResultsFormDialogActions.updateResult),
       mergeMap(({ result }) =>
         this.resultsService.update(result).pipe(
-          mergeMap((resultResponse) => [
+          mergeMap(() => [
             ResultsApiActions.updateResultSuccess(),
             ResultsActions.resultFormDialogDismiss(),
             MessageApiActions.successMessage({

@@ -22,6 +22,10 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
   //   });
   // }
 
+  getOne(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiPath}/${id}`);
+  }
+
   update(resource: T): Observable<T> {
     return this.http.put<T>(`${this.apiPath}/${resource.id}`, resource);
   }

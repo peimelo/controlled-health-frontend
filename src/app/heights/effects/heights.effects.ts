@@ -43,7 +43,7 @@ export class HeightsEffects {
       ofType(HeightsFormDialogActions.createHeight),
       mergeMap(({ height }) =>
         this.heightsService.create(height).pipe(
-          mergeMap((response) => [
+          mergeMap(() => [
             HeightsApiActions.createHeightSuccess(),
             HeightsActions.heightFormDialogDismiss(),
             MessageApiActions.successMessage({
@@ -59,8 +59,7 @@ export class HeightsEffects {
   deleteHeight$ = createEffect(() =>
     this.actions$.pipe(
       ofType(HeightsPageActions.deleteHeight),
-      withLatestFrom(this.heightsFacadeService.pagination$),
-      mergeMap(([action, pagination]) =>
+      mergeMap((action) =>
         this.heightsService.delete(action.id).pipe(
           mergeMap(() => [
             HeightsApiActions.deleteHeightSuccess(),
@@ -115,10 +114,9 @@ export class HeightsEffects {
   updateHeight$ = createEffect(() =>
     this.actions$.pipe(
       ofType(HeightsFormDialogActions.updateHeight),
-      withLatestFrom(this.heightsFacadeService.pagination$),
-      mergeMap(([action, pagination]) =>
+      mergeMap((action) =>
         this.heightsService.update(action.height).pipe(
-          mergeMap((heightResponse) => [
+          mergeMap(() => [
             HeightsApiActions.updateHeightSuccess(),
             HeightsActions.heightFormDialogDismiss(),
             MessageApiActions.successMessage({

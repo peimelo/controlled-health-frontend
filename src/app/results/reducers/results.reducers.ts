@@ -9,6 +9,7 @@ export const resultsFeatureKey = 'results';
 
 export interface State extends EntityState<Result> {
   pagination: Pagination;
+  selected: Result;
   sort: Sort;
 }
 
@@ -22,6 +23,11 @@ export const initialState: State = adapter.getInitialState({
     itemsPerPage: 0,
     totalItems: 0,
   },
+  selected: {
+    id: 0,
+    date: '',
+    description: '',
+  },
   sort: <Sort>{
     active: 'date',
     direction: 'desc',
@@ -30,6 +36,15 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
+
+  on(
+    ResultsPageActions.editResult,
+    ResultsApiActions.loadResultSuccess,
+    (state, { result }) => ({
+      ...state,
+      selected: result,
+    })
+  ),
 
   on(ResultsPageActions.changePageResults, (state, { pageIndex }) => ({
     ...state,
@@ -53,4 +68,5 @@ export const reducer = createReducer(
 );
 
 export const getPagination = (state: State) => state.pagination;
+export const getSelected = (state: State) => state.selected;
 export const getSort = (state: State) => state.sort;

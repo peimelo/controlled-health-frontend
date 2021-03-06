@@ -41,16 +41,18 @@
             mat-icon-button
             matTooltip="Edit this item"
             (click)="onEdit(row)"
+            [routerLink]="[row.id]"
           >
             <mat-icon>edit</mat-icon>
           </button>
-          <button
+
+          <!-- <button
             mat-icon-button
             matTooltip="Delete this item"
             (click)="deleteConfirmDialog(row)"
           >
             <mat-icon>delete</mat-icon>
-          </button>
+          </button> -->
         </mat-cell>
       </ng-container>
 

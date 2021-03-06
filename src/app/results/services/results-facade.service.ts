@@ -3,22 +3,29 @@ import { Sort } from '@angular/material/sort';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Pagination } from '../../shared/models';
-import { ResultsFormDialogActions, ResultsPageActions } from '../actions';
+import {
+  ResultDetailPageActions,
+  ResultsFormDialogActions,
+  ResultsPageActions,
+} from '../actions';
 import { Result } from '../models';
 import * as fromResults from '../reducers';
 
 @Injectable()
 export class ResultsFacadeService {
   pagination$: Observable<Pagination>;
-  sort$: Observable<Sort>;
   results$: Observable<Result[]>;
+  selected$: Observable<Result>;
+  sort$: Observable<Sort>;
 
   constructor(private store: Store<fromResults.State>) {
     this.pagination$ = this.store.pipe(select(fromResults.selectPagination));
 
-    this.sort$ = this.store.pipe(select(fromResults.selectSort));
-
     this.results$ = this.store.pipe(select(fromResults.selectAllResults));
+
+    this.selected$ = this.store.pipe(select(fromResults.selectSelected));
+
+    this.sort$ = this.store.pipe(select(fromResults.selectSort));
   }
 
   addResult(): void {
@@ -43,6 +50,10 @@ export class ResultsFacadeService {
 
   loadResults(): void {
     this.store.dispatch(ResultsPageActions.loadResults());
+  }
+
+  loadResult(id: number): void {
+    this.store.dispatch(ResultDetailPageActions.loadResult({ id }));
   }
 
   sortResults(sort: Sort): void {

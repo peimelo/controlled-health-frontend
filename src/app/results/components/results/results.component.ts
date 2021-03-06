@@ -15,7 +15,7 @@ export class ResultsComponent {
   private columnDefinitions = [
     { columnDef: 'date', showPortrait: true },
     { columnDef: 'description', showPortrait: true },
-    // { columnDef: 'actions', showPortrait: true },
+    { columnDef: 'actions', showPortrait: true },
   ];
 
   @Input() isHandsetPortrait!: boolean;

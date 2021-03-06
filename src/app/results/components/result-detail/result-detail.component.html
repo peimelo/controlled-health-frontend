@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  <div fxLayout fxLayout.xs="column" fxLayoutGap="10px">
+    <app-date-picker
+      [controlName]="'date'"
+      [form]="form"
+      [label]="'Date'"
+      [required]="true"
+    >
+    </app-date-picker>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+
+      <input matInput formControlName="description" />
+    </mat-form-field>
+  </div>
+</form>
+
+<mat-action-row>
+  <button
+    color="primary"
+    [disabled]="!form.valid"
+    mat-button
+    (click)="goBack()"
+  >
+    Back
+  </button>
+</mat-action-row>

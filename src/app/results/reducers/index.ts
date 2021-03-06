@@ -40,6 +40,11 @@ export const selectPagination = createSelector(
   fromResults.getPagination
 );
 
+export const selectSelected = createSelector(
+  selectResultsEntitiesState,
+  fromResults.getSelected
+);
+
 export const selectSort = createSelector(
   selectResultsEntitiesState,
   fromResults.getSort

@@ -43,7 +43,7 @@ export class WeightsEffects {
       ofType(WeightsFormDialogActions.createWeight),
       mergeMap(({ weight }) =>
         this.weightsService.create(weight).pipe(
-          mergeMap((response) => [
+          mergeMap(() => [
             WeightsApiActions.createWeightSuccess(),
             WeightsActions.weightFormDialogDismiss(),
             MessageApiActions.successMessage({
@@ -116,7 +116,7 @@ export class WeightsEffects {
       ofType(WeightsFormDialogActions.updateWeight),
       mergeMap(({ weight }) =>
         this.weightsService.update(weight).pipe(
-          mergeMap((weightResponse) => [
+          mergeMap(() => [
             WeightsApiActions.updateWeightSuccess(),
             WeightsActions.weightFormDialogDismiss(),
             MessageApiActions.successMessage({
