@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ResultsFacadeService } from '../../services/results-facade.service';
 
 @Component({
@@ -10,21 +9,5 @@ import { ResultsFacadeService } from '../../services/results-facade.service';
 export class ResultDetailPageComponent {
   result$ = this.resultsFacadeService.selected$;
 
-  constructor(
-    private resultsFacadeService: ResultsFacadeService,
-    private route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    this.getResult();
-  }
-
-  getResult(): void {
-    this.route.paramMap.subscribe((params) => {
-      const id = params.get('id');
-      if (id) {
-        this.resultsFacadeService.loadResult(+id);
-      }
-    });
-  }
+  constructor(private resultsFacadeService: ResultsFacadeService) {}
 }

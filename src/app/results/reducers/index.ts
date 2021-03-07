@@ -45,6 +45,11 @@ export const selectSelected = createSelector(
   fromResults.getSelected
 );
 
+export const selectSelectedLoaded = createSelector(
+  selectResultsEntitiesState,
+  fromResults.getSelectedLoaded
+);
+
 export const selectSort = createSelector(
   selectResultsEntitiesState,
   fromResults.getSort

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { ResultDetailPageComponent } from './containers/result-detail-page/result-detail-page.component';
 import { ResultsPageComponent } from './containers/results-page/results-page.component';
+import { ResultExistsGuard } from './guards/result-exists.guard';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ResultExistsGuard],
     component: ResultDetailPageComponent,
     data: { title: 'Results' },
   },

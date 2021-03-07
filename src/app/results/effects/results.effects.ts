@@ -12,10 +12,10 @@ import {
 import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services/errors.service';
 import {
-  ResultDetailPageActions,
   ResultsActions,
   ResultsApiActions,
   ResultsFormDialogActions,
+  ResultsGuardActions,
   ResultsPageActions,
 } from '../actions';
 import { ResultFormDialogPageComponent } from '../containers/result-form-dialog-page/result-form-dialog-page.component';
@@ -114,7 +114,7 @@ export class ResultsEffects {
 
   loadResult$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ResultDetailPageActions.loadResult),
+      ofType(ResultsGuardActions.loadResult),
       exhaustMap((action) =>
         this.resultsService.getOne(action.id).pipe(
           map((result) => ResultsApiActions.loadResultSuccess({ result })),

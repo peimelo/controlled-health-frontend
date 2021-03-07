@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
 export const loadResult = createAction(
-  '[Result Detail Page] Load Result',
+  '[Result Exists Guard] Load Result',
   props<{ id: number }>()
 );

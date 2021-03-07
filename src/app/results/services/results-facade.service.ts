@@ -4,8 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Pagination } from '../../shared/models';
 import {
-  ResultDetailPageActions,
   ResultsFormDialogActions,
+  ResultsGuardActions,
   ResultsPageActions,
 } from '../actions';
 import { Result } from '../models';
@@ -15,7 +15,8 @@ import * as fromResults from '../reducers';
 export class ResultsFacadeService {
   pagination$: Observable<Pagination>;
   results$: Observable<Result[]>;
-  selected$: Observable<Result>;
+  selected$: Observable<Result | null>;
+  selectedLoaded$: Observable<boolean>;
   sort$: Observable<Sort>;
 
   constructor(private store: Store<fromResults.State>) {
@@ -24,6 +25,9 @@ export class ResultsFacadeService {
     this.results$ = this.store.pipe(select(fromResults.selectAllResults));
 
     this.selected$ = this.store.pipe(select(fromResults.selectSelected));
+    this.selectedLoaded$ = this.store.pipe(
+      select(fromResults.selectSelectedLoaded)
+    );
 
     this.sort$ = this.store.pipe(select(fromResults.selectSort));
   }
@@ -53,7 +57,7 @@ export class ResultsFacadeService {
   }
 
   loadResult(id: number): void {
-    this.store.dispatch(ResultDetailPageActions.loadResult({ id }));
+    this.store.dispatch(ResultsGuardActions.loadResult({ id }));
   }
 
   sortResults(sort: Sort): void {

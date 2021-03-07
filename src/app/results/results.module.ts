@@ -10,6 +10,7 @@ import { ResultDetailPageComponent } from './containers/result-detail-page/resul
 import { ResultFormDialogPageComponent } from './containers/result-form-dialog-page/result-form-dialog-page.component';
 import { ResultsPageComponent } from './containers/results-page/results-page.component';
 import { ResultsEffects } from './effects';
+import { ResultExistsGuard } from './guards/result-exists.guard';
 import * as fromResult from './reducers';
 import { ResultsRoutingModule } from './results-routing.module';
 import { ResultsFacadeService } from './services/results-facade.service';
@@ -36,6 +37,6 @@ import { ResultsService } from './services/results.service';
     ResultFormDialogComponent,
     ResultFormDialogPageComponent,
   ],
-  providers: [ResultsFacadeService, ResultsService],
+  providers: [ResultsFacadeService, ResultsService, ResultExistsGuard],
 })
 export class ResultsModule {}
