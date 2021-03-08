@@ -200,7 +200,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(ResetPasswordPageActions.resetPassword),
       exhaustMap(({ passwordCombination }) =>
-        this.authService.updatePassword(passwordCombination).pipe(
+        this.authService.resetPassword(passwordCombination).pipe(
           switchMap((message) => [
             AuthApiActions.loginRedirect(),
             MessageApiActions.successMessage({

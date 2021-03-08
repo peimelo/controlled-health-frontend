@@ -122,8 +122,10 @@ export class ChangePasswordComponent {
   ) {}
 
   onUpdatePassword(): void {
-    if (this.form.valid) {
-      this.updatePassword.emit(this.form.value);
+    const { valid, value } = this.form;
+
+    if (valid) {
+      this.updatePassword.emit(value);
       this.form.reset();
     }
   }

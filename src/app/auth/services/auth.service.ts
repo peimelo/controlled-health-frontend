@@ -126,6 +126,19 @@ export class AuthService {
       .pipe(map(() => 'Your password has been successfully updated.'));
   }
 
+  resetPassword(passwordCombination: PasswordCombination): Observable<string> {
+    const { password, passwordConfirmation } = passwordCombination;
+
+    let data: any = {
+      password,
+      password_confirmation: passwordConfirmation,
+    };
+
+    return this.http
+      .put<MessageResponse>(`${this.url}/password`, data)
+      .pipe(map((resp) => resp.message));
+  }
+
   // Confirmation
 
   resendConfirmation(email: string): Observable<string> {

@@ -11,7 +11,7 @@ import { PasswordCombination } from '../../models';
 export class ResetPasswordFormComponent {
   form = this.fb.group(
     {
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       passwordConfirmation: ['', Validators.required],
     },
     {
@@ -39,8 +39,10 @@ export class ResetPasswordFormComponent {
   ) {}
 
   submit(): void {
-    if (this.form.valid) {
-      this.submitted.emit(this.form.value);
+    const { valid, value } = this.form;
+
+    if (valid) {
+      this.submitted.emit(value);
     }
   }
 }
