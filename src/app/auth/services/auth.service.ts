@@ -87,19 +87,11 @@ export class AuthService {
   forgotPassword(email: string): Observable<string> {
     const data = {
       email,
-      redirect_url: `${this.getRootUrl()}/reset-password`,
     };
 
     return this.http
       .post<MessageResponse>(`${this.url}/password`, data)
       .pipe(map((resp) => resp.message));
-  }
-
-  private getRootUrl(): string {
-    const protocol = window.location.protocol;
-    const host = window.location.host;
-
-    return `${protocol}//${host}`;
   }
 
   updatePassword(passwordCombination: PasswordCombination): Observable<string> {
