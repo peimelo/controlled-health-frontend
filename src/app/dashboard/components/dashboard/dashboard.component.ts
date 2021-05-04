@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { ChartResult, Serie } from '../../models';
 
@@ -6,6 +12,7 @@ import { ChartResult, Serie } from '../../models';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnChanges {
   colorScheme = {
@@ -57,9 +64,9 @@ export class DashboardComponent implements OnChanges {
     }
 
     const series: Serie[] = [];
-    this.average = 0;
     let max = 0;
     let min = 0;
+    this.resetValues();
 
     for (let i = this.data.length - 1; i >= 0; i--) {
       if (this.data[i].hasOwnProperty('range')) {
@@ -98,6 +105,14 @@ export class DashboardComponent implements OnChanges {
         series,
       },
     ];
+  }
+
+  private resetValues(): void {
+    this.average = 0;
+    this.maximumDate = '';
+    this.maximumValue = 0;
+    this.minimumDate = '';
+    this.minimumValue = 0;
   }
 
   private setMaximumDateAndValue(date: string, value: number): void {
