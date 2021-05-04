@@ -2,8 +2,8 @@
   <mat-card-header>
     <mat-card-title> {{ title }} </mat-card-title>
     <mat-card-subtitle>
-      <strong>Minimum: </strong>{{ minimum }} ({{ minimumDate }}) |
-      <strong>Maximum: </strong> {{ maximum }} ({{ maximumDate }})
+      <strong>Minimum: </strong>{{ minimumValue }} ({{ minimumDate }}) |
+      <strong>Maximum: </strong> {{ maximumValue }} ({{ maximumDate }})
       <span *ngIf="showAverage">
         | <strong>Average: </strong> {{ average }}
       </span>
@@ -14,7 +14,7 @@
     <ngx-charts-line-chart
       *ngIf="data.length > 1; else noData"
       [view]="[containerRef.offsetWidth, containerRef.offsetHeight / 1.15]"
-      [results]="result"
+      [results]="results"
       [scheme]="colorScheme"
       xAxis="true"
       [xAxisLabel]="'Date'"
@@ -22,7 +22,7 @@
       yAxis="true"
     >
       <ng-template #seriesTooltipTemplate let-model="model">
-        <h2>Weight</h2>
+        <h2>{{ title }}</h2>
         <strong>date: </strong> {{ getDateTime(model[0]["name"]) }}<br />
         <strong>value: </strong>{{ getValue(model[0]) }}
       </ng-template>

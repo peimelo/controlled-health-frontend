@@ -1,63 +1,77 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
+import { ChartResult, Serie } from '../../models';
 
-interface Serie {
-  name: Date;
-  value: number;
-  min?: number;
-  max?: number;
-}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnChanges {
   colorScheme = {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
   };
 
-  minimum!: number;
-  minimumDate = '';
-  maximum!: number;
-  maximumDate = '';
   average = 0;
+  maximumDate = '';
+  maximumValue = 0;
+  minimumDate = '';
+  minimumValue = 0;
 
-  @Input() title = '';
+  results: ChartResult[] = [];
+
   @Input() data!: any[];
   @Input() showAverage = true;
   @Input() showTime = false;
+  @Input() title = '';
 
   constructor(private dateTimeService: DateTimeService) {}
 
-  get result() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.data.currentValue) {
+      this.results = this.getChartData();
+    }
+  }
+
+  getDateTime(date: string): string {
+    if (this.showTime) {
+      return this.dateTimeService.convertDateTimeToUtc(date);
+    } else {
+      return this.dateTimeService.convertDateToUtcBr(date);
+    }
+  }
+
+  getValue(model: Serie): string {
+    const { value, min, max } = model;
+
+    if (min && max) {
+      return `${value} (min: ${min} ~ max: ${max})`;
+    }
+
+    return value.toString();
+  }
+
+  private getChartData(): ChartResult[] {
     if (!this.data) {
       return [];
     }
 
     const series: Serie[] = [];
-    let min = 0;
-    let max = 0;
     this.average = 0;
+    let max = 0;
+    let min = 0;
 
     for (let i = this.data.length - 1; i >= 0; i--) {
       if (this.data[i].hasOwnProperty('range')) {
-        min = this.data[i].range.min;
         max = this.data[i].range.max;
+        min = this.data[i].range.min;
       } else {
-        min = -1;
         max = -1;
+        min = -1;
       }
 
-      if (this.data[i].value <= this.minimum || !this.minimum) {
-        this.minimum = this.data[i].value;
-        this.minimumDate = this.getDateTime(this.data[i].date);
-      }
-
-      if (this.data[i].value >= this.maximum || !this.maximum) {
-        this.maximum = this.data[i].value;
-        this.maximumDate = this.getDateTime(this.data[i].date);
-      }
+      this.setMaximumDateAndValue(this.data[i].date, this.data[i].value);
+      this.setMinimumDateAndValue(this.data[i].date, this.data[i].value);
 
       this.average += parseFloat(this.data[i].value);
 
@@ -86,21 +100,17 @@ export class DashboardComponent {
     ];
   }
 
-  getDateTime(date: string): string {
-    if (this.showTime) {
-      return this.dateTimeService.convertDateTimeToUtc(date);
-    } else {
-      return this.dateTimeService.convertDateToUtcBr(date);
+  private setMaximumDateAndValue(date: string, value: number): void {
+    if (value >= this.maximumValue || !this.maximumValue) {
+      this.maximumValue = value;
+      this.maximumDate = this.getDateTime(date);
     }
   }
 
-  getValue(model: Serie): string {
-    const { value, min, max } = model;
-
-    if (min && max) {
-      return `${value} (min: ${min} ~ max: ${max})`;
+  private setMinimumDateAndValue(date: string, value: number): void {
+    if (value <= this.minimumValue || !this.minimumValue) {
+      this.minimumValue = value;
+      this.minimumDate = this.getDateTime(date);
     }
-
-    return value.toString();
   }
 }
