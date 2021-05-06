@@ -1,10 +1,14 @@
-<app-heights
-  [pagination]="pagination$ | async"
-  [heights]="heights$ | async"
-  [sort]="sort$ | async"
-  (add)="onAdd()"
-  (changePage)="onChangePage($event)"
-  (delete)="onDelete($event)"
-  (edit)="onEdit($event)"
-  (sortEvent)="onSortEvent($event)"
-></app-heights>
+<div class="container">
+  <h1 class="mat-h1">Heights</h1>
+
+  <app-heights
+    [pagination]="pagination$ | async"
+    [heights]="heights$ | async"
+    [sort]="sort$ | async"
+    (add)="onAdd()"
+    (changePage)="onChangePage($event)"
+    (delete)="onDelete($event)"
+    (edit)="onEdit($event)"
+    (sortEvent)="onSortEvent($event)"
+  ></app-heights>
+</div>

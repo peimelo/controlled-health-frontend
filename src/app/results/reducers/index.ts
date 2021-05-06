@@ -5,11 +5,13 @@ import {
   createSelector,
 } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
+import * as fromExamsResults from './exams-results.reducers';
 import * as fromResults from './results.reducers';
 
 export const resultsFeatureKey = 'results';
 
 export interface ResultsState {
+  [fromExamsResults.examsResultsFeatureKey]: fromExamsResults.State;
   [fromResults.resultsFeatureKey]: fromResults.State;
 }
 
@@ -19,12 +21,33 @@ export interface State extends fromRoot.State {
 
 export function reducers(state: ResultsState | undefined, action: Action) {
   return combineReducers({
+    [fromExamsResults.examsResultsFeatureKey]: fromExamsResults.reducer,
     [fromResults.resultsFeatureKey]: fromResults.reducer,
   })(state, action);
 }
 
 export const selectResultsState = createFeatureSelector<State, ResultsState>(
   resultsFeatureKey
+);
+
+/**
+ * Exams Results Reducers
+ */
+export const selectExamsResultsEntitiesState = createSelector(
+  selectResultsState,
+  (state) => state.examsResults
+);
+
+export const {
+  selectIds: selectExamResultIds,
+  selectEntities: selectExamResultEntities,
+  selectAll: selectAllExamsResults,
+  selectTotal: selectTotalExamsResults,
+} = fromExamsResults.adapter.getSelectors(selectExamsResultsEntitiesState);
+
+export const selectExamsResultsPagination = createSelector(
+  selectExamsResultsEntitiesState,
+  fromExamsResults.getPagination
 );
 
 /**

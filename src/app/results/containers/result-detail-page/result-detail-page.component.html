@@ -1,1 +1,12 @@
-<app-result-detail [result]="result$ | async"></app-result-detail>
+<div class="container">
+  <h1 class="mat-h1">Result Detail</h1>
+
+  <div fxLayout="column" fxLayoutGap="10px">
+    <app-result-detail [result]="result$ | async"></app-result-detail>
+
+    <app-exams-results
+      [examsResults]="examsResults$ | async"
+      [pagination]="pagination$ | async"
+    ></app-exams-results>
+  </div>
+</div>

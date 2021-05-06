@@ -1,0 +1,39 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>
+      <span [matBadge]="pagination.totalItems" matBadgeOverlap="false"
+        >Exams</span
+      >
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <mat-table [dataSource]="examsResults">
+        <ng-container matColumnDef="exam.name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.exam.name }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+          <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.value }} {{ element.exam.unit.name }}
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row
+          *matHeaderRowDef="getDisplayedColumns()"
+        ></mat-header-row>
+        <mat-row *matRowDef="let row; columns: getDisplayedColumns()"></mat-row>
+      </mat-table>
+
+      <app-paginator
+        *ngIf="pagination"
+        [pagination]="pagination"
+        (page)="onChangePage($event)"
+      ></app-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

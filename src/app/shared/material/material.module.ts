@@ -3,6 +3,7 @@ import {
   MatMomentDateModule,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
@@ -25,6 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 const MODULES = [
   MatCardModule,
+  MatBadgeModule,
   MatButtonModule,
   MatDatepickerModule,
   MatDialogModule,

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ExamsResultsFacadeService } from '../../services/exams-results-facade.service';
 import { ResultsFacadeService } from '../../services/results-facade.service';
 
 @Component({
@@ -6,8 +7,17 @@ import { ResultsFacadeService } from '../../services/results-facade.service';
   templateUrl: './result-detail-page.component.html',
   styleUrls: ['./result-detail-page.component.scss'],
 })
-export class ResultDetailPageComponent {
+export class ResultDetailPageComponent implements OnInit {
   result$ = this.resultsFacadeService.selected$;
+  examsResults$ = this.examsResultsFacadeService.examsResults$;
+  pagination$ = this.examsResultsFacadeService.pagination$;
 
-  constructor(private resultsFacadeService: ResultsFacadeService) {}
+  constructor(
+    private examsResultsFacadeService: ExamsResultsFacadeService,
+    private resultsFacadeService: ResultsFacadeService
+  ) {}
+
+  ngOnInit(): void {
+    this.examsResultsFacadeService.loadExamsResults();
+  }
 }

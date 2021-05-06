@@ -5,13 +5,6 @@ import { DashboardFacadeService } from '../../services/dashboard-facade.service'
   selector: 'app-dashboard-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dashboard-page.component.html',
-  styles: [
-    `
-      .grid-container {
-        margin: 20px;
-      }
-    `,
-  ],
 })
 export class DashboardPageComponent implements OnInit {
   dashboard$ = this.dashboardFacadeService.dashboard$;

@@ -1,11 +1,15 @@
-<app-weights
-  [isHandsetPortrait]="isHandsetPortrait$ | async"
-  [pagination]="pagination$ | async"
-  [sort]="sort$ | async"
-  [weights]="weights$ | async"
-  (add)="onAdd()"
-  (changePage)="onChangePage($event)"
-  (delete)="onDelete($event)"
-  (edit)="onEdit($event)"
-  (sortEvent)="onSortEvent($event)"
-></app-weights>
+<div class="container">
+  <h1 class="mat-h1">Weights</h1>
+
+  <app-weights
+    [isHandsetPortrait]="isHandsetPortrait$ | async"
+    [pagination]="pagination$ | async"
+    [sort]="sort$ | async"
+    [weights]="weights$ | async"
+    (add)="onAdd()"
+    (changePage)="onChangePage($event)"
+    (delete)="onDelete($event)"
+    (edit)="onEdit($event)"
+    (sortEvent)="onSortEvent($event)"
+  ></app-weights>
+</div>
