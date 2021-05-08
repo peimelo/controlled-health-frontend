@@ -38,17 +38,22 @@ export const selectExamsResultsEntitiesState = createSelector(
   (state) => state.examsResults
 );
 
+export const selectExamsResultsPagination = createSelector(
+  selectExamsResultsEntitiesState,
+  fromExamsResults.getPagination
+);
+
+export const selectExamsResultsSort = createSelector(
+  selectExamsResultsEntitiesState,
+  fromExamsResults.getSort
+);
+
 export const {
   selectIds: selectExamResultIds,
   selectEntities: selectExamResultEntities,
   selectAll: selectAllExamsResults,
   selectTotal: selectTotalExamsResults,
 } = fromExamsResults.adapter.getSelectors(selectExamsResultsEntitiesState);
-
-export const selectExamsResultsPagination = createSelector(
-  selectExamsResultsEntitiesState,
-  fromExamsResults.getPagination
-);
 
 /**
  * Results Reducers

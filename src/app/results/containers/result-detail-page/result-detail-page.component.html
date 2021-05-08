@@ -5,8 +5,12 @@
     <app-result-detail [result]="result$ | async"></app-result-detail>
 
     <app-exams-results
+      [isHandsetPortrait]="isHandsetPortrait$ | async"
       [examsResults]="examsResults$ | async"
       [pagination]="pagination$ | async"
+      [sort]="sort$ | async"
+      (changePage)="onChangePage($event)"
+      (sortEvent)="onSortEvent($event)"
     ></app-exams-results>
   </div>
 </div>

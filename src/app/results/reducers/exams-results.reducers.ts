@@ -2,7 +2,7 @@ import { Sort } from '@angular/material/sort';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { Pagination } from '../../shared/models';
-import { ExamsResultsApiActions } from '../actions';
+import { ExamsResultsApiActions, ResultDetailPageActions } from '../actions';
 import { ExamResult } from '../models';
 
 export const examsResultsFeatureKey = 'examsResults';
@@ -25,13 +25,21 @@ export const initialState: State = adapter.getInitialState({
     totalItems: 0,
   },
   sort: <Sort>{
-    active: 'value',
-    direction: 'desc',
+    active: 'exams.name',
+    direction: 'asc',
   },
 });
 
 export const reducer = createReducer(
   initialState,
+
+  on(ResultDetailPageActions.changePageResults, (state, { pageIndex }) => ({
+    ...state,
+    pagination: {
+      ...state.pagination,
+      currentPage: pageIndex,
+    },
+  })),
 
   on(
     ExamsResultsApiActions.loadExamsResultsSuccess,
@@ -40,7 +48,12 @@ export const reducer = createReducer(
         ...state,
         pagination: examResultResponse.meta,
       })
-  )
+  ),
+
+  on(ResultDetailPageActions.sortResults, (state, { sort }) => ({
+    ...state,
+    sort: sort,
+  }))
 );
 
 export const getPagination = (state: State) => state.pagination;

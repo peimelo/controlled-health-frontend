@@ -13,7 +13,7 @@ import { ExamResult, Result } from '../../models';
 })
 export class ExamsResultsComponent {
   private columnDefinitions = [
-    { columnDef: 'exam.name', showPortrait: true },
+    { columnDef: 'exams.name', showPortrait: true },
     { columnDef: 'value', showPortrait: true },
   ];
 
@@ -37,6 +37,10 @@ export class ExamsResultsComponent {
     return this.columnDefinitions
       .filter((item) => (this.isHandsetPortrait ? item.showPortrait : true))
       .map((item) => item.columnDef);
+  }
+
+  onChangePage(event: PageEvent): void {
+    this.changePage.emit(event);
   }
 
   sortData(sort: Sort) {
