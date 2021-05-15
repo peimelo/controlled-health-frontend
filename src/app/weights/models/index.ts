@@ -1,1 +1,1 @@
-export * from './weight-response';
+export * from './weight-response.model';

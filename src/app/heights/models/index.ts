@@ -1,1 +1,1 @@
-export * from './height-response';
+export * from './height-response.model';
