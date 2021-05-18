@@ -12,7 +12,11 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <app-line-chart [data]="weights" [showTime]="true"></app-line-chart>
+      <app-line-chart
+        [data]="weights"
+        [showTime]="true"
+        [showTimeline]="false"
+      ></app-line-chart>
     </mat-expansion-panel>
 
     <mat-expansion-panel expanded="true">
