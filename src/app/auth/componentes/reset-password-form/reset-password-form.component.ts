@@ -31,18 +31,18 @@ export class ResetPasswordFormComponent {
     }
   }
 
-  @Output() submitted = new EventEmitter<PasswordCombination>();
+  @Output() private submit = new EventEmitter<PasswordCombination>();
 
   constructor(
     private fb: FormBuilder,
     public readonly formErrorService: FormErrorService
   ) {}
 
-  submit(): void {
+  onSubmit(): void {
     const { valid, value } = this.form;
 
     if (valid) {
-      this.submitted.emit(value);
+      this.submit.emit(value);
     }
   }
 }

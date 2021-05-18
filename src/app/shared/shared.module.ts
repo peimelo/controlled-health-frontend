@@ -9,7 +9,6 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { IconsModule } from './icons/icons.module';
 import { MaterialModule } from './material/material.module';
 import { FormatDatetimeUtcPipe } from './pipes/format-datetime-utc.pipe';
-import * as fromServices from './services';
 
 const COMPONENTS = [
   ConfirmationDialogComponent,
@@ -37,6 +36,5 @@ const MODULES = [
   declarations: [...COMPONENTS],
   imports: [...MODULES],
   exports: [...COMPONENTS, ...MODULES],
-  providers: [...fromServices.services],
 })
 export class SharedModule {}

@@ -1,4 +1,4 @@
-import { AccountPageComponent } from './account-page.component';
+import { AccountPageComponent } from './account-page/account-page.component';
 import { CreateAccountPageComponent } from './create-account-page.component';
 import { ForgotPasswordPageComponent } from './forgot-password-page.component';
 import { LoginPageComponent } from './login-page.component';
@@ -14,7 +14,7 @@ export const containers: any[] = [
   ResetPasswordPageComponent,
 ];
 
-export * from './account-page.component';
+export * from './account-page/account-page.component';
 export * from './create-account-page.component';
 export * from './forgot-password-page.component';
 export * from './login-page.component';

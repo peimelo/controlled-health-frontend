@@ -10,8 +10,6 @@ import { AuthEffects } from './effects';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import * as fromAuth from './reducers';
-import { AuthFacadeService } from './services/auth-facade.service';
-import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [...fromContainers.containers, ...fromComponents.components],
@@ -25,8 +23,6 @@ import { AuthService } from './services/auth.service';
     SharedModule,
   ],
   providers: [
-    AuthFacadeService,
-    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

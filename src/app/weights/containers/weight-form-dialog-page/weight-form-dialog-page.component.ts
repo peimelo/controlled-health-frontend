@@ -23,9 +23,6 @@ export class WeightFormDialogPageComponent {
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
     private weightFacadeService: WeightsFacadeService
   ) {
-    // this.error$ = this.store.pipe(select(fromWeightsSelectors.getWeightsError))
-    // this.isLoading$ = this.store.pipe(select(fromWeightsSelectors.getWeightsLoading))
-    // this.user$ = this.store.pipe(select(fromAuthSelectors.getUser))
     this.weight = this.data.weight;
   }
 

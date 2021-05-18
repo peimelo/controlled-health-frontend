@@ -4,7 +4,7 @@ import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LayoutFacadeService {
   isHandsetPortrait$: Observable<boolean>;
   isHandsetLandscape$: Observable<boolean>;

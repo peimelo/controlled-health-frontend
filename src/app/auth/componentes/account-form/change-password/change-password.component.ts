@@ -1,17 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FormErrorService } from '../../../core/services/form-error.service';
-import { CreateAccountRequest } from '../../models';
+import { FormErrorService } from '../../../../core/services/form-error.service';
+import { PasswordCombination } from '../../../models';
 
 @Component({
-  selector: 'app-create-account-form',
-  templateUrl: './create-account-form.component.html',
-  styleUrls: ['./create-account-form.component.scss'],
+  selector: 'app-change-password',
+  templateUrl: './change-password.component.html',
+  styleUrls: ['../account-form.component.scss'],
 })
-export class CreateAccountFormComponent {
+export class ChangePasswordComponent {
   form = this.fb.group(
     {
-      email: ['', [Validators.email, Validators.required]],
+      currentPassword: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       passwordConfirmation: ['', Validators.required],
     },
@@ -32,16 +32,19 @@ export class CreateAccountFormComponent {
     }
   }
 
-  @Output() private submit = new EventEmitter<CreateAccountRequest>();
+  @Output() private updatePassword = new EventEmitter<PasswordCombination>();
 
   constructor(
     private fb: FormBuilder,
     public readonly formErrorService: FormErrorService
   ) {}
 
-  onSubmit(): void {
-    if (this.form.valid) {
-      this.submit.emit(this.form.value);
+  onUpdatePassword(): void {
+    const { valid, value } = this.form;
+
+    if (valid) {
+      this.updatePassword.emit(value);
+      this.form.reset();
     }
   }
 }

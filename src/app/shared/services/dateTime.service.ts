@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DateTimeService {
   convertDateToSave(date: any): string {
     return moment(date).format('YYYY-MM-DD');

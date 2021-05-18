@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { MessageApiActions } from '../../core/actions';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ErrorsService {
   private getMessage(error: any): string {
     if (!environment.production) {

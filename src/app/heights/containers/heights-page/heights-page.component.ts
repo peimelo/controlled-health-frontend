@@ -11,9 +11,9 @@ import { HeightsFacadeService } from '../../services/heights-facade.service';
   templateUrl: './heights-page.component.html',
 })
 export class HeightsPageComponent implements OnInit {
+  heights$: Observable<Height[]>;
   pagination$ = this.heightsFacadeService.pagination$;
   sort$ = this.heightsFacadeService.sort$;
-  heights$: Observable<Height[]>;
 
   constructor(private heightsFacadeService: HeightsFacadeService) {
     this.heights$ = this.heightsFacadeService.heights$;

@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { DialogConfig } from '../models';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ConfirmationDialogService {
   constructor(private dialog: MatDialog) {}
 

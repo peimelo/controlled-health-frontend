@@ -13,7 +13,7 @@ import {
   UserDataResponse,
 } from '../models';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private url = `${environment.baseUrl}/auth`;
 
@@ -58,30 +58,6 @@ export class AuthService {
     );
   }
 
-  // Session
-
-  login(credentials: Credentials): Observable<User> {
-    return this.http
-      .post<UserDataResponse>(`${this.url}/sign_in`, credentials)
-      .pipe(map((resp) => resp.data));
-  }
-
-  logout(): Observable<any> {
-    return this.http
-      .delete(`${this.url}/sign_out`)
-      .pipe(tap(() => this.clearLocalStorage()));
-  }
-
-  private clearLocalStorage(): void {
-    localStorage.clear();
-  }
-
-  getUser(): Observable<User> {
-    return this.http
-      .get<UserDataResponse>(`${this.url}/validate_token`)
-      .pipe(map((resp) => resp.data));
-  }
-
   // Password
 
   forgotPassword(email: string): Observable<string> {
@@ -95,11 +71,8 @@ export class AuthService {
   }
 
   updatePassword(passwordCombination: PasswordCombination): Observable<string> {
-    const {
-      currentPassword,
-      password,
-      passwordConfirmation,
-    } = passwordCombination;
+    const { currentPassword, password, passwordConfirmation } =
+      passwordCombination;
 
     let data: any = {
       password,
@@ -139,5 +112,29 @@ export class AuthService {
         email,
       })
       .pipe(map((resp) => resp.message));
+  }
+
+  // Session
+
+  getUser(): Observable<User> {
+    return this.http
+      .get<UserDataResponse>(`${this.url}/validate_token`)
+      .pipe(map((resp) => resp.data));
+  }
+
+  login(credentials: Credentials): Observable<User> {
+    return this.http
+      .post<UserDataResponse>(`${this.url}/sign_in`, credentials)
+      .pipe(map((resp) => resp.data));
+  }
+
+  logout(): Observable<any> {
+    return this.http
+      .delete(`${this.url}/sign_out`)
+      .pipe(tap(() => this.clearLocalStorage()));
+  }
+
+  private clearLocalStorage(): void {
+    localStorage.clear();
   }
 }

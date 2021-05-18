@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NumberService {
   convertToFloat(oldValue: any, newValue: any): number {
     return parseFloat(oldValue) ===

@@ -18,7 +18,7 @@ import {
 } from '../models';
 import * as fromAuth from '../reducers';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthFacadeService {
   loggedIn$: Observable<boolean>;
   user$: Observable<any>;
@@ -33,22 +33,16 @@ export class AuthFacadeService {
     this.store.dispatch(CreateAccountPageActions.createAccount({ account }));
   }
 
-  updateAccount(user: User): void {
-    this.store.dispatch(AccountPageActions.updateAccount({ user }));
-  }
-
-  updatePassword(passwordCombination: PasswordCombination): void {
-    this.store.dispatch(
-      AccountPageActions.updatePassword({ passwordCombination })
-    );
-  }
-
   deleteAccount(): void {
     this.store.dispatch(AuthActions.deleteAccount());
   }
 
   deleteAccountConfirmation(): void {
     this.store.dispatch(AccountPageActions.deleteAccountConfirmation());
+  }
+
+  forgotPassword(email: string): void {
+    this.store.dispatch(ForgotPasswordPageActions.forgotPassword({ email }));
   }
 
   login(credentials: Credentials): void {
@@ -61,10 +55,6 @@ export class AuthFacadeService {
 
   loadUser(): void {
     this.store.dispatch(AuthActions.loadUser());
-  }
-
-  forgotPassword(email: string): void {
-    this.store.dispatch(ForgotPasswordPageActions.forgotPassword({ email }));
   }
 
   resendConfirmation(email: string): void {
@@ -84,6 +74,16 @@ export class AuthFacadeService {
       LoginPageActions.showAccountConfirmationMessage({
         message,
       })
+    );
+  }
+
+  updateAccount(user: User): void {
+    this.store.dispatch(AccountPageActions.updateAccount({ user }));
+  }
+
+  updatePassword(passwordCombination: PasswordCombination): void {
+    this.store.dispatch(
+      AccountPageActions.updatePassword({ passwordCombination })
     );
   }
 }

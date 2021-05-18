@@ -1,0 +1,18 @@
+<div>
+  <h1 class="mat-h1">Account Settings</h1>
+
+  <mat-accordion multi>
+    <app-personal-data
+      [pending]="pending$ | async"
+      [user]="user$ | async"
+      (update)="onUpdate($event)"
+    ></app-personal-data>
+
+    <app-change-password
+      [pending]="pending$ | async"
+      (updatePassword)="onUpdatePassword($event)"
+    ></app-change-password>
+
+    <app-delete-account (delete)="onDelete()"></app-delete-account>
+  </mat-accordion>
+</div>

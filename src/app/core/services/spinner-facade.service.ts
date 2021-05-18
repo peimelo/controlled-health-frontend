@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IsLoadingService } from '@service-work/is-loading';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SpinnerFacadeService {
   private key = 'loading';
   showSpinner$: Observable<boolean>;

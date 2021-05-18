@@ -15,17 +15,14 @@ interface DialogData {
 })
 export class HeightFormDialogPageComponent {
   error$!: Observable<any>;
+  height!: Height;
   isLoading$!: Observable<boolean>;
   user$!: Observable<User>;
-  height!: Height;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
     private heightFacadeService: HeightsFacadeService
   ) {
-    // this.error$ = this.store.pipe(select(fromHeightsSelectors.getHeightsError))
-    // this.isLoading$ = this.store.pipe(select(fromHeightsSelectors.getHeightsLoading))
-    // this.user$ = this.store.pipe(select(fromAuthSelectors.getUser))
     this.height = this.data.height;
   }
 

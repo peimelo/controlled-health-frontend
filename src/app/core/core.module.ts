@@ -10,7 +10,6 @@ import { AppComponent } from './containers/app/app.component';
 import { HomePageComponent } from './containers/home/home-page.component';
 import { NotFoundPageComponent } from './containers/not-found-page.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
-import * as fromServices from './services';
 
 export const COMPONENTS = [
   AppComponent,
@@ -33,7 +32,6 @@ export const COMPONENTS = [
   declarations: [COMPONENTS],
   exports: [COMPONENTS],
   providers: [
-    ...fromServices.services,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,

@@ -1,0 +1,61 @@
+<mat-expansion-panel expanded="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title> Personal Data </mat-panel-title>
+
+    <mat-panel-description> Type your data </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <form [formGroup]="form">
+    <div fxLayout fxLayout.xs="column" fxLayoutGap="10px">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+
+        <input matInput formControlName="email" />
+
+        <mat-error
+          *ngFor="
+            let error of formErrorService.mapErrors(form.get('email')?.errors)
+          "
+        >
+          {{ error }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+
+        <input matInput formControlName="name" />
+      </mat-form-field>
+    </div>
+
+    <div fxLayout fxLayout.xs="column" fxLayoutGap="10px">
+      <mat-form-field fxFlex="50%">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value=""></mat-option>
+          <mat-option value="F">F</mat-option>
+          <mat-option value="M">M</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <app-date-picker
+        [controlName]="'date_of_birth'"
+        [form]="form"
+        [label]="'Date of birth'"
+        [required]="false"
+      >
+      </app-date-picker>
+    </div>
+  </form>
+
+  <mat-action-row>
+    <button
+      color="primary"
+      [disabled]="!form.valid"
+      mat-button
+      (click)="onUpdate()"
+    >
+      Save
+    </button>
+  </mat-action-row>
+</mat-expansion-panel>

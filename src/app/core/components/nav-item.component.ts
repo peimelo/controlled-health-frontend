@@ -34,9 +34,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   ],
 })
 export class NavItemComponent {
-  @Input() hint = '';
   @Input() fasIcon = '';
+  @Input() hint = '';
   @Input() matIcon = '';
   @Input() routerLink!: string;
+
   @Output() navigate = new EventEmitter();
 }

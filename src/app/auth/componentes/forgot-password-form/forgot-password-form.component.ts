@@ -21,16 +21,16 @@ export class ForgotPasswordFormComponent {
     }
   }
 
-  @Output() submitted = new EventEmitter<string>();
+  @Output() private submit = new EventEmitter<string>();
 
   constructor(
     private fb: FormBuilder,
     public readonly formErrorService: FormErrorService
   ) {}
 
-  submit(): void {
+  onSubmit(): void {
     if (this.form.valid) {
-      this.submitted.emit(this.form.get('email')?.value);
+      this.submit.emit(this.form.get('email')?.value);
     }
   }
 }
