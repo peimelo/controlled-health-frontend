@@ -23,7 +23,7 @@ export class LoginFormComponent {
     }
   }
 
-  @Output() private submit = new EventEmitter<Credentials>();
+  @Output() private submitted = new EventEmitter<Credentials>();
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +32,7 @@ export class LoginFormComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.submit.emit(this.form.value);
+      this.submitted.emit(this.form.value);
     }
   }
 }

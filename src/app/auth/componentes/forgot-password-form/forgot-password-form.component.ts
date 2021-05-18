@@ -21,7 +21,7 @@ export class ForgotPasswordFormComponent {
     }
   }
 
-  @Output() private submit = new EventEmitter<string>();
+  @Output() private submitted = new EventEmitter<string>();
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +30,7 @@ export class ForgotPasswordFormComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.submit.emit(this.form.get('email')?.value);
+      this.submitted.emit(this.form.get('email')?.value);
     }
   }
 }

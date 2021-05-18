@@ -31,7 +31,7 @@ export class ResetPasswordFormComponent {
     }
   }
 
-  @Output() private submit = new EventEmitter<PasswordCombination>();
+  @Output() private submitted = new EventEmitter<PasswordCombination>();
 
   constructor(
     private fb: FormBuilder,
@@ -42,7 +42,7 @@ export class ResetPasswordFormComponent {
     const { valid, value } = this.form;
 
     if (valid) {
-      this.submit.emit(value);
+      this.submitted.emit(value);
     }
   }
 }

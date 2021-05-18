@@ -32,7 +32,7 @@ export class CreateAccountFormComponent {
     }
   }
 
-  @Output() private submit = new EventEmitter<CreateAccountRequest>();
+  @Output() private submitted = new EventEmitter<CreateAccountRequest>();
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +41,7 @@ export class CreateAccountFormComponent {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.submit.emit(this.form.value);
+      this.submitted.emit(this.form.value);
     }
   }
 }
