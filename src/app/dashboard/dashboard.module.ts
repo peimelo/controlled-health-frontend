@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SharedModule } from '../shared/shared.module';
 import * as fromComponents from './components';
 import * as fromContainers from './containers';
@@ -14,7 +13,6 @@ import { DashboardService } from './services/dashboard.service';
 @NgModule({
   imports: [
     DashboardRoutingModule,
-    NgxChartsModule,
 
     // @ngrx
     StoreModule.forFeature(

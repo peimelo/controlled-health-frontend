@@ -1,23 +1,5 @@
 <div class="container">
   <h1 class="mat-h1">Dashboard</h1>
 
-  <mat-grid-list cols="2" rowHeight="500px">
-    <mat-grid-tile [colspan]="2" [rowspan]="1">
-      <app-dashboard
-        [data]="(dashboard$ | async).weights"
-        [showTime]="true"
-        [title]="'Weights'"
-      ></app-dashboard>
-    </mat-grid-tile>
-
-    <ng-container *ngIf="(dashboard$ | async).heights as heights">
-      <mat-grid-tile [colspan]="2" [rowspan]="1" *ngIf="heights.length > 1">
-        <app-dashboard
-          [data]="heights"
-          [showAverage]="false"
-          [title]="'Heights'"
-        ></app-dashboard>
-      </mat-grid-tile>
-    </ng-container>
-  </mat-grid-list>
+  <app-dashboard [dashboard]="dashboard$ | async"></app-dashboard>
 </div>

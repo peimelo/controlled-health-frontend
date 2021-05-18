@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> {{ title }} </mat-card-title>
+    <mat-card-subtitle>
+      <strong>Minimum: </strong>{{ minimumValue }} ({{ minimumDate }}) |
+      <strong>Maximum: </strong> {{ maximumValue }} ({{ maximumDate }})
+      <span *ngIf="showAverage">
+        | <strong>Average: </strong> {{ average }}
+      </span>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="card-content">
+    <ngx-charts-line-chart
+      *ngIf="data.length > 1; else noData"
+      class="chart-container"
+      [results]="results"
+      [scheme]="colorScheme"
+      xAxis="true"
+      [xAxisLabel]="'Date'"
+      [timeline]="showTimeline"
+      showXAxisLabel="true"
+      yAxis="true"
+    >
+      <ng-template #seriesTooltipTemplate let-model="model">
+        <h2>{{ title }}</h2>
+        <strong>date: </strong> {{ getDateTime(model[0]["name"]) }}<br />
+        <strong>value: </strong>{{ getValue(model[0]) }}
+      </ng-template>
+    </ngx-charts-line-chart>
+
+    <ng-template #noData>
+      <h2 class="mat-h2">Register at least 2 records to see the graph.</h2>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

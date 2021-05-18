@@ -1,35 +1,32 @@
-<mat-card class="dashboard-card">
-  <mat-card-header>
-    <mat-card-title> {{ title }} </mat-card-title>
-    <mat-card-subtitle>
-      <strong>Minimum: </strong>{{ minimumValue }} ({{ minimumDate }}) |
-      <strong>Maximum: </strong> {{ maximumValue }} ({{ maximumDate }})
-      <span *ngIf="showAverage">
-        | <strong>Average: </strong> {{ average }}
-      </span>
-    </mat-card-subtitle>
-  </mat-card-header>
+<mat-accordion multi>
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>show_chart</mat-icon>
+        Weights
+      </mat-panel-title>
+    </mat-expansion-panel-header>
 
-  <mat-card-content #containerRef class="dashboard-card-content">
-    <ngx-charts-line-chart
-      *ngIf="data.length > 1; else noData"
-      [view]="[containerRef.offsetWidth, containerRef.offsetHeight / 1.15]"
-      [results]="results"
-      [scheme]="colorScheme"
-      xAxis="true"
-      [xAxisLabel]="'Date'"
-      showXAxisLabel="true"
-      yAxis="true"
-    >
-      <ng-template #seriesTooltipTemplate let-model="model">
-        <h2>{{ title }}</h2>
-        <strong>date: </strong> {{ getDateTime(model[0]["name"]) }}<br />
-        <strong>value: </strong>{{ getValue(model[0]) }}
-      </ng-template>
-    </ngx-charts-line-chart>
+    <app-line-chart
+      [data]="dashboard?.weights"
+      [showTime]="true"
+    ></app-line-chart>
+  </mat-expansion-panel>
 
-    <ng-template #noData>
-      <h2 class="mat-h2">Register at least 2 records to see the graph.</h2>
-    </ng-template>
-  </mat-card-content>
-</mat-card>
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>show_chart</mat-icon>
+        Heights
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ng-container *ngIf="dashboard?.heights as heights">
+      <app-line-chart
+        [data]="heights"
+        [showAverage]="false"
+        [showTimeline]="false"
+      ></app-line-chart>
+    </ng-container>
+  </mat-expansion-panel>
+</mat-accordion>
