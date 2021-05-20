@@ -7,9 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
-import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './core/containers/app/app.component';
@@ -40,13 +38,16 @@ const maskConfig: Partial<IConfig> = {
         strictActionTypeUniqueness: true,
       },
     }),
+
     StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      name: 'Controlled Health App',
-      logOnly: environment.production,
-    }),
+
     EffectsModule.forRoot([MessageEffects, RouterEffects, UserEffects]),
+
+    // StoreDevtoolsModule.instrument({
+    //   maxAge: 25,
+    //   name: 'Controlled Health App',
+    //   logOnly: environment.production,
+    // }),
 
     // third-party
     NgxMaskModule.forRoot(maskConfig),
