@@ -25,12 +25,21 @@ export class WeightFormDialogComponent implements OnChanges {
     time: ['', Validators.required],
     value: ['', [Validators.min(3), Validators.max(400), Validators.required]],
   });
-  isNotFilledWeight = true;
   isEditing = false;
+  isNotFilledWeight = true;
   originalWeight!: Weight;
 
   @Input() error!: Observable<any>;
-  @Input() isLoading!: boolean;
+
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
+
   @Input() user!: User;
   @Input() weight!: Weight;
 

@@ -24,12 +24,21 @@ export class HeightFormDialogComponent implements OnChanges {
     date: ['', Validators.required],
     value: ['', [Validators.min(20), Validators.max(250), Validators.required]],
   });
-  isNotFilledHeight = true;
   isEditing = false;
+  isNotFilledHeight = true;
   originalHeight!: Height;
 
   @Input() error!: Observable<any>;
-  @Input() isLoading!: boolean;
+
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
+
   @Input() user!: User;
   @Input() height!: Height;
 

@@ -13,11 +13,11 @@ import { AuthFacadeService } from '../services/auth-facade.service';
   `,
 })
 export class ForgotPasswordPageComponent {
-  pending$ = this.spinnerFacade.showSpinner$;
+  pending$ = this.spinnerFacadeService.isLoading$;
 
   constructor(
     private authFacadeService: AuthFacadeService,
-    private spinnerFacade: SpinnerFacadeService
+    private spinnerFacadeService: SpinnerFacadeService
   ) {}
 
   onSubmit(email: string): void {

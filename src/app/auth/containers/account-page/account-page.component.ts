@@ -17,12 +17,12 @@ import { AuthFacadeService } from '../../services/auth-facade.service';
   ],
 })
 export class AccountPageComponent {
-  pending$ = this.spinnerFacade.showSpinner$;
+  pending$ = this.spinnerFacadeService.isLoading$;
   user$ = this.authFacadeService.user$;
 
   constructor(
     private authFacadeService: AuthFacadeService,
-    private spinnerFacade: SpinnerFacadeService
+    private spinnerFacadeService: SpinnerFacadeService
   ) {}
 
   onDelete(): void {

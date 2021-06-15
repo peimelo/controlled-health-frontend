@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { Observable } from 'rxjs';
 import { Height } from '../../../shared/models';
 import { HeightsFacadeService } from '../../services/heights-facade.service';
 
@@ -11,35 +10,33 @@ import { HeightsFacadeService } from '../../services/heights-facade.service';
   templateUrl: './heights-page.component.html',
 })
 export class HeightsPageComponent implements OnInit {
-  heights$: Observable<Height[]>;
+  heights$ = this.heightsFacadeService.heights$;
   pagination$ = this.heightsFacadeService.pagination$;
   sort$ = this.heightsFacadeService.sort$;
 
-  constructor(private heightsFacadeService: HeightsFacadeService) {
-    this.heights$ = this.heightsFacadeService.heights$;
-  }
+  constructor(private heightsFacadeService: HeightsFacadeService) {}
 
   ngOnInit(): void {
-    this.heightsFacadeService.loadHeights();
+    this.heightsFacadeService.load();
   }
 
   onAdd(): void {
-    this.heightsFacadeService.addHeight();
+    this.heightsFacadeService.add();
   }
 
   onChangePage(event: PageEvent): void {
-    this.heightsFacadeService.changePageHeights(event.pageIndex + 1);
+    this.heightsFacadeService.changePage(event.pageIndex + 1);
   }
 
   onDelete(id: number): void {
-    this.heightsFacadeService.deleteHeight(id);
+    this.heightsFacadeService.delete(id);
   }
 
   onEdit(height: Height): void {
-    this.heightsFacadeService.editHeight(height);
+    this.heightsFacadeService.edit(height);
   }
 
   onSortEvent(sort: Sort) {
-    this.heightsFacadeService.sortWeights(sort);
+    this.heightsFacadeService.sort(sort);
   }
 }

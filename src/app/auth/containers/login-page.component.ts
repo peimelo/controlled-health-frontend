@@ -12,7 +12,7 @@ import { AuthFacadeService } from '../services/auth-facade.service';
   `,
 })
 export class LoginPageComponent implements OnInit {
-  pending$ = this.spinnerFacadeService.showSpinner$;
+  pending$ = this.spinnerFacadeService.isLoading$;
 
   constructor(
     private authFacadeService: AuthFacadeService,

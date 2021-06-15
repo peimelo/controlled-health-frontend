@@ -15,7 +15,7 @@ import { AuthFacadeService } from '../services/auth-facade.service';
   `,
 })
 export class ResetPasswordPageComponent implements OnInit {
-  pending$ = this.spinnerFacadeService.showSpinner$;
+  pending$ = this.spinnerFacadeService.isLoading$;
 
   constructor(
     private authFacadeService: AuthFacadeService,

@@ -12,6 +12,7 @@ import {
 import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services/errors.service';
 import {
+  ResultDetailPageActions,
   ResultsActions,
   ResultsApiActions,
   ResultsFormDialogActions,
@@ -74,19 +75,6 @@ export class ResultsEffects {
     )
   );
 
-  // editResult$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(ResultsPageActions.editResult),
-  //       tap(({ result }) => {
-  //         this.dialogRef = this.dialog.open(ResultFormDialogPageComponent, {
-  //           data: { result },
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
   loadResults$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
@@ -94,8 +82,7 @@ export class ResultsEffects {
         ResultsPageActions.changePageResults,
         ResultsPageActions.sortResults,
         ResultsApiActions.createResultSuccess,
-        ResultsApiActions.deleteResultSuccess,
-        ResultsApiActions.updateResultSuccess
+        ResultsApiActions.deleteResultSuccess
       ),
       withLatestFrom(
         this.resultsFacadeService.pagination$,
@@ -126,12 +113,11 @@ export class ResultsEffects {
 
   updateResult$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ResultsFormDialogActions.updateResult),
+      ofType(ResultDetailPageActions.updateResult),
       mergeMap(({ result }) =>
         this.resultsService.update(result).pipe(
           mergeMap(() => [
             ResultsApiActions.updateResultSuccess(),
-            ResultsActions.resultFormDialogDismiss(),
             MessageApiActions.successMessage({
               message: 'Record successfully updated.',
             }),
@@ -140,17 +126,6 @@ export class ResultsEffects {
         )
       )
     )
-  );
-
-  resultFormDialogDismiss$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ResultsActions.resultFormDialogDismiss),
-        tap(() => {
-          this.dialogRef.close();
-        })
-      ),
-    { dispatch: false }
   );
 
   constructor(

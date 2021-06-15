@@ -13,14 +13,14 @@ import { SpinnerFacadeService } from '../services/spinner-facade.service';
 export class LoadingInterceptor implements HttpInterceptor {
   activeRequests = 0;
 
-  constructor(private spinnerFacade: SpinnerFacadeService) {}
+  constructor(private spinnerFacadeService: SpinnerFacadeService) {}
 
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (this.activeRequests === 0) {
-      this.spinnerFacade.show();
+      this.spinnerFacadeService.show();
     }
 
     this.activeRequests++;
@@ -30,7 +30,7 @@ export class LoadingInterceptor implements HttpInterceptor {
         this.activeRequests--;
 
         if (this.activeRequests === 0) {
-          this.spinnerFacade.hide();
+          this.spinnerFacadeService.hide();
         }
       })
     );

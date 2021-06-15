@@ -21,7 +21,7 @@ export class ResultFormDialogPageComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
-    private resultFacadeService: ResultsFacadeService
+    private resultsFacadeService: ResultsFacadeService
   ) {
     // this.error$ = this.store.pipe(select(fromResultsSelectors.getResultsError))
     // this.isLoading$ = this.store.pipe(select(fromResultsSelectors.getResultsLoading))
@@ -30,10 +30,10 @@ export class ResultFormDialogPageComponent {
   }
 
   onCreate(result: Result): void {
-    this.resultFacadeService.createResult(result);
+    this.resultsFacadeService.create(result);
   }
 
   onUpdate(result: Result): void {
-    this.resultFacadeService.updateResult(result);
+    this.resultsFacadeService.update(result);
   }
 }

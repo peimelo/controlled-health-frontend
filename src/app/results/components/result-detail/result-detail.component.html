@@ -30,6 +30,18 @@
   </mat-card-content>
 
   <mat-card-actions>
+    <!-- *ngIf="isEditing" -->
+    <button
+      color="primary"
+      [disabled]="!form.valid"
+      fxflex
+      mat-button
+      type="button"
+      (click)="onUpdate(form)"
+    >
+      Update
+    </button>
+
     <button mat-button (click)="goBack()">Back</button>
   </mat-card-actions>
 </mat-card>

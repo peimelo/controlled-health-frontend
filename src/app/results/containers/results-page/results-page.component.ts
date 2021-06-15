@@ -25,26 +25,26 @@ export class ResultsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.resultsFacadeService.loadResults();
+    this.resultsFacadeService.load();
   }
 
   onAdd(): void {
-    this.resultsFacadeService.addResult();
+    this.resultsFacadeService.add();
   }
 
   onChangePage(event: PageEvent): void {
-    this.resultsFacadeService.changePageResults(event.pageIndex + 1);
+    this.resultsFacadeService.changePage(event.pageIndex + 1);
   }
 
   onDelete(id: number): void {
-    this.resultsFacadeService.deleteResult(id);
+    this.resultsFacadeService.delete(id);
   }
 
   onEdit(result: Result): void {
-    this.resultsFacadeService.editResult(result);
+    this.resultsFacadeService.edit(result);
   }
 
   onSortEvent(sort: Sort) {
-    this.resultsFacadeService.sortResults(sort);
+    this.resultsFacadeService.sort(sort);
   }
 }

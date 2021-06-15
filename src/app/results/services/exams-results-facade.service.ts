@@ -25,17 +25,17 @@ export class ExamsResultsFacadeService {
     this.sort$ = this.store.pipe(select(fromResults.selectExamsResultsSort));
   }
 
-  changePageResults(pageIndex: number): void {
+  changePage(pageIndex: number): void {
     this.store.dispatch(
       ResultDetailPageActions.changePageResults({ pageIndex })
     );
   }
 
-  loadExamsResults(): void {
+  load(): void {
     this.store.dispatch(ResultDetailPageActions.loadExamsResults());
   }
 
-  sortResults(sort: Sort): void {
+  sort(sort: Sort): void {
     this.store.dispatch(ResultDetailPageActions.sortResults({ sort }));
   }
 }

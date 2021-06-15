@@ -13,7 +13,7 @@ import { AuthFacadeService } from '../services/auth-facade.service';
   `,
 })
 export class ResendConfirmationPageComponent {
-  pending$ = this.spinnerFacadeService.showSpinner$;
+  pending$ = this.spinnerFacadeService.isLoading$;
 
   constructor(
     private authFacadeService: AuthFacadeService,

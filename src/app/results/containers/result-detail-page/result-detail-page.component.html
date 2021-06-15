@@ -2,7 +2,11 @@
   <h1 class="mat-h1">Result Detail</h1>
 
   <div fxLayout="column" fxLayoutGap="10px">
-    <app-result-detail [result]="result$ | async"></app-result-detail>
+    <app-result-detail
+      [pending]="pending$ | async"
+      [result]="result$ | async"
+      (update)="onUpdateResult($event)"
+    ></app-result-detail>
 
     <app-exams-results
       [isHandsetPortrait]="isHandsetPortrait$ | async"

@@ -14,41 +14,39 @@ export class WeightsFacadeService {
 
   constructor(private store: Store<fromWeights.State>) {
     this.pagination$ = this.store.pipe(select(fromWeights.selectPagination));
-
     this.sort$ = this.store.pipe(select(fromWeights.selectSort));
-
     this.weights$ = this.store.pipe(select(fromWeights.selectAllWeights));
   }
 
-  addWeight(): void {
+  add(): void {
     this.store.dispatch(WeightsPageActions.addWeight());
   }
 
-  changePageWeights(pageIndex: number): void {
+  changePage(pageIndex: number): void {
     this.store.dispatch(WeightsPageActions.changePageWeights({ pageIndex }));
   }
 
-  createWeight(weight: Weight): void {
+  create(weight: Weight): void {
     this.store.dispatch(WeightsFormDialogActions.createWeight({ weight }));
   }
 
-  editWeight(weight: Weight): void {
-    this.store.dispatch(WeightsPageActions.editWeight({ weight }));
-  }
-
-  deleteWeight(id: number): void {
+  delete(id: number): void {
     this.store.dispatch(WeightsPageActions.deleteWeight({ id }));
   }
 
-  loadWeights(): void {
+  edit(weight: Weight): void {
+    this.store.dispatch(WeightsPageActions.editWeight({ weight }));
+  }
+
+  load(): void {
     this.store.dispatch(WeightsPageActions.loadWeights());
   }
 
-  sortWeights(sort: Sort): void {
+  sort(sort: Sort): void {
     this.store.dispatch(WeightsPageActions.sortWeights({ sort }));
   }
 
-  updateWeight(weight: Weight): void {
+  update(weight: Weight): void {
     this.store.dispatch(WeightsFormDialogActions.updateWeight({ weight }));
   }
 }

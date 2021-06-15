@@ -1,6 +1,6 @@
 <app-height-form-dialog
   [error]="error$"
-  [isLoading]="isLoading$ | async"
+  [pending]="pending$ | async"
   [user]="user$ | async"
   [height]="height"
   (create)="onCreate($event)"

@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SpinnerFacadeService {
+  isLoading$: Observable<boolean>;
   private key = 'loading';
-  showSpinner$: Observable<boolean>;
 
   constructor(private isLoadingService: IsLoadingService) {
-    this.showSpinner$ = this.isLoadingService.isLoading$({ key: this.key });
+    this.isLoading$ = this.isLoadingService.isLoading$({ key: this.key });
   }
 
   hide(): void {

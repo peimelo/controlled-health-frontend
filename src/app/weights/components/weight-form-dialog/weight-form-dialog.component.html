@@ -53,34 +53,24 @@
   <button fxflex mat-button [mat-dialog-close]="true">Cancel</button>
 
   <button
-    [disabled]="!form.valid || isLoading"
+    [disabled]="!form.valid"
     fxflex
     mat-button
     *ngIf="!isEditing"
     type="button"
     (click)="onCreate(form)"
   >
-    <fa-icon
-      [icon]="['fas', 'spinner']"
-      [spin]="true"
-      *ngIf="isLoading"
-    ></fa-icon>
     Create
   </button>
 
   <button
-    [disabled]="!form.valid || isLoading"
+    [disabled]="!form.valid"
     fxflex
     mat-button
     *ngIf="isEditing"
     type="button"
     (click)="onUpdate(form)"
   >
-    <fa-icon
-      [icon]="['fas', 'spinner']"
-      [spin]="true"
-      *ngIf="isLoading"
-    ></fa-icon>
     Update
   </button>
 </div>

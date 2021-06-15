@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Pagination } from '../../shared/models';
 import {
+  ResultDetailPageActions,
   ResultsFormDialogActions,
   ResultsGuardActions,
   ResultsPageActions,
@@ -32,27 +33,27 @@ export class ResultsFacadeService {
     this.sort$ = this.store.pipe(select(fromResults.selectSort));
   }
 
-  addResult(): void {
+  add(): void {
     this.store.dispatch(ResultsPageActions.addResult());
   }
 
-  changePageResults(pageIndex: number): void {
+  changePage(pageIndex: number): void {
     this.store.dispatch(ResultsPageActions.changePageResults({ pageIndex }));
   }
 
-  createResult(result: Result): void {
+  create(result: Result): void {
     this.store.dispatch(ResultsFormDialogActions.createResult({ result }));
   }
 
-  editResult(result: Result): void {
-    this.store.dispatch(ResultsPageActions.editResult({ result }));
-  }
-
-  deleteResult(id: number): void {
+  delete(id: number): void {
     this.store.dispatch(ResultsPageActions.deleteResult({ id }));
   }
 
-  loadResults(): void {
+  edit(result: Result): void {
+    this.store.dispatch(ResultsPageActions.editResult({ result }));
+  }
+
+  load(): void {
     this.store.dispatch(ResultsPageActions.loadResults());
   }
 
@@ -60,11 +61,11 @@ export class ResultsFacadeService {
     this.store.dispatch(ResultsGuardActions.loadResult({ id }));
   }
 
-  sortResults(sort: Sort): void {
+  sort(sort: Sort): void {
     this.store.dispatch(ResultsPageActions.sortResults({ sort }));
   }
 
-  updateResult(result: Result): void {
-    this.store.dispatch(ResultsFormDialogActions.updateResult({ result }));
+  update(result: Result): void {
+    this.store.dispatch(ResultDetailPageActions.updateResult({ result }));
   }
 }

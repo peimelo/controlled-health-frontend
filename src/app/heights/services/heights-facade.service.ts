@@ -8,47 +8,45 @@ import * as fromHeights from '../reducers';
 
 @Injectable()
 export class HeightsFacadeService {
-  sort$: Observable<Sort>;
-  pagination$: Observable<Pagination>;
   heights$: Observable<Height[]>;
+  pagination$: Observable<Pagination>;
+  sort$: Observable<Sort>;
 
   constructor(private store: Store<fromHeights.State>) {
-    this.pagination$ = this.store.pipe(select(fromHeights.selectPagination));
-
-    this.sort$ = this.store.pipe(select(fromHeights.selectSort));
-
     this.heights$ = this.store.pipe(select(fromHeights.selectAllHeights));
+    this.pagination$ = this.store.pipe(select(fromHeights.selectPagination));
+    this.sort$ = this.store.pipe(select(fromHeights.selectSort));
   }
 
-  addHeight(): void {
+  add(): void {
     this.store.dispatch(HeightsPageActions.addHeight());
   }
 
-  changePageHeights(pageIndex: number): void {
+  changePage(pageIndex: number): void {
     this.store.dispatch(HeightsPageActions.changePageHeights({ pageIndex }));
   }
 
-  createHeight(height: Height): void {
+  create(height: Height): void {
     this.store.dispatch(HeightsFormDialogActions.createHeight({ height }));
   }
 
-  editHeight(height: Height): void {
-    this.store.dispatch(HeightsPageActions.editHeight({ height }));
-  }
-
-  deleteHeight(id: number): void {
+  delete(id: number): void {
     this.store.dispatch(HeightsPageActions.deleteHeight({ id }));
   }
 
-  loadHeights(): void {
+  edit(height: Height): void {
+    this.store.dispatch(HeightsPageActions.editHeight({ height }));
+  }
+
+  load(): void {
     this.store.dispatch(HeightsPageActions.loadHeights());
   }
 
-  sortWeights(sort: Sort): void {
+  sort(sort: Sort): void {
     this.store.dispatch(HeightsPageActions.sortHeights({ sort }));
   }
 
-  updateHeight(height: Height): void {
+  update(height: Height): void {
     this.store.dispatch(HeightsFormDialogActions.updateHeight({ height }));
   }
 }

@@ -1,7 +1,15 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormErrorService } from '../../../core/services/form-error.service';
+import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { Result } from '../../models';
 
 @Component({
@@ -15,9 +23,20 @@ export class ResultDetailComponent implements OnChanges {
     description: ['', [Validators.required]],
   });
 
+  @Input()
+  set pending(isPending: boolean) {
+    if (isPending) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
+  }
+
   @Input() result!: Result;
+  @Output() private update = new EventEmitter<Result>();
 
   constructor(
+    private dateTimeService: DateTimeService,
     private location: Location,
     private fb: FormBuilder,
     public readonly formErrorService: FormErrorService
@@ -36,5 +55,17 @@ export class ResultDetailComponent implements OnChanges {
     this.location.back();
   }
 
-  save() {}
+  onUpdate(form: FormGroup): void {
+    const { valid, value } = form;
+
+    if (valid) {
+      const result = {
+        ...this.result,
+        date: this.dateTimeService.convertDateToSave(value.date),
+        description: value.description,
+      };
+
+      this.update.emit(result);
+    }
+  }
 }
