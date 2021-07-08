@@ -12,8 +12,10 @@
       [isHandsetPortrait]="isHandsetPortrait$ | async"
       [examsResults]="examsResults$ | async"
       [pagination]="pagination$ | async"
+      [result]="result$ | async"
       [sort]="sort$ | async"
       (changePage)="onChangePage($event)"
+      (delete)="onDeleteExamResult($event)"
       (sortEvent)="onSortEvent($event)"
     ></app-exams-results>
   </div>

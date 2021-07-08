@@ -7,16 +7,21 @@ export const changePageResults = createAction(
   props<{ pageIndex: number }>()
 );
 
+export const deleteExamResult = createAction(
+  '[Result Detail Page] Delete Exam Result',
+  props<{ id: number; resultId: number; }>()
+);
+
 export const loadExamsResults = createAction(
   '[Result Detail Page] Load Exams Results'
 );
 
 export const sortResults = createAction(
-  '[Results Detail Page] Sort Exams',
+  '[Result Detail Page] Sort Exams',
   props<{ sort: Sort }>()
 );
 
 export const updateResult = createAction(
-  '[Results Detail Page] Update Result',
+  '[Result Detail Page] Update Result',
   props<{ result: Result }>()
 );

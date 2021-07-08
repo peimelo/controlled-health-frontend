@@ -6,6 +6,7 @@
       >
     </mat-card-title>
   </mat-card-header>
+
   <mat-card-content>
     <div class="mat-elevation-z8">
       <mat-table
@@ -15,7 +16,7 @@
         [matSortDirection]="this.sort.direction"
         (matSortChange)="sortData($event)"
       >
-        <ng-container matColumnDef="exams.name">
+        <ng-container matColumnDef="exam.name">
           <mat-header-cell *matHeaderCellDef mat-sort-header>
             Name
           </mat-header-cell>
@@ -30,6 +31,28 @@
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             {{ element.value }} {{ element.exam.unit.name }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button
+              mat-icon-button
+              matTooltip="Edit this item"
+              (click)="onEdit(row)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button
+                mat-icon-button
+                matTooltip="Delete this item"
+                (click)="deleteConfirmDialog(row)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
           </mat-cell>
         </ng-container>
 

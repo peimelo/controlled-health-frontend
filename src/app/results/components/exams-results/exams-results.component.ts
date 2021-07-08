@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { Pagination } from '../../../shared/models';
+import { DialogConfig, Pagination } from '../../../shared/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
-import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { ExamResult, Result } from '../../models';
 
 @Component({
@@ -13,25 +12,39 @@ import { ExamResult, Result } from '../../models';
 })
 export class ExamsResultsComponent {
   private columnDefinitions = [
-    { columnDef: 'exams.name', showPortrait: true },
+    { columnDef: 'exam.name', showPortrait: true },
     { columnDef: 'value', showPortrait: true },
+    { columnDef: 'actions', showPortrait: true },
   ];
 
+  @Input() examsResults!: ExamResult[];
   @Input() isHandsetPortrait!: boolean;
   @Input() pagination!: Pagination;
+  @Input() result!: Result;
   @Input() sort!: Sort;
-  @Input() examsResults!: ExamResult[];
 
   @Output() private changePage = new EventEmitter<PageEvent>();
   @Output() private add = new EventEmitter();
-  @Output() private delete = new EventEmitter<number>();
+  @Output() private delete = new EventEmitter<{ id: number, resultId: number }>();
   @Output() private edit = new EventEmitter<Result>();
   @Output() private sortEvent = new EventEmitter<Sort>();
 
   constructor(
     private confirmationDialogService: ConfirmationDialogService,
-    private dateTimeService: DateTimeService
-  ) {}
+  ) {
+  }
+
+  deleteConfirmDialog(examResult: ExamResult): void {
+    const dialogConfig: DialogConfig = {
+      confirmText: 'Remove',
+      content: `'${examResult.exam.name}' will be removed.`,
+      title: 'Remove exam result',
+    };
+    this.confirmationDialogService.show(this.delete, {
+      id: examResult.id,
+      resultId: this.result.id
+    }, dialogConfig);
+  }
 
   getDisplayedColumns(): string[] {
     return this.columnDefinitions
@@ -41,6 +54,9 @@ export class ExamsResultsComponent {
 
   onChangePage(event: PageEvent): void {
     this.changePage.emit(event);
+  }
+
+  onEdit(row: any) {
   }
 
   sortData(sort: Sort) {

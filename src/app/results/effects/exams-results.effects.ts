@@ -1,22 +1,51 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, withLatestFrom } from 'rxjs/operators';
+import {
+  catchError,
+  exhaustMap,
+  map,
+  mergeMap,
+  withLatestFrom
+} from 'rxjs/operators';
 import { ErrorsService } from '../../shared/services/errors.service';
-import { ExamsResultsApiActions, ResultDetailPageActions } from '../actions';
+import {
+  ExamsResultsApiActions,
+  ResultDetailPageActions, ResultsApiActions,
+  ResultsPageActions
+} from '../actions';
 import { ExamsResultsFacadeService } from '../services';
 import { ExamsResultsService } from '../services/exams-results.service';
 import { ResultsFacadeService } from '../services/results-facade.service';
+import { MessageApiActions } from '../../core/actions';
 
 @Injectable()
 export class ExamsResultsEffects {
   dialogRef: any;
+
+  deleteResult$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ResultDetailPageActions.deleteExamResult),
+      mergeMap(({ id, resultId }) =>
+        this.examsResultsService.delete(id, resultId).pipe(
+          mergeMap(() => [
+            ExamsResultsApiActions.deleteExamResultSuccess(),
+            MessageApiActions.successMessage({
+              message: 'Record successfully deleted.',
+            }),
+          ]),
+          catchError((error) => this.errorService.showError(error))
+        )
+      )
+    )
+  );
 
   loadExamsResults$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
         ResultDetailPageActions.loadExamsResults,
         ResultDetailPageActions.changePageResults,
-        ResultDetailPageActions.sortResults
+        ResultDetailPageActions.sortResults,
+        ExamsResultsApiActions.deleteExamResultSuccess
       ),
       withLatestFrom(
         this.resultsFacadeService.selected$,

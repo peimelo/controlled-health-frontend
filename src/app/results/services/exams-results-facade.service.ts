@@ -3,7 +3,7 @@ import { Sort } from '@angular/material/sort';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Pagination } from '../../shared/models';
-import { ResultDetailPageActions } from '../actions';
+import { ResultDetailPageActions, ResultsPageActions } from '../actions';
 import { ExamResult } from '../models';
 import * as fromResults from '../reducers';
 
@@ -29,6 +29,10 @@ export class ExamsResultsFacadeService {
     this.store.dispatch(
       ResultDetailPageActions.changePageResults({ pageIndex })
     );
+  }
+
+  delete(id: number, resultId: number): void {
+    this.store.dispatch(ResultDetailPageActions.deleteExamResult({ id, resultId }));
   }
 
   load(): void {

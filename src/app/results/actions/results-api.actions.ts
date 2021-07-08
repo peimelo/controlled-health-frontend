@@ -6,7 +6,7 @@ export const createResultSuccess = createAction(
 );
 
 export const deleteResultSuccess = createAction(
-  '[Results/API] Delete Results Success'
+  '[Results/API] Delete Result Success'
 );
 
 export const loadResultsSuccess = createAction(

@@ -35,6 +35,11 @@ export class ResultDetailPageComponent implements OnInit {
     this.examsResultsFacadeService.changePage(event.pageIndex + 1);
   }
 
+  onDeleteExamResult(event: any): void {
+    const { id, resultId } = event;
+    this.examsResultsFacadeService.delete(id, resultId);
+  }
+
   onSortEvent(sort: Sort) {
     this.examsResultsFacadeService.sort(sort);
   }
