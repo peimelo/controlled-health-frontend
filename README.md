@@ -6,19 +6,19 @@ Frontend of the Controlled Health website built with [Angular](https://angular.i
   <tr>
     <td>Angular</td>
     <td>
-      11.2.x
+      12.1.x
     </td>
   </tr>
   <tr>
     <td>Material</td>
     <td>
-      11.2.x
+      12.1.x
     </td>
   </tr>
   <tr>
     <td>NgRx</td>
     <td>
-      11.x.x
+      12.2.x
     </td>
   </tr>
 </table>
