@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
@@ -10,7 +10,7 @@ import { WeightsFacadeService } from '../../services/weights-facade.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './weights-page.component.html',
 })
-export class WeightsPageComponent implements OnInit {
+export class WeightsPageComponent {
   isHandsetPortrait$ = this.layoutFacadeService.isHandsetPortrait$;
   pagination$ = this.weightsFacadeService.pagination$;
   sort$ = this.weightsFacadeService.sort$;
@@ -20,10 +20,6 @@ export class WeightsPageComponent implements OnInit {
     private layoutFacadeService: LayoutFacadeService,
     private weightsFacadeService: WeightsFacadeService
   ) {}
-
-  ngOnInit(): void {
-    this.weightsFacadeService.load();
-  }
 
   onAdd(): void {
     this.weightsFacadeService.add();

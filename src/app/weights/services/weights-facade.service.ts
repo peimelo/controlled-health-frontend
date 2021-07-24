@@ -3,17 +3,25 @@ import { Sort } from '@angular/material/sort';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Pagination, Weight } from '../../shared/models';
-import { WeightsFormDialogActions, WeightsPageActions } from '../actions';
+import {
+  WeightsFormDialogActions,
+  WeightsGuardActions,
+  WeightsPageActions,
+} from '../actions';
 import * as fromWeights from '../reducers';
 
 @Injectable()
 export class WeightsFacadeService {
   pagination$: Observable<Pagination>;
+  selectListLoaded$: Observable<boolean>;
   sort$: Observable<Sort>;
   weights$: Observable<Weight[]>;
 
   constructor(private store: Store<fromWeights.State>) {
     this.pagination$ = this.store.pipe(select(fromWeights.selectPagination));
+    this.selectListLoaded$ = this.store.pipe(
+      select(fromWeights.selectListLoaded)
+    );
     this.sort$ = this.store.pipe(select(fromWeights.selectSort));
     this.weights$ = this.store.pipe(select(fromWeights.selectAllWeights));
   }
@@ -39,7 +47,7 @@ export class WeightsFacadeService {
   }
 
   load(): void {
-    this.store.dispatch(WeightsPageActions.loadWeights());
+    this.store.dispatch(WeightsGuardActions.loadWeights());
   }
 
   sort(sort: Sort): void {

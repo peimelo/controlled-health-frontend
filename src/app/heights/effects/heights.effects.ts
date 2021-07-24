@@ -15,6 +15,7 @@ import {
   HeightsActions,
   HeightsApiActions,
   HeightsFormDialogActions,
+  HeightsGuardActions,
   HeightsPageActions,
 } from '../actions';
 import { HeightFormDialogPageComponent } from '../containers/height-form-dialog-page/height-form-dialog-page.component';
@@ -89,7 +90,7 @@ export class HeightsEffects {
   loadHeights$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        HeightsPageActions.loadHeights,
+        HeightsGuardActions.loadHeights,
         HeightsPageActions.changePageHeights,
         HeightsPageActions.sortHeights,
         HeightsApiActions.createHeightSuccess,

@@ -3,18 +3,26 @@ import { Sort } from '@angular/material/sort';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Height, Pagination } from '../../shared/models';
-import { HeightsFormDialogActions, HeightsPageActions } from '../actions';
+import {
+  HeightsFormDialogActions,
+  HeightsGuardActions,
+  HeightsPageActions,
+} from '../actions';
 import * as fromHeights from '../reducers';
 
 @Injectable()
 export class HeightsFacadeService {
   heights$: Observable<Height[]>;
   pagination$: Observable<Pagination>;
+  selectListLoaded$: Observable<boolean>;
   sort$: Observable<Sort>;
 
   constructor(private store: Store<fromHeights.State>) {
     this.heights$ = this.store.pipe(select(fromHeights.selectAllHeights));
     this.pagination$ = this.store.pipe(select(fromHeights.selectPagination));
+    this.selectListLoaded$ = this.store.pipe(
+      select(fromHeights.selectListLoaded)
+    );
     this.sort$ = this.store.pipe(select(fromHeights.selectSort));
   }
 
@@ -39,7 +47,7 @@ export class HeightsFacadeService {
   }
 
   load(): void {
-    this.store.dispatch(HeightsPageActions.loadHeights());
+    this.store.dispatch(HeightsGuardActions.loadHeights());
   }
 
   sort(sort: Sort): void {

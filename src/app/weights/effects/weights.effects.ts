@@ -15,6 +15,7 @@ import {
   WeightsActions,
   WeightsApiActions,
   WeightsFormDialogActions,
+  WeightsGuardActions,
   WeightsPageActions,
 } from '../actions';
 import { WeightFormDialogPageComponent } from '../containers/weight-form-dialog-page/weight-form-dialog-page.component';
@@ -89,7 +90,7 @@ export class WeightsEffects {
   loadWeights$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        WeightsPageActions.loadWeights,
+        WeightsGuardActions.loadWeights,
         WeightsPageActions.changePageWeights,
         WeightsPageActions.sortWeights,
         WeightsApiActions.createWeightSuccess,

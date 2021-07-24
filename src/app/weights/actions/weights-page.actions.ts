@@ -19,8 +19,6 @@ export const editWeight = createAction(
   props<{ weight: Weight }>()
 );
 
-export const loadWeights = createAction('[Weights Page] Load Weights');
-
 export const sortWeights = createAction(
   '[Weights Page] Sort Weights',
   props<{ sort: Sort }>()

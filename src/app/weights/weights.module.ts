@@ -8,6 +8,7 @@ import { WeightsComponent } from './components/weights/weights.component';
 import { WeightFormDialogPageComponent } from './containers/weight-form-dialog-page/weight-form-dialog-page.component';
 import { WeightsPageComponent } from './containers/weights-page/weights-page.component';
 import { WeightsEffects } from './effects';
+import { WeightsGuard } from './guards/weights.guard';
 import * as fromWeight from './reducers';
 import { WeightsFacadeService } from './services/weights-facade.service';
 import { WeightsService } from './services/weights.service';
@@ -32,6 +33,6 @@ import { WeightsRoutingModule } from './weights-routing.module';
     WeightFormDialogComponent,
     WeightFormDialogPageComponent,
   ],
-  providers: [WeightsFacadeService, WeightsService],
+  providers: [WeightsFacadeService, WeightsGuard, WeightsService],
 })
 export class WeightsModule {}

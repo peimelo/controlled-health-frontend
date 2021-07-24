@@ -5,6 +5,7 @@ import {
   createSelector,
 } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
+import { Pagination } from '../../shared/models';
 import * as fromWeights from './weights.reducers';
 
 export const weightsFeatureKey = 'weights';
@@ -51,3 +52,8 @@ export const {
   selectAll: selectAllWeights,
   selectTotal: selectTotalWeights,
 } = fromWeights.adapter.getSelectors(selectWeightsEntitiesState);
+
+export const selectListLoaded = createSelector(
+  selectPagination,
+  (pagination: Pagination) => !!pagination.totalItems
+);

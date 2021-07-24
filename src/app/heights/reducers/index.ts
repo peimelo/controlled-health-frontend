@@ -5,6 +5,7 @@ import {
   createSelector,
 } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
+import { Pagination } from '../../shared/models';
 import * as fromHeights from './heights.reducers';
 
 export const heightsFeatureKey = 'heights';
@@ -51,3 +52,8 @@ export const {
   selectAll: selectAllHeights,
   selectTotal: selectTotalHeights,
 } = fromHeights.adapter.getSelectors(selectHeightsEntitiesState);
+
+export const selectListLoaded = createSelector(
+  selectPagination,
+  (pagination: Pagination) => !!pagination.totalItems
+);

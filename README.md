@@ -8,17 +8,26 @@ Frontend of the Controlled Health website built with [Angular](https://angular.i
     <td>
       12.1.x
     </td>
+    <td>
+      https://angular.io
+    </td>
   </tr>
   <tr>
     <td>Material</td>
     <td>
       12.1.x
     </td>
+    <td>
+      https://material.angular.io
+    </td>
   </tr>
   <tr>
     <td>NgRx</td>
     <td>
       12.2.x
+    </td>
+    <td>
+      https://ngrx.io
     </td>
   </tr>
 </table>

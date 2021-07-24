@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Height } from '../../../shared/models';
@@ -9,16 +9,12 @@ import { HeightsFacadeService } from '../../services/heights-facade.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './heights-page.component.html',
 })
-export class HeightsPageComponent implements OnInit {
+export class HeightsPageComponent {
   heights$ = this.heightsFacadeService.heights$;
   pagination$ = this.heightsFacadeService.pagination$;
   sort$ = this.heightsFacadeService.sort$;
 
   constructor(private heightsFacadeService: HeightsFacadeService) {}
-
-  ngOnInit(): void {
-    this.heightsFacadeService.load();
-  }
 
   onAdd(): void {
     this.heightsFacadeService.add();

@@ -19,8 +19,6 @@ export const editHeight = createAction(
   props<{ height: Height }>()
 );
 
-export const loadHeights = createAction('[Heights Page] Load Heights');
-
 export const sortHeights = createAction(
   '[Heights Page] Sort Heights',
   props<{ sort: Sort }>()
