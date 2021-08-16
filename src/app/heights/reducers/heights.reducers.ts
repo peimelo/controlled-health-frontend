@@ -7,6 +7,7 @@ import { HeightsApiActions, HeightsPageActions } from '../actions';
 export const heightsFeatureKey = 'heights';
 
 export interface State extends EntityState<Height> {
+  listLoaded: boolean;
   pagination: Pagination;
   sort: Sort;
 }
@@ -16,6 +17,7 @@ export const adapter: EntityAdapter<Height> = createEntityAdapter<Height>({});
 export const initialState: State = adapter.getInitialState({
   entities: {},
   ids: [],
+  listLoaded: false,
   pagination: {
     currentPage: 1,
     itemsPerPage: 0,
@@ -41,6 +43,7 @@ export const reducer = createReducer(
   on(HeightsApiActions.loadHeightsSuccess, (state, { heightResponse }) =>
     adapter.setAll(heightResponse.heights, {
       ...state,
+      listLoaded: true,
       pagination: heightResponse.meta,
     })
   ),
@@ -51,5 +54,6 @@ export const reducer = createReducer(
   }))
 );
 
+export const getListLoaded = (state: State) => state.listLoaded;
 export const getPagination = (state: State) => state.pagination;
 export const getSort = (state: State) => state.sort;

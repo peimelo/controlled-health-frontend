@@ -7,6 +7,7 @@ import { WeightsApiActions, WeightsPageActions } from '../actions';
 export const weightsFeatureKey = 'weights';
 
 export interface State extends EntityState<Weight> {
+  listLoaded: boolean;
   pagination: Pagination;
   sort: Sort;
 }
@@ -16,6 +17,7 @@ export const adapter: EntityAdapter<Weight> = createEntityAdapter<Weight>({});
 export const initialState: State = adapter.getInitialState({
   entities: {},
   ids: [],
+  listLoaded: false,
   pagination: {
     currentPage: 1,
     itemsPerPage: 0,
@@ -41,6 +43,7 @@ export const reducer = createReducer(
   on(WeightsApiActions.loadWeightsSuccess, (state, { weightResponse }) =>
     adapter.setAll(weightResponse.weights, {
       ...state,
+      listLoaded: true,
       pagination: weightResponse.meta,
     })
   ),
@@ -51,5 +54,6 @@ export const reducer = createReducer(
   }))
 );
 
+export const getListLoaded = (state: State) => state.listLoaded;
 export const getPagination = (state: State) => state.pagination;
 export const getSort = (state: State) => state.sort;
