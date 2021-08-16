@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { ResultsFacadeService } from '../../services/results-facade.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './results-page.component.html',
 })
-export class ResultsPageComponent implements OnInit {
+export class ResultsPageComponent {
   isHandsetPortrait$ = this.layoutFacadeService.isHandsetPortrait$;
   pagination$ = this.resultsFacadeService.pagination$;
   sort$ = this.resultsFacadeService.sort$;
@@ -22,10 +22,6 @@ export class ResultsPageComponent implements OnInit {
     private resultsFacadeService: ResultsFacadeService
   ) {
     this.results$ = this.resultsFacadeService.results$;
-  }
-
-  ngOnInit(): void {
-    this.resultsFacadeService.load();
   }
 
   onAdd(): void {

@@ -4,11 +4,12 @@ import { AuthGuard } from '../auth/guards/auth.guard';
 import { ResultDetailPageComponent } from './containers/result-detail-page/result-detail-page.component';
 import { ResultsPageComponent } from './containers/results-page/results-page.component';
 import { ResultExistsGuard } from './guards/result-exists.guard';
+import { ResultsGuard } from './guards/results.guard';
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ResultsGuard],
     component: ResultsPageComponent,
     data: { title: 'Results' },
   },

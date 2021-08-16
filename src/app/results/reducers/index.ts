@@ -89,3 +89,8 @@ export const {
   selectAll: selectAllResults,
   selectTotal: selectTotalResults,
 } = fromResults.adapter.getSelectors(selectResultsEntitiesState);
+
+export const selectListLoaded = createSelector(
+  selectResultsEntitiesState,
+  fromResults.getListLoaded
+);

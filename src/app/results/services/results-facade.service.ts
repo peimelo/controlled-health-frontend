@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Pagination } from '../../shared/models';
 import {
   ResultDetailPageActions,
+  ResultExistsGuardActions,
   ResultsFormDialogActions,
   ResultsGuardActions,
   ResultsPageActions,
@@ -17,6 +18,7 @@ export class ResultsFacadeService {
   pagination$: Observable<Pagination>;
   results$: Observable<Result[]>;
   selected$: Observable<Result | null>;
+  selectListLoaded$: Observable<boolean>;
   selectedLoaded$: Observable<boolean>;
   sort$: Observable<Sort>;
 
@@ -26,6 +28,11 @@ export class ResultsFacadeService {
     this.results$ = this.store.pipe(select(fromResults.selectAllResults));
 
     this.selected$ = this.store.pipe(select(fromResults.selectSelected));
+
+    this.selectListLoaded$ = this.store.pipe(
+      select(fromResults.selectListLoaded)
+    );
+
     this.selectedLoaded$ = this.store.pipe(
       select(fromResults.selectSelectedLoaded)
     );
@@ -54,11 +61,11 @@ export class ResultsFacadeService {
   }
 
   load(): void {
-    this.store.dispatch(ResultsPageActions.loadResults());
+    this.store.dispatch(ResultsGuardActions.loadResults());
   }
 
   loadResult(id: number): void {
-    this.store.dispatch(ResultsGuardActions.loadResult({ id }));
+    this.store.dispatch(ResultExistsGuardActions.loadResult({ id }));
   }
 
   sort(sort: Sort): void {

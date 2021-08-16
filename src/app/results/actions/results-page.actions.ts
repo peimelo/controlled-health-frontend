@@ -19,8 +19,6 @@ export const editResult = createAction(
   props<{ result: Result }>()
 );
 
-export const loadResults = createAction('[Results Page] Load Results');
-
 export const sortResults = createAction(
   '[Results Page] Sort Results',
   props<{ sort: Sort }>()

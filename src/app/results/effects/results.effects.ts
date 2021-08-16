@@ -13,6 +13,7 @@ import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services/errors.service';
 import {
   ResultDetailPageActions,
+  ResultExistsGuardActions,
   ResultsActions,
   ResultsApiActions,
   ResultsFormDialogActions,
@@ -78,7 +79,7 @@ export class ResultsEffects {
   loadResults$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        ResultsPageActions.loadResults,
+        ResultsGuardActions.loadResults,
         ResultsPageActions.changePageResults,
         ResultsPageActions.sortResults,
         ResultsApiActions.createResultSuccess,
@@ -101,7 +102,7 @@ export class ResultsEffects {
 
   loadResult$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ResultsGuardActions.loadResult),
+      ofType(ResultExistsGuardActions.loadResult),
       exhaustMap((action) =>
         this.resultsService.getOne(action.id).pipe(
           map((result) => ResultsApiActions.loadResultSuccess({ result })),

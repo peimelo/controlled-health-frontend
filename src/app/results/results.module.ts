@@ -12,6 +12,7 @@ import { ResultFormDialogPageComponent } from './containers/result-form-dialog-p
 import { ResultsPageComponent } from './containers/results-page/results-page.component';
 import * as fromEffects from './effects';
 import { ResultExistsGuard } from './guards/result-exists.guard';
+import { ResultsGuard } from './guards/results.guard';
 import * as fromResult from './reducers';
 import { ResultsRoutingModule } from './results-routing.module';
 import * as fromServices from './services';
@@ -38,6 +39,6 @@ import * as fromServices from './services';
     ResultFormDialogComponent,
     ResultFormDialogPageComponent,
   ],
-  providers: [fromServices.services, ResultExistsGuard],
+  providers: [fromServices.services, ResultExistsGuard, ResultsGuard],
 })
 export class ResultsModule {}

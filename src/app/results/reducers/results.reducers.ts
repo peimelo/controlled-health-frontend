@@ -8,6 +8,7 @@ import { Result } from '../models';
 export const resultsFeatureKey = 'results';
 
 export interface State extends EntityState<Result> {
+  listLoaded: boolean;
   pagination: Pagination;
   selected: Result | null;
   sort: Sort;
@@ -18,6 +19,7 @@ export const adapter: EntityAdapter<Result> = createEntityAdapter<Result>({});
 export const initialState: State = adapter.getInitialState({
   entities: {},
   ids: [],
+  listLoaded: false,
   pagination: {
     currentPage: 1,
     itemsPerPage: 0,
@@ -53,6 +55,7 @@ export const reducer = createReducer(
   on(ResultsApiActions.loadResultsSuccess, (state, { resultResponse }) =>
     adapter.setAll(resultResponse.results, {
       ...state,
+      listLoaded: true,
       pagination: resultResponse.meta,
       selected: null,
     })
@@ -64,6 +67,7 @@ export const reducer = createReducer(
   }))
 );
 
+export const getListLoaded = (state: State) => state.listLoaded;
 export const getPagination = (state: State) => state.pagination;
 export const getSelected = (state: State) => state.selected;
 export const getSelectedLoaded = (state: State) => !!state.selected;
