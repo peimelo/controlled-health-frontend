@@ -7,6 +7,10 @@
     </mat-card-title>
   </mat-card-header>
 
+  <button class="custom-button" color="accent" mat-fab>
+    <mat-icon>add</mat-icon>
+  </button>
+
   <mat-card-content>
     <div class="mat-elevation-z8">
       <mat-table
@@ -47,12 +51,12 @@
             </button>
 
             <button
-                mat-icon-button
-                matTooltip="Delete this item"
-                (click)="deleteConfirmDialog(row)"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
+              mat-icon-button
+              matTooltip="Delete this item"
+              (click)="deleteConfirmDialog(row)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
           </mat-cell>
         </ng-container>
 

@@ -25,14 +25,14 @@ export class ExamsResultsComponent {
 
   @Output() private changePage = new EventEmitter<PageEvent>();
   @Output() private add = new EventEmitter();
-  @Output() private delete = new EventEmitter<{ id: number, resultId: number }>();
+  @Output() private delete = new EventEmitter<{
+    id: number;
+    resultId: number;
+  }>();
   @Output() private edit = new EventEmitter<Result>();
   @Output() private sortEvent = new EventEmitter<Sort>();
 
-  constructor(
-    private confirmationDialogService: ConfirmationDialogService,
-  ) {
-  }
+  constructor(private confirmationDialogService: ConfirmationDialogService) {}
 
   deleteConfirmDialog(examResult: ExamResult): void {
     const dialogConfig: DialogConfig = {
@@ -40,10 +40,14 @@ export class ExamsResultsComponent {
       content: `'${examResult.exam.name}' will be removed.`,
       title: 'Remove exam result',
     };
-    this.confirmationDialogService.show(this.delete, {
-      id: examResult.id,
-      resultId: this.result.id
-    }, dialogConfig);
+    this.confirmationDialogService.show(
+      this.delete,
+      {
+        id: examResult.id,
+        resultId: this.result.id,
+      },
+      dialogConfig
+    );
   }
 
   getDisplayedColumns(): string[] {
@@ -52,12 +56,15 @@ export class ExamsResultsComponent {
       .map((item) => item.columnDef);
   }
 
+  onAdd(): void {
+    this.add.emit();
+  }
+
   onChangePage(event: PageEvent): void {
     this.changePage.emit(event);
   }
 
-  onEdit(row: any) {
-  }
+  onEdit(row: any) {}
 
   sortData(sort: Sort) {
     this.sortEvent.emit(sort);
