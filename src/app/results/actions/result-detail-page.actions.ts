@@ -2,14 +2,18 @@ import { Sort } from '@angular/material/sort';
 import { createAction, props } from '@ngrx/store';
 import { Result } from '../models';
 
+export const addExamResult = createAction(
+  '[Result Detail Page] Add Exam Result'
+);
+
 export const changePageResults = createAction(
-  '[Results Detail Page] Change Page Exams',
+  '[Result Detail Page] Change Page Exams',
   props<{ pageIndex: number }>()
 );
 
 export const deleteExamResult = createAction(
   '[Result Detail Page] Delete Exam Result',
-  props<{ id: number; resultId: number; }>()
+  props<{ id: number; resultId: number }>()
 );
 
 export const loadExamsResults = createAction(

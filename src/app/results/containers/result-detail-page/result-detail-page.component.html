@@ -14,6 +14,7 @@
       [pagination]="pagination$ | async"
       [result]="result$ | async"
       [sort]="sort$ | async"
+      (add)="onAdd()"
       (changePage)="onChangePage($event)"
       (delete)="onDeleteExamResult($event)"
       (sortEvent)="onSortEvent($event)"

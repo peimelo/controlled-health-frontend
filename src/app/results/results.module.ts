@@ -3,10 +3,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from '../shared/shared.module';
+import { ExamResultFormDialogComponent } from './components/exam-result-form-dialog/exam-result-form-dialog.component';
 import { ExamsResultsComponent } from './components/exams-results/exams-results.component';
 import { ResultDetailComponent } from './components/result-detail/result-detail.component';
 import { ResultFormDialogComponent } from './components/result-form-dialog/result-form-dialog.component';
 import { ResultsComponent } from './components/results/results.component';
+import { ExamResultFormDialogPageComponent } from './containers/exam-result-form-dialog-page/exam-result-form-dialog-page.component';
 import { ResultDetailPageComponent } from './containers/result-detail-page/result-detail-page.component';
 import { ResultFormDialogPageComponent } from './containers/result-form-dialog-page/result-form-dialog-page.component';
 import { ResultsPageComponent } from './containers/results-page/results-page.component';
@@ -31,6 +33,8 @@ import * as fromServices from './services';
     SharedModule,
   ],
   declarations: [
+    ExamResultFormDialogComponent,
+    ExamResultFormDialogPageComponent,
     ExamsResultsComponent,
     ResultsPageComponent,
     ResultsComponent,

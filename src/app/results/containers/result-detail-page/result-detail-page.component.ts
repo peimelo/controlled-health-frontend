@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
+import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
 import { Result } from '../../models';
 import { ExamsResultsFacadeService } from '../../services/exams-results-facade.service';
 import { ResultsFacadeService } from '../../services/results-facade.service';
-import {SpinnerFacadeService} from "../../../core/services/spinner-facade.service";
 
 @Component({
   selector: 'app-result-detail-page',
@@ -29,6 +29,10 @@ export class ResultDetailPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.examsResultsFacadeService.load();
+  }
+
+  onAdd(): void {
+    this.examsResultsFacadeService.add();
   }
 
   onChangePage(event: PageEvent): void {

@@ -1,26 +1,38 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   catchError,
   exhaustMap,
   map,
   mergeMap,
-  withLatestFrom
+  tap,
+  withLatestFrom,
 } from 'rxjs/operators';
+import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services/errors.service';
-import {
-  ExamsResultsApiActions,
-  ResultDetailPageActions, ResultsApiActions,
-  ResultsPageActions
-} from '../actions';
+import { ExamsResultsApiActions, ResultDetailPageActions } from '../actions';
+import { ExamResultFormDialogPageComponent } from '../containers/exam-result-form-dialog-page/exam-result-form-dialog-page.component';
 import { ExamsResultsFacadeService } from '../services';
 import { ExamsResultsService } from '../services/exams-results.service';
 import { ResultsFacadeService } from '../services/results-facade.service';
-import { MessageApiActions } from '../../core/actions';
 
 @Injectable()
 export class ExamsResultsEffects {
   dialogRef: any;
+
+  addExamResult$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ResultDetailPageActions.addExamResult),
+        tap(() => {
+          this.dialogRef = this.dialog.open(ExamResultFormDialogPageComponent, {
+            data: {},
+          });
+        })
+      ),
+    { dispatch: false }
+  );
 
   deleteResult$ = createEffect(() =>
     this.actions$.pipe(
@@ -71,6 +83,7 @@ export class ExamsResultsEffects {
 
   constructor(
     private actions$: Actions,
+    private dialog: MatDialog,
     private errorService: ErrorsService,
     private examsResultsFacadeService: ExamsResultsFacadeService,
     private resultsFacadeService: ResultsFacadeService,
