@@ -6,8 +6,9 @@ import { map, shareReplay } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class LayoutFacadeService {
-  isHandsetPortrait$: Observable<boolean>;
+  isHandset$: Observable<boolean>;
   isHandsetLandscape$: Observable<boolean>;
+  isHandsetPortrait$: Observable<boolean>;
   isTablet$: Observable<boolean>;
   isWeb$: Observable<boolean>;
   mediaObserver$: Observable<MediaChange[]>;
@@ -16,15 +17,20 @@ export class LayoutFacadeService {
     private breakpointObserver: BreakpointObserver,
     private mediaObserver: MediaObserver
   ) {
-    this.isHandsetPortrait$ = this.breakpointObserver
-      .observe(Breakpoints.HandsetPortrait)
+    this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+      map((result) => result.matches),
+      shareReplay()
+    );
+
+    this.isHandsetLandscape$ = this.breakpointObserver
+      .observe(Breakpoints.HandsetLandscape)
       .pipe(
         map((result) => result.matches),
         shareReplay()
       );
 
-    this.isHandsetLandscape$ = this.breakpointObserver
-      .observe(Breakpoints.HandsetLandscape)
+    this.isHandsetPortrait$ = this.breakpointObserver
+      .observe(Breakpoints.HandsetPortrait)
       .pipe(
         map((result) => result.matches),
         shareReplay()

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
 import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
+import { LayoutFacadeService } from '../../../shared/services';
 import { Result } from '../../models';
 import { ExamsResultsFacadeService } from '../../services/exams-results-facade.service';
 import { ResultsFacadeService } from '../../services/results-facade.service';

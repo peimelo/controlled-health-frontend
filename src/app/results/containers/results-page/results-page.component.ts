@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
-import { LayoutFacadeService } from '../../../core/services/layout-facade.service';
+import { LayoutFacadeService } from '../../../shared/services';
 import { Result } from '../../models';
 import { ResultsFacadeService } from '../../services/results-facade.service';
 
