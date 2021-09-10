@@ -13,6 +13,7 @@ import { ResultDetailPageComponent } from './containers/result-detail-page/resul
 import { ResultFormDialogPageComponent } from './containers/result-form-dialog-page/result-form-dialog-page.component';
 import { ResultsPageComponent } from './containers/results-page/results-page.component';
 import * as fromEffects from './effects';
+import { AllExamsExistsGuard } from './guards/all-exams-exists.guard';
 import { ResultExistsGuard } from './guards/result-exists.guard';
 import { ResultsGuard } from './guards/results.guard';
 import * as fromResult from './reducers';
@@ -43,6 +44,11 @@ import * as fromServices from './services';
     ResultFormDialogComponent,
     ResultFormDialogPageComponent,
   ],
-  providers: [fromServices.services, ResultExistsGuard, ResultsGuard],
+  providers: [
+    fromServices.services,
+    AllExamsExistsGuard,
+    ResultExistsGuard,
+    ResultsGuard,
+  ],
 })
 export class ResultsModule {}

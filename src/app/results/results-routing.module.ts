@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { ResultDetailPageComponent } from './containers/result-detail-page/result-detail-page.component';
 import { ResultsPageComponent } from './containers/results-page/results-page.component';
+import { AllExamsExistsGuard } from './guards/all-exams-exists.guard';
 import { ResultExistsGuard } from './guards/result-exists.guard';
 import { ResultsGuard } from './guards/results.guard';
 
@@ -15,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    canActivate: [AuthGuard, ResultExistsGuard],
+    canActivate: [AuthGuard, ResultExistsGuard, AllExamsExistsGuard],
     component: ResultDetailPageComponent,
     data: { title: 'Results' },
   },

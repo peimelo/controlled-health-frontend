@@ -6,11 +6,13 @@ import {
 } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import * as fromExamsResults from './exams-results.reducers';
+import * as fromExams from './exams.reducers';
 import * as fromResults from './results.reducers';
 
 export const resultsFeatureKey = 'results';
 
 export interface ResultsState {
+  [fromExams.examsFeatureKey]: fromExams.State;
   [fromExamsResults.examsResultsFeatureKey]: fromExamsResults.State;
   [fromResults.resultsFeatureKey]: fromResults.State;
 }
@@ -21,6 +23,7 @@ export interface State extends fromRoot.State {
 
 export function reducers(state: ResultsState | undefined, action: Action) {
   return combineReducers({
+    [fromExams.examsFeatureKey]: fromExams.reducer,
     [fromExamsResults.examsResultsFeatureKey]: fromExamsResults.reducer,
     [fromResults.resultsFeatureKey]: fromResults.reducer,
   })(state, action);
@@ -93,4 +96,39 @@ export const {
 export const selectListLoaded = createSelector(
   selectResultsEntitiesState,
   fromResults.getListLoaded
+);
+
+/**
+ * Exams Reducers
+ */
+export const selectExamsEntitiesState = createSelector(
+  selectResultsState,
+  (state) => state.exams
+);
+
+export const selectExamsPagination = createSelector(
+  selectExamsEntitiesState,
+  fromExams.getPagination
+);
+
+export const selectExamsSort = createSelector(
+  selectExamsEntitiesState,
+  fromExams.getSort
+);
+
+export const {
+  selectIds: selectExamIds,
+  selectEntities: selectExamEntities,
+  selectAll: selectAllExams,
+  selectTotal: selectTotalExams,
+} = fromExams.adapter.getSelectors(selectExamsEntitiesState);
+
+export const selectExams = createSelector(
+  selectExamsEntitiesState,
+  fromExams.getAllExams
+);
+
+export const selectAllExamsLoaded = createSelector(
+  selectExamsEntitiesState,
+  fromExams.getAllExamsLoaded
 );
