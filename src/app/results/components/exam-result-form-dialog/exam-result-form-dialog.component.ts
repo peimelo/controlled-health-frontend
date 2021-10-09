@@ -1,35 +1,40 @@
-import { formatNumber } from '@angular/common';
 import {
   Component,
   EventEmitter,
   Input,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { User } from '../../../auth/models';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { Weight } from '../../../shared/models';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { NumberService } from '../../../shared/services/number.service';
+import { Exam, ExamResult } from '../../models';
 
 @Component({
   selector: 'app-exam-result-form-dialog',
   templateUrl: './exam-result-form-dialog.component.html',
 })
-export class ExamResultFormDialogComponent implements OnChanges {
+export class ExamResultFormDialogComponent implements OnInit, OnChanges {
   form = this.fb.group({
-    date: ['', Validators.required],
-    time: ['', Validators.required],
+    exam: ['', Validators.required],
     value: ['', [Validators.min(3), Validators.max(400), Validators.required]],
   });
   isEditing = false;
   isNotFilledWeight = true;
   originalWeight!: Weight;
 
+  filteredOptions!: Observable<Exam[]>;
+
+  @Input() allExams!: Exam[];
   @Input() error!: Observable<any>;
+  @Input() examResult!: ExamResult;
 
   @Input()
   set pending(isPending: boolean) {
@@ -41,10 +46,9 @@ export class ExamResultFormDialogComponent implements OnChanges {
   }
 
   @Input() user!: User;
-  @Input() weight!: Weight;
 
-  @Output() private create = new EventEmitter<Weight>();
-  @Output() private update = new EventEmitter<Weight>();
+  @Output() private create = new EventEmitter<any>();
+  @Output() private update = new EventEmitter<any>();
 
   constructor(
     private dateTimeService: DateTimeService,
@@ -53,29 +57,40 @@ export class ExamResultFormDialogComponent implements OnChanges {
     public readonly formErrorService: FormErrorService
   ) {}
 
+  ngOnInit() {
+    this.filteredOptions = this.form.get('exam')!.valueChanges.pipe(
+      startWith(''),
+      map((value) => (typeof value === 'string' ? value : value.name)),
+      map((name) => (name ? this._filter(name) : this.allExams.slice()))
+    );
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.weight && this.weight.id) {
+    if (this.examResult && this.examResult.id) {
       this.isEditing = true;
 
-      if (changes.weight && changes.weight.firstChange) {
-        this.originalWeight = changes.weight.currentValue;
-      }
+      //   if (changes.weight && changes.weight.firstChange) {
+      //     this.originalWeight = changes.weight.currentValue;
+      //   }
 
-      this.form.patchValue({
-        date: this.dateTimeService.convertDateToUtc(this.weight.date),
-        time: this.dateTimeService.convertTimeToUtc(this.weight.date),
-        value: formatNumber(this.weight.value, 'pt', '0.2-2'),
-      });
+      //   this.form.patchValue({
+      //     date: this.dateTimeService.convertDateToUtc(this.weight.date),
+      //     time: this.dateTimeService.convertTimeToUtc(this.weight.date),
+      //     value: formatNumber(this.weight.value, 'pt', '0.2-2'),
+      //   });
     } else {
-      if (this.isNotFilledWeight) {
-        this.form.patchValue({
-          date: this.dateTimeService.dateNow(),
-          time: this.dateTimeService.timeNow(),
-        });
-
-        this.isNotFilledWeight = false;
-      }
+      //   if (this.isNotFilledWeight) {
+      //     this.form.patchValue({
+      //       date: this.dateTimeService.dateNow(),
+      //       time: this.dateTimeService.timeNow(),
+      //     });
+      //     this.isNotFilledWeight = false;
+      // }
     }
+  }
+
+  displayFn(exam: Exam): string {
+    return exam && exam.name ? exam.name : '';
   }
 
   getErrorValue(): string {
@@ -92,15 +107,6 @@ export class ExamResultFormDialogComponent implements OnChanges {
     const { valid, value } = form;
 
     if (valid) {
-      const date = this.dateTimeService.convertDateToSave(value.date);
-
-      const weight = {
-        ...this.weight,
-        date: this.dateTimeService.convertDateTimeToSave(date, value.time),
-        value: value.value,
-      };
-
-      this.create.emit(weight);
     }
   }
 
@@ -108,18 +114,14 @@ export class ExamResultFormDialogComponent implements OnChanges {
     const { valid, value } = form;
 
     if (valid) {
-      const date = this.dateTimeService.convertDateToSave(value.date);
-
-      const weight = {
-        ...this.weight,
-        date: this.dateTimeService.convertDateTimeToSave(date, value.time),
-        value: this.numberService.convertToFloat(
-          this.originalWeight.value,
-          value.value
-        ),
-      };
-
-      this.update.emit(weight);
     }
+  }
+
+  private _filter(name: string): Exam[] {
+    const filterValue = name.toLowerCase();
+
+    return this.allExams.filter((option) =>
+      option.name.toLowerCase().includes(filterValue)
+    );
   }
 }
