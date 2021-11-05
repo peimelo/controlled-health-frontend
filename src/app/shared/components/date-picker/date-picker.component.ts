@@ -21,13 +21,13 @@ export class DatePickerComponent {
   }
 
   private isMyDateFormat(date: string): string {
-    const da = date.split('/');
+    const dateSplited = date.split('/');
 
     if (
-      da.length !== 3 ||
-      da[0].length !== 2 ||
-      da[1].length !== 2 ||
-      da[2].length !== 4
+      dateSplited.length !== 3 ||
+      dateSplited[0].length !== 2 ||
+      dateSplited[1].length !== 2 ||
+      dateSplited[2].length !== 4
     ) {
       return 'Please input a valid format.';
     } else if (!moment(date, 'DD/MM/YYYY').isValid()) {

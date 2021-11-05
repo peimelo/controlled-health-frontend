@@ -12,9 +12,8 @@ export interface State extends EntityState<ExamResult> {
   sort: Sort;
 }
 
-export const adapter: EntityAdapter<ExamResult> = createEntityAdapter<ExamResult>(
-  {}
-);
+export const adapter: EntityAdapter<ExamResult> =
+  createEntityAdapter<ExamResult>({});
 
 export const initialState: State = adapter.getInitialState({
   entities: {},
@@ -39,6 +38,11 @@ export const reducer = createReducer(
       ...state.pagination,
       currentPage: pageIndex,
     },
+  })),
+
+  on(ResultDetailPageActions.loadExamsResults, (state) => ({
+    ...initialState,
+    sort: state.sort,
   })),
 
   on(
