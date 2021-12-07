@@ -6,7 +6,7 @@ Frontend of the Controlled Health website built with [Angular](https://angular.i
   <tr>
     <td>Angular</td>
     <td>
-      12.1.x
+      13.x.x
     </td>
     <td>
       https://angular.io
@@ -15,7 +15,7 @@ Frontend of the Controlled Health website built with [Angular](https://angular.i
   <tr>
     <td>Material</td>
     <td>
-      12.1.x
+      13.x.x
     </td>
     <td>
       https://material.angular.io
@@ -24,7 +24,7 @@ Frontend of the Controlled Health website built with [Angular](https://angular.i
   <tr>
     <td>NgRx</td>
     <td>
-      12.2.x
+      13.x.x
     </td>
     <td>
       https://ngrx.io
