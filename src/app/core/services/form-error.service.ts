@@ -12,7 +12,7 @@ export class FormErrorService {
     email: (errors: ValidationErrors, name: string) =>
       'Must be a valid email address.',
     minlength: (errors: ValidationErrors, name: string) =>
-      `Must be at least ${errors.minlength.requiredLength} characters.`,
+      `Must be at least ${errors['minlength'].requiredLength} characters.`,
     required: (errors: ValidationErrors, name: string) => 'Field is required.',
   };
 
@@ -29,7 +29,7 @@ export class FormErrorService {
 
       if (
         matchingControl.errors &&
-        !matchingControl.errors.confirmedValidator
+        !matchingControl.errors['confirmedValidator']
       ) {
         return;
       }

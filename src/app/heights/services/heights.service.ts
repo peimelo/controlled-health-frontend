@@ -9,7 +9,7 @@ import { HeightResponse } from '../models';
 
 @Injectable()
 export class HeightsService extends BaseResourceService<Height> {
-  constructor(protected injector: Injector) {
+  constructor(protected override injector: Injector) {
     super(`${environment.baseUrl}/heights`, injector);
   }
 

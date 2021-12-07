@@ -45,7 +45,7 @@ export class ResultDetailComponent implements OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.result && changes.result.currentValue) {
+    if (changes['result'] && changes['result'].currentValue) {
       this.form.patchValue({
         date: this.result.date,
         description: this.result.description,

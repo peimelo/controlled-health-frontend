@@ -14,14 +14,6 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     return this.http.post<T>(this.apiPath, resource);
   }
 
-  // getAll(pageIndex: number): Observable<T> {
-  //   const httpParams = new HttpParams().set('page', pageIndex.toString());
-
-  //   return this.http.get<T>(this.apiPath, {
-  //     params: httpParams,
-  //   });
-  // }
-
   getOne(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiPath}/${id}`);
   }

@@ -6,7 +6,6 @@ import {
   exhaustMap,
   map,
   mergeMap,
-  tap,
   withLatestFrom,
 } from 'rxjs/operators';
 import { MessageApiActions } from '../../core/actions';
@@ -20,26 +19,12 @@ import {
   ResultsGuardActions,
   ResultsPageActions,
 } from '../actions';
-import { ResultFormDialogPageComponent } from '../containers/result-form-dialog-page/result-form-dialog-page.component';
 import { ResultsFacadeService } from '../services/results-facade.service';
 import { ResultsService } from '../services/results.service';
 
 @Injectable()
 export class ResultsEffects {
   dialogRef: any;
-
-  addResult$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ResultsPageActions.addResult),
-        tap(() => {
-          this.dialogRef = this.dialog.open(ResultFormDialogPageComponent, {
-            data: {},
-          });
-        })
-      ),
-    { dispatch: false }
-  );
 
   createResult$ = createEffect(() =>
     this.actions$.pipe(

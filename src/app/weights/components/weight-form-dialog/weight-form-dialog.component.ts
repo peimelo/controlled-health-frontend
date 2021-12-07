@@ -9,8 +9,6 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { User } from '../../../auth/models';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { Weight } from '../../../shared/models';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
@@ -31,8 +29,6 @@ export class WeightFormDialogComponent implements OnChanges {
   isNotFilledWeight = true;
   originalWeight!: Weight;
 
-  @Input() error!: Observable<any>;
-
   @Input()
   set pending(isPending: boolean) {
     if (isPending) {
@@ -42,7 +38,6 @@ export class WeightFormDialogComponent implements OnChanges {
     }
   }
 
-  @Input() user!: User;
   @Input() weight!: Weight;
 
   @Output() private create = new EventEmitter<Weight>();
@@ -59,8 +54,8 @@ export class WeightFormDialogComponent implements OnChanges {
     if (this.weight && this.weight.id) {
       this.isEditing = true;
 
-      if (changes.weight && changes.weight.firstChange) {
-        this.originalWeight = changes.weight.currentValue;
+      if (changes['weight'] && changes['weight'].firstChange) {
+        this.originalWeight = changes['weight'].currentValue;
       }
 
       this.form.patchValue({

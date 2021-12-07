@@ -8,7 +8,7 @@ import { Result, ResultResponse } from '../models';
 
 @Injectable()
 export class ResultsService extends BaseResourceService<Result> {
-  constructor(protected injector: Injector) {
+  constructor(protected override injector: Injector) {
     super(`${environment.baseUrl}/results`, injector);
   }
 

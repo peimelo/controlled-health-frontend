@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { User } from '../../../auth/models';
 import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
 import { Weight } from '../../../shared/models';
 import { WeightsFacadeService } from '../../services/weights-facade.service';
@@ -15,9 +14,7 @@ interface DialogData {
   templateUrl: './weight-form-dialog-page.component.html',
 })
 export class WeightFormDialogPageComponent {
-  error$!: Observable<any>;
-  pending$ = this.spinnerFacadeService.isLoading$;
-  user$!: Observable<User>;
+  pending$: Observable<boolean>;
   weight!: Weight;
 
   constructor(
@@ -25,6 +22,7 @@ export class WeightFormDialogPageComponent {
     private spinnerFacadeService: SpinnerFacadeService,
     private weightFacadeService: WeightsFacadeService
   ) {
+    this.pending$ = this.spinnerFacadeService.isLoading$;
     this.weight = this.data.weight;
   }
 

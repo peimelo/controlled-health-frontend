@@ -36,7 +36,7 @@ export class LineChartComponent implements OnChanges {
   constructor(private dateTimeService: DateTimeService) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.data.currentValue) {
+    if (changes['data'].currentValue) {
       this.results = this.getChartData();
     }
   }

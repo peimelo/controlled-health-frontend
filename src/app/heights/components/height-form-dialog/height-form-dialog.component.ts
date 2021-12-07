@@ -9,8 +9,6 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { User } from '../../../auth/models';
 import { Height } from '../../../shared/models';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { NumberService } from '../../../shared/services/number.service';
@@ -29,8 +27,6 @@ export class HeightFormDialogComponent implements OnChanges {
   isNotFilledHeight = true;
   originalHeight!: Height;
 
-  @Input() error!: Observable<any>;
-
   @Input()
   set pending(isPending: boolean) {
     if (isPending) {
@@ -40,7 +36,6 @@ export class HeightFormDialogComponent implements OnChanges {
     }
   }
 
-  @Input() user!: User;
   @Input() height!: Height;
 
   @Output() private create = new EventEmitter<Height>();
@@ -56,8 +51,8 @@ export class HeightFormDialogComponent implements OnChanges {
     if (this.height && this.height.id) {
       this.isEditing = true;
 
-      if (changes.height && changes.height.firstChange) {
-        this.originalHeight = changes.height.currentValue;
+      if (changes['height'] && changes['height'].firstChange) {
+        this.originalHeight = changes['height'].currentValue;
       }
 
       this.form.patchValue({

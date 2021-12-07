@@ -9,7 +9,7 @@ import { WeightResponse } from '../models';
 
 @Injectable()
 export class WeightsService extends BaseResourceService<Weight> {
-  constructor(protected injector: Injector) {
+  constructor(protected override injector: Injector) {
     super(`${environment.baseUrl}/weights`, injector);
   }
 

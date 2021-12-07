@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
+import { Pagination } from '../../../shared/models';
 import { LayoutFacadeService } from '../../../shared/services';
 import { Result } from '../../models';
 import { ResultsFacadeService } from '../../services/results-facade.service';
@@ -12,15 +13,18 @@ import { ResultsFacadeService } from '../../services/results-facade.service';
   templateUrl: './results-page.component.html',
 })
 export class ResultsPageComponent {
-  isHandsetPortrait$ = this.layoutFacadeService.isHandsetPortrait$;
-  pagination$ = this.resultsFacadeService.pagination$;
-  sort$ = this.resultsFacadeService.sort$;
+  isHandsetPortrait$: Observable<boolean>;
+  pagination$: Observable<Pagination>;
+  sort$: Observable<Sort>;
   results$: Observable<Result[]>;
 
   constructor(
     private layoutFacadeService: LayoutFacadeService,
     private resultsFacadeService: ResultsFacadeService
   ) {
+    this.isHandsetPortrait$ = this.layoutFacadeService.isHandsetPortrait$;
+    this.pagination$ = this.resultsFacadeService.pagination$;
+    this.sort$ = this.resultsFacadeService.sort$;
     this.results$ = this.resultsFacadeService.results$;
   }
 

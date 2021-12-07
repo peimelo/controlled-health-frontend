@@ -1,7 +1,5 @@
 <app-weight-form-dialog
-  [error]="error$"
   [pending]="pending$ | async"
-  [user]="user$ | async"
   [weight]="weight"
   (create)="onCreate($event)"
   (update)="onUpdate($event)"

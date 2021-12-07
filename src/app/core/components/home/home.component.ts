@@ -19,8 +19,8 @@ export class HomeComponent implements OnChanges {
   @Input() mediaObserver!: MediaChange[];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mediaObserver && changes.mediaObserver.currentValue) {
-      const mqAlias = changes.mediaObserver.currentValue[0].mqAlias;
+    if (changes['mediaObserver'] && changes['mediaObserver'].currentValue) {
+      const mqAlias = changes['mediaObserver'].currentValue[0].mqAlias;
 
       if (mqAlias === 'xs') {
         this.cols = 1;

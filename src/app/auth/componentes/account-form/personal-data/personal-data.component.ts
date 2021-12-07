@@ -45,7 +45,7 @@ export class PersonalDataComponent implements OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.user && changes.user.currentValue) {
+    if (changes['user'] && changes['user'].currentValue) {
       this.form.patchValue({
         date_of_birth: this.user.date_of_birth,
         email: this.user.email,
