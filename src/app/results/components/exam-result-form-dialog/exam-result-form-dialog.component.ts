@@ -14,8 +14,6 @@ import { map, startWith } from 'rxjs/operators';
 import { User } from '../../../auth/models';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { Weight } from '../../../shared/models';
-import { DateTimeService } from '../../../shared/services/dateTime.service';
-import { NumberService } from '../../../shared/services/number.service';
 import { Exam, ExamResult } from '../../models';
 
 @Component({
@@ -53,8 +51,6 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
   @Output() private update = new EventEmitter<any>();
 
   constructor(
-    private dateTimeService: DateTimeService,
-    private numberService: NumberService,
     private fb: FormBuilder,
     public readonly formErrorService: FormErrorService
   ) {}
@@ -70,24 +66,6 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.examResult && this.examResult.id) {
       this.isEditing = true;
-
-      //   if (changes.weight && changes.weight.firstChange) {
-      //     this.originalWeight = changes.weight.currentValue;
-      //   }
-
-      //   this.form.patchValue({
-      //     date: this.dateTimeService.convertDateToUtc(this.weight.date),
-      //     time: this.dateTimeService.convertTimeToUtc(this.weight.date),
-      //     value: formatNumber(this.weight.value, 'pt', '0.2-2'),
-      //   });
-    } else {
-      //   if (this.isNotFilledWeight) {
-      //     this.form.patchValue({
-      //       date: this.dateTimeService.dateNow(),
-      //       time: this.dateTimeService.timeNow(),
-      //     });
-      //     this.isNotFilledWeight = false;
-      // }
     }
   }
 
