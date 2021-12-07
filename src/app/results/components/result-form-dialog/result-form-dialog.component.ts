@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -11,12 +12,12 @@ import { Observable } from 'rxjs';
 import { User } from '../../../auth/models';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
-import { NumberService } from '../../../shared/services/number.service';
 import { Result } from '../../models';
 
 @Component({
   selector: 'app-result-form-dialog',
   templateUrl: './result-form-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultFormDialogComponent implements OnChanges {
   form = this.fb.group({
@@ -38,7 +39,6 @@ export class ResultFormDialogComponent implements OnChanges {
 
   constructor(
     private dateTimeService: DateTimeService,
-    private numberService: NumberService,
     private fb: FormBuilder,
     public readonly formErrorService: FormErrorService
   ) {}

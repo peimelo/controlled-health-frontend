@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -16,6 +17,7 @@ import { Result } from '../../models';
   selector: 'app-result-detail',
   templateUrl: './result-detail.component.html',
   styleUrls: ['./result-detail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultDetailComponent implements OnChanges {
   form = this.fb.group({

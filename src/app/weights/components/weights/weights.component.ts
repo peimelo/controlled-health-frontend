@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { DialogConfig, Pagination, Weight } from '../../../shared/models';
@@ -9,6 +15,7 @@ import { DateTimeService } from '../../../shared/services/dateTime.service';
   selector: 'app-weights',
   templateUrl: './weights.component.html',
   styleUrls: ['./weights.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeightsComponent {
   private columnDefinitions = [

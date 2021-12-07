@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { CreateAccountRequest } from '../../models';
@@ -7,8 +13,10 @@ import { CreateAccountRequest } from '../../models';
   selector: 'app-create-account-form',
   templateUrl: './create-account-form.component.html',
   styleUrls: ['./create-account-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAccountFormComponent {
+  // TODO: method deprecated
   form = this.fb.group(
     {
       email: ['', [Validators.email, Validators.required]],

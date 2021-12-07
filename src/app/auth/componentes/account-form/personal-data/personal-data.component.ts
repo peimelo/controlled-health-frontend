@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -15,6 +16,7 @@ import { User } from '../../../models';
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
   styleUrls: ['../account-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonalDataComponent implements OnChanges {
   form = this.fb.group({

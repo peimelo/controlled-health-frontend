@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-date-picker',
   templateUrl: 'date-picker.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerComponent {
   @Input() controlName = 'date';

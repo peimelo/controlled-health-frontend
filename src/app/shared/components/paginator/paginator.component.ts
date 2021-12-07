@@ -1,10 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Pagination } from '../../models';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: 'paginator.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginatorComponent {
   @Input() pagination!: Pagination;

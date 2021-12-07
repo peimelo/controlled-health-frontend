@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -20,6 +21,7 @@ import { Exam, ExamResult } from '../../models';
 @Component({
   selector: 'app-exam-result-form-dialog',
   templateUrl: './exam-result-form-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExamResultFormDialogComponent implements OnInit, OnChanges {
   form = this.fb.group({

@@ -1,5 +1,6 @@
 import { formatNumber } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -16,8 +17,8 @@ import { NumberService } from '../../../shared/services/number.service';
 
 @Component({
   selector: 'app-height-form-dialog',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './height-form-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeightFormDialogComponent implements OnChanges {
   form = this.fb.group({

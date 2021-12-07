@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormErrorService } from '../../../../core/services/form-error.service';
 import { PasswordCombination } from '../../../models';
@@ -7,6 +13,7 @@ import { PasswordCombination } from '../../../models';
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['../account-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChangePasswordComponent {
   form = this.fb.group(

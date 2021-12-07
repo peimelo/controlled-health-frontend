@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormErrorService } from '../../../core/services/form-error.service';
 
@@ -6,6 +12,7 @@ import { FormErrorService } from '../../../core/services/form-error.service';
   selector: 'app-forgot-password-form',
   templateUrl: './forgot-password-form.component.html',
   styleUrls: ['./forgot-password-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotPasswordFormComponent {
   form = this.fb.group({
