@@ -14,7 +14,7 @@ import { map, startWith } from 'rxjs/operators';
 import { User } from '../../../auth/models';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { Weight } from '../../../shared/models';
-import { Exam, ExamResult } from '../../models';
+import { Exam, ExamResult, Result } from '../../models';
 
 @Component({
   selector: 'app-exam-result-form-dialog',
@@ -35,6 +35,7 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
   @Input() allExams!: Exam[];
   @Input() error!: Observable<any>;
   @Input() examResult!: ExamResult;
+  @Input() result!: Result;
 
   @Input()
   set pending(isPending: boolean) {
@@ -47,7 +48,10 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
 
   @Input() user!: User;
 
-  @Output() private create = new EventEmitter<any>();
+  @Output() private create = new EventEmitter<{
+    examResult: ExamResult;
+    resultId: number;
+  }>();
   @Output() private update = new EventEmitter<any>();
 
   constructor(
@@ -83,10 +87,19 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
       : '';
   }
 
-  onCreate(form: FormGroup): void {
-    const { valid, value } = form;
+  onCreate(): void {
+    const { valid, value } = this.form;
 
     if (valid) {
+      const examResult = {
+        exam: value.exam,
+        value: value.value,
+      };
+
+      this.create.emit({
+        examResult: examResult as ExamResult,
+        resultId: this.result.id,
+      });
     }
   }
 

@@ -10,12 +10,19 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { MessageApiActions } from '../../core/actions';
-import { ErrorsService } from '../../shared/services/errors.service';
-import { ExamsResultsApiActions, ResultDetailPageActions } from '../actions';
+import { ErrorsService } from '../../shared/services';
+import {
+  ExamResultFormDialogActions,
+  ExamsResultsActions,
+  ExamsResultsApiActions,
+  ResultDetailPageActions,
+} from '../actions';
 import { ExamResultFormDialogPageComponent } from '../containers/exam-result-form-dialog-page/exam-result-form-dialog-page.component';
-import { ExamsResultsFacadeService } from '../services';
-import { ExamsResultsService } from '../services/exams-results.service';
-import { ResultsFacadeService } from '../services/results-facade.service';
+import {
+  ExamsResultsFacadeService,
+  ExamsResultsService,
+  ResultsFacadeService,
+} from '../services';
 
 @Injectable()
 export class ExamsResultsEffects {
@@ -28,10 +35,29 @@ export class ExamsResultsEffects {
         tap(() => {
           this.dialogRef = this.dialog.open(ExamResultFormDialogPageComponent, {
             data: {},
+            width: '800px',
           });
         })
       ),
     { dispatch: false }
+  );
+
+  createExamResult$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExamResultFormDialogActions.createExamResult),
+      mergeMap(({ examResult, resultId }) =>
+        this.examsResultsService.create(examResult, resultId).pipe(
+          mergeMap(() => [
+            ExamsResultsApiActions.createExamResultSuccess(),
+            ExamsResultsActions.examResultFormDialogDismiss(),
+            MessageApiActions.successMessage({
+              message: 'Record successfully created.',
+            }),
+          ]),
+          catchError((error) => this.errorService.showError(error))
+        )
+      )
+    )
   );
 
   deleteResult$ = createEffect(() =>
@@ -51,12 +77,24 @@ export class ExamsResultsEffects {
     )
   );
 
+  examResultFormDialogDismiss$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ExamsResultsActions.examResultFormDialogDismiss),
+        tap(() => {
+          this.dialogRef.close();
+        })
+      ),
+    { dispatch: false }
+  );
+
   loadExamsResults$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
         ResultDetailPageActions.loadExamsResults,
         ResultDetailPageActions.changePageResults,
         ResultDetailPageActions.sortResults,
+        ExamsResultsApiActions.createExamResultSuccess,
         ExamsResultsApiActions.deleteExamResultSuccess
       ),
       withLatestFrom(

@@ -6,7 +6,6 @@ import { Pagination } from '../../shared/models';
 import {
   ResultDetailPageActions,
   ResultExistsGuardActions,
-  ResultsFormDialogActions,
   ResultsGuardActions,
   ResultsPageActions,
 } from '../actions';
@@ -49,7 +48,7 @@ export class ResultsFacadeService {
   }
 
   create(result: Result): void {
-    this.store.dispatch(ResultsFormDialogActions.createResult({ result }));
+    // this.store.dispatch(ResultsPageActions.createResult({ result }));
   }
 
   delete(id: number): void {

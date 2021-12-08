@@ -13,9 +13,7 @@ import { ErrorsService } from '../../shared/services/errors.service';
 import {
   ResultDetailPageActions,
   ResultExistsGuardActions,
-  ResultsActions,
   ResultsApiActions,
-  ResultsFormDialogActions,
   ResultsGuardActions,
   ResultsPageActions,
 } from '../actions';
@@ -26,23 +24,23 @@ import { ResultsService } from '../services/results.service';
 export class ResultsEffects {
   dialogRef: any;
 
-  createResult$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ResultsFormDialogActions.createResult),
-      mergeMap(({ result }) =>
-        this.resultsService.create(result).pipe(
-          mergeMap(() => [
-            ResultsApiActions.createResultSuccess(),
-            ResultsActions.resultFormDialogDismiss(),
-            MessageApiActions.successMessage({
-              message: 'Record successfully created.',
-            }),
-          ]),
-          catchError((error) => this.errorService.showError(error))
-        )
-      )
-    )
-  );
+  // createResult$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(ResultsFormDialogActions.createResult),
+  //     mergeMap(({ result }) =>
+  //       this.resultsService.create(result).pipe(
+  //         mergeMap(() => [
+  //           ResultsApiActions.createResultSuccess(),
+  //           ResultsActions.resultFormDialogDismiss(),
+  //           MessageApiActions.successMessage({
+  //             message: 'Record successfully created.',
+  //           }),
+  //         ]),
+  //         catchError((error) => this.errorService.showError(error))
+  //       )
+  //     )
+  //   )
+  // );
 
   deleteResult$ = createEffect(() =>
     this.actions$.pipe(

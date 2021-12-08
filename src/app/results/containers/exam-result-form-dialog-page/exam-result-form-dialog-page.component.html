@@ -2,5 +2,7 @@
   [allExams]="allExams$ | async"
   [error]="error$"
   [pending]="pending$ | async"
+  [result]="result$ | async"
   [user]="user$ | async"
+  (create)="onCreate($event)"
 ></app-exam-result-form-dialog>

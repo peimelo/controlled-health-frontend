@@ -8,7 +8,7 @@
     fxLayoutGap="10px"
     novalidate
   >
-    <mat-form-field fxFlex>
+    <mat-form-field fxFlex="75%">
       <mat-label>Exame</mat-label>
       <input
         type="text"
@@ -20,7 +20,7 @@
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option
           *ngFor="let option of filteredOptions | async"
-          [value]="option.id"
+          [value]="option"
         >
           {{ option.name }}
         </mat-option>
@@ -31,6 +31,23 @@
         "
       >
         {{ error }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="25%">
+      <input
+        [dropSpecialCharacters]="true"
+        formControlName="value"
+        mask="separator.2"
+        thousandSeparator="."
+        matInput
+        placeholder="Value (kg)"
+        required
+      />
+      <mat-error
+        *ngIf="!form.controls['value'].valid && form.controls['value'].touched"
+      >
+        {{ getErrorValue() }}
       </mat-error>
     </mat-form-field>
   </form>
@@ -45,7 +62,7 @@
     mat-button
     *ngIf="!isEditing"
     type="button"
-    (click)="onCreate(form)"
+    (click)="onCreate()"
   >
     Create
   </button>

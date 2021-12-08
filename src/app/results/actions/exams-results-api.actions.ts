@@ -1,6 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { ExamResultResponse } from '../models';
 
+export const createExamResultSuccess = createAction(
+  '[Exams Results/API] Create Exam Result Success'
+);
+
 export const deleteExamResultSuccess = createAction(
   '[Exams Results/API] Delete Exam Result Success'
 );

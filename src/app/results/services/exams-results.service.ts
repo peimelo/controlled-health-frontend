@@ -1,18 +1,25 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ExamResult, ExamResultResponse, Result } from '../models';
-import { BaseResourceService } from '../../shared/services/base-resource.service';
+import { ExamResult, ExamResultResponse } from '../models';
 
 @Injectable()
 export class ExamsResultsService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+
+  create(examResult: ExamResult, resultId: number): Observable<ExamResult> {
+    return this.http.post<ExamResult>(
+      `${environment.baseUrl}/results/${resultId}/exams_results`,
+      { value: examResult.value, exam_id: examResult.exam.id }
+    );
   }
 
   delete(id: number, resultId: number): Observable<any> {
-    return this.http.delete<any>(`${environment.baseUrl}/results/${resultId}/exams_results/${id}`);
+    return this.http.delete<any>(
+      `${environment.baseUrl}/results/${resultId}/exams_results/${id}`
+    );
   }
 
   getAll(
