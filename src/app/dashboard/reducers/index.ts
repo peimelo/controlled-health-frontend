@@ -40,3 +40,8 @@ export const selectDashboard = createSelector(
   selectDashboardStatusState,
   fromDashboard.getDashboard
 );
+
+export const selectLoaded = createSelector(
+  selectDashboardStatusState,
+  fromDashboard.getLoaded
+);

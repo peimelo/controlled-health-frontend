@@ -87,6 +87,17 @@ export class WeightsEffects {
     { dispatch: false }
   );
 
+  loadDashboard$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        WeightsApiActions.createWeightSuccess,
+        WeightsApiActions.deleteWeightSuccess,
+        WeightsApiActions.updateWeightSuccess
+      ),
+      map(() => WeightsActions.loadDashboard())
+    )
+  );
+
   loadWeights$ = createEffect(() =>
     this.actions$.pipe(
       ofType(

@@ -1,4 +1,4 @@
 import * as DashboardApiActions from './dashboard-api.actions';
-import * as DashboardPageActions from './dashboard-page.actions';
+import * as DashboardGuardActions from './dashboard-guard.actions';
 
-export { DashboardApiActions, DashboardPageActions };
+export { DashboardApiActions, DashboardGuardActions };

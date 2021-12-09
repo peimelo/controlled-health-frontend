@@ -8,7 +8,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Height } from '../../../shared/models';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { NumberService } from '../../../shared/services/number.service';
@@ -19,14 +19,7 @@ import { NumberService } from '../../../shared/services/number.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeightFormDialogComponent implements OnChanges {
-  form = this.fb.group({
-    date: ['', Validators.required],
-    value: ['', [Validators.min(20), Validators.max(250), Validators.required]],
-  });
-  isEditing = false;
-  isNotFilledHeight = true;
-  originalHeight!: Height;
-
+  @Input() height!: Height;
   @Input()
   set pending(isPending: boolean) {
     if (isPending) {
@@ -36,10 +29,14 @@ export class HeightFormDialogComponent implements OnChanges {
     }
   }
 
-  @Input() height!: Height;
-
   @Output() private create = new EventEmitter<Height>();
   @Output() private update = new EventEmitter<Height>();
+
+  form = this.fb.group({
+    date: ['', Validators.required],
+    value: ['', [Validators.min(20), Validators.max(250), Validators.required]],
+  });
+  isEditing!: boolean;
 
   constructor(
     private dateTimeService: DateTimeService,
@@ -48,24 +45,20 @@ export class HeightFormDialogComponent implements OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.height && this.height.id) {
-      this.isEditing = true;
+    if (this.isEditing === undefined) {
+      if (this.height && this.height.id) {
+        this.isEditing = true;
 
-      if (changes['height'] && changes['height'].firstChange) {
-        this.originalHeight = changes['height'].currentValue;
-      }
+        this.form.patchValue({
+          date: this.dateTimeService.convertDateToUtc(this.height.date),
+          value: formatNumber(this.height.value, 'pt', '0.2-2'),
+        });
+      } else {
+        this.isEditing = false;
 
-      this.form.patchValue({
-        date: this.dateTimeService.convertDateToUtc(this.height.date),
-        value: formatNumber(this.height.value, 'pt', '0.2-2'),
-      });
-    } else {
-      if (this.isNotFilledHeight) {
         this.form.patchValue({
           date: this.dateTimeService.dateNow(),
         });
-
-        this.isNotFilledHeight = false;
       }
     }
   }
@@ -80,29 +73,28 @@ export class HeightFormDialogComponent implements OnChanges {
       : '';
   }
 
-  onCreate(form: FormGroup): void {
-    const { valid, value } = form;
+  onCreate(): void {
+    const { valid, value } = this.form;
 
     if (valid) {
       const height = {
-        ...this.height,
         date: this.dateTimeService.convertDateToSave(value.date),
         value: value.value,
       };
 
-      this.create.emit(height);
+      this.create.emit(height as Height);
     }
   }
 
-  onUpdate(form: FormGroup): void {
-    const { valid, value } = form;
+  onUpdate(): void {
+    const { valid, value } = this.form;
 
     if (valid) {
-      const height = {
+      const height: Height = {
         ...this.height,
         date: this.dateTimeService.convertDateToSave(value.date),
         value: this.numberService.convertToFloat(
-          this.originalHeight.value,
+          this.height.value,
           value.value
         ),
       };

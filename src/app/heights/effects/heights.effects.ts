@@ -87,6 +87,17 @@ export class HeightsEffects {
     { dispatch: false }
   );
 
+  loadDashboard$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        HeightsApiActions.createHeightSuccess,
+        HeightsApiActions.deleteHeightSuccess,
+        HeightsApiActions.updateHeightSuccess
+      ),
+      map(() => HeightsActions.loadDashboard())
+    )
+  );
+
   loadHeights$ = createEffect(() =>
     this.actions$.pipe(
       ofType(

@@ -6,6 +6,7 @@ export const statusFeatureKey = 'status';
 
 export interface State {
   dashboard: Dashboard;
+  loaded: boolean;
 }
 
 export const initialState: State = {
@@ -13,6 +14,7 @@ export const initialState: State = {
     heights: [],
     weights: [],
   },
+  loaded: false,
 };
 
 export const reducer = createReducer(
@@ -21,7 +23,9 @@ export const reducer = createReducer(
   on(DashboardApiActions.loadDashboardSuccess, (state, { dashboard }) => ({
     ...state,
     dashboard,
+    loaded: true,
   }))
 );
 
 export const getDashboard = (state: State) => state.dashboard;
+export const getLoaded = (state: State) => state.loaded;

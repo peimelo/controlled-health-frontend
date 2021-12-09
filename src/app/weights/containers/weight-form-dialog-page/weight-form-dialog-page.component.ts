@@ -8,6 +8,7 @@ import { WeightsFacadeService } from '../../services/weights-facade.service';
 interface DialogData {
   weight: Weight;
 }
+
 @Component({
   selector: 'app-weight-form-dialog-page',
   changeDetection: ChangeDetectionStrategy.OnPush,

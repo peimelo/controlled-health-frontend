@@ -58,7 +58,7 @@
     mat-button
     *ngIf="!isEditing"
     type="button"
-    (click)="onCreate(form)"
+    (click)="onCreate()"
   >
     Create
   </button>
@@ -69,7 +69,7 @@
     mat-button
     *ngIf="isEditing"
     type="button"
-    (click)="onUpdate(form)"
+    (click)="onUpdate()"
   >
     Update
   </button>

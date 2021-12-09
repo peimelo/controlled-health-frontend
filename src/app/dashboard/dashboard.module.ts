@@ -6,6 +6,7 @@ import * as fromComponents from './components';
 import * as fromContainers from './containers';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardEffects } from './effects';
+import { DashboardGuard } from './guards/dashboard.guard';
 import * as fromDashboard from './reducers';
 import { DashboardFacadeService } from './services/dashboard-facade.service';
 import { DashboardService } from './services/dashboard.service';
@@ -26,6 +27,6 @@ import { DashboardService } from './services/dashboard.service';
   ],
   declarations: [...fromComponents.components, ...fromContainers.containers],
   exports: [...fromComponents.components, ...fromContainers.containers],
-  providers: [DashboardFacadeService, DashboardService],
+  providers: [DashboardFacadeService, DashboardGuard, DashboardService],
 })
 export class DashboardModule {}

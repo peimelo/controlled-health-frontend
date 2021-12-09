@@ -6,9 +6,8 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { Weight } from '../../../shared/models';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
@@ -20,15 +19,6 @@ import { NumberService } from '../../../shared/services/number.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeightFormDialogComponent implements OnChanges {
-  form = this.fb.group({
-    date: ['', Validators.required],
-    time: ['', Validators.required],
-    value: ['', [Validators.min(3), Validators.max(400), Validators.required]],
-  });
-  isEditing = false;
-  isNotFilledWeight = true;
-  originalWeight!: Weight;
-
   @Input()
   set pending(isPending: boolean) {
     if (isPending) {
@@ -43,6 +33,14 @@ export class WeightFormDialogComponent implements OnChanges {
   @Output() private create = new EventEmitter<Weight>();
   @Output() private update = new EventEmitter<Weight>();
 
+  form = this.fb.group({
+    date: ['', Validators.required],
+    time: ['', Validators.required],
+    value: ['', [Validators.min(3), Validators.max(400), Validators.required]],
+  });
+
+  isEditing!: boolean;
+
   constructor(
     private dateTimeService: DateTimeService,
     private numberService: NumberService,
@@ -50,27 +48,23 @@ export class WeightFormDialogComponent implements OnChanges {
     public readonly formErrorService: FormErrorService
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.weight && this.weight.id) {
-      this.isEditing = true;
+  ngOnChanges(): void {
+    if (this.isEditing === undefined) {
+      if (this.weight && this.weight.id) {
+        this.isEditing = true;
 
-      if (changes['weight'] && changes['weight'].firstChange) {
-        this.originalWeight = changes['weight'].currentValue;
-      }
+        this.form.patchValue({
+          date: this.dateTimeService.convertDateToUtc(this.weight.date),
+          time: this.dateTimeService.convertTimeToUtc(this.weight.date),
+          value: formatNumber(this.weight.value, 'pt', '0.2-2'),
+        });
+      } else {
+        this.isEditing = false;
 
-      this.form.patchValue({
-        date: this.dateTimeService.convertDateToUtc(this.weight.date),
-        time: this.dateTimeService.convertTimeToUtc(this.weight.date),
-        value: formatNumber(this.weight.value, 'pt', '0.2-2'),
-      });
-    } else {
-      if (this.isNotFilledWeight) {
         this.form.patchValue({
           date: this.dateTimeService.dateNow(),
           time: this.dateTimeService.timeNow(),
         });
-
-        this.isNotFilledWeight = false;
       }
     }
   }
@@ -85,33 +79,32 @@ export class WeightFormDialogComponent implements OnChanges {
       : '';
   }
 
-  onCreate(form: FormGroup): void {
-    const { valid, value } = form;
+  onCreate(): void {
+    const { valid, value } = this.form;
 
     if (valid) {
       const date = this.dateTimeService.convertDateToSave(value.date);
 
       const weight = {
-        ...this.weight,
         date: this.dateTimeService.convertDateTimeToSave(date, value.time),
         value: value.value,
       };
 
-      this.create.emit(weight);
+      this.create.emit(weight as Weight);
     }
   }
 
-  onUpdate(form: FormGroup): void {
-    const { valid, value } = form;
+  onUpdate(): void {
+    const { valid, value } = this.form;
 
     if (valid) {
       const date = this.dateTimeService.convertDateToSave(value.date);
 
-      const weight = {
+      const weight: Weight = {
         ...this.weight,
         date: this.dateTimeService.convertDateTimeToSave(date, value.time),
         value: this.numberService.convertToFloat(
-          this.originalWeight.value,
+          this.weight.value,
           value.value
         ),
       };

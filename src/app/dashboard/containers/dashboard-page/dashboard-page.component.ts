@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Dashboard } from '../../models';
 import { DashboardFacadeService } from '../../services/dashboard-facade.service';
 
 @Component({
@@ -6,12 +8,10 @@ import { DashboardFacadeService } from '../../services/dashboard-facade.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dashboard-page.component.html',
 })
-export class DashboardPageComponent implements OnInit {
-  dashboard$ = this.dashboardFacadeService.dashboard$;
+export class DashboardPageComponent {
+  dashboard$: Observable<Dashboard>;
 
-  constructor(private dashboardFacadeService: DashboardFacadeService) {}
-
-  ngOnInit(): void {
-    this.dashboardFacadeService.loadDashboard();
+  constructor(private dashboardFacadeService: DashboardFacadeService) {
+    this.dashboard$ = this.dashboardFacadeService.dashboard$;
   }
 }
