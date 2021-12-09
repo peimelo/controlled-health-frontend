@@ -9,7 +9,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { DialogConfig, Pagination } from '../../../shared/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
-import { ExamResult, Result } from '../../models';
+import { ExamResult, ExamResultDeleteEvent, Result } from '../../models';
 
 @Component({
   selector: 'app-exams-results',
@@ -32,10 +32,7 @@ export class ExamsResultsComponent {
 
   @Output() private changePage = new EventEmitter<PageEvent>();
   @Output() private add = new EventEmitter();
-  @Output() private delete = new EventEmitter<{
-    id: number;
-    resultId: number;
-  }>();
+  @Output() private delete = new EventEmitter<ExamResultDeleteEvent>();
   @Output() private edit = new EventEmitter<ExamResult>();
   @Output() private sortEvent = new EventEmitter<Sort>();
 
@@ -47,12 +44,15 @@ export class ExamsResultsComponent {
       content: `'${examResult.exam.name}' will be removed.`,
       title: 'Remove exam result',
     };
+
+    const examResultDeleteEvent: ExamResultDeleteEvent = {
+      id: examResult.id,
+      resultId: this.result.id,
+    };
+
     this.confirmationDialogService.show(
       this.delete,
-      {
-        id: examResult.id,
-        resultId: this.result.id,
-      },
+      examResultDeleteEvent,
       dialogConfig
     );
   }

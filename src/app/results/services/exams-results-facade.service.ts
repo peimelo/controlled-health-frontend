@@ -7,7 +7,7 @@ import {
   ExamResultFormDialogPageActions,
   ResultDetailPageActions,
 } from '../actions';
-import { ExamResult, ExamResultRequest } from '../models';
+import { ExamResult } from '../models';
 import * as fromResults from '../reducers';
 
 @Injectable()
@@ -38,7 +38,7 @@ export class ExamsResultsFacadeService {
     );
   }
 
-  create({ examResult, resultId }: ExamResultRequest): void {
+  create(examResult: ExamResult, resultId: number): void {
     this.store.dispatch(
       ExamResultFormDialogPageActions.createExamResult({ examResult, resultId })
     );
@@ -62,7 +62,7 @@ export class ExamsResultsFacadeService {
     this.store.dispatch(ResultDetailPageActions.sortResults({ sort }));
   }
 
-  update({ examResult, resultId }: ExamResultRequest): void {
+  update(examResult: ExamResult, resultId: number): void {
     this.store.dispatch(
       ExamResultFormDialogPageActions.updateExamResult({ examResult, resultId })
     );

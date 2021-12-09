@@ -39,11 +39,11 @@ export class ExamResultFormDialogPageComponent {
     this.result$ = this.resultsFacadeService.selected$;
   }
 
-  onCreate(examResultRequest: ExamResultRequest): void {
-    this.examsResultsFacadeService.create(examResultRequest);
+  onCreate({ examResult, resultId }: ExamResultRequest): void {
+    this.examsResultsFacadeService.create(examResult, resultId);
   }
 
-  onUpdate(examResultRequest: ExamResultRequest): void {
-    this.examsResultsFacadeService.update(examResultRequest);
+  onUpdate({ examResult, resultId }: ExamResultRequest): void {
+    this.examsResultsFacadeService.update(examResult, resultId);
   }
 }

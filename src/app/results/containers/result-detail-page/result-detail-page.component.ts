@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
 import { Pagination } from '../../../shared/models';
 import { LayoutFacadeService } from '../../../shared/services';
-import { ExamResult, Result } from '../../models';
+import { ExamResult, ExamResultDeleteEvent, Result } from '../../models';
 import { ExamsResultsFacadeService } from '../../services/exams-results-facade.service';
 import { ResultsFacadeService } from '../../services/results-facade.service';
 
@@ -48,8 +48,7 @@ export class ResultDetailPageComponent implements OnInit {
     this.examsResultsFacadeService.changePage(event.pageIndex + 1);
   }
 
-  onDeleteExamResult(event: any): void {
-    const { id, resultId } = event;
+  onDeleteExamResult({ id, resultId }: ExamResultDeleteEvent): void {
     this.examsResultsFacadeService.delete(id, resultId);
   }
 
