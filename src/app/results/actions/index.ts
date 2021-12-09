@@ -1,5 +1,5 @@
 import * as AllExamsExistsGuardActions from './all-exams-exists-guard.actions';
-import * as ExamResultFormDialogActions from './exam-result-form-dialog-page.actions';
+import * as ExamResultFormDialogPageActions from './exam-result-form-dialog-page.actions';
 import * as ExamsApiActions from './exams-api.actions';
 import * as ExamsResultsApiActions from './exams-results-api.actions';
 import * as ExamsResultsActions from './exams-results.actions';
@@ -13,7 +13,7 @@ import * as ResultsActions from './results.actions';
 export {
   AllExamsExistsGuardActions,
   ExamsApiActions,
-  ExamResultFormDialogActions,
+  ExamResultFormDialogPageActions,
   ExamsResultsActions,
   ExamsResultsApiActions,
   ResultDetailPageActions,

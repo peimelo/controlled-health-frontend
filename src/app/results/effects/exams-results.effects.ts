@@ -12,7 +12,7 @@ import {
 import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services';
 import {
-  ExamResultFormDialogActions,
+  ExamResultFormDialogPageActions,
   ExamsResultsActions,
   ExamsResultsApiActions,
   ResultDetailPageActions,
@@ -44,7 +44,7 @@ export class ExamsResultsEffects {
 
   createExamResult$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ExamResultFormDialogActions.createExamResult),
+      ofType(ExamResultFormDialogPageActions.createExamResult),
       mergeMap(({ examResult, resultId }) =>
         this.examsResultsService.create(examResult, resultId).pipe(
           mergeMap(() => [
@@ -77,6 +77,20 @@ export class ExamsResultsEffects {
     )
   );
 
+  editExamResult$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ResultDetailPageActions.editExamResult),
+        tap(({ examResult }) => {
+          this.dialogRef = this.dialog.open(ExamResultFormDialogPageComponent, {
+            data: { examResult },
+            width: '800px',
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
   examResultFormDialogDismiss$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -95,7 +109,8 @@ export class ExamsResultsEffects {
         ResultDetailPageActions.changePageResults,
         ResultDetailPageActions.sortResults,
         ExamsResultsApiActions.createExamResultSuccess,
-        ExamsResultsApiActions.deleteExamResultSuccess
+        ExamsResultsApiActions.deleteExamResultSuccess,
+        ExamsResultsApiActions.updateExamResultSuccess
       ),
       withLatestFrom(
         this.resultsFacadeService.selected$,
@@ -116,6 +131,24 @@ export class ExamsResultsEffects {
             catchError((error) => this.errorService.showError(error))
           );
       })
+    )
+  );
+
+  updateExamResult$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExamResultFormDialogPageActions.updateExamResult),
+      mergeMap(({ examResult, resultId }) =>
+        this.examsResultsService.update(examResult, resultId).pipe(
+          mergeMap(() => [
+            ExamsResultsApiActions.updateExamResultSuccess(),
+            ExamsResultsActions.examResultFormDialogDismiss(),
+            MessageApiActions.successMessage({
+              message: 'Record successfully updated.',
+            }),
+          ]),
+          catchError((error) => this.errorService.showError(error))
+        )
+      )
     )
   );
 

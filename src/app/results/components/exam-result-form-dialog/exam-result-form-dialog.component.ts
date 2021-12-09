@@ -1,3 +1,4 @@
+import { formatNumber } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,15 +7,14 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { User } from '../../../auth/models';
 import { FormErrorService } from '../../../core/services/form-error.service';
-import { Weight } from '../../../shared/models';
-import { Exam, ExamResult, Result } from '../../models';
+import { NumberService } from '../../../shared/services';
+import { Exam, ExamResult, ExamResultRequest, Result } from '../../models';
 
 @Component({
   selector: 'app-exam-result-form-dialog',
@@ -22,21 +22,9 @@ import { Exam, ExamResult, Result } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExamResultFormDialogComponent implements OnInit, OnChanges {
-  form = this.fb.group({
-    exam: ['', Validators.required],
-    value: ['', [Validators.min(3), Validators.max(400), Validators.required]],
-  });
-  isEditing = false;
-  isNotFilledWeight = true;
-  originalWeight!: Weight;
-
-  filteredOptions!: Observable<Exam[]>;
-
   @Input() allExams!: Exam[];
-  @Input() error!: Observable<any>;
   @Input() examResult!: ExamResult;
   @Input() result!: Result;
-
   @Input()
   set pending(isPending: boolean) {
     if (isPending) {
@@ -45,18 +33,22 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
       this.form.enable();
     }
   }
-
   @Input() user!: User;
 
-  @Output() private create = new EventEmitter<{
-    examResult: ExamResult;
-    resultId: number;
-  }>();
-  @Output() private update = new EventEmitter<any>();
+  @Output() private create = new EventEmitter<ExamResultRequest>();
+  @Output() private update = new EventEmitter<ExamResultRequest>();
+
+  form = this.fb.group({
+    exam: ['', Validators.required],
+    value: ['', [Validators.min(3), Validators.max(400), Validators.required]],
+  });
+  filteredOptions!: Observable<Exam[]>;
+  isEditing!: boolean;
 
   constructor(
     private fb: FormBuilder,
-    public readonly formErrorService: FormErrorService
+    public readonly formErrorService: FormErrorService,
+    private numberService: NumberService
   ) {}
 
   ngOnInit() {
@@ -67,9 +59,18 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
     );
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.examResult && this.examResult.id) {
-      this.isEditing = true;
+  ngOnChanges(): void {
+    if (this.isEditing === undefined) {
+      if (this.examResult && this.examResult.id) {
+        this.isEditing = true;
+
+        this.form.patchValue({
+          exam: this.examResult.exam,
+          value: formatNumber(this.examResult.value, 'pt', '0.2-2'),
+        });
+      } else {
+        this.isEditing = false;
+      }
     }
   }
 
@@ -103,10 +104,20 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
     }
   }
 
-  onUpdate(form: FormGroup): void {
-    const { valid, value } = form;
+  onUpdate(): void {
+    const { valid, value } = this.form;
 
     if (valid) {
+      const examResult: ExamResult = {
+        ...this.examResult,
+        exam: value.exam,
+        value: this.numberService.convertToFloat(
+          this.examResult.value,
+          value.value
+        ),
+      };
+
+      this.update.emit({ examResult, resultId: this.result.id });
     }
   }
 

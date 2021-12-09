@@ -4,10 +4,10 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Pagination } from '../../shared/models';
 import {
-  ExamResultFormDialogActions,
+  ExamResultFormDialogPageActions,
   ResultDetailPageActions,
 } from '../actions';
-import { ExamResult } from '../models';
+import { ExamResult, ExamResultRequest } from '../models';
 import * as fromResults from '../reducers';
 
 @Injectable()
@@ -38,9 +38,9 @@ export class ExamsResultsFacadeService {
     );
   }
 
-  create(examResult: ExamResult, resultId: number): void {
+  create({ examResult, resultId }: ExamResultRequest): void {
     this.store.dispatch(
-      ExamResultFormDialogActions.createExamResult({ examResult, resultId })
+      ExamResultFormDialogPageActions.createExamResult({ examResult, resultId })
     );
   }
 
@@ -50,11 +50,21 @@ export class ExamsResultsFacadeService {
     );
   }
 
+  edit(examResult: ExamResult): void {
+    this.store.dispatch(ResultDetailPageActions.editExamResult({ examResult }));
+  }
+
   load(): void {
     this.store.dispatch(ResultDetailPageActions.loadExamsResults());
   }
 
   sort(sort: Sort): void {
     this.store.dispatch(ResultDetailPageActions.sortResults({ sort }));
+  }
+
+  update({ examResult, resultId }: ExamResultRequest): void {
+    this.store.dispatch(
+      ExamResultFormDialogPageActions.updateExamResult({ examResult, resultId })
+    );
   }
 }

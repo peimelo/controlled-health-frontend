@@ -1,3 +1,4 @@
+export * from './exam-result-request.model';
 export * from './exam-result-response.model';
 export * from './exam-result.model';
 export * from './exam.model';

@@ -3,14 +3,17 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { User } from '../../../auth/models';
 import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
-import { Exam, Result } from '../../models';
+import { Exam, ExamResult, ExamResultRequest, Result } from '../../models';
 import {
   ExamsFacadeService,
   ExamsResultsFacadeService,
   ResultsFacadeService,
 } from '../../services';
 
-interface DialogData {}
+interface DialogData {
+  examResult: ExamResult;
+}
+
 @Component({
   selector: 'app-exam-result-form-dialog-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,8 +21,8 @@ interface DialogData {}
 })
 export class ExamResultFormDialogPageComponent {
   allExams$: Observable<Exam[]>;
-  error$!: Observable<any>;
-  pending$ = this.spinnerFacadeService.isLoading$;
+  examResult!: ExamResult;
+  pending$: Observable<boolean>;
   user$!: Observable<User>;
   result$: Observable<Result | null>;
 
@@ -31,16 +34,16 @@ export class ExamResultFormDialogPageComponent {
     private spinnerFacadeService: SpinnerFacadeService
   ) {
     this.allExams$ = this.examsFacadeService.allExams$;
+    this.examResult = this.data.examResult;
+    this.pending$ = this.spinnerFacadeService.isLoading$;
     this.result$ = this.resultsFacadeService.selected$;
   }
 
-  onCreate(event: any): void {
-    const { examResult, resultId } = event;
-
-    this.examsResultsFacadeService.create(examResult, resultId);
+  onCreate(examResultRequest: ExamResultRequest): void {
+    this.examsResultsFacadeService.create(examResultRequest);
   }
 
-  onUpdate(): void {
-    // this.weightFacadeService.update(weight);
+  onUpdate(examResultRequest: ExamResultRequest): void {
+    this.examsResultsFacadeService.update(examResultRequest);
   }
 }

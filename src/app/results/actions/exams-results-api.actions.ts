@@ -13,3 +13,7 @@ export const loadExamsResultsSuccess = createAction(
   '[Exams Results/API] Load Exams Results Success',
   props<{ examResultResponse: ExamResultResponse }>()
 );
+
+export const updateExamResultSuccess = createAction(
+  '[Exams Results/API] Update Exam Result Success'
+);

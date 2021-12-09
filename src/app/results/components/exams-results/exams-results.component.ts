@@ -36,7 +36,7 @@ export class ExamsResultsComponent {
     id: number;
     resultId: number;
   }>();
-  @Output() private edit = new EventEmitter<Result>();
+  @Output() private edit = new EventEmitter<ExamResult>();
   @Output() private sortEvent = new EventEmitter<Sort>();
 
   constructor(private confirmationDialogService: ConfirmationDialogService) {}
@@ -71,7 +71,9 @@ export class ExamsResultsComponent {
     this.changePage.emit(event);
   }
 
-  onEdit(row: any) {}
+  onEdit(examResult: ExamResult) {
+    this.edit.emit(examResult);
+  }
 
   sortData(sort: Sort) {
     this.sortEvent.emit(sort);

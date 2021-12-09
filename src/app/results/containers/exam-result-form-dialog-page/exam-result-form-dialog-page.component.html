@@ -1,8 +1,9 @@
 <app-exam-result-form-dialog
   [allExams]="allExams$ | async"
-  [error]="error$"
+  [examResult]="examResult"
   [pending]="pending$ | async"
   [result]="result$ | async"
   [user]="user$ | async"
   (create)="onCreate($event)"
+  (update)="onUpdate($event)"
 ></app-exam-result-form-dialog>
