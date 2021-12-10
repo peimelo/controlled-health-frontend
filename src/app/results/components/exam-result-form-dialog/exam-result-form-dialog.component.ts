@@ -9,12 +9,19 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { User } from '../../../auth/models';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { NumberService } from '../../../shared/services';
-import { Exam, ExamResult, ExamResultRequest, Result } from '../../models';
+import {
+  Exam,
+  ExamResult,
+  ExamResultRequest,
+  Result,
+  Unit,
+} from '../../models';
 
 @Component({
   selector: 'app-exam-result-form-dialog',
@@ -44,6 +51,7 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
   });
   filteredOptions!: Observable<Exam[]>;
   isEditing!: boolean;
+  unitName = '';
 
   constructor(
     private fb: FormBuilder,
@@ -68,6 +76,7 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
           exam: this.examResult.exam,
           value: formatNumber(this.examResult.value, 'pt', '0.2-2'),
         });
+        this.unitName = this.setUnitName(this.examResult.exam.unit);
       } else {
         this.isEditing = false;
       }
@@ -88,6 +97,10 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
       : '';
   }
 
+  getValuePlaceholder(): string {
+    return this.unitName ? `Value (${this.unitName})` : 'Value';
+  }
+
   onCreate(): void {
     const { valid, value } = this.form;
 
@@ -102,6 +115,16 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
         resultId: this.result.id,
       });
     }
+  }
+
+  onOptionSelected(event: MatAutocompleteSelectedEvent) {
+    const {
+      option: {
+        value: { unit },
+      },
+    } = event;
+
+    this.unitName = this.setUnitName(unit);
   }
 
   onUpdate(): void {
@@ -127,5 +150,9 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
     return this.allExams.filter((option) =>
       option.name.toLowerCase().includes(filterValue)
     );
+  }
+
+  private setUnitName(unit: Unit): string {
+    return unit?.name ? unit.name : '';
   }
 }

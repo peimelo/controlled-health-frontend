@@ -17,7 +17,11 @@
         [matAutocomplete]="auto"
         required
       />
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayFn"
+        (optionSelected)="onOptionSelected($event)"
+      >
         <mat-option
           *ngFor="let option of filteredOptions | async"
           [value]="option"
@@ -41,7 +45,7 @@
         mask="separator.2"
         thousandSeparator="."
         matInput
-        placeholder="Value (kg)"
+        [placeholder]="getValuePlaceholder()"
         required
       />
       <mat-error
