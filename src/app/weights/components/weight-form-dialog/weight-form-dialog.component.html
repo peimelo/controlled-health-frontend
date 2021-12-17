@@ -1,15 +1,11 @@
 <h1 mat-dialog-title>{{ isEditing ? "Update" : "Create" }} weight</h1>
 
-<div mat-dialog-content>
-  <form
-    [formGroup]="form"
-    fxLayout
-    fxLayout.xs="column"
-    fxLayoutGap="10px"
-    novalidate
-  >
+<form [formGroup]="form" novalidate>
+  <div mat-dialog-content fxLayout fxLayout.xs="column" fxLayoutGap="10px">
+    <!-- date -->
     <app-date-picker [form]="form"></app-date-picker>
 
+    <!-- time -->
     <mat-form-field fxFlex>
       <input
         [dropSpecialCharacters]="false"
@@ -23,13 +19,17 @@
       />
       <mat-error
         *ngFor="
-          let error of formErrorService.mapErrors(form.get('time')?.errors)
+          let error of formErrorService.mapErrors(
+            form.get('time')?.errors,
+            'Time'
+          )
         "
       >
         {{ error }}
       </mat-error>
     </mat-form-field>
 
+    <!-- value -->
     <mat-form-field fxFlex>
       <input
         [dropSpecialCharacters]="true"
@@ -41,36 +41,27 @@
         required
       />
       <mat-error
-        *ngIf="!form.controls['value'].valid && form.controls['value'].touched"
+        *ngFor="
+          let error of formErrorService.mapErrors(
+            form.get('value')?.errors,
+            'Value'
+          )
+        "
       >
-        {{ getErrorValue() }}
+        {{ error }}
       </mat-error>
     </mat-form-field>
-  </form>
-</div>
+  </div>
 
-<div fxLayout fxLayoutAlign="end" mat-dialog-actions>
-  <button fxflex mat-button [mat-dialog-close]="true">Cancel</button>
+  <div fxLayout fxLayoutAlign="end" mat-dialog-actions>
+    <button fxflex mat-button [mat-dialog-close]="true">Cancel</button>
 
-  <button
-    [disabled]="!form.valid"
-    fxflex
-    mat-button
-    *ngIf="!isEditing"
-    type="button"
-    (click)="onCreate()"
-  >
-    Create
-  </button>
+    <button fxflex mat-button *ngIf="!isEditing" (click)="onCreate()">
+      Create
+    </button>
 
-  <button
-    [disabled]="!form.valid"
-    fxflex
-    mat-button
-    *ngIf="isEditing"
-    type="button"
-    (click)="onUpdate()"
-  >
-    Update
-  </button>
-</div>
+    <button fxflex mat-button *ngIf="isEditing" (click)="onUpdate()">
+      Update
+    </button>
+  </div>
+</form>

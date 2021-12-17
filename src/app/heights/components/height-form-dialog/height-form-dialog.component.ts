@@ -6,9 +6,9 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { FormErrorService } from '../../../core/services/form-error.service';
 import { Height } from '../../../shared/models';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { NumberService } from '../../../shared/services/number.service';
@@ -41,10 +41,11 @@ export class HeightFormDialogComponent implements OnChanges {
   constructor(
     private dateTimeService: DateTimeService,
     private numberService: NumberService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public readonly formErrorService: FormErrorService
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.isEditing === undefined) {
       if (this.height && this.height.id) {
         this.isEditing = true;
@@ -61,16 +62,6 @@ export class HeightFormDialogComponent implements OnChanges {
         });
       }
     }
-  }
-
-  getErrorValue(): string {
-    return this.form.get('value')?.hasError('required')
-      ? 'Field is required.'
-      : this.form.get('value')?.hasError('min')
-      ? 'Must be >= 20'
-      : this.form.get('value')?.hasError('max')
-      ? 'Must be <= 250'
-      : '';
   }
 
   onCreate(): void {

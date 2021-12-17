@@ -1,15 +1,9 @@
 <h1 mat-dialog-title>{{ isEditing ? "Update" : "Create" }} Exam Result</h1>
 
-<div mat-dialog-content>
-  <form
-    [formGroup]="form"
-    fxLayout
-    fxLayout.xs="column"
-    fxLayoutGap="10px"
-    novalidate
-  >
+<form [formGroup]="form" novalidate>
+  <div mat-dialog-content fxLayout fxLayout.xs="column" fxLayoutGap="10px">
     <mat-form-field fxFlex="75%">
-      <mat-label>Exame</mat-label>
+      <mat-label>Exam</mat-label>
       <input
         type="text"
         matInput
@@ -31,7 +25,10 @@
       </mat-autocomplete>
       <mat-error
         *ngFor="
-          let error of formErrorService.mapErrors(form.get('exam')?.errors)
+          let error of formErrorService.mapErrors(
+            form.get('exam')?.errors,
+            'Exam'
+          )
         "
       >
         {{ error }}
@@ -49,36 +46,27 @@
         required
       />
       <mat-error
-        *ngIf="!form.controls['value'].valid && form.controls['value'].touched"
+        *ngFor="
+          let error of formErrorService.mapErrors(
+            form.get('value')?.errors,
+            'Value'
+          )
+        "
       >
-        {{ getErrorValue() }}
+        {{ error }}
       </mat-error>
     </mat-form-field>
-  </form>
-</div>
+  </div>
 
-<div fxLayout fxLayoutAlign="end" mat-dialog-actions>
-  <button fxflex mat-button [mat-dialog-close]="true">Cancel</button>
+  <div fxLayout fxLayoutAlign="end" mat-dialog-actions>
+    <button fxflex mat-button [mat-dialog-close]="true">Cancel</button>
 
-  <button
-    [disabled]="!form.valid"
-    fxflex
-    mat-button
-    *ngIf="!isEditing"
-    type="button"
-    (click)="onCreate()"
-  >
-    Create
-  </button>
+    <button fxflex mat-button *ngIf="!isEditing" (click)="onCreate()">
+      Create
+    </button>
 
-  <button
-    [disabled]="!form.valid"
-    fxflex
-    mat-button
-    *ngIf="isEditing"
-    type="button"
-    (click)="onUpdate()"
-  >
-    Update
-  </button>
-</div>
+    <button fxflex mat-button *ngIf="isEditing" (click)="onUpdate()">
+      Update
+    </button>
+  </div>
+</form>

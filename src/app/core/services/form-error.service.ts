@@ -11,15 +11,21 @@ export class FormErrorService {
       `${name} must be match.`,
     email: (errors: ValidationErrors, name: string) =>
       'Must be a valid email address.',
+    max: (errors: ValidationErrors, name: string) =>
+      `Must be <= ${errors['max'].max}.`,
     minlength: (errors: ValidationErrors, name: string) =>
       `Must be at least ${errors['minlength'].requiredLength} characters.`,
+    min: (errors: ValidationErrors, name: string) =>
+      `Must be >= ${errors['min'].min}.`,
     required: (errors: ValidationErrors, name: string) => 'Field is required.',
   };
 
   mapErrors(errors: ValidationErrors, name = ''): string[] {
-    return Object.keys(errors || {}).map((key) =>
-      this.errorMap[key](errors, name)
-    );
+    if (!errors) {
+      return [];
+    }
+
+    return Object.keys(errors).map((key) => this.errorMap[key](errors, name));
   }
 
   confirmedValidator(controlName: string, matchingControlName: string): any {

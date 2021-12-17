@@ -47,7 +47,7 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
 
   form = this.fb.group({
     exam: ['', Validators.required],
-    value: ['', [Validators.min(3), Validators.max(400), Validators.required]],
+    value: ['', [Validators.max(99999999.99), Validators.required]],
   });
   filteredOptions!: Observable<Exam[]>;
   isEditing!: boolean;
@@ -85,16 +85,6 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
 
   displayFn(exam: Exam): string {
     return exam && exam.name ? exam.name : '';
-  }
-
-  getErrorValue(): string {
-    return this.form.get('value')?.hasError('required')
-      ? 'Field is required.'
-      : this.form.get('value')?.hasError('min')
-      ? 'Must be >= 3'
-      : this.form.get('value')?.hasError('max')
-      ? 'Must be <= 400'
-      : '';
   }
 
   getValuePlaceholder(): string {

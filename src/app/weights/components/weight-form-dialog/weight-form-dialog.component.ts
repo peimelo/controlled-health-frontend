@@ -69,16 +69,6 @@ export class WeightFormDialogComponent implements OnChanges {
     }
   }
 
-  getErrorValue(): string {
-    return this.form.get('value')?.hasError('required')
-      ? 'Field is required.'
-      : this.form.get('value')?.hasError('min')
-      ? 'Must be >= 3'
-      : this.form.get('value')?.hasError('max')
-      ? 'Must be <= 400'
-      : '';
-  }
-
   onCreate(): void {
     const { valid, value } = this.form;
 
