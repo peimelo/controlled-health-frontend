@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   catchError,
   exhaustMap,
   map,
   mergeMap,
+  tap,
   withLatestFrom,
 } from 'rxjs/operators';
 import { MessageApiActions } from '../../core/actions';
@@ -22,25 +23,35 @@ import { ResultsService } from '../services/results.service';
 
 @Injectable()
 export class ResultsEffects {
-  dialogRef: any;
+  createResult$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ResultDetailPageActions.createResult),
+      mergeMap(({ result }) =>
+        this.resultsService.create(result).pipe(
+          mergeMap((resultApi) => [
+            ResultsApiActions.createResultSuccess({ result: resultApi }),
+            MessageApiActions.successMessage({
+              message: 'Record successfully created.',
+            }),
+          ]),
+          catchError((error) => this.errorService.showError(error))
+        )
+      )
+    )
+  );
 
-  // createResult$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(ResultsFormDialogActions.createResult),
-  //     mergeMap(({ result }) =>
-  //       this.resultsService.create(result).pipe(
-  //         mergeMap(() => [
-  //           ResultsApiActions.createResultSuccess(),
-  //           ResultsActions.resultFormDialogDismiss(),
-  //           MessageApiActions.successMessage({
-  //             message: 'Record successfully created.',
-  //           }),
-  //         ]),
-  //         catchError((error) => this.errorService.showError(error))
-  //       )
-  //     )
-  //   )
-  // );
+  createResultSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ResultsApiActions.createResultSuccess),
+        tap(({ result }) => {
+          this.router
+            .navigateByUrl('results', { skipLocationChange: true })
+            .then(() => this.router.navigate(['results', result.id]));
+        })
+      ),
+    { dispatch: false }
+  );
 
   deleteResult$ = createEffect(() =>
     this.actions$.pipe(
@@ -56,6 +67,13 @@ export class ResultsEffects {
           catchError((error) => this.errorService.showError(error))
         )
       )
+    )
+  );
+
+  editResult$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ResultsPageActions.editResult),
+      map(() => ResultsApiActions.loadExamsResults())
     )
   );
 
@@ -88,7 +106,10 @@ export class ResultsEffects {
       ofType(ResultExistsGuardActions.loadResult),
       exhaustMap((action) =>
         this.resultsService.getOne(action.id).pipe(
-          map((result) => ResultsApiActions.loadResultSuccess({ result })),
+          mergeMap((result) => [
+            ResultsApiActions.loadResultSuccess({ result }),
+            ResultsApiActions.loadExamsResults(),
+          ]),
           catchError((error) => this.errorService.showError(error))
         )
       )
@@ -114,9 +135,9 @@ export class ResultsEffects {
 
   constructor(
     private actions$: Actions,
-    private dialog: MatDialog,
     private errorService: ErrorsService,
     private resultsFacadeService: ResultsFacadeService,
-    private resultsService: ResultsService
+    private resultsService: ResultsService,
+    private router: Router
   ) {}
 }

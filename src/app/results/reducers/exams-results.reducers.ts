@@ -2,7 +2,12 @@ import { Sort } from '@angular/material/sort';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { Pagination } from '../../shared/models';
-import { ExamsResultsApiActions, ResultDetailPageActions } from '../actions';
+import {
+  ExamsResultsApiActions,
+  ResultDetailPageActions,
+  ResultsApiActions,
+  ResultsPageActions,
+} from '../actions';
 import { ExamResult } from '../models';
 
 export const examsResultsFeatureKey = 'examsResults';
@@ -40,10 +45,14 @@ export const reducer = createReducer(
     },
   })),
 
-  on(ResultDetailPageActions.loadExamsResults, (state) => ({
-    ...initialState,
-    sort: state.sort,
-  })),
+  on(
+    ResultsApiActions.loadExamsResults,
+    ResultsPageActions.addResult,
+    (state) => ({
+      ...initialState,
+      sort: state.sort,
+    })
+  ),
 
   on(
     ExamsResultsApiActions.loadExamsResultsSuccess,

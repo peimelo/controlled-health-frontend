@@ -1,3 +1,5 @@
+<h1 class="mat-h1">{{ isEditing ? "Update" : "Create" }} Result Detail</h1>
+
 <mat-card>
   <mat-card-content>
     <form [formGroup]="form">
@@ -30,12 +32,23 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <!-- *ngIf="isEditing" -->
+    <button
+      [disabled]="!form.valid"
+      fxflex
+      mat-button
+      *ngIf="!isEditing"
+      type="button"
+      (click)="onCreate()"
+    >
+      Create
+    </button>
+
     <button
       color="primary"
       [disabled]="!form.valid"
       fxflex
       mat-button
+      *ngIf="isEditing"
       type="button"
       (click)="onUpdate(form)"
     >

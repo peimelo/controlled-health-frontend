@@ -54,10 +54,6 @@ export class ExamsResultsFacadeService {
     this.store.dispatch(ResultDetailPageActions.editExamResult({ examResult }));
   }
 
-  load(): void {
-    this.store.dispatch(ResultDetailPageActions.loadExamsResults());
-  }
-
   sort(sort: Sort): void {
     this.store.dispatch(ResultDetailPageActions.sortResults({ sort }));
   }

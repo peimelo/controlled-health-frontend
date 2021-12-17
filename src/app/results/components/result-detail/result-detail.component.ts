@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,9 +5,9 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { Result } from '../../models';
@@ -20,11 +19,6 @@ import { Result } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultDetailComponent implements OnChanges {
-  form = this.fb.group({
-    date: ['', [Validators.required]],
-    description: ['', [Validators.required]],
-  });
-
   @Input()
   set pending(isPending: boolean) {
     if (isPending) {
@@ -33,37 +27,71 @@ export class ResultDetailComponent implements OnChanges {
       this.form.enable();
     }
   }
-
   @Input() result!: Result;
+
+  @Output() private create = new EventEmitter<Result>();
   @Output() private update = new EventEmitter<Result>();
+
+  form = this.fb.group({
+    date: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+  });
+  isEditing!: boolean;
 
   constructor(
     private dateTimeService: DateTimeService,
-    private location: Location,
+    private router: Router,
     private fb: FormBuilder,
     public readonly formErrorService: FormErrorService
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['result'] && changes['result'].currentValue) {
-      this.form.patchValue({
-        date: this.result.date,
-        description: this.result.description,
-      });
+  ngOnChanges(): void {
+    if (this.isEditing === undefined) {
+      if (this.result && this.result.id) {
+        this.isEditing = true;
+
+        this.form.patchValue({
+          date: this.result.date,
+          description: this.result.description,
+        });
+      } else {
+        this.isEditing = false;
+
+        this.form.patchValue({
+          date: this.dateTimeService.dateNow(),
+        });
+      }
     }
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['results']);
+  }
+
+  onCreate(): void {
+    const { valid, value } = this.form;
+
+    if (valid) {
+      const date = this.dateTimeService.convertDateToSave(value.date);
+
+      const result = {
+        date,
+        description: value.description,
+      };
+
+      this.create.emit(result as Result);
+    }
   }
 
   onUpdate(form: FormGroup): void {
     const { valid, value } = form;
 
     if (valid) {
-      const result = {
+      const date = this.dateTimeService.convertDateToSave(value.date);
+
+      const result: Result = {
         ...this.result,
-        date: this.dateTimeService.convertDateToSave(value.date),
+        date,
         description: value.description,
       };
 

@@ -48,7 +48,7 @@ export class ResultsFacadeService {
   }
 
   create(result: Result): void {
-    // this.store.dispatch(ResultsPageActions.createResult({ result }));
+    this.store.dispatch(ResultDetailPageActions.createResult({ result }));
   }
 
   delete(id: number): void {

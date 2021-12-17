@@ -16,6 +16,7 @@ import {
   ExamsResultsActions,
   ExamsResultsApiActions,
   ResultDetailPageActions,
+  ResultsApiActions,
 } from '../actions';
 import { ExamResultFormDialogPageComponent } from '../containers/exam-result-form-dialog-page/exam-result-form-dialog-page.component';
 import {
@@ -105,12 +106,12 @@ export class ExamsResultsEffects {
   loadExamsResults$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        ResultDetailPageActions.loadExamsResults,
         ResultDetailPageActions.changePageResults,
         ResultDetailPageActions.sortResults,
         ExamsResultsApiActions.createExamResultSuccess,
         ExamsResultsApiActions.deleteExamResultSuccess,
-        ExamsResultsApiActions.updateExamResultSuccess
+        ExamsResultsApiActions.updateExamResultSuccess,
+        ResultsApiActions.loadExamsResults
       ),
       withLatestFrom(
         this.resultsFacadeService.selected$,

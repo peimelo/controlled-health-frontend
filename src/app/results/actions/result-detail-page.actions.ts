@@ -11,6 +11,11 @@ export const changePageResults = createAction(
   props<{ pageIndex: number }>()
 );
 
+export const createResult = createAction(
+  '[Result Detail Page] Create Result',
+  props<{ result: Result }>()
+);
+
 export const deleteExamResult = createAction(
   '[Result Detail Page] Delete Exam Result',
   props<{ id: number; resultId: number }>()
@@ -19,10 +24,6 @@ export const deleteExamResult = createAction(
 export const editExamResult = createAction(
   '[Result Detail Page] Edit Exam Result',
   props<{ examResult: ExamResult }>()
-);
-
-export const loadExamsResults = createAction(
-  '[Result Detail Page] Load Exams Results'
 );
 
 export const sortResults = createAction(

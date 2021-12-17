@@ -35,7 +35,13 @@ export const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
 
+  on(ResultsPageActions.addResult, (state) => ({
+    ...state,
+    selected: null,
+  })),
+
   on(
+    ResultsApiActions.createResultSuccess,
     ResultsPageActions.editResult,
     ResultsApiActions.loadResultSuccess,
     (state, { result }) => ({
@@ -57,7 +63,6 @@ export const reducer = createReducer(
       ...state,
       listLoaded: true,
       pagination: resultResponse.meta,
-      selected: null,
     })
   ),
 

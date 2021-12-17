@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
@@ -14,7 +14,7 @@ import { ResultsFacadeService } from '../../services/results-facade.service';
   templateUrl: './result-detail-page.component.html',
   styleUrls: ['./result-detail-page.component.scss'],
 })
-export class ResultDetailPageComponent implements OnInit {
+export class ResultDetailPageComponent {
   isHandsetPortrait$: Observable<boolean>;
   examsResults$: Observable<ExamResult[]>;
   pagination$: Observable<Pagination>;
@@ -36,16 +36,16 @@ export class ResultDetailPageComponent implements OnInit {
     this.sort$ = this.examsResultsFacadeService.sort$;
   }
 
-  ngOnInit(): void {
-    this.examsResultsFacadeService.load();
-  }
-
   onAdd(): void {
     this.examsResultsFacadeService.add();
   }
 
   onChangePage(event: PageEvent): void {
     this.examsResultsFacadeService.changePage(event.pageIndex + 1);
+  }
+
+  onCreateResult(result: Result): void {
+    this.resultsFacadeService.create(result);
   }
 
   onDeleteExamResult({ id, resultId }: ExamResultDeleteEvent): void {

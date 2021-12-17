@@ -2,11 +2,16 @@ import { createAction, props } from '@ngrx/store';
 import { Result, ResultResponse } from '../models';
 
 export const createResultSuccess = createAction(
-  '[Results/API] Create Result Success'
+  '[Results/API] Create Result Success',
+  props<{ result: Result }>()
 );
 
 export const deleteResultSuccess = createAction(
   '[Results/API] Delete Result Success'
+);
+
+export const loadExamsResults = createAction(
+  '[Results/API] Load Exams Results'
 );
 
 export const loadResultsSuccess = createAction(

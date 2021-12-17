@@ -1,24 +1,25 @@
 <div class="container">
-  <h1 class="mat-h1">Result Detail</h1>
-
   <div fxLayout="column" fxLayoutGap="10px">
     <app-result-detail
       [pending]="pending$ | async"
       [result]="result$ | async"
+      (create)="onCreateResult($event)"
       (update)="onUpdateResult($event)"
     ></app-result-detail>
 
-    <app-exams-results
-      [isHandsetPortrait]="isHandsetPortrait$ | async"
-      [examsResults]="examsResults$ | async"
-      [pagination]="pagination$ | async"
-      [result]="result$ | async"
-      [sort]="sort$ | async"
-      (add)="onAdd()"
-      (changePage)="onChangePage($event)"
-      (delete)="onDeleteExamResult($event)"
-      (edit)="onEdit($event)"
-      (sortEvent)="onSortEvent($event)"
-    ></app-exams-results>
+    <ng-container *ngIf="result$ | async" as result>
+      <app-exams-results
+        [isHandsetPortrait]="isHandsetPortrait$ | async"
+        [examsResults]="examsResults$ | async"
+        [pagination]="pagination$ | async"
+        [result]="result"
+        [sort]="sort$ | async"
+        (add)="onAdd()"
+        (changePage)="onChangePage($event)"
+        (delete)="onDeleteExamResult($event)"
+        (edit)="onEdit($event)"
+        (sortEvent)="onSortEvent($event)"
+      ></app-exams-results>
+    </ng-container>
   </div>
 </div>
