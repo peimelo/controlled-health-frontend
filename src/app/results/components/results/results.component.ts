@@ -44,7 +44,7 @@ export class ResultsComponent {
   deleteConfirmDialog(result: Result): void {
     const dialogConfig: DialogConfig = {
       confirmText: 'Remove',
-      content: `'${this.dateTimeService.convertDateTimeToUtc(
+      content: `'${this.dateTimeService.convertDateToUtcBr(
         result.date
       )}' will be removed.`,
       title: 'Remove result',
