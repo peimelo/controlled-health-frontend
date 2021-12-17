@@ -8,6 +8,12 @@
   <mat-icon>add</mat-icon>
 </button>
 
+<h1 class="mat-h1">
+  <span [matBadge]="pagination.totalItems" matBadgeOverlap="false"
+    >Results</span
+  >
+</h1>
+
 <div class="mat-elevation-z8">
   <mat-table
     [dataSource]="results"
