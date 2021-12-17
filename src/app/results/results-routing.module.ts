@@ -15,10 +15,16 @@ const routes: Routes = [
     data: { title: 'Results' },
   },
   {
+    path: 'new',
+    canActivate: [AuthGuard, AllExamsExistsGuard],
+    component: ResultDetailPageComponent,
+    data: { title: 'Create Result' },
+  },
+  {
     path: ':id',
     canActivate: [AuthGuard, ResultExistsGuard, AllExamsExistsGuard],
     component: ResultDetailPageComponent,
-    data: { title: 'Results' },
+    data: { title: 'Update Result' },
   },
 ];
 
