@@ -84,7 +84,8 @@ export class ResultsEffects {
         ResultsPageActions.changePageResults,
         ResultsPageActions.sortResults,
         ResultsApiActions.createResultSuccess,
-        ResultsApiActions.deleteResultSuccess
+        ResultsApiActions.deleteResultSuccess,
+        ResultsApiActions.updateResultSuccess
       ),
       withLatestFrom(
         this.resultsFacadeService.pagination$,
