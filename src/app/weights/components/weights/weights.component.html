@@ -75,14 +75,14 @@
             <button
               mat-icon-button
               matTooltip="Edit this item"
-              (click)="onEdit(row)"
+              (click)="onEdit(row); $event.stopPropagation()"
             >
               <mat-icon>edit</mat-icon>
             </button>
             <button
               mat-icon-button
               matTooltip="Delete this item"
-              (click)="deleteConfirmDialog(row)"
+              (click)="deleteConfirmDialog(row); $event.stopPropagation()"
             >
               <mat-icon>delete</mat-icon>
             </button>
@@ -92,7 +92,10 @@
         <mat-header-row
           *matHeaderRowDef="getDisplayedColumns()"
         ></mat-header-row>
-        <mat-row *matRowDef="let row; columns: getDisplayedColumns()"></mat-row>
+        <mat-row
+          *matRowDef="let row; columns: getDisplayedColumns()"
+          (click)="onEdit(row)"
+        ></mat-row>
       </mat-table>
     </mat-expansion-panel>
   </mat-accordion>

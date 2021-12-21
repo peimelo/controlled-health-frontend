@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, ValidationErrors } from '@angular/forms';
-import * as moment from 'moment';
+import {
+  AbstractControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class FormErrorService {
   errorMap: {
     [key: string]: (errors: ValidationErrors, name: string) => string;
   } = {
-    confirmedValidator: (errors: ValidationErrors, name: string) =>
-      `${name} must be match.`,
     email: (errors: ValidationErrors, name: string) =>
       'Must be a valid email address.',
     max: (errors: ValidationErrors, name: string) =>
@@ -17,18 +19,23 @@ export class FormErrorService {
       `Must be at least ${errors['minlength'].requiredLength} characters.`,
     min: (errors: ValidationErrors, name: string) =>
       `Must be >= ${errors['min'].min}.`,
-    required: (errors: ValidationErrors, name: string) => 'Field is required.',
+    mustMatch: (errors: ValidationErrors, name: string) =>
+      `${name} must be match.`,
+    passwordStrength: (errors: ValidationErrors, name: string) =>
+      `Your ${name} must have lower case, upper case, numeric and special characters.`,
+    required: (errors: ValidationErrors, name: string) =>
+      `${name} is required.`,
   };
 
-  mapErrors(errors: ValidationErrors, name = ''): string[] {
-    if (!errors) {
-      return [];
+  mapErrors(errors: ValidationErrors, name: string): string[] {
+    if (errors) {
+      return Object.keys(errors).map((key) => this.errorMap[key](errors, name));
     }
 
-    return Object.keys(errors).map((key) => this.errorMap[key](errors, name));
+    return [];
   }
 
-  confirmedValidator(controlName: string, matchingControlName: string): any {
+  comparePasswordValidator(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
@@ -41,27 +48,33 @@ export class FormErrorService {
       }
 
       if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ confirmedValidator: true });
+        matchingControl.setErrors({ mustMatch: true });
       } else {
         matchingControl.setErrors(null);
       }
     };
   }
 
-  isMyDateFormat(date: string): string {
-    const da = date.split('/');
+  createPasswordStrengthValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
 
-    if (
-      da.length !== 3 ||
-      da[0].length !== 2 ||
-      da[1].length !== 2 ||
-      da[2].length !== 4
-    ) {
-      return 'Please input in the form of DD/MM/YYYY';
-    } else if (!moment(date).isValid()) {
-      return 'Please input a valid date.';
-    }
+      if (!value) {
+        return null;
+      }
 
-    return 'Unknown error.';
+      const hasUpperCase = /[A-Z]+/.test(value);
+
+      const hasLowerCase = /[a-z]+/.test(value);
+
+      const hasNumeric = /[0-9]+/.test(value);
+
+      const hasExtraChars = /[\W_]/.test(value);
+
+      const passwordValid =
+        hasUpperCase && hasLowerCase && hasNumeric && hasExtraChars;
+
+      return !passwordValid ? { passwordStrength: true } : null;
+    };
   }
 }

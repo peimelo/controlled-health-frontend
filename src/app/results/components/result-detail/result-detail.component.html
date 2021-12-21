@@ -20,7 +20,8 @@
           <mat-error
             *ngFor="
               let error of formErrorService.mapErrors(
-                form.get('description')?.errors
+                form.get('description')?.errors,
+                'Description'
               )
             "
           >

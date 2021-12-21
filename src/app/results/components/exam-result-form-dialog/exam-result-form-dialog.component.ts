@@ -83,12 +83,16 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
     }
   }
 
+  clearExam(): void {
+    this.form.controls['exam'].setValue('');
+  }
+
   displayFn(exam: Exam): string {
     return exam && exam.name ? exam.name : '';
   }
 
-  getValuePlaceholder(): string {
-    return this.unitName ? `Value (${this.unitName})` : 'Value';
+  getValueSulffix(): string {
+    return this.unitName ? this.unitName : '';
   }
 
   onCreate(): void {

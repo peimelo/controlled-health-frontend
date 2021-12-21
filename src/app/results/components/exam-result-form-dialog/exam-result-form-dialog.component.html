@@ -2,8 +2,10 @@
 
 <form [formGroup]="form" novalidate>
   <div mat-dialog-content fxLayout fxLayout.xs="column" fxLayoutGap="10px">
+    <!-- exam -->
     <mat-form-field fxFlex="75%">
       <mat-label>Exam</mat-label>
+
       <input
         type="text"
         matInput
@@ -11,6 +13,11 @@
         [matAutocomplete]="auto"
         required
       />
+
+      <button matSuffix mat-icon-button (click)="clearExam()">
+        <mat-icon>close</mat-icon>
+      </button>
+
       <mat-autocomplete
         #auto="matAutocomplete"
         [displayWith]="displayFn"
@@ -23,6 +30,7 @@
           {{ option.name }}
         </mat-option>
       </mat-autocomplete>
+
       <mat-error
         *ngFor="
           let error of formErrorService.mapErrors(
@@ -35,16 +43,18 @@
       </mat-error>
     </mat-form-field>
 
+    <!-- value -->
     <mat-form-field fxFlex="25%">
+      <mat-label>Value</mat-label>
       <input
         [dropSpecialCharacters]="true"
         formControlName="value"
         mask="separator.2"
         thousandSeparator="."
         matInput
-        [placeholder]="getValuePlaceholder()"
         required
       />
+      <span matSuffix>{{ getValueSulffix() }}</span>
       <mat-error
         *ngFor="
           let error of formErrorService.mapErrors(

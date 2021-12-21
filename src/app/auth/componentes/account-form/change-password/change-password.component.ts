@@ -18,12 +18,22 @@ import { PasswordCombination } from '../../../models';
 export class ChangePasswordComponent {
   form = this.fb.group(
     {
-      currentPassword: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      passwordConfirmation: ['', Validators.required],
+      currentPassword: ['', [Validators.required, Validators.minLength(8)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          this.formErrorService.createPasswordStrengthValidator(),
+        ],
+      ],
+      passwordConfirmation: [
+        '',
+        [Validators.required, Validators.minLength(8)],
+      ],
     },
     {
-      validators: this.formErrorService.confirmedValidator(
+      validators: this.formErrorService.comparePasswordValidator(
         'password',
         'passwordConfirmation'
       ),
@@ -46,6 +56,11 @@ export class ChangePasswordComponent {
     public readonly formErrorService: FormErrorService
   ) {}
 
+  // passwordConfirmation: new FormControl('', [
+  //   Validators.required,
+  //   Validators.minLength(8),
+  //   this.formErrorService.confirmedValidatorw(this.form[''], 'www'),
+  // ]),
   onUpdatePassword(): void {
     const { valid, value } = this.form;
 

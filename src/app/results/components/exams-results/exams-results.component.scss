@@ -1,5 +1,10 @@
-.custom-button {
+.add-button {
   position: absolute;
   right: 10px;
   top: 5px;
+}
+
+.mat-row:hover {
+  cursor: pointer;
+  background: whitesmoke;
 }

@@ -1,3 +1,9 @@
+.add-button {
+  position: absolute;
+  right: 30px;
+  top: 69px;
+}
+
 .dashboard-card {
   position: absolute;
   top: 15px;
@@ -10,8 +16,7 @@
   text-align: center;
 }
 
-.add-button {
-  position: absolute;
-  right: 30px;
-  top: 69px;
+.mat-row:hover {
+  cursor: pointer;
+  background: whitesmoke;
 }

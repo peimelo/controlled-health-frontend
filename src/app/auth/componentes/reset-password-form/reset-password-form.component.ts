@@ -18,11 +18,18 @@ import { PasswordCombination } from '../../models';
 export class ResetPasswordFormComponent {
   form = this.fb.group(
     {
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          this.formErrorService.createPasswordStrengthValidator(),
+        ],
+      ],
       passwordConfirmation: ['', Validators.required],
     },
     {
-      validators: this.formErrorService.confirmedValidator(
+      validators: this.formErrorService.comparePasswordValidator(
         'password',
         'passwordConfirmation'
       ),
