@@ -72,7 +72,10 @@
         <mat-header-row
           *matHeaderRowDef="getDisplayedColumns()"
         ></mat-header-row>
-        <mat-row *matRowDef="let row; columns: getDisplayedColumns()"></mat-row>
+        <mat-row
+          *matRowDef="let row; columns: getDisplayedColumns()"
+          (click)="onEdit(row)"
+        ></mat-row>
       </mat-table>
 
       <app-paginator
