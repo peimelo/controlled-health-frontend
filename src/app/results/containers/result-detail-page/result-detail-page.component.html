@@ -7,12 +7,12 @@
       (update)="onUpdateResult($event)"
     ></app-result-detail>
 
-    <ng-container *ngIf="result$ | async" as result>
+    <ng-container *ngIf="(result$ | async)?.id">
       <app-exams-results
         [isHandsetPortrait]="isHandsetPortrait$ | async"
         [examsResults]="examsResults$ | async"
         [pagination]="pagination$ | async"
-        [result]="result"
+        [result]="result$ | async"
         [sort]="sort$ | async"
         (add)="onAdd()"
         (changePage)="onChangePage($event)"
