@@ -11,6 +11,11 @@ export const changePageResults = createAction(
   props<{ pageIndex: number }>()
 );
 
+export const chart = createAction(
+  '[Result Detail Page] Chart',
+  props<{ examId: number }>()
+);
+
 export const createResult = createAction(
   '[Result Detail Page] Create Result',
   props<{ result: Result }>()

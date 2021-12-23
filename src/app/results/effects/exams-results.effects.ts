@@ -20,6 +20,7 @@ import {
 } from '../actions';
 import { ExamResultFormDialogPageComponent } from '../containers/exam-result-form-dialog-page/exam-result-form-dialog-page.component';
 import {
+  ExamGraphicsService,
   ExamsResultsFacadeService,
   ExamsResultsService,
   ResultsFacadeService,
@@ -41,6 +42,22 @@ export class ExamsResultsEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  chart$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ResultDetailPageActions.chart),
+      mergeMap(({ examId }) =>
+        this.examGraphicsService.getOne(examId).pipe(
+          map((examGraphics) =>
+            ExamsResultsApiActions.loadExamGraphicsSuccess({
+              examGraphics: examGraphics.exam_results,
+            })
+          ),
+          catchError((error) => this.errorService.showError(error))
+        )
+      )
+    )
   );
 
   createExamResult$ = createEffect(() =>
@@ -157,8 +174,9 @@ export class ExamsResultsEffects {
     private actions$: Actions,
     private dialog: MatDialog,
     private errorService: ErrorsService,
+    private examGraphicsService: ExamGraphicsService,
     private examsResultsFacadeService: ExamsResultsFacadeService,
-    private resultsFacadeService: ResultsFacadeService,
-    private examsResultsService: ExamsResultsService
+    private examsResultsService: ExamsResultsService,
+    private resultsFacadeService: ResultsFacadeService
   ) {}
 }

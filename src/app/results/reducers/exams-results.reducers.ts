@@ -8,13 +8,14 @@ import {
   ResultsApiActions,
   ResultsPageActions,
 } from '../actions';
-import { ExamResult } from '../models';
+import { ExamGraphic, ExamResult } from '../models';
 
 export const examsResultsFeatureKey = 'examsResults';
 
 export interface State extends EntityState<ExamResult> {
   pagination: Pagination;
   sort: Sort;
+  examGraphics: ExamGraphic[];
 }
 
 export const adapter: EntityAdapter<ExamResult> =
@@ -32,6 +33,7 @@ export const initialState: State = adapter.getInitialState({
     active: 'exams.name',
     direction: 'asc',
   },
+  examGraphics: [],
 });
 
 export const reducer = createReducer(
@@ -46,10 +48,19 @@ export const reducer = createReducer(
   })),
 
   on(
+    ExamsResultsApiActions.loadExamGraphicsSuccess,
+    (state, { examGraphics }) => ({
+      ...state,
+      examGraphics,
+    })
+  ),
+
+  on(
     ResultsApiActions.loadExamsResults,
     ResultsPageActions.addResult,
     (state) => ({
       ...initialState,
+      examGraphics: [],
       sort: state.sort,
     })
   ),
@@ -69,5 +80,6 @@ export const reducer = createReducer(
   }))
 );
 
+export const getExamGraphics = (state: State) => state.examGraphics;
 export const getPagination = (state: State) => state.pagination;
 export const getSort = (state: State) => state.sort;

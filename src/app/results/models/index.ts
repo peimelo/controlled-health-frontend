@@ -1,3 +1,4 @@
+export * from './exam-graphic.model';
 export * from './exam-result-delete-event.model';
 export * from './exam-result-request.model';
 export * from './exam-result-response.model';

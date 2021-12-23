@@ -9,13 +9,15 @@
 
     <ng-container *ngIf="(result$ | async)?.id">
       <app-exams-results
-        [isHandsetPortrait]="isHandsetPortrait$ | async"
+        [examGraphics]="examGraphics$ | async"
         [examsResults]="examsResults$ | async"
+        [isHandsetPortrait]="isHandsetPortrait$ | async"
         [pagination]="pagination$ | async"
         [result]="result$ | async"
         [sort]="sort$ | async"
         (add)="onAdd()"
         (changePage)="onChangePage($event)"
+        (chart)="onChart($event)"
         (delete)="onDeleteExamResult($event)"
         (edit)="onEdit($event)"
         (sortEvent)="onSortEvent($event)"

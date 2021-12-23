@@ -4,12 +4,19 @@ import {
   EventEmitter,
   Input,
   Output,
+  ViewChild,
 } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { DialogConfig, Pagination } from '../../../shared/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
-import { ExamResult, ExamResultDeleteEvent, Result } from '../../models';
+import {
+  ExamGraphic,
+  ExamResult,
+  ExamResultDeleteEvent,
+  Result,
+} from '../../models';
 
 @Component({
   selector: 'app-exams-results',
@@ -18,23 +25,27 @@ import { ExamResult, ExamResultDeleteEvent, Result } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExamsResultsComponent {
-  private columnDefinitions = [
-    { columnDef: 'exam.name', showPortrait: true },
-    { columnDef: 'value', showPortrait: true },
-    { columnDef: 'actions', showPortrait: true },
-  ];
-
+  @Input() examGraphics!: ExamGraphic[];
   @Input() examsResults!: ExamResult[];
   @Input() isHandsetPortrait!: boolean;
   @Input() pagination!: Pagination;
   @Input() result!: Result;
   @Input() sort!: Sort;
 
-  @Output() private changePage = new EventEmitter<PageEvent>();
   @Output() private add = new EventEmitter();
+  @Output() private changePage = new EventEmitter<PageEvent>();
+  @Output() private chart = new EventEmitter<number>();
   @Output() private delete = new EventEmitter<ExamResultDeleteEvent>();
   @Output() private edit = new EventEmitter<ExamResult>();
   @Output() private sortEvent = new EventEmitter<Sort>();
+
+  @ViewChild(MatAccordion) accordion!: MatAccordion;
+
+  private columnDefinitions = [
+    { columnDef: 'exam.name', showPortrait: true },
+    { columnDef: 'value', showPortrait: true },
+    { columnDef: 'actions', showPortrait: true },
+  ];
 
   constructor(private confirmationDialogService: ConfirmationDialogService) {}
 
@@ -71,7 +82,13 @@ export class ExamsResultsComponent {
     this.changePage.emit(event);
   }
 
+  onChart(examResult: ExamResult): void {
+    this.accordion.openAll();
+    this.chart.emit(examResult.exam.id);
+  }
+
   onEdit(examResult: ExamResult) {
+    console.log(examResult);
     this.edit.emit(examResult);
   }
 

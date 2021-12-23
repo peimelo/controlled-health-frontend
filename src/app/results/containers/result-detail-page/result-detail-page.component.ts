@@ -5,7 +5,12 @@ import { Observable } from 'rxjs';
 import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
 import { Pagination } from '../../../shared/models';
 import { LayoutFacadeService } from '../../../shared/services';
-import { ExamResult, ExamResultDeleteEvent, Result } from '../../models';
+import {
+  ExamGraphic,
+  ExamResult,
+  ExamResultDeleteEvent,
+  Result,
+} from '../../models';
 import { ExamsResultsFacadeService } from '../../services/exams-results-facade.service';
 import { ResultsFacadeService } from '../../services/results-facade.service';
 
@@ -15,8 +20,9 @@ import { ResultsFacadeService } from '../../services/results-facade.service';
   styleUrls: ['./result-detail-page.component.scss'],
 })
 export class ResultDetailPageComponent {
-  isHandsetPortrait$: Observable<boolean>;
+  examGraphics$: Observable<ExamGraphic[]>;
   examsResults$: Observable<ExamResult[]>;
+  isHandsetPortrait$: Observable<boolean>;
   pagination$: Observable<Pagination>;
   pending$: Observable<boolean>;
   result$: Observable<Result | null>;
@@ -28,8 +34,9 @@ export class ResultDetailPageComponent {
     private resultsFacadeService: ResultsFacadeService,
     private spinnerFacadeService: SpinnerFacadeService
   ) {
-    this.isHandsetPortrait$ = this.layoutFacadeService.isHandsetPortrait$;
+    this.examGraphics$ = this.examsResultsFacadeService.examGraphics$;
     this.examsResults$ = this.examsResultsFacadeService.examsResults$;
+    this.isHandsetPortrait$ = this.layoutFacadeService.isHandsetPortrait$;
     this.pagination$ = this.examsResultsFacadeService.pagination$;
     this.pending$ = this.spinnerFacadeService.isLoading$;
     this.result$ = this.resultsFacadeService.selected$;
@@ -42,6 +49,10 @@ export class ResultDetailPageComponent {
 
   onChangePage(event: PageEvent): void {
     this.examsResultsFacadeService.changePage(event.pageIndex + 1);
+  }
+
+  onChart(examId: number): void {
+    this.examsResultsFacadeService.chart(examId);
   }
 
   onCreateResult(result: Result): void {

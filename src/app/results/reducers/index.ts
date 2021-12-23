@@ -41,6 +41,11 @@ export const selectExamsResultsEntitiesState = createSelector(
   (state) => state.examsResults
 );
 
+export const selectExamGraphics = createSelector(
+  selectExamsResultsEntitiesState,
+  fromExamsResults.getExamGraphics
+);
+
 export const selectExamsResultsPagination = createSelector(
   selectExamsResultsEntitiesState,
   fromExamsResults.getPagination

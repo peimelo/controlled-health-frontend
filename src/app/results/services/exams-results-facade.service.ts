@@ -7,16 +7,21 @@ import {
   ExamResultFormDialogPageActions,
   ResultDetailPageActions,
 } from '../actions';
-import { ExamResult } from '../models';
+import { ExamGraphic, ExamResult } from '../models';
 import * as fromResults from '../reducers';
 
 @Injectable()
 export class ExamsResultsFacadeService {
+  examGraphics$: Observable<ExamGraphic[]>;
   examsResults$: Observable<ExamResult[]>;
   pagination$: Observable<Pagination>;
   sort$: Observable<Sort>;
 
   constructor(private store: Store<fromResults.State>) {
+    this.examGraphics$ = this.store.pipe(
+      select(fromResults.selectExamGraphics)
+    );
+
     this.examsResults$ = this.store.pipe(
       select(fromResults.selectAllExamsResults)
     );
@@ -36,6 +41,10 @@ export class ExamsResultsFacadeService {
     this.store.dispatch(
       ResultDetailPageActions.changePageResults({ pageIndex })
     );
+  }
+
+  chart(examId: number): void {
+    this.store.dispatch(ResultDetailPageActions.chart({ examId }));
   }
 
   create(examResult: ExamResult, resultId: number): void {
