@@ -47,7 +47,7 @@ npm install
 ng serve
 ```
 
-Open the browser at the address `http://localhost:4200`.
+Open the browser at the address `http://localhost:4200`
 
 The backend is expected to rise to `http://localhost:3000`. If you want another port, change the file `src/proxy.conf.json` and restart the frontend.
 
