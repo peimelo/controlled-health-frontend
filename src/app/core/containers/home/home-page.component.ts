@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LayoutFacadeService } from '../../../shared/services';
+import { LayoutFacadeService } from '../../services';
 
 @Component({
   selector: 'app-home-page',

@@ -12,9 +12,9 @@ import {
 import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services/errors.service';
 import {
+  HeightFormDialogActions,
   HeightsActions,
   HeightsApiActions,
-  HeightsFormDialogActions,
   HeightsGuardActions,
   HeightsPageActions,
 } from '../actions';
@@ -41,7 +41,7 @@ export class HeightsEffects {
 
   createHeight$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(HeightsFormDialogActions.createHeight),
+      ofType(HeightFormDialogActions.createHeight),
       mergeMap(({ height }) =>
         this.heightsService.create(height).pipe(
           mergeMap(() => [
@@ -125,7 +125,7 @@ export class HeightsEffects {
 
   updateHeight$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(HeightsFormDialogActions.updateHeight),
+      ofType(HeightFormDialogActions.updateHeight),
       mergeMap((action) =>
         this.heightsService.update(action.height).pipe(
           mergeMap(() => [

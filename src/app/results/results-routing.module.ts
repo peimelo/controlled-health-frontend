@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountExistsGuard } from '../accounts/guards/account-exists.guard';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { ResultDetailPageComponent } from './containers/result-detail-page/result-detail-page.component';
 import { ResultsPageComponent } from './containers/results-page/results-page.component';
@@ -10,19 +11,24 @@ import { ResultsGuard } from './guards/results.guard';
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard, ResultsGuard],
+    canActivate: [AuthGuard, AccountExistsGuard, ResultsGuard],
     component: ResultsPageComponent,
     data: { title: 'Results' },
   },
   {
     path: 'new',
-    canActivate: [AuthGuard, AllExamsExistsGuard],
+    canActivate: [AuthGuard, AccountExistsGuard, AllExamsExistsGuard],
     component: ResultDetailPageComponent,
     data: { title: 'Create Result' },
   },
   {
     path: ':id',
-    canActivate: [AuthGuard, ResultExistsGuard, AllExamsExistsGuard],
+    canActivate: [
+      AuthGuard,
+      AccountExistsGuard,
+      ResultExistsGuard,
+      AllExamsExistsGuard,
+    ],
     component: ResultDetailPageComponent,
     data: { title: 'Update Result' },
   },

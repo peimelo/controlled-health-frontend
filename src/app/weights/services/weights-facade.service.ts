@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Pagination, Weight } from '../../shared/models';
+import { Weight } from '../../core/models';
+import { Pagination } from '../../shared/models';
 import {
-  WeightsFormDialogActions,
+  WeightFormDialogActions,
   WeightsGuardActions,
   WeightsPageActions,
 } from '../actions';
@@ -35,7 +36,7 @@ export class WeightsFacadeService {
   }
 
   create(weight: Weight): void {
-    this.store.dispatch(WeightsFormDialogActions.createWeight({ weight }));
+    this.store.dispatch(WeightFormDialogActions.createWeight({ weight }));
   }
 
   delete(id: number): void {
@@ -55,6 +56,6 @@ export class WeightsFacadeService {
   }
 
   update(weight: Weight): void {
-    this.store.dispatch(WeightsFormDialogActions.updateWeight({ weight }));
+    this.store.dispatch(WeightFormDialogActions.updateWeight({ weight }));
   }
 }

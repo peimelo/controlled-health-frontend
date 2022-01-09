@@ -8,8 +8,8 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Weight } from '../../../core/models';
 import { FormErrorService } from '../../../core/services/form-error.service';
-import { Weight } from '../../../shared/models';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { NumberService } from '../../../shared/services/number.service';
 

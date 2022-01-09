@@ -3,7 +3,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { BaseResourceService } from '../../shared/services/base-resource.service';
+import { BaseResourceService } from '../../core/services/base-resource.service';
 import { Result, ResultResponse } from '../models';
 
 @Injectable()

@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Height, Pagination } from '../../shared/models';
+import { Height } from '../../core/models';
+import { Pagination } from '../../shared/models';
 import {
-  HeightsFormDialogActions,
+  HeightFormDialogActions,
   HeightsGuardActions,
   HeightsPageActions,
 } from '../actions';
@@ -35,7 +36,7 @@ export class HeightsFacadeService {
   }
 
   create(height: Height): void {
-    this.store.dispatch(HeightsFormDialogActions.createHeight({ height }));
+    this.store.dispatch(HeightFormDialogActions.createHeight({ height }));
   }
 
   delete(id: number): void {
@@ -55,6 +56,6 @@ export class HeightsFacadeService {
   }
 
   update(height: Height): void {
-    this.store.dispatch(HeightsFormDialogActions.updateHeight({ height }));
+    this.store.dispatch(HeightFormDialogActions.updateHeight({ height }));
   }
 }

@@ -1,6 +1,6 @@
 import { Sort } from '@angular/material/sort';
 import { createAction, props } from '@ngrx/store';
-import { Height } from '../../shared/models';
+import { Height } from '../../core/models';
 
 export const addHeight = createAction('[Heights Page] Add Height');
 

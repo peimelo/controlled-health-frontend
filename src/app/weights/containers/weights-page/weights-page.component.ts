@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
-import { Pagination, Weight } from '../../../shared/models';
-import { LayoutFacadeService } from '../../../shared/services/layout-facade.service';
+import { Weight } from '../../../core/models';
+import { LayoutFacadeService } from '../../../core/services';
+import { Pagination } from '../../../shared/models';
 import { WeightsFacadeService } from '../../services/weights-facade.service';
 
 @Component({

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { Height } from '../../../core/models';
 import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
-import { Height } from '../../../shared/models';
 import { HeightsFacadeService } from '../../services/heights-facade.service';
 
 interface DialogData {

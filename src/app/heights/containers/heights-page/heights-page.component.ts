@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
-import { Height, Pagination } from '../../../shared/models';
+import { Height } from '../../../core/models';
+import { Pagination } from '../../../shared/models';
 import { HeightsFacadeService } from '../../services/heights-facade.service';
 
 @Component({

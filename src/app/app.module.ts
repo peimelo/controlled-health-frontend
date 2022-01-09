@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { AccountsModule } from './accounts/accounts.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './core/containers/app/app.component';
@@ -47,6 +48,7 @@ const maskConfig: Partial<IConfig> = {
 
     // app
     AuthModule,
+    AccountsModule,
     CoreModule,
     AppRoutingModule,
   ],

@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
+import { LayoutFacadeService } from '../../../core/services';
 import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
 import { Pagination } from '../../../shared/models';
-import { LayoutFacadeService } from '../../../shared/services';
 import {
   ExamGraphic,
   ExamResult,

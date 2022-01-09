@@ -3,8 +3,8 @@ import { Injectable, Injector } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Height } from '../../shared/models';
-import { BaseResourceService } from '../../shared/services/base-resource.service';
+import { Height } from '../../core/models';
+import { BaseResourceService } from '../../core/services/base-resource.service';
 import { HeightResponse } from '../models';
 
 @Injectable()

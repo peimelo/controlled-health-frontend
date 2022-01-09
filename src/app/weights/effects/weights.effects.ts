@@ -12,9 +12,9 @@ import {
 import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services/errors.service';
 import {
+  WeightFormDialogActions,
   WeightsActions,
   WeightsApiActions,
-  WeightsFormDialogActions,
   WeightsGuardActions,
   WeightsPageActions,
 } from '../actions';
@@ -41,7 +41,7 @@ export class WeightsEffects {
 
   createWeight$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(WeightsFormDialogActions.createWeight),
+      ofType(WeightFormDialogActions.createWeight),
       mergeMap(({ weight }) =>
         this.weightsService.create(weight).pipe(
           mergeMap(() => [
@@ -125,7 +125,7 @@ export class WeightsEffects {
 
   updateWeight$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(WeightsFormDialogActions.updateWeight),
+      ofType(WeightFormDialogActions.updateWeight),
       mergeMap(({ weight }) =>
         this.weightsService.update(weight).pipe(
           mergeMap(() => [

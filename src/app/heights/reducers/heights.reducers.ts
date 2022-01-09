@@ -1,7 +1,9 @@
 import { Sort } from '@angular/material/sort';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { Height, Pagination } from '../../shared/models';
+import { AccountsPageActions } from '../../accounts/actions';
+import { Height } from '../../core/models';
+import { Pagination } from '../../shared/models';
 import { HeightsApiActions, HeightsPageActions } from '../actions';
 
 export const heightsFeatureKey = 'heights';
@@ -31,6 +33,8 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
+
+  on(AccountsPageActions.loadAccount, (state, { id }) => ({ ...initialState })),
 
   on(HeightsPageActions.changePageHeights, (state, { pageIndex }) => ({
     ...state,

@@ -5,7 +5,7 @@
     <mat-nav-list>
       <app-nav-item
         matIcon="home"
-        *ngIf="!(loggedIn$ | async)"
+        *ngIf="(loggedIn$ | async) === false"
         routerLink="/"
         (navigate)="drawer.toggle()"
       >
@@ -15,7 +15,7 @@
       <app-nav-item
         hint="Login into app"
         matIcon="login"
-        *ngIf="!(loggedIn$ | async)"
+        *ngIf="(loggedIn$ | async) === false"
         routerLink="/login"
         (navigate)="drawer.toggle()"
       >
@@ -24,7 +24,7 @@
 
       <app-nav-item
         matIcon="person_add"
-        *ngIf="!(loggedIn$ | async)"
+        *ngIf="(loggedIn$ | async) === false"
         routerLink="/create-account"
         (navigate)="drawer.toggle()"
       >
@@ -41,9 +41,19 @@
       </app-nav-item>
 
       <app-nav-item
+        hint="View your Accounts"
+        matIcon="dashboard"
+        *ngIf="accountListLoaded$ | async"
+        routerLink="/accounts"
+        (navigate)="drawer.toggle()"
+      >
+        Accounts
+      </app-nav-item>
+
+      <app-nav-item
         hint="View your Dashboard"
         matIcon="dashboard"
-        *ngIf="loggedIn$ | async"
+        *ngIf="accountSelectedLoaded$ | async"
         routerLink="/dashboard"
         (navigate)="drawer.toggle()"
       >
@@ -53,7 +63,7 @@
       <app-nav-item
         hint="View your Results"
         matIcon="rules"
-        *ngIf="loggedIn$ | async"
+        *ngIf="accountSelectedLoaded$ | async"
         routerLink="/results"
         (navigate)="drawer.toggle()"
       >
@@ -63,7 +73,7 @@
       <app-nav-item
         hint="View your Weights"
         fasIcon="weight"
-        *ngIf="loggedIn$ | async"
+        *ngIf="accountSelectedLoaded$ | async"
         routerLink="/weights"
         (navigate)="drawer.toggle()"
       >
@@ -73,7 +83,7 @@
       <app-nav-item
         hint="View your Heights"
         matIcon="height"
-        *ngIf="loggedIn$ | async"
+        *ngIf="accountSelectedLoaded$ | async"
         routerLink="/heights"
         (navigate)="drawer.toggle()"
       >

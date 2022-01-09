@@ -1,0 +1,6 @@
+<app-account-form-dialog
+  [pending]="pending$ | async"
+  [account]="account"
+  (create)="onCreate($event)"
+  (update)="onUpdate($event)"
+></app-account-form-dialog>

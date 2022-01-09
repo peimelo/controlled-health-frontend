@@ -1,6 +1,7 @@
 import { Sort } from '@angular/material/sort';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
+import { AccountsPageActions } from '../../accounts/actions';
 import { Pagination } from '../../shared/models';
 import {
   ExamsResultsApiActions,
@@ -38,6 +39,8 @@ export const initialState: State = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
+
+  on(AccountsPageActions.loadAccount, (state, { id }) => ({ ...initialState })),
 
   on(ResultDetailPageActions.changePageResults, (state, { pageIndex }) => ({
     ...state,

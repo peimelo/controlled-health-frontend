@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>{{ isEditing ? "Update" : "Create" }} account</h1>
+
+<form [formGroup]="form" novalidate>
+  <div mat-dialog-content fxLayout fxLayout.xs="column" fxLayoutGap="10px">
+    <mat-form-field fxFlex>
+      <input formControlName="name" matInput placeholder="Name" required />
+      <mat-error
+        *ngFor="
+          let error of formErrorService.mapErrors(
+            form.get('name')?.errors,
+            'Name'
+          )
+        "
+      >
+        {{ error }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout fxLayoutAlign="end" mat-dialog-actions>
+    <button fxflex mat-button [mat-dialog-close]="true">Cancel</button>
+
+    <button fxflex mat-button *ngIf="!isEditing" (click)="onCreate()">
+      Create
+    </button>
+
+    <button fxflex mat-button *ngIf="isEditing" (click)="onUpdate()">
+      Update
+    </button>
+  </div>
+</form>

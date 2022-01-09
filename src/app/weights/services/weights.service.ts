@@ -3,8 +3,8 @@ import { Injectable, Injector } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Weight } from '../../shared/models';
-import { BaseResourceService } from '../../shared/services/base-resource.service';
+import { Weight } from '../../core/models/weight.model';
+import { BaseResourceService } from '../../core/services/base-resource.service';
 import { WeightResponse } from '../models';
 
 @Injectable()

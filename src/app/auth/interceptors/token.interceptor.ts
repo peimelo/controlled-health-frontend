@@ -27,6 +27,7 @@ export class TokenInterceptor implements HttpInterceptor {
     const accessToken = localStorage.getItem('access-token');
     const client = localStorage.getItem('client');
     const uid = localStorage.getItem('uid');
+    const account = localStorage.getItem('account');
 
     if (accessToken && client && uid) {
       request = request.clone({
@@ -34,6 +35,7 @@ export class TokenInterceptor implements HttpInterceptor {
           'access-token': accessToken,
           client,
           uid,
+          account: account || '',
           'Content-Type': 'application/json',
         },
       });
@@ -49,6 +51,7 @@ export class TokenInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         this.setHeadersInLocalStorage(error.headers);
         return throwError(error);
+        // return throwError(() => new Error(error.message));
       })
     );
   }

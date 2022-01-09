@@ -1,12 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { Height } from '../../shared/models';
+import { Height } from '../../core/models';
 
 export const createHeight = createAction(
-  '[Heights Form Dialog Page] Create Height',
+  '[Height Form Dialog Page] Create Height',
   props<{ height: Height }>()
 );
 
 export const updateHeight = createAction(
-  '[Heights Form Dialog Page] Update Height',
+  '[Height Form Dialog Page] Update Height',
   props<{ height: Height }>()
 );

@@ -1,8 +1,14 @@
-<div class="mat-elevation-z8">
-  <button class="add-button" color="accent" mat-fab (click)="onAdd()">
-    <mat-icon>add</mat-icon>
-  </button>
+<button class="add-button" color="accent" mat-fab (click)="onAdd()">
+  <mat-icon>add</mat-icon>
+</button>
 
+<h1 class="mat-h1">
+  <span [matBadge]="pagination.totalItems" matBadgeOverlap="false">
+    Heights
+  </span>
+</h1>
+
+<div class="mat-elevation-z8">
   <mat-table
     [dataSource]="heights"
     matSort

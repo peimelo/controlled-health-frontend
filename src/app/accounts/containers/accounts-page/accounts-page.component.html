@@ -1,0 +1,7 @@
+<app-accounts
+  [accounts]="accounts$ | async"
+  (add)="onAdd()"
+  (edit)="onEdit($event)"
+  (enter)="onEnter($event)"
+>
+</app-accounts>

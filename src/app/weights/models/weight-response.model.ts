@@ -1,4 +1,5 @@
-import { Pagination, Weight } from '../../shared/models';
+import { Weight } from '../../core/models';
+import { Pagination } from '../../shared/models';
 
 export interface WeightResponse {
   meta: Pagination;
