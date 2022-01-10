@@ -36,8 +36,17 @@
             </button>
 
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item (click)="onEnter(account)">Enter</button>
-              <button mat-menu-item (click)="onDelete(account.id)" disabled>
+              <button
+                mat-menu-item
+                (click)="onEnter(account); $event.stopPropagation()"
+              >
+                Enter
+              </button>
+              <button
+                mat-menu-item
+                (click)="onDelete(account.id); $event.stopPropagation()"
+                disabled
+              >
                 Remove
               </button>
             </mat-menu>
