@@ -99,7 +99,10 @@ export class AccountsEffects {
   loadAccountSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AccountsApiActions.loadAccountSuccess),
+        ofType(
+          AccountsActions.loadAccountFromPageSuccess,
+          AccountsApiActions.loadAccountSuccess
+        ),
         map((action) => action.account),
         tap((account) => {
           localStorage.setItem('account', account.id.toString());
