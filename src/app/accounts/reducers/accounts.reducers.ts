@@ -1,10 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import {
-  AccountsApiActions,
-  AccountsGuardActions,
-  AccountsPageActions,
-} from '../actions';
+import { AccountsApiActions } from '../actions';
 import { Account } from '../models';
 
 export const accountsFeatureKey = 'accounts';
@@ -26,13 +22,10 @@ export const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
 
-  on(
-    AccountsApiActions.loadAccountSuccess,
-    (state, { account }) => ({
-      ...state,
-      selected: account,
-    })
-  ),
+  on(AccountsApiActions.loadAccountSuccess, (state, { account }) => ({
+    ...state,
+    selected: account,
+  })),
 
   on(AccountsApiActions.loadAccountsSuccess, (state, { accountResponse }) =>
     adapter.setAll(accountResponse.accounts, {
