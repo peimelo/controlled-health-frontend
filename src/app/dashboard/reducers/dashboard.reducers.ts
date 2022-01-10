@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { AccountsApiActions } from '../../accounts/actions';
+import { AccountsActions } from '../../accounts/actions';
 import { DashboardApiActions } from '../actions';
 import { Dashboard } from '../models';
 
@@ -21,7 +21,7 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
-  on(AccountsApiActions.loadAccountSuccess, (state, { account }) => ({
+  on(AccountsActions.loadAccountFromPageSuccess, (state, { account }) => ({
     ...initialState,
   })),
 

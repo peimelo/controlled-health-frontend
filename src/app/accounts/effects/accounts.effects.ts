@@ -75,26 +75,21 @@ export class AccountsEffects {
     { dispatch: false }
   );
 
-  loadAccountFromPage$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AccountsPageActions.loadAccount),
-        map((action) => action.account),
-        map((account) => AccountsApiActions.loadAccountSuccess({ account })),
-        tap(() => this.router.navigate(['/dashboard']))
-      )
+  loadAccountFromPage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AccountsPageActions.loadAccount),
+      map((action) => action.account),
+      map((account) => AccountsActions.loadAccountFromPageSuccess({ account })),
+      tap(() => this.router.navigate(['/dashboard']))
+    )
   );
 
   loadAccount$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(
-        AccountsGuardActions.loadAccount,
-      ),
+      ofType(AccountsGuardActions.loadAccount),
       mergeMap((action) =>
         this.accountsService.getOne(action.id).pipe(
-          map((account) =>
-            AccountsApiActions.loadAccountSuccess({ account })
-          ),
+          map((account) => AccountsApiActions.loadAccountSuccess({ account })),
           catchError((error) => this.errorService.showError(error))
         )
       )
