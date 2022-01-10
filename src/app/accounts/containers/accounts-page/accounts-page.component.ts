@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Account } from '../../models';
 import { AccountsFacadeService } from '../../services/accounts-facade.service';
@@ -8,15 +8,11 @@ import { AccountsFacadeService } from '../../services/accounts-facade.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './accounts-page.component.html',
 })
-export class AccountsPageComponent implements OnInit {
+export class AccountsPageComponent {
   accounts$: Observable<Account[]>;
 
   constructor(private accountsFacadeService: AccountsFacadeService) {
     this.accounts$ = this.accountsFacadeService.accounts$;
-  }
-
-  ngOnInit(): void {
-    this.accountsFacadeService.load();
   }
 
   onAdd(): void {
@@ -28,6 +24,6 @@ export class AccountsPageComponent implements OnInit {
   }
 
   onEnter(account: Account): void {
-    this.accountsFacadeService.loadAccountFromPage(account.id);
+    this.accountsFacadeService.loadAccountFromPage(account);
   }
 }

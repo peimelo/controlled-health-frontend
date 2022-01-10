@@ -20,7 +20,7 @@ import { AccountsService } from '../services/accounts.service';
 export class AccountsEffects {
   dialogRef: any;
 
-  addHeight$ = createEffect(
+  addAccount$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AccountsPageActions.addAccount),
@@ -75,14 +75,39 @@ export class AccountsEffects {
     { dispatch: false }
   );
 
-  loadAccount$ = createEffect(
+  loadAccountFromPage$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AccountsPageActions.loadAccount),
-        map((action) => action.id),
-        tap((id) => {
-          localStorage.setItem('account', id.toString());
-          this.router.navigate(['/dashboard']);
+        map((action) => action.account),
+        map((account) => AccountsApiActions.loadAccountSuccess({ account })),
+        tap(() => this.router.navigate(['/dashboard']))
+      )
+  );
+
+  loadAccount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        AccountsGuardActions.loadAccount,
+      ),
+      mergeMap((action) =>
+        this.accountsService.getOne(action.id).pipe(
+          map((account) =>
+            AccountsApiActions.loadAccountSuccess({ account })
+          ),
+          catchError((error) => this.errorService.showError(error))
+        )
+      )
+    )
+  );
+
+  loadAccountSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AccountsApiActions.loadAccountSuccess),
+        map((action) => action.account),
+        tap((account) => {
+          localStorage.setItem('account', account.id.toString());
         })
       ),
     { dispatch: false }

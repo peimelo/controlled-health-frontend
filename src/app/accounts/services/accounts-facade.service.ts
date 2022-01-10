@@ -13,7 +13,7 @@ import * as fromAccounts from '../reducers';
 export class AccountsFacadeService {
   accounts$: Observable<Account[]>;
   selectListLoaded$: Observable<boolean>;
-  selected$: Observable<number | null>;
+  selected$: Observable<Account | null>;
   selectedLoaded$: Observable<boolean>;
 
   constructor(private store: Store<fromAccounts.State>) {
@@ -49,8 +49,8 @@ export class AccountsFacadeService {
     this.store.dispatch(AccountsGuardActions.loadAccount({ id }));
   }
 
-  loadAccountFromPage(id: number): void {
-    this.store.dispatch(AccountsPageActions.loadAccount({ id }));
+  loadAccountFromPage(account: Account): void {
+    this.store.dispatch(AccountsPageActions.loadAccount({ account }));
   }
 
   update(account: Account): void {

@@ -43,7 +43,7 @@
       <app-nav-item
         hint="View your Accounts"
         matIcon="dashboard"
-        *ngIf="accountListLoaded$ | async"
+        *ngIf="loggedIn$ | async"
         routerLink="/accounts"
         (navigate)="drawer.toggle()"
       >
@@ -94,6 +94,8 @@
 
   <mat-sidenav-content>
     <app-toolbar
+      [accountSelected]="accountSelected$ | async"
+      [accountSelectedLoaded]="accountSelectedLoaded$ | async"
       [loggedIn]="loggedIn$ | async"
       [user]="user$ | async"
       (logout)="logout()"

@@ -11,7 +11,7 @@ export const accountsFeatureKey = 'accounts';
 
 export interface State extends EntityState<Account> {
   listLoaded: boolean;
-  selected: number | null;
+  selected: Account | null;
 }
 
 export const adapter: EntityAdapter<Account> = createEntityAdapter<Account>({});
@@ -27,11 +27,10 @@ export const reducer = createReducer(
   initialState,
 
   on(
-    AccountsGuardActions.loadAccount,
-    AccountsPageActions.loadAccount,
-    (state, { id }) => ({
+    AccountsApiActions.loadAccountSuccess,
+    (state, { account }) => ({
       ...state,
-      selected: id,
+      selected: account,
     })
   ),
 

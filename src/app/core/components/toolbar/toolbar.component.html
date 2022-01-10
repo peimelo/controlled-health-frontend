@@ -32,15 +32,24 @@
     Login
   </a>
 
-  <button
-    *ngIf="loggedIn"
-    mat-icon-button
-    [matMenuTriggerFor]="menu"
-    matTooltip="{{ !!user.name ? user.name : user.email }}"
-    [matTooltipPosition]="'left'"
-  >
-    <mat-icon>account_circle</mat-icon>
-  </button>
+  <div *ngIf="loggedIn">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      *ngIf="!accountSelectedLoaded"
+    >
+      <mat-icon >account_circle</mat-icon>
+    </button>
+
+    <button
+      *ngIf="accountSelectedLoaded"
+      [matMenuTriggerFor]="menu"
+      mat-button
+    >
+      {{accountSelected.name}}
+    </button>
+  </div>
+
   <mat-menu #menu="matMenu">
     <a mat-menu-item routerLink="/account"> User Settings </a>
     <button mat-menu-item (click)="logout.emit()">Logout</button>

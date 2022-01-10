@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AccountsFacadeService } from '../../../accounts/services/accounts-facade.service';
 import { AuthFacadeService } from '../../../auth/services/auth-facade.service';
+import {Account} from "../../../accounts/models";
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { AuthFacadeService } from '../../../auth/services/auth-facade.service';
 })
 export class AppComponent {
   accountListLoaded$: Observable<boolean>;
+  accountSelected$: Observable<Account | null>;
   accountSelectedLoaded$: Observable<boolean>;
   loggedIn$: Observable<boolean>;
   user$: Observable<any>;
@@ -20,6 +22,7 @@ export class AppComponent {
     private accountFacadeService: AccountsFacadeService
   ) {
     this.accountListLoaded$ = this.accountFacadeService.selectListLoaded$;
+    this.accountSelected$ = this.accountFacadeService.selected$;
     this.accountSelectedLoaded$ = this.accountFacadeService.selectedLoaded$;
     this.loggedIn$ = this.authFacadeService.loggedIn$;
     this.user$ = this.authFacadeService.user$;

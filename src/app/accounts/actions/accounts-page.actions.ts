@@ -10,5 +10,5 @@ export const editAccount = createAction(
 
 export const loadAccount = createAction(
   '[Accounts Page] Load Account',
-  props<{ id: number }>()
+  props<{ account: Account }>()
 );
