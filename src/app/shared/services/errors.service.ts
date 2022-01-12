@@ -5,21 +5,19 @@ import { MessageApiActions } from '../../core/actions';
 
 @Injectable({ providedIn: 'root' })
 export class ErrorsService {
-  private getMessage(error: any): string {
+  private getMessage(err: any): string {
     if (!environment.production) {
-      console.log(error);
+      console.log(err);
     }
 
-    let message = error.message;
+    let message = err.message;
 
-    if (error.error && error.error.errors) {
-      if (error.error.errors.full_messages) {
-        message = error.error.errors.full_messages[0];
-      } else {
-        message = error.error.errors[0];
+    if (err.error) {
+      if (Array.isArray(err.error) && err.error.length) {
+        message = err.error[0];
       }
-    } else if (error.status === 404) {
-      return error.statusText;
+    } else if (err.status === 404) {
+      return err.statusText;
     }
 
     return message;

@@ -43,7 +43,7 @@ export class ExamsResultsService {
   update(examResult: ExamResult, resultId: number): Observable<ExamResult> {
     return this.http.put<ExamResult>(
       `${environment.baseUrl}/results/${resultId}/exams_results/${examResult.id}`,
-      examResult
+      { value: examResult.value, exam_id: examResult.exam.id }
     );
   }
 }

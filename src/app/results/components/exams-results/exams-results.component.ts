@@ -88,7 +88,6 @@ export class ExamsResultsComponent {
   }
 
   onEdit(examResult: ExamResult) {
-    console.log(examResult);
     this.edit.emit(examResult);
   }
 
