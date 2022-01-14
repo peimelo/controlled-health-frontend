@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
@@ -39,4 +39,12 @@ export const COMPONENTS = [
     },
   ],
 })
-export class CoreModule {}
+export class CoreModule {
+  constructor(@Optional() @SkipSelf() parentModule?: CoreModule) {
+    if (parentModule) {
+      throw new Error(
+        'CoreModule has already been loaded. Import this module in the AppModule only.'
+      );
+    }
+  }
+}
