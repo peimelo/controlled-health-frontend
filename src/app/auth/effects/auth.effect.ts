@@ -139,7 +139,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthApiActions.loginSuccess),
-        tap(() => this.router.navigate(['/accounts']))
+        tap(() => this.router.navigate(['/profiles']))
       ),
     { dispatch: false }
   );

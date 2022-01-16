@@ -41,13 +41,13 @@
       </app-nav-item>
 
       <app-nav-item
-        hint="View your Accounts"
-        matIcon="dashboard"
+        hint="View your Profiles"
+        matIcon="switch_account"
         *ngIf="loggedIn$ | async"
-        routerLink="/accounts"
+        routerLink="/profiles"
         (navigate)="drawer.toggle()"
       >
-        Accounts
+        Profiles
       </app-nav-item>
 
       <app-nav-item

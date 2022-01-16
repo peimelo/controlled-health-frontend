@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { AccountsPageComponent } from './containers/accounts-page/accounts-page.component';
-import {AccountsGuard} from "./guards/accounts.guard";
+import { AccountsGuard } from './guards/accounts.guard';
 
 const routes: Routes = [
   {
-    path: 'accounts',
+    path: 'profiles',
     canActivate: [AuthGuard, AccountsGuard],
     component: AccountsPageComponent,
-    data: { title: 'Accounts' },
+    data: { title: 'Profiles' },
   },
 ];
 

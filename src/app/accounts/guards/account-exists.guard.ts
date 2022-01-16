@@ -26,7 +26,7 @@ export class AccountExistsGuard implements CanActivate {
           if (account) {
             this.accountFacadeService.loadAccount(+account);
           } else {
-            this.router.navigate(['/accounts']);
+            this.router.navigate(['/profiles']);
           }
         }
       }),
