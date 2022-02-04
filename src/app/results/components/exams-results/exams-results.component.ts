@@ -9,7 +9,7 @@ import {
 import { MatAccordion } from '@angular/material/expansion';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { DialogConfig, Pagination } from '../../../shared/models';
+import { DialogData, Pagination } from '../../../shared/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 import {
   ExamGraphic,
@@ -50,7 +50,7 @@ export class ExamsResultsComponent {
   constructor(private confirmationDialogService: ConfirmationDialogService) {}
 
   deleteConfirmDialog(examResult: ExamResult): void {
-    const dialogConfig: DialogConfig = {
+    const dialogData: DialogData = {
       confirmText: 'Remove',
       content: `'${examResult.exam.name}' will be removed.`,
       title: 'Remove exam result',
@@ -64,7 +64,7 @@ export class ExamsResultsComponent {
     this.confirmationDialogService.show(
       this.delete,
       examResultDeleteEvent,
-      dialogConfig
+      dialogData
     );
   }
 

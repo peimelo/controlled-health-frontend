@@ -1,4 +1,4 @@
-export interface DialogConfig {
+export interface DialogData {
   cancelText?: string;
   confirmText?: string;
   content: string;

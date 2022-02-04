@@ -8,7 +8,7 @@ import {
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Weight } from '../../../core/models';
-import { DialogConfig, Pagination } from '../../../shared/models';
+import { DialogData, Pagination } from '../../../shared/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 
@@ -43,14 +43,14 @@ export class WeightsComponent {
   ) {}
 
   deleteConfirmDialog(weight: Weight): void {
-    const dialogConfig: DialogConfig = {
+    const dialogData: DialogData = {
       confirmText: 'Remove',
       content: `'${this.dateTimeService.convertDateTimeToUtc(
         weight.date
       )}' will be removed.`,
       title: 'Remove weight',
     };
-    this.confirmationDialogService.show(this.delete, weight.id, dialogConfig);
+    this.confirmationDialogService.show(this.delete, weight.id, dialogData);
   }
 
   getDisplayedColumns(): string[] {

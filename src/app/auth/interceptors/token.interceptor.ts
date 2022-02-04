@@ -7,23 +7,16 @@ import {
   HttpRequest,
   HttpResponse,
 } from '@angular/common/http';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  private authService!: AuthService;
-
-  constructor(private injector: Injector) {}
-
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.authService = this.injector.get(AuthService);
-
     const accessToken = localStorage.getItem('access-token');
     const client = localStorage.getItem('client');
     const uid = localStorage.getItem('uid');
@@ -50,8 +43,7 @@ export class TokenInterceptor implements HttpInterceptor {
       }),
       catchError((error: HttpErrorResponse) => {
         this.setHeadersInLocalStorage(error.headers);
-        return throwError(error);
-        // return throwError(() => new Error(error.message));
+        return throwError(() => new Error(error.message));
       })
     );
   }

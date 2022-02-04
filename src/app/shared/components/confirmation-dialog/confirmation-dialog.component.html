@@ -1,27 +1,15 @@
-<h1 mat-dialog-title>{{title}}</h1>
+<h1 mat-dialog-title>{{ title }}</h1>
 
-<div mat-dialog-content>
-  <p class="mat-body-1">{{content}}</p>
-</div>
+<mat-dialog-content>
+  <p class="mat-body-1">{{ content }}</p>
+</mat-dialog-content>
 
-<div
-  fxLayout
-  fxLayoutAlign="end"
-  mat-dialog-actions
->
-  <button
-    fxflex
-    mat-button
-    [mat-dialog-close]="false"
-  >
-    {{cancelText}}
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">
+    {{ cancelText }}
   </button>
-  
-  <button
-    fxflex
-    mat-button
-    [mat-dialog-close]="true"
-  >
-    {{confirmText}}
+
+  <button mat-button [mat-dialog-close]="true">
+    {{ confirmText }}
   </button>
-</div>
+</mat-dialog-actions>

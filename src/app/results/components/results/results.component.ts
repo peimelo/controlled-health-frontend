@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { DialogConfig, Pagination } from '../../../shared/models';
+import { DialogData, Pagination } from '../../../shared/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { Result } from '../../models';
@@ -42,14 +42,14 @@ export class ResultsComponent {
   ) {}
 
   deleteConfirmDialog(result: Result): void {
-    const dialogConfig: DialogConfig = {
+    const dialogData: DialogData = {
       confirmText: 'Remove',
       content: `'${this.dateTimeService.convertDateToUtcBr(
         result.date
       )}' will be removed.`,
       title: 'Remove result',
     };
-    this.confirmationDialogService.show(this.delete, result.id, dialogConfig);
+    this.confirmationDialogService.show(this.delete, result.id, dialogData);
   }
 
   getDisplayedColumns(): string[] {
