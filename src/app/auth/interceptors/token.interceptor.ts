@@ -43,7 +43,7 @@ export class TokenInterceptor implements HttpInterceptor {
       }),
       catchError((error: HttpErrorResponse) => {
         this.setHeadersInLocalStorage(error.headers);
-        return throwError(() => new Error(error.message));
+        return throwError(error);
       })
     );
   }

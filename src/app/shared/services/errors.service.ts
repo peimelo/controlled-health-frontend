@@ -14,7 +14,13 @@ export class ErrorsService {
 
     if (err.error) {
       if (Array.isArray(err.error) && err.error.length) {
-        message = err.error[0];
+        return err.error[0];
+      }
+
+      if (err.error.errors) {
+        if (Array.isArray(err.error.errors) && err.error.errors.length) {
+          return err.error.errors[0];
+        }
       }
     } else if (err.status === 404) {
       return err.statusText;
