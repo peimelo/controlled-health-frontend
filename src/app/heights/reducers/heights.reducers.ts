@@ -2,8 +2,7 @@ import { Sort } from '@angular/material/sort';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { AccountsActions } from '../../accounts/actions';
-import { Height } from '../../core/models';
-import { Pagination } from '../../shared/models';
+import { Height, Pagination } from '../../core/models';
 import { HeightsApiActions, HeightsPageActions } from '../actions';
 
 export const heightsFeatureKey = 'heights';

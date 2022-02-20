@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxMaskModule } from 'ngx-mask';
+import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { WeightFormDialogComponent } from './components/weight-form-dialog/weight-form-dialog.component';
 import { WeightsComponent } from './components/weights/weights.component';
@@ -16,16 +20,21 @@ import { WeightsRoutingModule } from './weights-routing.module';
 
 @NgModule({
   imports: [
+    // @angular
+    CommonModule,
+    ReactiveFormsModule,
+
     // @ngrx
     StoreModule.forFeature(fromWeight.weightsFeatureKey, fromWeight.reducers),
     EffectsModule.forFeature([WeightsEffects]),
 
     // third-party
+    FlexLayoutModule,
     NgxMaskModule.forChild(),
-
     // app
-    WeightsRoutingModule,
+    MaterialModule,
     SharedModule,
+    WeightsRoutingModule,
   ],
   declarations: [
     WeightsPageComponent,

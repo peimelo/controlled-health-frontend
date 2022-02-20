@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
+import { IsLoadingPipeModule } from '@service-work/is-loading';
+import { IconsModule } from '../icons/icons.module';
+import { MaterialModule } from '../material/material.module';
 import { HomeComponent } from './components/home/home.component';
 import { MessageComponent } from './components/message/message.component';
 import { NavItemComponent } from './components/nav-item.component';
@@ -11,7 +15,7 @@ import { HomePageComponent } from './containers/home/home-page.component';
 import { NotFoundPageComponent } from './containers/not-found-page.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
-export const COMPONENTS = [
+const CORE_COMPONENTS = [
   AppComponent,
   HomePageComponent,
   HomeComponent,
@@ -23,14 +27,20 @@ export const COMPONENTS = [
 
 @NgModule({
   imports: [
-    // Angular
+    // @angular
+    CommonModule,
     RouterModule,
 
+    // third-party
+    FlexLayoutModule,
+    IsLoadingPipeModule,
+
     // app
-    SharedModule,
+    IconsModule,
+    MaterialModule,
   ],
-  declarations: [COMPONENTS],
-  exports: [COMPONENTS],
+  declarations: [CORE_COMPONENTS],
+  exports: [CORE_COMPONENTS],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

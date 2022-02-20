@@ -2,8 +2,7 @@ import { Sort } from '@angular/material/sort';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { AccountsActions } from '../../accounts/actions';
-import { Weight } from '../../core/models';
-import { Pagination } from '../../shared/models';
+import { Pagination, Weight } from '../../core/models';
 import { WeightsApiActions, WeightsPageActions } from '../actions';
 
 export const weightsFeatureKey = 'weights';

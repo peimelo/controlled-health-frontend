@@ -1,6 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { AccountsRoutingModule } from './accounts-routing.module';
 import { AccountFormDialogComponent } from './components/account-form-dialog/account-form-dialog.component';
@@ -14,6 +18,10 @@ import { AccountsService } from './services/accounts.service';
 
 @NgModule({
   imports: [
+    // @angular
+    CommonModule,
+    ReactiveFormsModule,
+
     // @ngrx
     StoreModule.forFeature(
       fromAccount.accountsFeatureKey,
@@ -21,7 +29,12 @@ import { AccountsService } from './services/accounts.service';
     ),
     EffectsModule.forFeature([AccountsEffects]),
 
+    // third-party
+    FlexLayoutModule,
+
+    // app
     AccountsRoutingModule,
+    MaterialModule,
     SharedModule,
   ],
   declarations: [

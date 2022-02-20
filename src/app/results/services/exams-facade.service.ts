@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Pagination } from '../../core/models';
 import { Exam } from '../../results/models';
-import { Pagination } from '../../shared/models';
 import { AllExamsExistsGuardActions } from '../actions';
 import * as fromExams from '../reducers';
 

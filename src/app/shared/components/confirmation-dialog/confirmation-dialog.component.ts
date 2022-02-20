@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../../models';
+import { DialogData } from '../../../core/models';
 
 @Component({
   selector: 'app-confirmation-dialog',

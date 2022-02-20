@@ -7,7 +7,12 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+    "compodoc:serve": "compodoc -s",
+    "build:stats": "ng build --configuration development --stats-json",
+    "analyze": "webpack-bundle-analyzer dist/controlled-health-frontend/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -47,6 +52,7 @@
     "@angular-eslint/template-parser": "13.0.1",
     "@angular/cli": "~13.0.4",
     "@angular/compiler-cli": "~13.0.0",
+    "@compodoc/compodoc": "^1.1.18",
     "@types/d3-scale": "^4.0.2",
     "@types/d3-selection": "^3.0.2",
     "@types/jasmine": "~3.10.0",
@@ -60,6 +66,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.4.3"
+    "typescript": "~4.4.3",
+    "webpack-bundle-analyzer": "^4.5.0"
   }
 }

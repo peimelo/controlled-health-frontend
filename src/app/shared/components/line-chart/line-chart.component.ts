@@ -5,8 +5,8 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+import { ChartResult, Serie } from '../../../core/models';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
-import { ChartResult, Serie } from '../../models';
 
 @Component({
   selector: 'app-line-chart',

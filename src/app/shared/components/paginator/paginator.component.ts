@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { Pagination } from '../../models';
+import { Pagination } from '../../../core/models';
 
 @Component({
   selector: 'app-paginator',

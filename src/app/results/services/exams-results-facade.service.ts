@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Pagination } from '../../shared/models';
+import { Pagination } from '../../core/models';
 import {
   ExamResultFormDialogPageActions,
   ResultDetailPageActions,

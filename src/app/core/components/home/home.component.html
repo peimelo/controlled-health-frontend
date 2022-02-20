@@ -3,7 +3,7 @@
 
   <mat-grid-list [cols]="cols" rowHeight="250px">
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="card">
         <mat-card-header>
           <div mat-card-avatar>
             <mat-icon>favorite</mat-icon>
@@ -11,7 +11,7 @@
           <mat-card-title> Free </mat-card-title>
         </mat-card-header>
 
-        <mat-card-content class="dashboard-card-content">
+        <mat-card-content class="card-content">
           You don't have to pay anything. We want to help you take care of your
           health.
         </mat-card-content>
@@ -19,7 +19,7 @@
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="card">
         <mat-card-header>
           <div mat-card-avatar>
             <mat-icon>mobile_friendly</mat-icon>
@@ -27,14 +27,14 @@
           <mat-card-title> Responsive </mat-card-title>
         </mat-card-header>
 
-        <mat-card-content class="dashboard-card-content">
+        <mat-card-content class="card-content">
           It means that you can access from your computer, tablet or cell phone.
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="card">
         <mat-card-header>
           <div mat-card-avatar>
             <mat-icon>code</mat-icon>
@@ -42,14 +42,18 @@
           <mat-card-title> Open Source Code </mat-card-title>
         </mat-card-header>
 
-        <mat-card-content class="dashboard-card-content" fxLayout="column">
+        <mat-card-content
+          class="card-content"
+          fxLayout="column"
+          fxLayoutGap="5px"
+        >
           <div>
             You can have the source code of this application or even collaborate
             to improve it.
           </div>
 
           <a
-            mat-flat-button
+            mat-raised-button
             href="https://github.com/peimelo/controlled-health-frontend"
             target="_blank"
           >
@@ -57,7 +61,7 @@
           </a>
 
           <a
-            mat-flat-button
+            mat-raised-button
             href="https://github.com/peimelo/controlled_health_api"
             target="_blank"
           >
@@ -68,7 +72,7 @@
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="card">
         <mat-card-header>
           <div mat-card-avatar>
             <mat-icon>email</mat-icon>
@@ -76,9 +80,9 @@
           <mat-card-title> Contact </mat-card-title>
         </mat-card-header>
 
-        <mat-card-content class="dashboard-card-content" fxLayout="column">
-          Send an email to <strong>webmaster@saudecontrolada.com.br</strong> and
-          we will respond as soon as possible.
+        <mat-card-content class="card-content" fxLayout="column">
+          Send an email to <strong>melo@andreiaemelo.com.br</strong> and we will
+          respond as soon as possible.
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
@@ -88,7 +92,7 @@
 
   <mat-grid-list [cols]="cols === 4 ? 2 : 1" rowHeight="400px">
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="card">
         <mat-card-header>
           <div mat-card-avatar>
             <fa-icon [icon]="['fas', 'weight']" size="2x"></fa-icon>
@@ -98,14 +102,14 @@
 
         <img mat-card-image src="assets/weight.png" alt="Weight" />
 
-        <mat-card-content class="dashboard-card-content">
+        <mat-card-content class="card-content">
           Control the evolution of your weight.
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="card">
         <mat-card-header>
           <div mat-card-avatar>
             <mat-icon>height</mat-icon>
@@ -115,7 +119,7 @@
 
         <img mat-card-image src="assets/height.png" alt="Height" />
 
-        <mat-card-content class="dashboard-card-content">
+        <mat-card-content class="card-content">
           Control the evolution of your height.
         </mat-card-content>
       </mat-card>

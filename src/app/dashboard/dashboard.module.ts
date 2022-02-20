@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
-import * as fromComponents from './components';
-import * as fromContainers from './containers';
+import { DashboardComponent } from './components';
+import { DashboardPageComponent } from './containers';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardEffects } from './effects';
 import { DashboardGuard } from './guards/dashboard.guard';
@@ -13,7 +15,8 @@ import { DashboardService } from './services/dashboard.service';
 
 @NgModule({
   imports: [
-    DashboardRoutingModule,
+    // @angular
+    CommonModule,
 
     // @ngrx
     StoreModule.forFeature(
@@ -23,10 +26,11 @@ import { DashboardService } from './services/dashboard.service';
     EffectsModule.forFeature([DashboardEffects]),
 
     // app
+    DashboardRoutingModule,
+    MaterialModule,
     SharedModule,
   ],
-  declarations: [...fromComponents.components, ...fromContainers.containers],
-  exports: [...fromComponents.components, ...fromContainers.containers],
+  declarations: [DashboardComponent, DashboardPageComponent],
   providers: [DashboardFacadeService, DashboardGuard, DashboardService],
 })
 export class DashboardModule {}

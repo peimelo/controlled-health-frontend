@@ -1,5 +1,5 @@
 import { Account } from '.';
-import { Pagination } from '../../shared/models';
+import { Pagination } from '../../core/models';
 
 export interface AccountResponse {
   meta: Pagination;

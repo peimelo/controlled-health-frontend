@@ -16,7 +16,7 @@ import {
   ResendConfirmationPageActions,
   ResetPasswordPageActions,
 } from '../actions';
-import * as fromComponents from '../componentes';
+import { DeleteAccountConfirmationComponent } from '../componentes';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
@@ -76,10 +76,10 @@ export class AuthEffects {
       ofType(AccountPageActions.deleteAccountConfirmation),
       exhaustMap(() => {
         const dialogRef = this.dialog.open<
-          fromComponents.DeleteAccountConfirmationComponent,
+          DeleteAccountConfirmationComponent,
           undefined,
           boolean
-        >(fromComponents.DeleteAccountConfirmationComponent);
+        >(DeleteAccountConfirmationComponent);
 
         return dialogRef.afterClosed();
       }),

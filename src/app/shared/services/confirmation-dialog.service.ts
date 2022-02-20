@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogData } from '../../core/models';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
-import { DialogData } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class ConfirmationDialogService {

@@ -25,6 +25,7 @@ const maskConfig: Partial<IConfig> = {
 
 @NgModule({
   imports: [
+    // @angular
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -41,9 +42,9 @@ const maskConfig: Partial<IConfig> = {
     }),
     EffectsModule.forRoot([MessageEffects, RouterEffects, UserEffects]),
     StoreRouterConnectingModule.forRoot(),
-    FontAwesomeModule,
 
     // third-party
+    FontAwesomeModule,
     NgxMaskModule.forRoot(maskConfig),
 
     // app

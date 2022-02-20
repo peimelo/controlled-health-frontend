@@ -1,38 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import * as fromContainers from './containers';
+import {
+  AccountPageComponent,
+  CreateAccountPageComponent,
+  ForgotPasswordPageComponent,
+  LoginPageComponent,
+  ResendConfirmationPageComponent,
+  ResetPasswordPageComponent,
+} from './containers';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'account',
-    component: fromContainers.AccountPageComponent,
+    component: AccountPageComponent,
     data: { title: 'Account Settings' },
     canActivate: [AuthGuard],
   },
   {
     path: 'create-account',
-    component: fromContainers.CreateAccountPageComponent,
+    component: CreateAccountPageComponent,
     data: { title: 'Create an Account' },
   },
   {
     path: 'forgot-password',
-    component: fromContainers.ForgotPasswordPageComponent,
+    component: ForgotPasswordPageComponent,
     data: { title: 'Forgot Password' },
   },
   {
     path: 'login',
-    component: fromContainers.LoginPageComponent,
+    component: LoginPageComponent,
     data: { title: 'Login' },
   },
   {
     path: 'resend-confirmation',
-    component: fromContainers.ResendConfirmationPageComponent,
+    component: ResendConfirmationPageComponent,
     data: { title: 'Resend Confirmation' },
   },
   {
     path: 'reset-password',
-    component: fromContainers.ResetPasswordPageComponent,
+    component: ResetPasswordPageComponent,
     data: { title: 'Reset Password' },
   },
 ];

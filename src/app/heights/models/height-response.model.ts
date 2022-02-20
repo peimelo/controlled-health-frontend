@@ -1,5 +1,4 @@
-import { Height } from '../../core/models';
-import { Pagination } from '../../shared/models';
+import { Height, Pagination } from '../../core/models';
 
 export interface HeightResponse {
   meta: Pagination;

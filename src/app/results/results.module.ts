@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxMaskModule } from 'ngx-mask';
+import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { ExamResultFormDialogComponent } from './components/exam-result-form-dialog/exam-result-form-dialog.component';
 import { ExamsResultsComponent } from './components/exams-results/exams-results.component';
@@ -20,14 +24,20 @@ import * as fromServices from './services';
 
 @NgModule({
   imports: [
+    // @angular
+    CommonModule,
+    ReactiveFormsModule,
+
     // @ngrx
     StoreModule.forFeature(fromResult.resultsFeatureKey, fromResult.reducers),
     EffectsModule.forFeature([...fromEffects.effects]),
 
     // third-party
+    FlexLayoutModule,
     NgxMaskModule.forChild(),
 
     // app
+    MaterialModule,
     ResultsRoutingModule,
     SharedModule,
   ],

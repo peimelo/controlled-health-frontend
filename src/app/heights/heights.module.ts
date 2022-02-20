@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxMaskModule } from 'ngx-mask';
+import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { HeightFormDialogComponent } from './components/height-form-dialog/height-form-dialog.component';
 import { HeightsComponent } from './components/heights/heights.component';
@@ -16,15 +20,21 @@ import { HeightsService } from './services/heights.service';
 
 @NgModule({
   imports: [
+    // @angular
+    CommonModule,
+    ReactiveFormsModule,
+
     // @ngrx
     StoreModule.forFeature(fromHeight.heightsFeatureKey, fromHeight.reducers),
     EffectsModule.forFeature([HeightsEffects]),
 
     // third-party
+    FlexLayoutModule,
     NgxMaskModule.forChild(),
 
     // app
     HeightsRoutingModule,
+    MaterialModule,
     SharedModule,
   ],
   declarations: [

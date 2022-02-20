@@ -9,7 +9,7 @@ import {
 import { MatAccordion } from '@angular/material/expansion';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { DialogData, Pagination } from '../../../shared/models';
+import { DialogData, Pagination } from '../../../core/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 import {
   ExamGraphic,

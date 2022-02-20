@@ -2,7 +2,7 @@ import { Sort } from '@angular/material/sort';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { AccountsActions } from '../../accounts/actions';
-import { Pagination } from '../../shared/models';
+import { Pagination } from '../../core/models';
 import {
   ExamsResultsApiActions,
   ResultDetailPageActions,

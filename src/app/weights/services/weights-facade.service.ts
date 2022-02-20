@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Weight } from '../../core/models';
-import { Pagination } from '../../shared/models';
+import { Pagination, Weight } from '../../core/models';
 import {
   WeightFormDialogActions,
   WeightsGuardActions,

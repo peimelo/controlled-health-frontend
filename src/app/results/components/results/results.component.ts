@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
-import { DialogData, Pagination } from '../../../shared/models';
+import { DialogData, Pagination } from '../../../core/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
 import { Result } from '../../models';

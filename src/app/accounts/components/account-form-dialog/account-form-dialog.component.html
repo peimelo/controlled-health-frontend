@@ -18,13 +18,13 @@
   </div>
 
   <div fxLayout fxLayoutAlign="end" mat-dialog-actions>
-    <button fxflex mat-button [mat-dialog-close]="true">Cancel</button>
+    <button fxFlex mat-button [mat-dialog-close]="true">Cancel</button>
 
-    <button fxflex mat-button *ngIf="!isEditing" (click)="onCreate()">
+    <button fxFlex mat-button *ngIf="!isEditing" (click)="onCreate()">
       Create
     </button>
 
-    <button fxflex mat-button *ngIf="isEditing" (click)="onUpdate()">
+    <button fxFlex mat-button *ngIf="isEditing" (click)="onUpdate()">
       Update
     </button>
   </div>

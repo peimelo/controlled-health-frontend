@@ -1,4 +1,4 @@
-import { Pagination } from '../../shared/models';
+import { Pagination } from '../../core/models';
 import { Result } from './result.model';
 
 export interface ResultResponse {
