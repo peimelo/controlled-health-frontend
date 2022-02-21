@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Account } from '../../../accounts/models';
 import { AccountsFacadeService } from '../../../accounts/services/accounts-facade.service';
 import { AuthFacadeService } from '../../../auth/services/auth-facade.service';
-import {Account} from "../../../accounts/models";
 
 @Component({
   selector: 'app-root',
@@ -19,11 +19,11 @@ export class AppComponent {
 
   constructor(
     private authFacadeService: AuthFacadeService,
-    private accountFacadeService: AccountsFacadeService
+    private accountsFacadeService: AccountsFacadeService
   ) {
-    this.accountListLoaded$ = this.accountFacadeService.selectListLoaded$;
-    this.accountSelected$ = this.accountFacadeService.selected$;
-    this.accountSelectedLoaded$ = this.accountFacadeService.selectedLoaded$;
+    this.accountListLoaded$ = this.accountsFacadeService.selectListLoaded$;
+    this.accountSelected$ = this.accountsFacadeService.selected$;
+    this.accountSelectedLoaded$ = this.accountsFacadeService.selectedLoaded$;
     this.loggedIn$ = this.authFacadeService.loggedIn$;
     this.user$ = this.authFacadeService.user$;
   }

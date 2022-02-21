@@ -20,7 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
     const accessToken = localStorage.getItem('access-token');
     const client = localStorage.getItem('client');
     const uid = localStorage.getItem('uid');
-    const account = localStorage.getItem('account');
+    const account = localStorage.getItem('account') || '';
 
     if (accessToken && client && uid) {
       request = request.clone({
@@ -28,7 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
           'access-token': accessToken,
           client,
           uid,
-          account: account || '',
+          account,
           'Content-Type': 'application/json',
         },
       });

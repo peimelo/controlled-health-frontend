@@ -1,5 +1,7 @@
 <app-accounts
   [accounts]="accounts$ | async"
+  [accountSelected]="accountSelected$ | async"
+  [accountSelectedLoaded]="accountSelectedLoaded$ | async"
   (add)="onAdd()"
   (edit)="onEdit($event)"
   (enter)="onEnter($event)"

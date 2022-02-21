@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import {
   CreateAccountRequest,
@@ -52,10 +52,9 @@ export class AuthService {
   }
 
   deleteAccount(): Observable<string> {
-    return this.http.delete(this.url).pipe(
-      tap(() => this.clearLocalStorage()),
-      map(() => 'Your account has been successfully deleted.')
-    );
+    return this.http
+      .delete(this.url)
+      .pipe(map(() => 'Your account has been successfully deleted.'));
   }
 
   // Password
@@ -129,12 +128,6 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http
-      .delete(`${this.url}/sign_out`)
-      .pipe(tap(() => this.clearLocalStorage()));
-  }
-
-  private clearLocalStorage(): void {
-    localStorage.clear();
+    return this.http.delete(`${this.url}/sign_out`);
   }
 }

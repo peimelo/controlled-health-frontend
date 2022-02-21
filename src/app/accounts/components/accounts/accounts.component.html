@@ -23,6 +23,12 @@
         (click)="onEnter(account)"
       >
         <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon
+              *ngIf="accountSelectedLoaded && account.id === accountSelected.id"
+              >how_to_reg</mat-icon
+            >
+          </div>
           <mat-card-title>
             {{ account.name }}
 

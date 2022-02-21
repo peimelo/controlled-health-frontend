@@ -156,6 +156,7 @@ export class AuthEffects {
       ofType(AuthActions.logout),
       exhaustMap(() =>
         this.authService.logout().pipe(
+          tap(() => localStorage.clear()),
           map(() => AuthApiActions.loginRedirect()),
           catchError(() => of(AuthApiActions.loginRedirect()))
         )

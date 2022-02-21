@@ -9,3 +9,8 @@ export const loadAccountFromPageSuccess = createAction(
   '[Accounts] Load Account From Page Success',
   props<{ account: Account }>()
 );
+
+export const loadAccountFromUpdateSuccess = createAction(
+  '[Accounts] Load Account From Update Success',
+  props<{ account: Account }>()
+);

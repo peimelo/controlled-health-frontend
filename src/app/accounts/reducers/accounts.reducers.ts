@@ -24,6 +24,7 @@ export const reducer = createReducer(
 
   on(
     AccountsActions.loadAccountFromPageSuccess,
+    AccountsActions.loadAccountFromUpdateSuccess,
     AccountsApiActions.loadAccountSuccess,
     (state, { account }) => ({
       ...state,

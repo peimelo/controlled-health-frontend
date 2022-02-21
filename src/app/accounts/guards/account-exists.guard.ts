@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 import { AccountsFacadeService } from '../services/accounts-facade.service';
@@ -13,7 +13,7 @@ export class AccountExistsGuard implements CanActivate {
     private router: Router
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
+  canActivate(): Observable<boolean> {
     return this.hasSelectedLoaded();
   }
 

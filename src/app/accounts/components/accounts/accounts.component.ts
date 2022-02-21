@@ -1,14 +1,23 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Account } from '../../models';
 
 @Component({
   selector: 'app-accounts',
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountsComponent {
   @Input() isLoading!: boolean;
   @Input() accounts!: Account[];
+  @Input() accountSelected!: Account | null;
+  @Input() accountSelectedLoaded!: boolean;
 
   @Output() private add = new EventEmitter();
   @Output() private delete = new EventEmitter<string>();

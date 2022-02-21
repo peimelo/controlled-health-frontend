@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
 import { tap } from 'rxjs';
 import { catchError, exhaustMap, map, mergeMap } from 'rxjs/operators';
 import { MessageApiActions } from '../../core/actions';
@@ -134,13 +135,36 @@ export class AccountsEffects {
       ofType(AccountFormDialogPageActions.updateAccount),
       mergeMap((action) =>
         this.accountsService.update(action.account).pipe(
-          mergeMap(() => [
-            AccountsApiActions.updateAccountSuccess(),
-            AccountsActions.accountFormDialogDismiss(),
-            MessageApiActions.successMessage({
-              message: 'Record successfully updated.',
-            }),
-          ]),
+          mergeMap((accountUpdated) => {
+            const actions: Action[] = [];
+
+            actions.push(
+              AccountsApiActions.updateAccountSuccess({
+                account: {
+                  id: accountUpdated.id,
+                  name: accountUpdated.name,
+                },
+              })
+            );
+            actions.push(AccountsActions.accountFormDialogDismiss());
+            actions.push(
+              MessageApiActions.successMessage({
+                message: 'Record successfully updated.',
+              })
+            );
+
+            if (
+              localStorage.getItem('account') === accountUpdated.id.toString()
+            ) {
+              actions.push(
+                AccountsActions.loadAccountFromUpdateSuccess({
+                  account: accountUpdated,
+                })
+              );
+            }
+
+            return actions;
+          }),
           catchError((error) => this.errorService.showError(error))
         )
       )

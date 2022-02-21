@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {Account, AccountResponse} from '../models';
+import { Account, AccountResponse } from '../models';
 
 export const createAccountSuccess = createAction(
   '[Accounts/API] Create Account Success'
@@ -20,5 +20,6 @@ export const loadAccountsSuccess = createAction(
 );
 
 export const updateAccountSuccess = createAction(
-  '[Accounts/API] Update Account Success'
+  '[Accounts/API] Update Account Success',
+  props<{ account: Account }>()
 );
