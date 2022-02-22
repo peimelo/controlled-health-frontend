@@ -24,11 +24,21 @@
       >
         <mat-card-header>
           <div mat-card-avatar>
-            <mat-icon
-              *ngIf="accountSelectedLoaded && account.id === accountSelected.id"
-              >how_to_reg</mat-icon
-            >
+            <ng-container
+              *ngIf="
+                accountSelectedLoaded && account.id === accountSelected.id;
+                then userSelected;
+                else user
+              "
+            ></ng-container>
+
+            <ng-template #userSelected>
+              <mat-icon>how_to_reg</mat-icon>
+            </ng-template>
+
+            <ng-template #user><mat-icon>person</mat-icon> </ng-template>
           </div>
+
           <mat-card-title>
             {{ account.name }}
 
