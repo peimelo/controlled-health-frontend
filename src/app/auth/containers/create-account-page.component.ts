@@ -4,7 +4,6 @@ import { CreateAccountRequest } from '../models';
 import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-create-account-form
       [pending]="pending$ | async"
@@ -12,6 +11,7 @@ import { AuthFacadeService } from '../services/auth-facade.service';
     >
     </app-create-account-form>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAccountPageComponent {
   pending$ = this.spinnerFacadeService.isLoading$;

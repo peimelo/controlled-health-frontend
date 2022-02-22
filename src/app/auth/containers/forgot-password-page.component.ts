@@ -3,7 +3,6 @@ import { SpinnerFacadeService } from '../../core/services/spinner-facade.service
 import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-forgot-password-form
       [pending]="pending$ | async"
@@ -11,6 +10,7 @@ import { AuthFacadeService } from '../services/auth-facade.service';
     >
     </app-forgot-password-form>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotPasswordPageComponent {
   pending$ = this.spinnerFacadeService.isLoading$;

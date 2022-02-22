@@ -10,8 +10,8 @@ interface DialogData {
 }
 @Component({
   selector: 'app-account-form-dialog-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './account-form-dialog-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountFormDialogPageComponent {
   account!: Account;

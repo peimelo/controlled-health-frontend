@@ -4,7 +4,6 @@ import { PasswordCombination, User } from '../../models';
 import { AuthFacadeService } from '../../services/auth-facade.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './account-page.component.html',
   styles: [
     `
@@ -15,6 +14,7 @@ import { AuthFacadeService } from '../../services/auth-facade.service';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountPageComponent {
   pending$ = this.spinnerFacadeService.isLoading$;

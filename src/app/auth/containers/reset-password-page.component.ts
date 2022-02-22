@@ -5,7 +5,6 @@ import { PasswordCombination } from '../models';
 import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-reset-password-form
       [pending]="pending$ | async"
@@ -13,6 +12,7 @@ import { AuthFacadeService } from '../services/auth-facade.service';
     >
     </app-reset-password-form>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPasswordPageComponent implements OnInit {
   pending$ = this.spinnerFacadeService.isLoading$;

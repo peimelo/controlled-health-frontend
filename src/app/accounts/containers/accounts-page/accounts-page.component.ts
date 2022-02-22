@@ -5,8 +5,8 @@ import { AccountsFacadeService } from '../../services/accounts-facade.service';
 
 @Component({
   selector: 'app-accounts-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './accounts-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountsPageComponent implements OnInit {
   accounts$: Observable<Account[]>;

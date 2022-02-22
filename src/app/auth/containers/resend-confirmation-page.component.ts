@@ -3,7 +3,6 @@ import { SpinnerFacadeService } from '../../core/services/spinner-facade.service
 import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-resend-confirmation-form
       [pending]="pending$ | async"
@@ -11,6 +10,7 @@ import { AuthFacadeService } from '../services/auth-facade.service';
     >
     </app-resend-confirmation-form>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResendConfirmationPageComponent {
   pending$ = this.spinnerFacadeService.isLoading$;

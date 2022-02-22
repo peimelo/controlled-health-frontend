@@ -5,11 +5,11 @@ import { Credentials } from '../models';
 import { AuthFacadeService } from '../services/auth-facade.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-login-form [pending]="pending$ | async" (submitted)="onSubmit($event)">
     </app-login-form>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPageComponent implements OnInit {
   pending$ = this.spinnerFacadeService.isLoading$;
