@@ -32,7 +32,7 @@
       </app-nav-item>
 
       <app-nav-item
-        fasIcon="sign-out-alt"
+        matIcon="logout"
         *ngIf="loggedIn$ | async"
         routerLink="/login"
         (navigate)="drawer.toggle(); logout()"

@@ -38,20 +38,21 @@
       [matMenuTriggerFor]="menu"
       *ngIf="!accountSelectedLoaded"
     >
-      <mat-icon >account_circle</mat-icon>
+      <mat-icon>account_circle</mat-icon>
     </button>
 
-    <button
-      *ngIf="accountSelectedLoaded"
-      [matMenuTriggerFor]="menu"
-      mat-button
-    >
-      {{accountSelected.name}}
+    <button *ngIf="accountSelectedLoaded" [matMenuTriggerFor]="menu" mat-button>
+      <mat-icon>how_to_reg</mat-icon> {{ accountSelected.name }}
     </button>
   </div>
 
   <mat-menu #menu="matMenu">
-    <a mat-menu-item routerLink="/account"> User Settings </a>
-    <button mat-menu-item (click)="logout.emit()">Logout</button>
+    <a mat-menu-item routerLink="/account">
+      <mat-icon>account_circle</mat-icon> User Settings
+    </a>
+
+    <button mat-menu-item (click)="logout.emit()">
+      <mat-icon>logout</mat-icon> Logout
+    </button>
   </mat-menu>
 </mat-toolbar>

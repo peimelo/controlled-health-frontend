@@ -4,7 +4,6 @@ import {
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
 import {
-  faSignOutAlt,
   faSpinner,
   faTachometerAlt,
   faWeight,
@@ -16,6 +15,6 @@ import {
 })
 export class IconsModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faSignOutAlt, faSpinner, faTachometerAlt, faWeight);
+    library.addIcons(faSpinner, faTachometerAlt, faWeight);
   }
 }
