@@ -35,6 +35,10 @@ export class AccountsPageComponent implements OnInit {
     this.accountsFacadeService.add();
   }
 
+  onDelete(id: number): void {
+    this.accountsFacadeService.delete(id);
+  }
+
   onEdit(account: Account): void {
     this.accountsFacadeService.edit(account);
   }

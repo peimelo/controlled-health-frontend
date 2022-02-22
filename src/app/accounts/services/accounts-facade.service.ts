@@ -37,6 +37,10 @@ export class AccountsFacadeService {
     );
   }
 
+  delete(id: number): void {
+    this.store.dispatch(AccountsPageActions.deleteAccount({ id }));
+  }
+
   edit(account: Account): void {
     this.store.dispatch(AccountsPageActions.editAccount({ account }));
   }

@@ -3,6 +3,7 @@
   [accountSelected]="accountSelected$ | async"
   [accountSelectedLoaded]="accountSelectedLoaded$ | async"
   (add)="onAdd()"
+  (delete)="onDelete($event)"
   (edit)="onEdit($event)"
   (enter)="onEnter($event)"
 >
