@@ -22,6 +22,10 @@ export class ErrorsService {
           return err.error.errors[0];
         }
       }
+
+      if (err.error.error && typeof err.error.error === 'string') {
+        return err.error.error;
+      }
     } else if (err.status === 404) {
       return err.statusText;
     }
