@@ -8,8 +8,8 @@ import { WeightsFacadeService } from '../../services/weights-facade.service';
 
 @Component({
   selector: 'app-weights-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './weights-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeightsPageComponent {
   isHandsetPortrait$: Observable<boolean>;

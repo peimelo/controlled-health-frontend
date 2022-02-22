@@ -16,8 +16,8 @@ interface DialogData {
 
 @Component({
   selector: 'app-exam-result-form-dialog-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './exam-result-form-dialog-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExamResultFormDialogPageComponent {
   allExams$: Observable<Exam[]>;

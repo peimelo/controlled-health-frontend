@@ -9,8 +9,8 @@ import { ResultsFacadeService } from '../../services/results-facade.service';
 
 @Component({
   selector: 'app-results-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './results-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultsPageComponent {
   isHandsetPortrait$: Observable<boolean>;

@@ -7,8 +7,8 @@ import { HeightsFacadeService } from '../../services/heights-facade.service';
 
 @Component({
   selector: 'app-heights-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './heights-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeightsPageComponent {
   heights$: Observable<Height[]>;

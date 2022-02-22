@@ -10,8 +10,8 @@ interface DialogData {
 }
 @Component({
   selector: 'app-height-form-dialog-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './height-form-dialog-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeightFormDialogPageComponent {
   height!: Height;

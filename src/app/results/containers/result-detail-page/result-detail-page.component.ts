@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
@@ -18,6 +18,7 @@ import { ResultsFacadeService } from '../../services/results-facade.service';
   selector: 'app-result-detail-page',
   templateUrl: './result-detail-page.component.html',
   styleUrls: ['./result-detail-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResultDetailPageComponent {
   examGraphics$: Observable<ExamGraphic[]>;

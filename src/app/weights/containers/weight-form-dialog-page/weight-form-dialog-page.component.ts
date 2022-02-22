@@ -11,8 +11,8 @@ interface DialogData {
 
 @Component({
   selector: 'app-weight-form-dialog-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './weight-form-dialog-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeightFormDialogPageComponent {
   pending$: Observable<boolean>;

@@ -5,8 +5,8 @@ import { DashboardFacadeService } from '../../services/dashboard-facade.service'
 
 @Component({
   selector: 'app-dashboard-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dashboard-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardPageComponent {
   dashboard$: Observable<Dashboard>;

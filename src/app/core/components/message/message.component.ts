@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
 interface Data {
@@ -9,6 +9,7 @@ interface Data {
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageComponent {
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: Data) {}
