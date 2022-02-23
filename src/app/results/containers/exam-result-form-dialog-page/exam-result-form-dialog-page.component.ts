@@ -20,7 +20,7 @@ interface DialogData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExamResultFormDialogPageComponent {
-  allExams$: Observable<Exam[]>;
+  allExams$: Observable<ReadonlyArray<Exam>>;
   examResult!: ExamResult;
   pending$: Observable<boolean>;
   user$!: Observable<User>;

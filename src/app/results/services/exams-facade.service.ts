@@ -1,29 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Sort } from '@angular/material/sort';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Pagination } from '../../core/models';
 import { Exam } from '../../results/models';
 import { AllExamsExistsGuardActions } from '../actions';
 import * as fromExams from '../reducers';
 
 @Injectable()
 export class ExamsFacadeService {
-  allExams$: Observable<Exam[]>;
-  pagination$: Observable<Pagination>;
+  allExams$: Observable<ReadonlyArray<Exam>>;
   selectAllExamsLoaded$: Observable<boolean>;
-  sort$: Observable<Sort>;
 
   constructor(private store: Store<fromExams.State>) {
     this.allExams$ = this.store.pipe(select(fromExams.selectExams));
 
-    this.pagination$ = this.store.pipe(select(fromExams.selectExamsPagination));
-
     this.selectAllExamsLoaded$ = this.store.pipe(
       select(fromExams.selectAllExamsLoaded)
     );
-
-    this.sort$ = this.store.pipe(select(fromExams.selectExamsSort));
   }
 
   loadAll(): void {

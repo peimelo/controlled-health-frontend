@@ -111,23 +111,6 @@ export const selectExamsEntitiesState = createSelector(
   (state) => state.exams
 );
 
-export const selectExamsPagination = createSelector(
-  selectExamsEntitiesState,
-  fromExams.getPagination
-);
-
-export const selectExamsSort = createSelector(
-  selectExamsEntitiesState,
-  fromExams.getSort
-);
-
-export const {
-  selectIds: selectExamIds,
-  selectEntities: selectExamEntities,
-  selectAll: selectAllExams,
-  selectTotal: selectTotalExams,
-} = fromExams.adapter.getSelectors(selectExamsEntitiesState);
-
 export const selectExams = createSelector(
   selectExamsEntitiesState,
   fromExams.getAllExams
