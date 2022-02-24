@@ -101,7 +101,7 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
     if (valid) {
       const examResult = {
         exam: value.exam,
-        value: value.value,
+        value: this.numberService.convertToFloat(value.value),
       };
 
       this.create.emit({
@@ -128,10 +128,7 @@ export class ExamResultFormDialogComponent implements OnInit, OnChanges {
       const examResult: ExamResult = {
         ...this.examResult,
         exam: value.exam,
-        value: this.numberService.convertToFloat(
-          this.examResult.value,
-          value.value
-        ),
+        value: this.numberService.convertToFloat(value.value),
       };
 
       this.update.emit({ examResult, resultId: this.result.id });

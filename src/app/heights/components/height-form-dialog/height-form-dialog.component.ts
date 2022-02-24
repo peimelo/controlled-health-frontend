@@ -70,7 +70,7 @@ export class HeightFormDialogComponent implements OnChanges {
     if (valid) {
       const height = {
         date: this.dateTimeService.convertDateToSave(value.date),
-        value: value.value,
+        value: this.numberService.convertToFloat(value.value),
       };
 
       this.create.emit(height as Height);
@@ -84,10 +84,7 @@ export class HeightFormDialogComponent implements OnChanges {
       const height: Height = {
         ...this.height,
         date: this.dateTimeService.convertDateToSave(value.date),
-        value: this.numberService.convertToFloat(
-          this.height.value,
-          value.value
-        ),
+        value: this.numberService.convertToFloat(value.value),
       };
 
       this.update.emit(height);

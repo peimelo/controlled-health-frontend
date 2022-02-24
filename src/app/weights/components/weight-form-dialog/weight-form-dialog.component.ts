@@ -77,7 +77,7 @@ export class WeightFormDialogComponent implements OnChanges {
 
       const weight = {
         date: this.dateTimeService.convertDateTimeToSave(date, value.time),
-        value: value.value,
+        value: this.numberService.convertToFloat(value.value),
       };
 
       this.create.emit(weight as Weight);
@@ -93,10 +93,7 @@ export class WeightFormDialogComponent implements OnChanges {
       const weight: Weight = {
         ...this.weight,
         date: this.dateTimeService.convertDateTimeToSave(date, value.time),
-        value: this.numberService.convertToFloat(
-          this.weight.value,
-          value.value
-        ),
+        value: this.numberService.convertToFloat(value.value),
       };
 
       this.update.emit(weight);
