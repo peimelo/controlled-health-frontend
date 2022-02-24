@@ -1,5 +1,4 @@
 import { Sort } from '@angular/material/sort';
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { AccountsActions } from '../../accounts/actions';
 import { Pagination } from '../../core/models';
@@ -8,18 +7,16 @@ import { Result } from '../models';
 
 export const resultsFeatureKey = 'results';
 
-export interface State extends EntityState<Result> {
+export interface State {
+  list: Result[];
   listLoaded: boolean;
   pagination: Pagination;
   selected: Result | null;
   sort: Sort;
 }
 
-export const adapter: EntityAdapter<Result> = createEntityAdapter<Result>({});
-
-export const initialState: State = adapter.getInitialState({
-  entities: {},
-  ids: [],
+export const initialState: State = {
+  list: [],
   listLoaded: false,
   pagination: {
     currentPage: 1,
@@ -31,12 +28,12 @@ export const initialState: State = adapter.getInitialState({
     active: 'date',
     direction: 'desc',
   },
-});
+};
 
 export const reducer = createReducer(
   initialState,
 
-  on(AccountsActions.loadAccountFromPageSuccess, (state, { account }) => ({
+  on(AccountsActions.loadAccountFromPageSuccess, () => ({
     ...initialState,
   })),
 
@@ -63,13 +60,12 @@ export const reducer = createReducer(
     },
   })),
 
-  on(ResultsApiActions.loadResultsSuccess, (state, { resultResponse }) =>
-    adapter.setAll(resultResponse.results, {
-      ...state,
-      listLoaded: true,
-      pagination: resultResponse.meta,
-    })
-  ),
+  on(ResultsApiActions.loadResultsSuccess, (state, { resultResponse }) => ({
+    ...state,
+    list: resultResponse.results,
+    listLoaded: true,
+    pagination: resultResponse.meta,
+  })),
 
   on(ResultsPageActions.sortResults, (state, { sort }) => ({
     ...state,
@@ -77,6 +73,7 @@ export const reducer = createReducer(
   }))
 );
 
+export const getList = (state: State) => state.list;
 export const getListLoaded = (state: State) => state.listLoaded;
 export const getPagination = (state: State) => state.pagination;
 export const getSelected = (state: State) => state.selected;

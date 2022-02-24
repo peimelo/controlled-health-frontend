@@ -1,5 +1,4 @@
 import { Sort } from '@angular/material/sort';
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { AccountsActions } from '../../accounts/actions';
 import { Height, Pagination } from '../../core/models';
@@ -7,17 +6,15 @@ import { HeightsApiActions, HeightsPageActions } from '../actions';
 
 export const heightsFeatureKey = 'heights';
 
-export interface State extends EntityState<Height> {
+export interface State {
+  list: Height[];
   listLoaded: boolean;
   pagination: Pagination;
   sort: Sort;
 }
 
-export const adapter: EntityAdapter<Height> = createEntityAdapter<Height>({});
-
-export const initialState: State = adapter.getInitialState({
-  entities: {},
-  ids: [],
+export const initialState: State = {
+  list: [],
   listLoaded: false,
   pagination: {
     currentPage: 1,
@@ -28,7 +25,7 @@ export const initialState: State = adapter.getInitialState({
     active: 'date',
     direction: 'desc',
   },
-});
+};
 
 export const reducer = createReducer(
   initialState,
@@ -45,13 +42,12 @@ export const reducer = createReducer(
     },
   })),
 
-  on(HeightsApiActions.loadHeightsSuccess, (state, { heightResponse }) =>
-    adapter.setAll(heightResponse.heights, {
-      ...state,
-      listLoaded: true,
-      pagination: heightResponse.meta,
-    })
-  ),
+  on(HeightsApiActions.loadHeightsSuccess, (state, { heightResponse }) => ({
+    ...state,
+    list: heightResponse.heights,
+    listLoaded: true,
+    pagination: heightResponse.meta,
+  })),
 
   on(HeightsPageActions.sortHeights, (state, { sort }) => ({
     ...state,
@@ -59,6 +55,7 @@ export const reducer = createReducer(
   }))
 );
 
+export const getList = (state: State) => state.list;
 export const getListLoaded = (state: State) => state.listLoaded;
 export const getPagination = (state: State) => state.pagination;
 export const getSort = (state: State) => state.sort;

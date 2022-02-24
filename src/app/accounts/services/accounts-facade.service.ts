@@ -17,7 +17,7 @@ export class AccountsFacadeService {
   selectedLoaded$: Observable<boolean>;
 
   constructor(private store: Store<fromAccounts.State>) {
-    this.accounts$ = this.store.pipe(select(fromAccounts.selectAllAccounts));
+    this.accounts$ = this.store.pipe(select(fromAccounts.selectList));
     this.selectListLoaded$ = this.store.pipe(
       select(fromAccounts.selectListLoaded)
     );

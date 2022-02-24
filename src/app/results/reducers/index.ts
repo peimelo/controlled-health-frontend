@@ -34,6 +34,24 @@ export const selectResultsState = createFeatureSelector<State, ResultsState>(
 );
 
 /**
+ * Exams Reducers
+ */
+export const selectExamsEntitiesState = createSelector(
+  selectResultsState,
+  (state) => state.exams
+);
+
+export const selectExams = createSelector(
+  selectExamsEntitiesState,
+  fromExams.getAllExams
+);
+
+export const selectAllExamsLoaded = createSelector(
+  selectExamsEntitiesState,
+  fromExams.getAllExamsLoaded
+);
+
+/**
  * Exams Results Reducers
  */
 export const selectExamsResultsEntitiesState = createSelector(
@@ -46,6 +64,11 @@ export const selectExamGraphics = createSelector(
   fromExamsResults.getExamGraphics
 );
 
+export const selectExamsResultsList = createSelector(
+  selectExamsResultsEntitiesState,
+  fromExamsResults.getList
+);
+
 export const selectExamsResultsPagination = createSelector(
   selectExamsResultsEntitiesState,
   fromExamsResults.getPagination
@@ -55,13 +78,6 @@ export const selectExamsResultsSort = createSelector(
   selectExamsResultsEntitiesState,
   fromExamsResults.getSort
 );
-
-export const {
-  selectIds: selectExamResultIds,
-  selectEntities: selectExamResultEntities,
-  selectAll: selectAllExamsResults,
-  selectTotal: selectTotalExamsResults,
-} = fromExamsResults.adapter.getSelectors(selectExamsResultsEntitiesState);
 
 /**
  * Results Reducers
@@ -91,32 +107,12 @@ export const selectSort = createSelector(
   fromResults.getSort
 );
 
-export const {
-  selectIds: selectResultIds,
-  selectEntities: selectResultEntities,
-  selectAll: selectAllResults,
-  selectTotal: selectTotalResults,
-} = fromResults.adapter.getSelectors(selectResultsEntitiesState);
+export const selectList = createSelector(
+  selectResultsEntitiesState,
+  fromResults.getList
+);
 
 export const selectListLoaded = createSelector(
   selectResultsEntitiesState,
   fromResults.getListLoaded
-);
-
-/**
- * Exams Reducers
- */
-export const selectExamsEntitiesState = createSelector(
-  selectResultsState,
-  (state) => state.exams
-);
-
-export const selectExams = createSelector(
-  selectExamsEntitiesState,
-  fromExams.getAllExams
-);
-
-export const selectAllExamsLoaded = createSelector(
-  selectExamsEntitiesState,
-  fromExams.getAllExamsLoaded
 );

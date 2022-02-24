@@ -45,12 +45,10 @@ export const selectPagination = createSelector(
   fromHeights.getPagination
 );
 
-export const {
-  selectIds: selectHeightIds,
-  selectEntities: selectHeightEntities,
-  selectAll: selectAllHeights,
-  selectTotal: selectTotalHeights,
-} = fromHeights.adapter.getSelectors(selectHeightsEntitiesState);
+export const selectList = createSelector(
+  selectHeightsEntitiesState,
+  fromHeights.getList
+);
 
 export const selectListLoaded = createSelector(
   selectHeightsEntitiesState,

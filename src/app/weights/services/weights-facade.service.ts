@@ -23,7 +23,7 @@ export class WeightsFacadeService {
       select(fromWeights.selectListLoaded)
     );
     this.sort$ = this.store.pipe(select(fromWeights.selectSort));
-    this.weights$ = this.store.pipe(select(fromWeights.selectAllWeights));
+    this.weights$ = this.store.pipe(select(fromWeights.selectList));
   }
 
   add(): void {

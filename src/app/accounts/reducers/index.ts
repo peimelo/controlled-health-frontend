@@ -35,12 +35,10 @@ export const selectAccountsEntitiesState = createSelector(
   (state) => state.accounts
 );
 
-export const {
-  selectIds: selectAccountIds,
-  selectEntities: selectAccountEntities,
-  selectAll: selectAllAccounts,
-  selectTotal: selectTotalAccounts,
-} = fromAccounts.adapter.getSelectors(selectAccountsEntitiesState);
+export const selectList = createSelector(
+  selectAccountsEntitiesState,
+  fromAccounts.getList
+);
 
 export const selectListLoaded = createSelector(
   selectAccountsEntitiesState,

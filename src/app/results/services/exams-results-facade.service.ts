@@ -23,7 +23,7 @@ export class ExamsResultsFacadeService {
     );
 
     this.examsResults$ = this.store.pipe(
-      select(fromResults.selectAllExamsResults)
+      select(fromResults.selectExamsResultsList)
     );
 
     this.pagination$ = this.store.pipe(

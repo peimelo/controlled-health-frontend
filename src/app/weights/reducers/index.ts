@@ -45,12 +45,10 @@ export const selectSort = createSelector(
   fromWeights.getSort
 );
 
-export const {
-  selectIds: selectWeightIds,
-  selectEntities: selectWeightEntities,
-  selectAll: selectAllWeights,
-  selectTotal: selectTotalWeights,
-} = fromWeights.adapter.getSelectors(selectWeightsEntitiesState);
+export const selectList = createSelector(
+  selectWeightsEntitiesState,
+  fromWeights.getList
+);
 
 export const selectListLoaded = createSelector(
   selectWeightsEntitiesState,

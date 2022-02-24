@@ -1,5 +1,4 @@
 import { Sort } from '@angular/material/sort';
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { AccountsActions } from '../../accounts/actions';
 import { Pagination } from '../../core/models';
@@ -13,18 +12,16 @@ import { ExamGraphic, ExamResult } from '../models';
 
 export const examsResultsFeatureKey = 'examsResults';
 
-export interface State extends EntityState<ExamResult> {
+export interface State {
+  examGraphics: ExamGraphic[];
+  list: ExamResult[];
   pagination: Pagination;
   sort: Sort;
-  examGraphics: ExamGraphic[];
 }
 
-export const adapter: EntityAdapter<ExamResult> =
-  createEntityAdapter<ExamResult>({});
-
-export const initialState: State = adapter.getInitialState({
-  entities: {},
-  ids: [],
+export const initialState: State = {
+  examGraphics: [],
+  list: [],
   pagination: {
     currentPage: 1,
     itemsPerPage: 0,
@@ -34,8 +31,7 @@ export const initialState: State = adapter.getInitialState({
     active: 'exams.name',
     direction: 'asc',
   },
-  examGraphics: [],
-});
+};
 
 export const reducer = createReducer(
   initialState,
@@ -72,11 +68,11 @@ export const reducer = createReducer(
 
   on(
     ExamsResultsApiActions.loadExamsResultsSuccess,
-    (state, { examResultResponse }) =>
-      adapter.setAll(examResultResponse.exam_results, {
-        ...state,
-        pagination: examResultResponse.meta,
-      })
+    (state, { examResultResponse }) => ({
+      ...state,
+      list: examResultResponse.exam_results,
+      pagination: examResultResponse.meta,
+    })
   ),
 
   on(ResultDetailPageActions.sortResults, (state, { sort }) => ({
@@ -86,5 +82,6 @@ export const reducer = createReducer(
 );
 
 export const getExamGraphics = (state: State) => state.examGraphics;
+export const getList = (state: State) => state.list;
 export const getPagination = (state: State) => state.pagination;
 export const getSort = (state: State) => state.sort;

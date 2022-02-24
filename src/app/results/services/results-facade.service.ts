@@ -24,7 +24,7 @@ export class ResultsFacadeService {
   constructor(private store: Store<fromResults.State>) {
     this.pagination$ = this.store.pipe(select(fromResults.selectPagination));
 
-    this.results$ = this.store.pipe(select(fromResults.selectAllResults));
+    this.results$ = this.store.pipe(select(fromResults.selectList));
 
     this.selected$ = this.store.pipe(select(fromResults.selectSelected));
 

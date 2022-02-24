@@ -18,7 +18,7 @@ export class HeightsFacadeService {
   sort$: Observable<Sort>;
 
   constructor(private store: Store<fromHeights.State>) {
-    this.heights$ = this.store.pipe(select(fromHeights.selectAllHeights));
+    this.heights$ = this.store.pipe(select(fromHeights.selectList));
     this.pagination$ = this.store.pipe(select(fromHeights.selectPagination));
     this.selectListLoaded$ = this.store.pipe(
       select(fromHeights.selectListLoaded)
