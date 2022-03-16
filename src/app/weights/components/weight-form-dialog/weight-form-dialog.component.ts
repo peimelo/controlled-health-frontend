@@ -36,7 +36,7 @@ export class WeightFormDialogComponent implements OnChanges {
   form = this.fb.group({
     date: ['', Validators.required],
     time: ['', Validators.required],
-    value: ['', [Validators.min(3), Validators.max(400), Validators.required]],
+    value: ['', [Validators.min(1), Validators.max(400), Validators.required]],
   });
 
   isEditing!: boolean;
