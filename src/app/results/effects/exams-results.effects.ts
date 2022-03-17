@@ -9,6 +9,7 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
+import { AuthActions } from '../../auth/actions';
 import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services';
 import {
@@ -112,7 +113,10 @@ export class ExamsResultsEffects {
   examResultFormDialogDismiss$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(ExamsResultsActions.examResultFormDialogDismiss),
+        ofType(
+          ExamsResultsActions.examResultFormDialogDismiss,
+          AuthActions.logout
+        ),
         tap(() => {
           this.dialogRef.close();
         })

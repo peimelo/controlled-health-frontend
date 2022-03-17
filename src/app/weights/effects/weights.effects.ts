@@ -9,6 +9,7 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
+import { AuthActions } from '../../auth/actions';
 import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services/errors.service';
 import {
@@ -144,7 +145,7 @@ export class WeightsEffects {
   weightFormDialogDismiss$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(WeightsActions.weightFormDialogDismiss),
+        ofType(WeightsActions.weightFormDialogDismiss, AuthActions.logout),
         tap(() => {
           this.dialogRef.close();
         })
