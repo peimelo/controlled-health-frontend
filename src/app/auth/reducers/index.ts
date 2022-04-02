@@ -41,3 +41,8 @@ export const selectUser = createSelector(
 );
 
 export const selectLoggedIn = createSelector(selectUser, (user) => !!user);
+
+export const selectIsAdmin = createSelector(
+  selectUser,
+  (user) => !!user && user.admin
+);

@@ -10,6 +10,7 @@ export interface PasswordCombination {
 }
 
 export interface User {
+  admin: boolean;
   id: number;
   email: string;
   name: string;

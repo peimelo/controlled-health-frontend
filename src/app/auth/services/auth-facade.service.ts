@@ -22,11 +22,14 @@ import * as fromAuth from '../reducers';
 export class AuthFacadeService {
   loggedIn$: Observable<boolean>;
   user$: Observable<any>;
+  userIsAdmin$: Observable<boolean>;
 
   constructor(private store: Store<fromAuth.State>) {
     this.loggedIn$ = this.store.pipe(select(fromAuth.selectLoggedIn));
 
     this.user$ = this.store.pipe(select(fromAuth.selectUser));
+
+    this.userIsAdmin$ = this.store.pipe(select(fromAuth.selectIsAdmin));
   }
 
   createAccount(account: CreateAccountRequest): void {

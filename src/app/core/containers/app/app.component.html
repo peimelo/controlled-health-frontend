@@ -93,7 +93,7 @@
       <app-nav-item
         hint="View your Units"
         matIcon="height"
-        *ngIf="loggedIn$ | async"
+        *ngIf="userIsAdmin$ | async"
         routerLink="/units"
         (navigate)="drawer.toggle()"
       >
