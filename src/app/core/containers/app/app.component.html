@@ -89,6 +89,16 @@
       >
         Heights
       </app-nav-item>
+
+      <app-nav-item
+        hint="View your Units"
+        matIcon="height"
+        *ngIf="loggedIn$ | async"
+        routerLink="/units"
+        (navigate)="drawer.toggle()"
+      >
+        Units
+      </app-nav-item>
     </mat-nav-list>
   </mat-sidenav>
 

@@ -1,0 +1,6 @@
+<app-unit-form-dialog
+  [pending]="pending$ | async"
+  [unit]="unit"
+  (create)="onCreate($event)"
+  (update)="onUpdate($event)"
+></app-unit-form-dialog>

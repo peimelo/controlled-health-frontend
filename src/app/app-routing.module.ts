@@ -25,6 +25,11 @@ const routes: Routes = [
       import('./results/results.module').then((m) => m.ResultsModule),
   },
   {
+    path: 'units',
+    loadChildren: () =>
+      import('./units/units.module').then((m) => m.UnitsModule),
+  },
+  {
     path: 'weights',
     loadChildren: () =>
       import('./weights/weights.module').then((m) => m.WeightsModule),

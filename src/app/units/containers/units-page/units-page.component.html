@@ -1,0 +1,12 @@
+<div class="container">
+  <app-units
+    [pagination]="pagination$ | async"
+    [units]="units$ | async"
+    [sort]="sort$ | async"
+    (add)="onAdd()"
+    (changePage)="onChangePage($event)"
+    (delete)="onDelete($event)"
+    (edit)="onEdit($event)"
+    (sortEvent)="onSortEvent($event)"
+  ></app-units>
+</div>
