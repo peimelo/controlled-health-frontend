@@ -15,9 +15,9 @@ export class AppComponent {
   accountListLoaded$: Observable<boolean>;
   accountSelected$: Observable<Account | null>;
   accountSelectedLoaded$: Observable<boolean>;
+  isUserAdmin$: Observable<boolean>;
   loggedIn$: Observable<boolean>;
   user$: Observable<User | null>;
-  userIsAdmin$: Observable<boolean>;
 
   constructor(
     private authFacadeService: AuthFacadeService,
@@ -26,9 +26,9 @@ export class AppComponent {
     this.accountListLoaded$ = this.accountsFacadeService.selectListLoaded$;
     this.accountSelected$ = this.accountsFacadeService.selected$;
     this.accountSelectedLoaded$ = this.accountsFacadeService.selectedLoaded$;
+    this.isUserAdmin$ = this.authFacadeService.isUserAdmin$;
     this.loggedIn$ = this.authFacadeService.loggedIn$;
     this.user$ = this.authFacadeService.user$;
-    this.userIsAdmin$ = this.authFacadeService.userIsAdmin$;
   }
 
   logout(): void {
