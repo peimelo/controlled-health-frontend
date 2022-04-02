@@ -88,17 +88,6 @@ export class UnitsEffects {
     { dispatch: false }
   );
 
-  loadDashboard$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(
-        UnitsApiActions.createUnitSuccess,
-        UnitsApiActions.deleteUnitSuccess,
-        UnitsApiActions.updateUnitSuccess
-      ),
-      map(() => UnitsActions.loadDashboard())
-    )
-  );
-
   loadUnits$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
