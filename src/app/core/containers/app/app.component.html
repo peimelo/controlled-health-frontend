@@ -91,7 +91,17 @@
       </app-nav-item>
 
       <app-nav-item
-        hint="View your Units"
+        hint="View your References"
+        matIcon="menu_book"
+        *ngIf="isUserAdmin$ | async"
+        routerLink="/references"
+        (navigate)="drawer.toggle()"
+      >
+        References
+      </app-nav-item>
+
+      <app-nav-item
+        hint="View your References"
         matIcon="superscript"
         *ngIf="isUserAdmin$ | async"
         routerLink="/units"

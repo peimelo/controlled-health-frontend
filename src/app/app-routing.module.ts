@@ -25,6 +25,11 @@ const routes: Routes = [
       import('./results/results.module').then((m) => m.ResultsModule),
   },
   {
+    path: 'references',
+    loadChildren: () =>
+      import('./references/references.module').then((m) => m.ReferencesModule),
+  },
+  {
     path: 'units',
     loadChildren: () =>
       import('./units/units.module').then((m) => m.UnitsModule),

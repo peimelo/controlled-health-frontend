@@ -1,0 +1,6 @@
+<app-reference-form-dialog
+  [pending]="pending$ | async"
+  [reference]="reference"
+  (create)="onCreate($event)"
+  (update)="onUpdate($event)"
+></app-reference-form-dialog>
