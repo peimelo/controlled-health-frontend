@@ -6,7 +6,7 @@ import {
   OnChanges,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { DateTimeService } from '../../../shared/services/dateTime.service';
@@ -83,8 +83,8 @@ export class ResultDetailComponent implements OnChanges {
     }
   }
 
-  onUpdate(form: FormGroup): void {
-    const { valid, value } = form;
+  onUpdate(): void {
+    const { valid, value } = this.form;
 
     if (valid) {
       const date = this.dateTimeService.convertDateToSave(value.date);

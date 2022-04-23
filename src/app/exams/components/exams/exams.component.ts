@@ -20,6 +20,7 @@ import { DateTimeService } from '../../../shared/services/dateTime.service';
 export class ExamsComponent {
   private columnDefinitions = [
     { columnDef: 'name', showPortrait: true },
+    { columnDef: 'unitName', showPortrait: true },
     { columnDef: 'actions', showPortrait: true },
   ];
 

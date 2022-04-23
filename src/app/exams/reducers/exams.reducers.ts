@@ -38,7 +38,7 @@ export const reducer = createReducer(
 
   on(
     ExamsApiActions.createExamSuccess,
-    // ResultsPageActions.editResult,
+    ExamsPageActions.editExam,
     ExamsApiActions.loadExamSuccess,
     (state, { exam }) => ({
       ...state,

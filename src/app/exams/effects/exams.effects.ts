@@ -12,6 +12,7 @@ import {
 import { MessageApiActions } from '../../core/actions';
 import { ErrorsService } from '../../shared/services/errors.service';
 import {
+  ExamExistsGuardActions,
   ExamsApiActions,
   ExamsGuardActions,
   ExamsPageActions,
@@ -68,7 +69,7 @@ export class ExamsEffects {
     )
   );
 
-  // editResult$ = createEffect(() =>
+  // editExam$ = createEffect(() =>
   //   this.actions$.pipe(
   //     ofType(ExamsPageActions.editExam),
   //     map(() => ExamsApiActions.load())
@@ -100,20 +101,20 @@ export class ExamsEffects {
     )
   );
 
-  // loadResult$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(ExamExistsGuardActions.loadExam),
-  //     exhaustMap((action) =>
-  //       this.examsService.getOne(action.id).pipe(
-  //         mergeMap((result) => [
-  //           ExamsApiActions.loadExamSuccess({ result }),
-  //           ExamsApiActions.loadExamsResults(),
-  //         ]),
-  //         catchError((error) => this.errorService.showError(error))
-  //       )
-  //     )
-  //   )
-  // );
+  loadExam$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExamExistsGuardActions.loadExam),
+      exhaustMap((action) =>
+        this.examsService.getOne(action.id).pipe(
+          mergeMap((exam) => [
+            ExamsApiActions.loadExamSuccess({ exam }),
+            // ExamsApiActions.loadExamsResults(),
+          ]),
+          catchError((error) => this.errorService.showError(error))
+        )
+      )
+    )
+  );
 
   // updateResult$ = createEffect(() =>
   //   this.actions$.pipe(

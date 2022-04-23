@@ -7,10 +7,13 @@ import { StoreModule } from '@ngrx/store';
 import { NgxMaskModule } from 'ngx-mask';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
+import { ExamDetailComponent } from './components';
 import { ExamsComponent } from './components/exams/exams.component';
+import { ExamDetailPageComponent } from './containers';
 import { ExamsPageComponent } from './containers/exams-page/exams-page.component';
 import * as fromEffects from './effects';
 import { ExamsRoutingModule } from './exams-routing.module';
+import { ExamExistsGuard } from './guards/exam-exists.guard';
 import { ExamsGuard } from './guards/exams.guard';
 import * as fromExam from './reducers';
 import * as fromServices from './services';
@@ -34,7 +37,12 @@ import * as fromServices from './services';
     MaterialModule,
     SharedModule,
   ],
-  declarations: [ExamsComponent, ExamsPageComponent],
-  providers: [fromServices.services, ExamsGuard],
+  declarations: [
+    ExamDetailComponent,
+    ExamDetailPageComponent,
+    ExamsComponent,
+    ExamsPageComponent,
+  ],
+  providers: [fromServices.services, ExamExistsGuard, ExamsGuard],
 })
 export class ExamsModule {}

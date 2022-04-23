@@ -61,7 +61,7 @@ export class ExamsFacadeService {
     this.store.dispatch(ExamsGuardActions.loadExams());
   }
 
-  loadResult(id: number): void {
+  loadExam(id: number): void {
     this.store.dispatch(ExamExistsGuardActions.loadExam({ id }));
   }
 

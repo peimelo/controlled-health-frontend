@@ -1,0 +1,27 @@
+<div class="container">
+  <div fxLayout="column" fxLayoutGap="10px">
+    <app-exam-detail
+      [pending]="pending$ | async"
+      [exam]="exam$ | async"
+      (create)="onCreateExam($event)"
+      (update)="onUpdateExam($event)"
+    ></app-exam-detail>
+
+    <!-- <ng-container *ngIf="(result$ | async)?.id">
+      <app-exams-results
+        [examGraphics]="examGraphics$ | async"
+        [examsResults]="examsResults$ | async"
+        [isHandsetPortrait]="isHandsetPortrait$ | async"
+        [pagination]="pagination$ | async"
+        [result]="result$ | async"
+        [sort]="sort$ | async"
+        (add)="onAdd()"
+        (changePage)="onChangePage($event)"
+        (chart)="onChart($event)"
+        (delete)="onDeleteExamResult($event)"
+        (edit)="onEdit($event)"
+        (sortEvent)="onSortEvent($event)"
+      ></app-exams-results>
+    </ng-container> -->
+  </div>
+</div>
