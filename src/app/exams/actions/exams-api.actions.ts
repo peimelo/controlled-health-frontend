@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Exam } from '../../core/models';
-import { ExamResponse } from '../models';
+import { Exam, ExamResponse } from '../../core/models';
 
 export const createExamSuccess = createAction(
   '[Exams/API] Create Exam Success',

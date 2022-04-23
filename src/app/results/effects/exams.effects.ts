@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { ExamsService } from '../../core/services/exams.service';
 import { ErrorsService } from '../../shared/services/errors.service';
 import { AllExamsExistsGuardActions, ExamsApiActions } from '../actions';
-import { ExamsService } from '../services';
 
 @Injectable()
 export class ExamsEffects {
@@ -13,7 +13,7 @@ export class ExamsEffects {
     this.actions$.pipe(
       ofType(AllExamsExistsGuardActions.loadAllExams),
       exhaustMap(() => {
-        return this.examsService.getAll().pipe(
+        return this.examsService.getAllRecords().pipe(
           map((exams) =>
             ExamsApiActions.loadAllExamsSuccess({
               exams,

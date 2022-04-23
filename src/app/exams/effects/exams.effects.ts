@@ -10,6 +10,7 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { MessageApiActions } from '../../core/actions';
+import { ExamsService } from '../../core/services/exams.service';
 import { ErrorsService } from '../../shared/services/errors.service';
 import {
   ExamExistsGuardActions,
@@ -18,7 +19,6 @@ import {
   ExamsPageActions,
 } from '../actions';
 import { ExamsFacadeService } from '../services/exams-facade.service';
-import { ExamsService } from '../services/exams.service';
 
 @Injectable()
 export class ExamsEffects {

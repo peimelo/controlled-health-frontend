@@ -14,6 +14,10 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     return this.http.post<T>(this.apiPath, resource);
   }
 
+  getAllRecords(): Observable<T[]> {
+    return this.http.get<T[]>(this.apiPath);
+  }
+
   getOne(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiPath}/${id}`);
   }

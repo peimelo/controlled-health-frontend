@@ -7,20 +7,20 @@ import { Exam } from '../../core/models';
 import { BaseResourceService } from '../../core/services/base-resource.service';
 import { ExamResponse } from '../models';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ExamsService extends BaseResourceService<Exam> {
   constructor(protected override injector: Injector) {
     super(`${environment.baseUrl}/exams`, injector);
   }
 
   getAll(pageIndex: number, sort: Sort): Observable<ExamResponse> {
-    const httpParams = new HttpParams()
+    const params = new HttpParams()
       .set('page', pageIndex.toString())
       .set('sort', sort.active)
       .set('dir', sort.direction);
 
     return this.http.get<ExamResponse>(this.apiPath, {
-      params: httpParams,
+      params,
     });
   }
 }
