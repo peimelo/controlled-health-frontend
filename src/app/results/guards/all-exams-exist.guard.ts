@@ -2,21 +2,21 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
-import { ExamsFacadeService } from '../services/exams-facade.service';
+import { AllExamsFacadeService } from '../services';
 
 @Injectable()
-export class AllExamsExistsGuard implements CanActivate {
-  constructor(private examsFacadeService: ExamsFacadeService) {}
+export class AllExamsExistGuard implements CanActivate {
+  constructor(private allExamsFacadeService: AllExamsFacadeService) {}
 
   canActivate(): Observable<boolean> {
     return this.hasListLoaded();
   }
 
   hasListLoaded(): Observable<boolean> {
-    return this.examsFacadeService.selectAllExamsLoaded$.pipe(
+    return this.allExamsFacadeService.selectAllExamsLoaded$.pipe(
       tap((listLoaded) => {
         if (!listLoaded) {
-          this.examsFacadeService.loadAll();
+          this.allExamsFacadeService.loadAll();
         }
       }),
       filter((listLoaded) => listLoaded),

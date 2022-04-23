@@ -13,6 +13,7 @@ import { ExamDetailPageComponent } from './containers';
 import { ExamsPageComponent } from './containers/exams-page/exams-page.component';
 import * as fromEffects from './effects';
 import { ExamsRoutingModule } from './exams-routing.module';
+import { AllUnitsExistGuard } from './guards/all-units-exist.guard';
 import { ExamExistsGuard } from './guards/exam-exists.guard';
 import { ExamsGuard } from './guards/exams.guard';
 import * as fromExam from './reducers';
@@ -43,6 +44,11 @@ import * as fromServices from './services';
     ExamsComponent,
     ExamsPageComponent,
   ],
-  providers: [fromServices.services, ExamExistsGuard, ExamsGuard],
+  providers: [
+    fromServices.services,
+    AllUnitsExistGuard,
+    ExamExistsGuard,
+    ExamsGuard,
+  ],
 })
 export class ExamsModule {}

@@ -4,7 +4,7 @@ import { AccountExistsGuard } from '../accounts/guards/account-exists.guard';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { ResultDetailPageComponent } from './containers/result-detail-page/result-detail-page.component';
 import { ResultsPageComponent } from './containers/results-page/results-page.component';
-import { AllExamsExistsGuard } from './guards/all-exams-exists.guard';
+import { AllExamsExistGuard } from './guards/all-exams-exist.guard';
 import { ResultExistsGuard } from './guards/result-exists.guard';
 import { ResultsGuard } from './guards/results.guard';
 
@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'new',
-    canActivate: [AuthGuard, AccountExistsGuard, AllExamsExistsGuard],
+    canActivate: [AuthGuard, AccountExistsGuard, AllExamsExistGuard],
     component: ResultDetailPageComponent,
     data: { title: 'Create Result' },
   },
@@ -27,7 +27,7 @@ const routes: Routes = [
       AuthGuard,
       AccountExistsGuard,
       ResultExistsGuard,
-      AllExamsExistsGuard,
+      AllExamsExistGuard,
     ],
     component: ResultDetailPageComponent,
     data: { title: 'Update Result' },

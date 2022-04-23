@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import { AccountsActions } from '../../accounts/actions';
 import { Exam } from '../../core/models';
-import { ExamsApiActions } from '../actions';
+import { AllExamsApiActions } from '../actions';
 
-export const examsFeatureKey = 'exams';
+export const allExamsFeatureKey = 'allExams';
 
 export interface State {
   allExams: ReadonlyArray<Exam>;
@@ -23,7 +23,7 @@ export const reducer = createReducer(
     ...initialState,
   })),
 
-  on(ExamsApiActions.loadAllExamsSuccess, (state, { exams }) => ({
+  on(AllExamsApiActions.loadAllExamsSuccess, (state, { exams }) => ({
     ...state,
     allExams: exams,
     allExamsLoaded: true,

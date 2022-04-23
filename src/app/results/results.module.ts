@@ -19,7 +19,7 @@ import {
   ResultsPageComponent,
 } from './containers';
 import * as fromEffects from './effects';
-import { AllExamsExistsGuard } from './guards/all-exams-exists.guard';
+import { AllExamsExistGuard } from './guards/all-exams-exist.guard';
 import { ResultExistsGuard } from './guards/result-exists.guard';
 import { ResultsGuard } from './guards/results.guard';
 import * as fromResult from './reducers';
@@ -56,7 +56,7 @@ import * as fromServices from './services';
   ],
   providers: [
     fromServices.services,
-    AllExamsExistsGuard,
+    AllExamsExistGuard,
     ResultExistsGuard,
     ResultsGuard,
   ],

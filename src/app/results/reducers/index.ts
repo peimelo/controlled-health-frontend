@@ -5,14 +5,14 @@ import {
   createSelector,
 } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
+import * as fromAllExams from './all-exams.reducers';
 import * as fromExamsResults from './exams-results.reducers';
-import * as fromExams from './exams.reducers';
 import * as fromResults from './results.reducers';
 
 export const resultsFeatureKey = 'results';
 
 export interface ResultsState {
-  [fromExams.examsFeatureKey]: fromExams.State;
+  [fromAllExams.allExamsFeatureKey]: fromAllExams.State;
   [fromExamsResults.examsResultsFeatureKey]: fromExamsResults.State;
   [fromResults.resultsFeatureKey]: fromResults.State;
 }
@@ -23,7 +23,7 @@ export interface State extends fromRoot.State {
 
 export function reducers(state: ResultsState | undefined, action: Action) {
   return combineReducers({
-    [fromExams.examsFeatureKey]: fromExams.reducer,
+    [fromAllExams.allExamsFeatureKey]: fromAllExams.reducer,
     [fromExamsResults.examsResultsFeatureKey]: fromExamsResults.reducer,
     [fromResults.resultsFeatureKey]: fromResults.reducer,
   })(state, action);
@@ -38,17 +38,17 @@ export const selectResultsState = createFeatureSelector<State, ResultsState>(
  */
 export const selectExamsEntitiesState = createSelector(
   selectResultsState,
-  (state) => state.exams
+  (state) => state.allExams
 );
 
 export const selectExams = createSelector(
   selectExamsEntitiesState,
-  fromExams.getAllExams
+  fromAllExams.getAllExams
 );
 
 export const selectAllExamsLoaded = createSelector(
   selectExamsEntitiesState,
-  fromExams.getAllExamsLoaded
+  fromAllExams.getAllExamsLoaded
 );
 
 /**

@@ -6,7 +6,7 @@ import { Exam } from '../../../core/models';
 import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
 import { ExamResult, ExamResultRequest, Result } from '../../models';
 import {
-  ExamsFacadeService,
+  AllExamsFacadeService,
   ExamsResultsFacadeService,
   ResultsFacadeService,
 } from '../../services';
@@ -29,12 +29,12 @@ export class ExamResultFormDialogPageComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
-    private examsFacadeService: ExamsFacadeService,
+    private allExamsFacadeService: AllExamsFacadeService,
     private examsResultsFacadeService: ExamsResultsFacadeService,
     private resultsFacadeService: ResultsFacadeService,
     private spinnerFacadeService: SpinnerFacadeService
   ) {
-    this.allExams$ = this.examsFacadeService.allExams$;
+    this.allExams$ = this.allExamsFacadeService.allExams$;
     this.examResult = this.data.examResult;
     this.pending$ = this.spinnerFacadeService.isLoading$;
     this.result$ = this.resultsFacadeService.selected$;

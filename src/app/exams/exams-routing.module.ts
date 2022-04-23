@@ -4,6 +4,7 @@ import { AdminUserGuard } from '../auth/guards/admin-user.guard';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { ExamDetailPageComponent } from './containers';
 import { ExamsPageComponent } from './containers/exams-page/exams-page.component';
+import { AllUnitsExistGuard } from './guards/all-units-exist.guard';
 import { ExamExistsGuard } from './guards/exam-exists.guard';
 import { ExamsGuard } from './guards/exams.guard';
 
@@ -16,13 +17,18 @@ const routes: Routes = [
   },
   {
     path: 'new',
-    canActivate: [AuthGuard, AdminUserGuard],
+    canActivate: [AuthGuard, AdminUserGuard, AllUnitsExistGuard],
     component: ExamDetailPageComponent,
     data: { title: 'Create Exam' },
   },
   {
     path: ':id',
-    canActivate: [AuthGuard, AdminUserGuard, ExamExistsGuard],
+    canActivate: [
+      AuthGuard,
+      AdminUserGuard,
+      ExamExistsGuard,
+      AllUnitsExistGuard,
+    ],
     component: ExamDetailPageComponent,
     data: { title: 'Update Exam' },
   },

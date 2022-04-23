@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Exam } from '../../core/models';
-import { AllExamsExistsGuardActions } from '../actions';
+import { AllExamsExistGuardActions } from '../actions';
 import * as fromExams from '../reducers';
 
 @Injectable()
-export class ExamsFacadeService {
+export class AllExamsFacadeService {
   allExams$: Observable<ReadonlyArray<Exam>>;
   selectAllExamsLoaded$: Observable<boolean>;
 
@@ -19,6 +19,6 @@ export class ExamsFacadeService {
   }
 
   loadAll(): void {
-    this.store.dispatch(AllExamsExistsGuardActions.loadAllExams());
+    this.store.dispatch(AllExamsExistGuardActions.loadAllExams());
   }
 }

@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
-import { ExamsService } from '../../core/services/exams.service';
+import { UnitsService } from '../../core/services/units.service';
 import { ErrorsService } from '../../shared/services/errors.service';
-import { AllExamsExistsGuardActions, ExamsApiActions } from '../actions';
+import { AllUnitsApiActions, AllUnitsExistGuardActions } from '../actions';
 
 @Injectable()
-export class ExamsEffects {
-  dialogRef: any;
-
-  loadExams$ = createEffect(() =>
+export class AllUnitsEffects {
+  loadAllUnits$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AllExamsExistsGuardActions.loadAllExams),
+      ofType(AllUnitsExistGuardActions.loadAllUnits),
       exhaustMap(() => {
-        return this.examsService.getAllRecords().pipe(
-          map((exams) =>
-            ExamsApiActions.loadAllExamsSuccess({
-              exams,
+        return this.unitsService.getAllRecords().pipe(
+          map((units) =>
+            AllUnitsApiActions.loadAllUnitsSuccess({
+              units,
             })
           ),
           catchError((error) => this.errorService.showError(error))
@@ -28,6 +26,6 @@ export class ExamsEffects {
   constructor(
     private actions$: Actions,
     private errorService: ErrorsService,
-    private examsService: ExamsService
+    private unitsService: UnitsService
   ) {}
 }
