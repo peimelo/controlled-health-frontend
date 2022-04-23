@@ -1,0 +1,13 @@
+<div class="container">
+  <app-exams
+    [isHandsetPortrait]="isHandsetPortrait$ | async"
+    [pagination]="pagination$ | async"
+    [sort]="sort$ | async"
+    [exams]="exams$ | async"
+    (add)="onAdd()"
+    (changePage)="onChangePage($event)"
+    (delete)="onDelete($event)"
+    (edit)="onEdit($event)"
+    (sortEvent)="onSortEvent($event)"
+  ></app-exams>
+</div>

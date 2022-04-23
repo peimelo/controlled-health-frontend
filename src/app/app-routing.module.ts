@@ -15,6 +15,11 @@ const routes: Routes = [
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
+    path: 'exams',
+    loadChildren: () =>
+      import('./exams/exams.module').then((m) => m.ExamsModule),
+  },
+  {
     path: 'heights',
     loadChildren: () =>
       import('./heights/heights.module').then((m) => m.HeightsModule),

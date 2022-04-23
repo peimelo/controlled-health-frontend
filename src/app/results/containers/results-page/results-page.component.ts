@@ -15,8 +15,8 @@ import { ResultsFacadeService } from '../../services/results-facade.service';
 export class ResultsPageComponent {
   isHandsetPortrait$: Observable<boolean>;
   pagination$: Observable<Pagination>;
-  sort$: Observable<Sort>;
   results$: Observable<Result[]>;
+  sort$: Observable<Sort>;
 
   constructor(
     private layoutFacadeService: LayoutFacadeService,
@@ -24,8 +24,8 @@ export class ResultsPageComponent {
   ) {
     this.isHandsetPortrait$ = this.layoutFacadeService.isHandsetPortrait$;
     this.pagination$ = this.resultsFacadeService.pagination$;
-    this.sort$ = this.resultsFacadeService.sort$;
     this.results$ = this.resultsFacadeService.results$;
+    this.sort$ = this.resultsFacadeService.sort$;
   }
 
   onAdd(): void {

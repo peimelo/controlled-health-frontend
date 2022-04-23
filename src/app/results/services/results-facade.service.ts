@@ -17,8 +17,8 @@ export class ResultsFacadeService {
   pagination$: Observable<Pagination>;
   results$: Observable<Result[]>;
   selected$: Observable<Result | null>;
-  selectListLoaded$: Observable<boolean>;
   selectedLoaded$: Observable<boolean>;
+  selectListLoaded$: Observable<boolean>;
   sort$: Observable<Sort>;
 
   constructor(private store: Store<fromResults.State>) {
@@ -28,12 +28,12 @@ export class ResultsFacadeService {
 
     this.selected$ = this.store.pipe(select(fromResults.selectSelected));
 
-    this.selectListLoaded$ = this.store.pipe(
-      select(fromResults.selectListLoaded)
-    );
-
     this.selectedLoaded$ = this.store.pipe(
       select(fromResults.selectSelectedLoaded)
+    );
+
+    this.selectListLoaded$ = this.store.pipe(
+      select(fromResults.selectListLoaded)
     );
 
     this.sort$ = this.store.pipe(select(fromResults.selectSort));

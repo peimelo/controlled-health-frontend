@@ -13,15 +13,10 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { User } from '../../../auth/models';
+import { Exam } from '../../../core/models';
 import { FormErrorService } from '../../../core/services/form-error.service';
 import { NumberService } from '../../../shared/services';
-import {
-  Exam,
-  ExamResult,
-  ExamResultRequest,
-  Result,
-  Unit,
-} from '../../models';
+import { ExamResult, ExamResultRequest, Result, Unit } from '../../models';
 
 @Component({
   selector: 'app-exam-result-form-dialog',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Exam } from '../../results/models';
+import { Exam } from '../../core/models';
 import { AllExamsExistsGuardActions } from '../actions';
 import * as fromExams from '../reducers';
 

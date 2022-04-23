@@ -1,4 +1,4 @@
-import { Exam } from './exam.model';
+import { Exam } from '../../core/models';
 
 export interface ExamResult {
   id: number;

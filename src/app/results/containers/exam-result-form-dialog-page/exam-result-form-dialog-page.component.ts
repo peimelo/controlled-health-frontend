@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { User } from '../../../auth/models';
+import { Exam } from '../../../core/models';
 import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
-import { Exam, ExamResult, ExamResultRequest, Result } from '../../models';
+import { ExamResult, ExamResultRequest, Result } from '../../models';
 import {
   ExamsFacadeService,
   ExamsResultsFacadeService,

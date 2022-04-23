@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { AccountsActions } from '../../accounts/actions';
-import { Exam } from '../../results/models';
+import { Exam } from '../../core/models';
 import { ExamsApiActions } from '../actions';
 
 export const examsFeatureKey = 'exams';

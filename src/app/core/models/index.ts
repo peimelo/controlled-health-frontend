@@ -1,6 +1,7 @@
 export * from './base-resource.model';
 export * from './chart-result.model';
 export * from './dialog-data.model';
+export * from './exam.model';
 export * from './height.model';
 export * from './pagination.model';
 export * from './reference.model';

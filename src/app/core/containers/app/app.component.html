@@ -91,6 +91,16 @@
       </app-nav-item>
 
       <app-nav-item
+        hint="View Exams"
+        matIcon="menu_book"
+        *ngIf="isUserAdmin$ | async"
+        routerLink="/exams"
+        (navigate)="drawer.toggle()"
+      >
+        Exams
+      </app-nav-item>
+
+      <app-nav-item
         hint="View References"
         matIcon="menu_book"
         *ngIf="isUserAdmin$ | async"

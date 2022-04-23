@@ -4,7 +4,6 @@ import localePt from '@angular/common/locales/pt';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -44,7 +43,6 @@ const maskConfig: Partial<IConfig> = {
     StoreRouterConnectingModule.forRoot(),
 
     // third-party
-    FontAwesomeModule,
     NgxMaskModule.forRoot(maskConfig),
 
     // app

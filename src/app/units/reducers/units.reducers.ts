@@ -1,6 +1,5 @@
 import { Sort } from '@angular/material/sort';
 import { createReducer, on } from '@ngrx/store';
-import { AccountsActions } from '../../accounts/actions';
 import { Pagination, Unit } from '../../core/models';
 import { UnitsApiActions, UnitsPageActions } from '../actions';
 
@@ -29,10 +28,6 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-
-  on(AccountsActions.loadAccountFromPageSuccess, (state, { account }) => ({
-    ...initialState,
-  })),
 
   on(UnitsPageActions.changePageUnits, (state, { pageIndex }) => ({
     ...state,

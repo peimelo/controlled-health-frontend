@@ -1,6 +1,5 @@
 import { Sort } from '@angular/material/sort';
 import { createReducer, on } from '@ngrx/store';
-import { AccountsActions } from '../../accounts/actions';
 import { Pagination, Reference } from '../../core/models';
 import { ReferencesApiActions, ReferencesPageActions } from '../actions';
 
@@ -30,10 +29,6 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
-  on(AccountsActions.loadAccountFromPageSuccess, (state, { account }) => ({
-    ...initialState,
-  })),
-
   on(ReferencesPageActions.changePageReferences, (state, { pageIndex }) => ({
     ...state,
     pagination: {
@@ -42,12 +37,15 @@ export const reducer = createReducer(
     },
   })),
 
-  on(ReferencesApiActions.loadReferencesSuccess, (state, { referenceResponse }) => ({
-    ...state,
-    list: referenceResponse.references,
-    listLoaded: true,
-    pagination: referenceResponse.meta,
-  })),
+  on(
+    ReferencesApiActions.loadReferencesSuccess,
+    (state, { referenceResponse }) => ({
+      ...state,
+      list: referenceResponse.references,
+      listLoaded: true,
+      pagination: referenceResponse.meta,
+    })
+  ),
 
   on(ReferencesPageActions.sortReferences, (state, { sort }) => ({
     ...state,
