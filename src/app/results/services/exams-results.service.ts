@@ -27,7 +27,7 @@ export class ExamsResultsService {
     pageIndex: number,
     sort: Sort
   ): Observable<ExamResultResponse> {
-    const httpParams = new HttpParams()
+    const params = new HttpParams()
       .set('page', pageIndex.toString())
       .set('sort', sort.active)
       .set('dir', sort.direction);
@@ -35,7 +35,7 @@ export class ExamsResultsService {
     return this.http.get<ExamResultResponse>(
       `${environment.baseUrl}/results/${id}/exams_results`,
       {
-        params: httpParams,
+        params,
       }
     );
   }

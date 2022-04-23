@@ -13,13 +13,13 @@ export class ResultsService extends BaseResourceService<Result> {
   }
 
   getAll(pageIndex: number, sort: Sort): Observable<ResultResponse> {
-    const httpParams = new HttpParams()
+    const params = new HttpParams()
       .set('page', pageIndex.toString())
       .set('sort', sort.active)
       .set('dir', sort.direction);
 
     return this.http.get<ResultResponse>(this.apiPath, {
-      params: httpParams,
+      params,
     });
   }
 }

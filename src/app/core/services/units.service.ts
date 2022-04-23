@@ -7,20 +7,20 @@ import { Unit } from '../../core/models';
 import { BaseResourceService } from '../../core/services/base-resource.service';
 import { UnitResponse } from '../models';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UnitsService extends BaseResourceService<Unit> {
   constructor(protected override injector: Injector) {
     super(`${environment.baseUrl}/units`, injector);
   }
 
   getAll(pageIndex: number, sort: Sort): Observable<UnitResponse> {
-    const httpParams = new HttpParams()
+    const params = new HttpParams()
       .set('page', pageIndex.toString())
       .set('sort', sort.active)
       .set('dir', sort.direction);
 
     return this.http.get<UnitResponse>(this.apiPath, {
-      params: httpParams,
+      params,
     });
   }
 }

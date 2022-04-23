@@ -7,5 +7,6 @@ export * from './height.model';
 export * from './pagination.model';
 export * from './reference.model';
 export * from './serie.model';
+export * from './unit-response.model';
 export * from './unit.model';
 export * from './weight.model';

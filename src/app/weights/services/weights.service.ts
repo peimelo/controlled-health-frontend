@@ -14,13 +14,13 @@ export class WeightsService extends BaseResourceService<Weight> {
   }
 
   getAll(pageIndex: number, sort: Sort): Observable<WeightResponse> {
-    const httpParams = new HttpParams()
+    const params = new HttpParams()
       .set('page', pageIndex.toString())
       .set('sort', sort.active)
       .set('dir', sort.direction);
 
     return this.http.get<WeightResponse>(this.apiPath, {
-      params: httpParams,
+      params,
     });
   }
 }

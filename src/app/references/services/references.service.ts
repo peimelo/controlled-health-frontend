@@ -14,13 +14,13 @@ export class ReferencesService extends BaseResourceService<Reference> {
   }
 
   getAll(pageIndex: number, sort: Sort): Observable<ReferenceResponse> {
-    const httpParams = new HttpParams()
+    const params = new HttpParams()
       .set('page', pageIndex.toString())
       .set('sort', sort.active)
       .set('dir', sort.direction);
 
     return this.http.get<ReferenceResponse>(this.apiPath, {
-      params: httpParams,
+      params,
     });
   }
 }

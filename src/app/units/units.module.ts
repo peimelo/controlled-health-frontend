@@ -15,7 +15,6 @@ import { UnitsEffects } from './effects';
 import { UnitsGuard } from './guards/units.guard';
 import * as fromUnit from './reducers';
 import { UnitsFacadeService } from './services/units-facade.service';
-import { UnitsService } from './services/units.service';
 import { UnitsRoutingModule } from './units-routing.module';
 
 @NgModule({
@@ -43,6 +42,6 @@ import { UnitsRoutingModule } from './units-routing.module';
     UnitFormDialogComponent,
     UnitFormDialogPageComponent,
   ],
-  providers: [UnitsFacadeService, UnitsGuard, UnitsService],
+  providers: [UnitsFacadeService, UnitsGuard],
 })
 export class UnitsModule {}
