@@ -3,6 +3,7 @@
     <app-exam-detail
       [pending]="pending$ | async"
       [exam]="exam$ | async"
+      [units]="units$ | async"
       (create)="onCreateExam($event)"
       (update)="onUpdateExam($event)"
     ></app-exam-detail>

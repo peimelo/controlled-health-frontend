@@ -13,6 +13,7 @@ import { MessageApiActions } from '../../core/actions';
 import { ExamsService } from '../../core/services/exams.service';
 import { ErrorsService } from '../../shared/services/errors.service';
 import {
+  ExamDetailPageActions,
   ExamExistsGuardActions,
   ExamsApiActions,
   ExamsGuardActions,
@@ -116,22 +117,22 @@ export class ExamsEffects {
     )
   );
 
-  // updateResult$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(ResultDetailPageActions.updateResult),
-  //     mergeMap(({ result }) =>
-  //       this.examsService.update(result).pipe(
-  //         mergeMap(() => [
-  //           ResultsApiActions.updateResultSuccess(),
-  //           MessageApiActions.successMessage({
-  //             message: 'Record successfully updated.',
-  //           }),
-  //         ]),
-  //         catchError((error) => this.errorService.showError(error))
-  //       )
-  //     )
-  //   )
-  // );
+  updateExam$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExamDetailPageActions.updateExam),
+      mergeMap(({ exam }) =>
+        this.examsService.update(exam).pipe(
+          mergeMap(() => [
+            ExamsApiActions.updateExamSuccess(),
+            MessageApiActions.successMessage({
+              message: 'Record successfully updated.',
+            }),
+          ]),
+          catchError((error) => this.errorService.showError(error))
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,

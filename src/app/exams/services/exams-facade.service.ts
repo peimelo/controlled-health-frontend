@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Exam, Pagination } from '../../core/models';
 import {
+  ExamDetailPageActions,
   ExamExistsGuardActions,
   ExamsGuardActions,
   ExamsPageActions,
@@ -69,7 +70,7 @@ export class ExamsFacadeService {
     this.store.dispatch(ExamsPageActions.sortExams({ sort }));
   }
 
-  // update(exam: Exam): void {
-  //   this.store.dispatch(ResultDetailPageActions.updateResult({ exam }));
-  // }
+  update(exam: Exam): void {
+    this.store.dispatch(ExamDetailPageActions.updateExam({ exam }));
+  }
 }

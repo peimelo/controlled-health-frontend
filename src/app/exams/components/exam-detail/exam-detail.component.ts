@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Exam } from '../../../core/models';
+import { Exam, Unit } from '../../../core/models';
 import { FormErrorService } from '../../../core/services/form-error.service';
 
 @Component({
@@ -27,12 +27,14 @@ export class ExamDetailComponent implements OnChanges {
     }
   }
   @Input() exam!: Exam;
+  @Input() units!: ReadonlyArray<Unit>;
 
   @Output() private create = new EventEmitter<Exam>();
   @Output() private update = new EventEmitter<Exam>();
 
   form = this.fb.group({
     name: ['', [Validators.required]],
+    unitId: [''],
   });
   isEditing!: boolean;
 
@@ -49,6 +51,7 @@ export class ExamDetailComponent implements OnChanges {
 
         this.form.patchValue({
           name: this.exam.name,
+          unitId: this.exam.unit.id,
         });
       } else {
         this.isEditing = false;
@@ -79,6 +82,7 @@ export class ExamDetailComponent implements OnChanges {
       const exam: Exam = {
         ...this.exam,
         name: value.name,
+        unit: { id: value.unitId } as Unit,
       };
 
       this.update.emit(exam);

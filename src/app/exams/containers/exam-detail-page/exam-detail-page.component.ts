@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
-import { Exam } from '../../../core/models';
+import { Exam, Unit } from '../../../core/models';
 import { LayoutFacadeService } from '../../../core/services';
 import { SpinnerFacadeService } from '../../../core/services/spinner-facade.service';
-import { ExamsFacadeService } from '../../services';
+import { AllUnitsFacadeService, ExamsFacadeService } from '../../services';
 
 @Component({
   selector: 'app-exam-detail-page',
@@ -20,11 +20,13 @@ export class ExamDetailPageComponent {
   // pagination$: Observable<Pagination>;
   pending$: Observable<boolean>;
   // sort$: Observable<Sort>;
+  units$: Observable<ReadonlyArray<Unit>>;
 
   constructor(
+    private allUnitsFacadeService: AllUnitsFacadeService,
+    private examsFacadeService: ExamsFacadeService,
     // private examsResultsFacadeService: ExamsResultsFacadeService,
     private layoutFacadeService: LayoutFacadeService,
-    private examsFacadeService: ExamsFacadeService,
     private spinnerFacadeService: SpinnerFacadeService
   ) {
     this.exam$ = this.examsFacadeService.selected$;
@@ -33,6 +35,7 @@ export class ExamDetailPageComponent {
     // this.pagination$ = this.examsResultsFacadeService.pagination$;
     this.pending$ = this.spinnerFacadeService.isLoading$;
     // this.sort$ = this.examsResultsFacadeService.sort$;
+    this.units$ = this.allUnitsFacadeService.allUnits$;
   }
 
   onAdd(): void {
@@ -64,6 +67,6 @@ export class ExamDetailPageComponent {
   }
 
   onUpdateExam(exam: Exam): void {
-    // this.resultsFacadeService.update(result);
+    this.examsFacadeService.update(exam);
   }
 }

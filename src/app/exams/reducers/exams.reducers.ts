@@ -31,10 +31,10 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
-  // on(ResultsPageActions.addResult, (state) => ({
-  //   ...state,
-  //   selected: null,
-  // })),
+  on(ExamsPageActions.addExam, (state) => ({
+    ...state,
+    selected: null,
+  })),
 
   on(
     ExamsApiActions.createExamSuccess,

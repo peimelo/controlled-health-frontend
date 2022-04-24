@@ -62,7 +62,6 @@ const MY_FORMATS = {
 };
 
 @NgModule({
-  imports: [MODULES],
   exports: [MODULES],
   providers: [
     {

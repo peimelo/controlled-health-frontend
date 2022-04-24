@@ -20,6 +20,16 @@
             {{ error }}
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Unit</mat-label>
+          <mat-select formControlName="unitId">
+            <mat-option [value]="null"></mat-option>
+            <mat-option [value]="unit.id" *ngFor="let unit of units">
+              {{ unit.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </form>
   </mat-card-content>
