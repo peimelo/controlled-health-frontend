@@ -9,7 +9,6 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { DialogData, Exam, Pagination } from '../../../core/models';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
-import { DateTimeService } from '../../../shared/services/dateTime.service';
 
 @Component({
   selector: 'app-exams',
@@ -35,17 +34,12 @@ export class ExamsComponent {
   @Output() private edit = new EventEmitter<Exam>();
   @Output() private sortEvent = new EventEmitter<Sort>();
 
-  constructor(
-    private confirmationDialogService: ConfirmationDialogService,
-    private dateTimeService: DateTimeService
-  ) {}
+  constructor(private confirmationDialogService: ConfirmationDialogService) {}
 
   deleteConfirmDialog(exam: Exam): void {
     const dialogData: DialogData = {
       confirmText: 'Remove',
-      content: `'${this.dateTimeService.convertDateToUtcBr(
-        exam.name
-      )}' will be removed.`,
+      content: `'${exam.name}' will be removed.`,
       title: 'Remove exam',
     };
     this.confirmationDialogService.show(this.delete, exam.id, dialogData);
