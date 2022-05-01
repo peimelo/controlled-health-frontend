@@ -51,7 +51,7 @@ export class ExamDetailPageComponent {
   }
 
   onCreateExam(exam: Exam): void {
-    // this.resultsFacadeService.create(result);
+    this.examsFacadeService.create(exam);
   }
 
   onDeleteExamResult({ id, resultId }: any): void {

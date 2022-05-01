@@ -46,9 +46,9 @@ export class ExamsFacadeService {
     this.store.dispatch(ExamsPageActions.changePageExams({ pageIndex }));
   }
 
-  // create(exam: Exam): void {
-  //   this.store.dispatch(ResultDetailPageActions.createResult({ exam }));
-  // }
+  create(exam: Exam): void {
+    this.store.dispatch(ExamDetailPageActions.createExam({ exam }));
+  }
 
   delete(id: number): void {
     this.store.dispatch(ExamsPageActions.deleteExam({ id }));

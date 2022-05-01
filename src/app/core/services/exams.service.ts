@@ -24,6 +24,13 @@ export class ExamsService extends BaseResourceService<Exam> {
     });
   }
 
+  override create(exam: Exam): Observable<Exam> {
+    return this.http.post<Exam>(`${environment.baseUrl}/exams`, {
+      ...exam,
+      unit_id: exam.unit.id,
+    });
+  }
+
   override update(exam: Exam): Observable<Exam> {
     return this.http.put<Exam>(`${environment.baseUrl}/exams/${exam.id}`, {
       ...exam,

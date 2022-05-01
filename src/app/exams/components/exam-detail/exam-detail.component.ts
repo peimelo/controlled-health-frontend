@@ -69,6 +69,7 @@ export class ExamDetailComponent implements OnChanges {
     if (valid) {
       const exam = {
         name: value.name,
+        unit: { id: value.unitId } as Unit,
       };
 
       this.create.emit(exam as Exam);

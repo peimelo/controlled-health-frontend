@@ -23,22 +23,22 @@ import { ExamsFacadeService } from '../services/exams-facade.service';
 
 @Injectable()
 export class ExamsEffects {
-  // createResult$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(ResultDetailPageActions.createResult),
-  //     mergeMap(({ result }) =>
-  //       this.examsService.create(result).pipe(
-  //         mergeMap((resultApi) => [
-  //           ResultsApiActions.createResultSuccess({ result: resultApi }),
-  //           MessageApiActions.successMessage({
-  //             message: 'Record successfully created.',
-  //           }),
-  //         ]),
-  //         catchError((error) => this.errorService.showError(error))
-  //       )
-  //     )
-  //   )
-  // );
+  createExam$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExamDetailPageActions.createExam),
+      mergeMap(({ exam }) =>
+        this.examsService.create(exam).pipe(
+          mergeMap((examApi) => [
+            ExamsApiActions.createExamSuccess({ exam: examApi }),
+            MessageApiActions.successMessage({
+              message: 'Record successfully created.',
+            }),
+          ]),
+          catchError((error) => this.errorService.showError(error))
+        )
+      )
+    )
+  );
 
   createExamSuccess$ = createEffect(
     () =>
@@ -73,7 +73,7 @@ export class ExamsEffects {
   // editExam$ = createEffect(() =>
   //   this.actions$.pipe(
   //     ofType(ExamsPageActions.editExam),
-  //     map(() => ExamsApiActions.load())
+  //     map(() => ExamsApiActions.loadExamsResults())
   //   )
   // );
 
