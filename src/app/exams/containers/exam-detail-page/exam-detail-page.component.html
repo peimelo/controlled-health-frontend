@@ -8,9 +8,8 @@
       (update)="onUpdateExam($event)"
     ></app-exam-detail>
 
-    <!-- <ng-container *ngIf="(result$ | async)?.id">
+    <!-- <ng-container *ngIf="(exam$ | async)?.id">
       <app-exams-results
-        [examGraphics]="examGraphics$ | async"
         [examsResults]="examsResults$ | async"
         [isHandsetPortrait]="isHandsetPortrait$ | async"
         [pagination]="pagination$ | async"
@@ -18,7 +17,6 @@
         [sort]="sort$ | async"
         (add)="onAdd()"
         (changePage)="onChangePage($event)"
-        (chart)="onChart($event)"
         (delete)="onDeleteExamResult($event)"
         (edit)="onEdit($event)"
         (sortEvent)="onSortEvent($event)"

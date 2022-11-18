@@ -118,7 +118,9 @@ export class ExamsResultsEffects {
           AuthActions.logout
         ),
         tap(() => {
-          this.dialogRef.close();
+          if (this.dialog) {
+            this.dialogRef.close();
+          }
         })
       ),
     { dispatch: false }
